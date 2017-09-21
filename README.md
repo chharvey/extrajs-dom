@@ -211,11 +211,11 @@ return (
 ```
 
 #### `#removeClass()` (LOCKED)
-Remove a class.
+Remove one or more classes.
 ```js
 let el = new Element('div').class('my-div your-div o-Object c-Component')
-el.removeClass('o-Object')
-return el.html() === `<div class="my-div your-div c-Component"></div>`
+el.removeClass('o-Object', 'your-div')
+return el.html() === `<div class="my-div c-Component"></div>`
 ```
 
 #### `#style()` (STABLE)

@@ -205,7 +205,7 @@ module.exports = class Element {
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
    * ```
-   * @param  {string=} attr_str a string of the format `'attribute="attr value"'`
+   * @param  {...string} attr_str a string of the format `'attribute="attr value"'`
    * @return {Element} `this`
    */
   attrStr(...attr_str) {
@@ -273,23 +273,28 @@ module.exports = class Element {
   }
 
   /**
-   * Remove a single token from this element’s `class` attribute.
+   * Remove one or more tokens from this element’s `class` attribute.
    *
    * Examples:
    * ```
    * this.removeClass('o-Object') // remove one class
+   * this.removeClass('o-Object', 'c-Component') // remove multiple classes
    * this.removeClass()           // do nothing; return `this`
    * ```
    *
-   * @param  {string=} classname classname to remove; must not contain spaces
+   * @param  {...string} classname classname to remove; must not contain spaces
    * @return {Element} `this`
    */
-  removeClass(classname = '') {
-    if (classname.trim() === '') return this
-    let classes = (this.class() || '').split(' ')
-    let index = classes.indexOf(classname.trim())
-    if (index >= 0) classes.splice(index, 1)
-    return this.class(classes.join(' '))
+  removeClass(...classname) {
+    try {
+      return this.class((this.class() || '')
+        .split(' ')
+        .filter((str) => !classname.includes(str))
+        .join(' ')
+      )
+    } catch (e) {
+      return this
+    }
   }
 
   /**
@@ -447,7 +452,7 @@ module.exports = class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
-   * @param  {?Element|Array<?Element>} elements one or more elements to output, or an array of elements
+   * @param  {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
