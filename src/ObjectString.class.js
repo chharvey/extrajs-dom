@@ -1,4 +1,4 @@
-var Util = require('extrajs').Util
+var xjs = require('extrajs').Util
 
 /**
  * An Object that contains string values only.
@@ -55,7 +55,7 @@ module.exports = class ObjectString {
    * @return {Object<string>} a shallow clone of `this._obj`
    */
   get data() {
-    return Util.Object.cloneDeep(this._data)
+    return xjs.Object.cloneDeep(this._data)
   }
 
 
@@ -75,7 +75,7 @@ module.exports = class ObjectString {
    */
   set(key, value) {
     if (key.trim() === '') return this
-    if (Util.Object.typeOf(value) === 'NaN') throw new TypeError('Provided value cannot be NaN.')
+    if (xjs.Object.typeOf(value) === 'NaN') throw new TypeError('Provided value cannot be NaN.')
     this._data[key.trim()] = `${value}`.trim()
     return this
   }

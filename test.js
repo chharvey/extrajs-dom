@@ -1,4 +1,3 @@
-var Util    = require('extrajs').Util
 var Element = require('./index.js')
 
 
