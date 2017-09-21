@@ -401,14 +401,21 @@ module.exports = class Element {
    * Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * Calling `this#data()` does nothing and returns `this`.
-   * @param  {string=} name  the suffix of the `[data-*]` attribute
-   * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it
+   * @param  {(string|Object<ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with ValueArg type values
+   * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
    *                             (or `undefined` if that attribute had not been set)
    */
   data(name = '', value) {
-    if (Util.Object.typeOf(name)==='string' && name.trim()==='') return this
-    return this.attr(`data-${name.trim()}`, value)
+    // REVIEW: object lookups too complicated here; using standard switches
+    switch (Util.Object.typeOf(name)) {
+      case 'string':
+        if (name.trim()==='') break;
+        return this.attr(`data-${name.trim()}`, value)
+      case 'object': for (let i in name) this.data(i, key[i]); break;
+      default      : throw new TypeError('Provided name must be a string or object.')
+    }
+    return this
   }
 
   /**
