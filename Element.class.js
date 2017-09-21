@@ -99,9 +99,9 @@ module.exports = class Element {
    * Note that the keys of this object do not contain the string `'data-'`.
    * Example:
    * ```js
-   * my_elem.html()     // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
-   * my_elem.attributes // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
-   * my_elem.dataset    // returns { foo:'bar', baz:'qux' }
+   * this.html()     // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
+   * this.attributes // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
+   * this.dataset    // returns { foo:'bar', baz:'qux' }
    * ```
    * @return {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
    */
@@ -148,18 +148,18 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.attr('itemtype', 'HTMLElement')                   // set the `[itemtype]` attribute
-   * my_elem.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
-   * my_elem.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `undefined` if it had not been set)
-   * my_elem.attr('itemprop', null)                            // remove the `[itemprop]` attribute
-   * my_elem.attr('data-id', function () { return this.id() }) // set the `[data-id]` attribute to this element’s ID
-   * my_elem.attr({                                            // set/remove multiple attributes all at once
+   * this.attr('itemtype', 'HTMLElement')                   // set the `[itemtype]` attribute
+   * this.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
+   * this.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `undefined` if it had not been set)
+   * this.attr('itemprop', null)                            // remove the `[itemprop]` attribute
+   * this.attr('data-id', function () { return this.id() }) // set the `[data-id]` attribute to this element’s ID
+   * this.attr({                                            // set/remove multiple attributes all at once
    *   itemprop : 'name',
    *   itemscope: '',
    *   itemtype : 'Person',
    *   'data-id': null, // remove the `[data-id]` attribute
    * })
-   * my_elem.attr()                                            // do nothing; return `this`
+   * this.attr()                                            // do nothing; return `this`
    * ```
    *
    * Notes:
@@ -203,9 +203,9 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
-   * my_elem.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
-   * my_elem.attrStr() // do nothing; return `this`
+   * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
+   * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
+   * this.attrStr() // do nothing; return `this`
    * ```
    * @param  {string=} attr_str a string of the format `'attribute="attr value"'`
    * @return {Element} `this`
@@ -220,10 +220,10 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.id('section1') // set the [id] attribute
-   * my_elem.id(function () { return this.attr('data-id') }) // set the [id] attribute using a function
-   * my_elem.id(null)       // remove the [id] attribute
-   * my_elem.id()           // return the value of [id]
+   * this.id('section1') // set the [id] attribute
+   * this.id(function () { return this.attr('data-id') }) // set the [id] attribute using a function
+   * this.id(null)       // remove the [id] attribute
+   * this.id()           // return the value of [id]
    * ```
    *
    * @param  {AttrValue=} id the value to set for the `id` attribute
@@ -238,9 +238,9 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.class('o-Object c-Component') // set the [class] attribute
-   * my_elem.class(null)                   // remove the [class] attribute
-   * my_elem.class()                       // return the value of [class]
+   * this.class('o-Object c-Component') // set the [class] attribute
+   * this.class(null)                   // remove the [class] attribute
+   * this.class()                       // return the value of [class]
    * ```
    *
    * @param  {AttrValue=} classs the value to set for the `class` attribute
@@ -258,8 +258,8 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.addClass('o-Object c-Component') // add to the [class] attribute
-   * my_elem.addClass()                       // do nothing; return `this`
+   * this.addClass('o-Object c-Component') // add to the [class] attribute
+   * this.addClass()                       // do nothing; return `this`
    * ```
    *
    * @param  {string=} class_str the classname(s) to add, space-separated
@@ -275,8 +275,8 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.removeClass('o-Object') // remove one class
-   * my_elem.removeClass()           // do nothing; return `this`
+   * this.removeClass('o-Object') // remove one class
+   * this.removeClass()           // do nothing; return `this`
    * ```
    *
    * @param  {string=} classname classname to remove; must not contain spaces
@@ -296,11 +296,11 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
-   * my_elem.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
-   * my_elem.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
-   * my_elem.style(null)                                      // remove the [style] attribute
-   * my_elem.style()                                          // return the value of [style], as a string (or `undefined` if the attribute has not been set)
+   * this.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
+   * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
+   * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
+   * this.style(null)                                      // remove the [style] attribute
+   * this.style()                                          // return the value of [style], as a string (or `undefined` if the attribute has not been set)
    * ```
    *
    * @param  {(AttrValue|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
@@ -346,19 +346,19 @@ module.exports = class Element {
    *
    * Examples:
    * ```
-   * my_elem.css('background', 'red')                       // set the `background` property
-   * my_elem.css('font-weight', '')                         // remove the `font-weight` property
-   * my_elem.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)
-   * my_elem.css('font-weight', null)                       // remove the `font-weight` property
-   * my_elem.css('color', function () { return this.id() }) // set the `color` property to this element’s ID
-   * my_elem.css({                                          // set/remove multiple attributes all at once
+   * this.css('background', 'red')                       // set the `background` property
+   * this.css('font-weight', '')                         // remove the `font-weight` property
+   * this.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)
+   * this.css('font-weight', null)                       // remove the `font-weight` property
+   * this.css('color', function () { return this.id() }) // set the `color` property to this element’s ID
+   * this.css({                                          // set/remove multiple attributes all at once
    *   background  : 'red',
    *   margin      : '1rem',
    *   opacity     : 0.5,
    *   visibility  : null, // remove the `visibility` property
    *   'text-align': '',   // remove the `text-align` property
    * })
-   * my_elem.css()                                          // do nothing; return `this`
+   * this.css()                                          // do nothing; return `this`
    * ```
    *
    * @param {(string|Object<AttrValue>)=} prop the name of the css property to set or get, or an object with AttrValue type values
@@ -443,7 +443,7 @@ module.exports = class Element {
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
-    if (Util.Object.typeOf(elements[0]) === 'array') return Element.concat.call(null, ...elements[0]) // same as Element.concat.apply(null, elements[0])
+    if (Util.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0]) // same as Element.concat.apply(null, elements[0])
     return elements
       .filter((el) => el !== null)
       .map((el) => el.html()).join('')
