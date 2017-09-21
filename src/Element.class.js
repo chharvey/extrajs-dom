@@ -382,7 +382,7 @@ module.exports = class Element {
          * A new ObjectString representing this element’s styles.
          * @type {ObjectString}
          */
-        let $styles = this.styles
+        let $styles = new ObjectString(this.styles)
         switch (Util.Object.typeOf(value)) {
           case 'function' : return this.css(prop, value.call(this));
           case 'null'     : $styles.delete(prop); break;
