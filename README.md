@@ -168,9 +168,9 @@ return el.id() === 'my-div'
 ```
 remove the id:
 ```js
-let el = new Element('div').id('my-div')
-el.id(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').id('my-div').id(null)
+let el2 = new Element('div').id('my-div').id('')
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`)
 ```
 
 #### `#class()` (LOCKED)
@@ -194,9 +194,9 @@ return el.id() === 'my-div your-div'
 ```
 remove the class:
 ```js
-let el = new Element('div').class('my-div your-div')
-el.id(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').class('my-div your-div').class(null)
+let el1 = new Element('div').class('my-div your-div').class('')
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`)
 ```
 
 #### `#addClass()` (LOCKED)
@@ -239,9 +239,10 @@ return el.html() === `<div style="content:'div';"></div>`
 ```
 remove the `[style]` attribute:
 ```js
-let el = new Element('div').style(function () { return `content: '${this.name}';` })
-el.style(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').style(function () { return `content: '${this.name}';` }).style(null)
+let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style('')
+let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style({})
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`) && (el3.html() === `<div></div>`)
 ```
 get the value of `[style]` (or `undefined` if the attribute had not been set):
 ```js

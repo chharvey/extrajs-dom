@@ -170,7 +170,7 @@ module.exports = class Element {
    *   if you have strings and are not removing any attributes:
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
-   * @param {(string|Object<ValueArg>)=} key the name of the attribute to set or get, or an object with ValueArg type values
+   * @param {(string|Object<ValueArg>)=} key the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
    * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
    *                             (or `undefined` if that attribute had not been set)
@@ -219,15 +219,17 @@ module.exports = class Element {
    * Examples:
    * ```
    * this.id('section1') // set the [id] attribute
-   * this.id(function () { return this.attr('data-id') }) // set the [id] attribute using a function
+   * this.id(function () { return this.name }) // set the [id] attribute using a function
    * this.id(null)       // remove the [id] attribute
+   * this.id('')         // remove the [id] attribute
    * this.id()           // return the value of [id]
    * ```
    *
-   * @param  {ValueArg=} id the value to set for the `id` attribute
+   * @param  {ValueArg=} id the value to set for the `id` attribute; nonempty string
    * @return {(Element|string=)} `this` if setting the ID, else the value of the ID (or `undefined` if not set)
    */
   id(id) {
+    if (Util.Object.typeOf(id)==='string' && id.trim()==='') return this.id(null)
     return this.attr('id', id)
   }
 
@@ -237,16 +239,18 @@ module.exports = class Element {
    * Examples:
    * ```
    * this.class('o-Object c-Component') // set the [class] attribute
+   * this.class(function () { return this.name }) // set the [class] attribute using a function
    * this.class(null)                   // remove the [class] attribute
+   * this.class('')                     // remove the [class] attribute
    * this.class()                       // return the value of [class]
    * ```
    *
-   * @param  {ValueArg=} classs the value to set for the `class` attribute
+   * @param  {ValueArg=} class_ the value to set for the `class` attribute; nonempty string
    * @return {(Element|string=)} `this` if setting the class, else the value of the class (or `undefined` if not set)
    */
-  class(classs) {
-    if (typeof classs === 'string' && classs.trim() === '') return this.class(null)
-    return this.attr('class', classs)
+  class(class_) {
+    if (Util.Object.typeOf(class_)==='string' && class_.trim()==='') return this.class(null)
+    return this.attr('class', class_)
   }
 
   /**
@@ -260,11 +264,11 @@ module.exports = class Element {
    * this.addClass()                       // do nothing; return `this`
    * ```
    *
-   * @param  {string=} class_str the classname(s) to add, space-separated
+   * @param  {string=} class_str the classname(s) to add, space-separated; nonempty string
    * @return {Element} `this`
    */
   addClass(class_str = '') {
-    if (class_str === '') return this
+    if (class_str.trim() === '') return this
     return this.class(`${this.class() || ''} ${class_str}`)
   }
 
@@ -281,10 +285,9 @@ module.exports = class Element {
    * @return {Element} `this`
    */
   removeClass(classname = '') {
-    classname = classname.trim()
-    if (classname === '') return this
+    if (classname.trim() === '') return this
     let classes = (this.class() || '').split(' ')
-    let index = classes.indexOf(classname)
+    let index = classes.indexOf(classname.trim())
     if (index >= 0) classes.splice(index, 1)
     return this.class(classes.join(' '))
   }
@@ -306,10 +309,9 @@ module.exports = class Element {
    */
   style(arg) {
     if (['number','infinite','boolean'].includes(Util.Object.typeOf(arg))) throw new Error('Provided argument cannot be a number or boolean.')
-    if (Util.Object.is(arg, {}) || arg === '') return this.style(null)
     let returned = {
       object: function () {
-        return this.attr('style', new ObjectString(arg).toCssString())
+        return this.attr('style', new ObjectString(arg).toCssString() || null)
       },
       string: function () {
         return this.style(ObjectString.fromCssString(arg).data)
@@ -383,7 +385,7 @@ module.exports = class Element {
           case 'string'   : if (value.trim() === '') return this.css(prop, null);
           default         : $styles.set(prop, value); break; // boolean, number, infinite, NaN
         }
-        return this.attr('style', $styles.toCssString())
+        return this.style($styles.data)
       case 'object': for (let i in prop) this.css(i, prop[i]); break;
       default      : throw new TypeError('Provided property must be a string or object.')
     }
@@ -393,13 +395,15 @@ module.exports = class Element {
   /**
    * Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
-   * @param  {string} name  the suffix of the `[data-*]` attribute
+   * Calling `this#data()` does nothing and returns `this`.
+   * @param  {string=} name  the suffix of the `[data-*]` attribute
    * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it
    * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
    *                             (or `undefined` if that attribute had not been set)
    */
-  data(name, value) {
-    return this.attr(`data-${name}`, value)
+  data(name = '', value) {
+    if (Util.Object.typeOf(name)==='string' && name.trim()==='') return this
+    return this.attr(`data-${name.trim()}`, value)
   }
 
   /**
