@@ -1,0 +1,26 @@
+{
+  "name": "extrajs-element",
+  "version": "1.0.0",
+  "description": "An HTML element in Javascript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chharvey/extrajs-element.git"
+  },
+  "keywords": [
+    "html",
+    "element"
+  ],
+  "author": "Chris Harvey <chrisharvey2pi@gmail.com> (https://chharvey.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chharvey/extrajs-element/issues"
+  },
+  "homepage": "https://github.com/chharvey/extrajs-element#readme",
+  "dependencies": {
+    "extrajs": "^0.7.1"
+  }
+}
