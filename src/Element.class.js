@@ -212,7 +212,7 @@ module.exports = class Element {
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
    * ```
-   * @param  {string=} attr_str a string of the format `'attribute="attr value"'`
+   * @param  {...string} attr_str a string of the format `'attribute="attr value"'`
    * @return {Element} `this`
    */
   attrStr(...attr_str) {
@@ -284,24 +284,25 @@ module.exports = class Element {
   }
 
   /**
-   * Remove a single token from this element’s `class` attribute.
+   * Remove one or more tokens from this element’s `class` attribute.
    *
    * Examples:
    * ```
    * this.removeClass('o-Object') // remove one class
+   * this.removeClass('o-Object', 'c-Component') // remove multiple classes
    * this.removeClass()           // do nothing; return `this`
    * ```
    *
-   * @param  {string=} classname classname to remove; must not contain spaces
+   * @param  {...string} classname classname to remove; must not contain spaces
    * @return {Element} `this`
    */
-  removeClass(classname = '') {
-    if (classname.trim() === '') return this
+  removeClass(...classname) {
     try {
-      let classes = this.class().split(' ') // throws an error if there is no `[class]` attribute
-    let index = classes.indexOf(classname.trim())
-    if (index >= 0) classes.splice(index, 1)
-    return this.class(classes.join(' '))
+      return this.class((this.class())
+        .split(' ')
+        .filter((str) => !classname.includes(str))
+        .join(' ')
+      )
     } catch (e) {
       return this
     }
@@ -394,7 +395,7 @@ module.exports = class Element {
          * A new ObjectString representing this element’s styles.
          * @type {ObjectString}
          */
-        let $styles = this.styles
+        let $styles = new ObjectString(this.styles)
         switch (Util.Object.typeOf(value)) {
           case 'function' : return this.css(prop, value.call(this));
           case 'null'     : $styles.delete(prop); break;
@@ -415,13 +416,20 @@ module.exports = class Element {
    * Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * Calling `this#data()` does nothing and returns `this`.
-   * @param  {string=} name  the suffix of the `[data-*]` attribute
-   * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it
+   * @param  {(string|Object<ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with ValueArg type values
+   * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @return {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    */
   data(name = '', value) {
-    if (Util.Object.typeOf(name)==='string' && name.trim()==='') return this
-    return this.attr(`data-${name.trim()}`, value)
+    // REVIEW: object lookups too complicated here; using standard switches
+    switch (Util.Object.typeOf(name)) {
+      case 'string':
+        if (name.trim()==='') break;
+        return this.attr(`data-${name.trim()}`, value)
+      case 'object': for (let i in name) this.data(i, key[i]); break;
+      default      : throw new TypeError('Provided name must be a string or object.')
+    }
+    return this
   }
 
   /**
@@ -466,7 +474,7 @@ module.exports = class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
-   * @param  {?Element|Array<?Element>} elements one or more elements to output, or an array of elements
+   * @param  {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
