@@ -118,17 +118,15 @@ module.exports = class Element {
   /**
    * NOTE: TYPE DEFINITION
    * A type to provide as a value argument for setting/removing an attribute.
-   * - {string}            - set the attribute to the string value
-   * - {number}            - set the attribute to the number converted to a string; may not be `NaN`
-   * - {boolean}           - set the attribute to the boolean converted to a string
-   * - {function():string} - set the attribute to the result of calling the function on `this`
-   * - {null}              - remove the attribute altogether
-   * @type {?(string|number|boolean|function():string)} AttrValue
+   * - {ObjectString.ValueType}            - set the attribute to an ObjectString.ValueType value
+   * - {function():ObjectString.ValueType} - call the function on `this` and then set the attribute to the result
+   * - {null}                              - remove the attribute altogether
+   * @type {?(ValueArgType|function():ObjectString.ValueType)} ValueArg
    */
   /**
    * Set or get attributes of this element.
    *
-   * If the key given is a string, and the value is a non-null {@link AttrValue} type,
+   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
    * then the attribute will be set (or modified) with the result of the value.
    *
    * If the key is a string and the value is `null,`
@@ -139,7 +137,7 @@ module.exports = class Element {
    * If no such attribute exists, `undefined` is returned.
    *
    * If an object key is provided, then no value argument may be provided.
-   * The object must have values of the {@link AttrValue} type;
+   * The object must have values of the {@link ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * attributes. You may use this method with a single object argument to set and/or remove
    * multiple attributes (using `null` to remove).
@@ -172,8 +170,8 @@ module.exports = class Element {
    *   if you have strings and are not removing any attributes:
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
-   * @param {(string|Object<AttrValue>)=} key the name of the attribute to set or get, or an object with AttrValue type values
-   * @param {AttrValue=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param {(string|Object<ValueArg>)=} key the name of the attribute to set or get, or an object with ValueArg type values
+   * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
    *                             (or `undefined` if that attribute had not been set)
    */
@@ -183,7 +181,7 @@ module.exports = class Element {
       case 'string':
         if (key.trim() === '') break;
         switch (Util.Object.typeOf(value)) {
-          case 'function' : this._attributes.setFn(key, value, this); break;
+          case 'function' : return this.attr(key, value.call(this));
           case 'null'     : this._attributes.delete(key); break;
           case 'undefined': return this._attributes.get(key);
           default         : this._attributes.set(key, value); break; // string, boolean, number, infinite, NaN
@@ -226,7 +224,7 @@ module.exports = class Element {
    * this.id()           // return the value of [id]
    * ```
    *
-   * @param  {AttrValue=} id the value to set for the `id` attribute
+   * @param  {ValueArg=} id the value to set for the `id` attribute
    * @return {(Element|string=)} `this` if setting the ID, else the value of the ID (or `undefined` if not set)
    */
   id(id) {
@@ -243,7 +241,7 @@ module.exports = class Element {
    * this.class()                       // return the value of [class]
    * ```
    *
-   * @param  {AttrValue=} classs the value to set for the `class` attribute
+   * @param  {ValueArg=} classs the value to set for the `class` attribute
    * @return {(Element|string=)} `this` if setting the class, else the value of the class (or `undefined` if not set)
    */
   class(classs) {
@@ -303,7 +301,7 @@ module.exports = class Element {
    * this.style()                                          // return the value of [style], as a string (or `undefined` if the attribute has not been set)
    * ```
    *
-   * @param  {(AttrValue|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
+   * @param  {(ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
    * @return {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    */
   style(arg) {
@@ -316,7 +314,9 @@ module.exports = class Element {
       string: function () {
         return this.style(ObjectString.fromCssString(arg).data)
       },
-      default: function () { return this.attr('style', arg) }, // function, null, undefined
+      default: function () { // function, null, undefined
+        return this.attr('style', arg)
+      },
     }
     return (returned[Util.Object.typeOf(arg)] || returned.default).call(this)
   }
@@ -324,7 +324,7 @@ module.exports = class Element {
   /**
    * Set or get css properties of this element’s inline styles (`[style]` attribute).
    *
-   * If the key given is a string, and the value is a non-null {@link AttrValue} type,
+   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
    * then the property will be set (or modified) with the result of the value.
    *
    * If the key is a string and the value is `null,` or if the value is `''` (CHANGED!),
@@ -337,7 +337,7 @@ module.exports = class Element {
    * depending on whether the property is inherited or not.)
    *
    * If an object key is provided, then no value argument may be provided.
-   * The object must have values of the {@link AttrValue} type;
+   * The object must have values of the {@link ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * css properties. You may use this method with a single object argument to set and/or remove
    * multiple properties (using `null` to remove).
@@ -361,8 +361,8 @@ module.exports = class Element {
    * this.css()                                          // do nothing; return `this`
    * ```
    *
-   * @param {(string|Object<AttrValue>)=} prop the name of the css property to set or get, or an object with AttrValue type values
-   * @param {AttrValue=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param {(string|Object<ValueArg>)=} prop the name of the css property to set or get, or an object with ValueArg type values
+   * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @return {(Element|string=)} `this` if setting a property, else the value of the property specified
    *                             (or `undefined` if that property had not been set)
    */
@@ -371,15 +371,19 @@ module.exports = class Element {
     switch (Util.Object.typeOf(prop)) {
       case 'string':
         if (prop.trim() === '') break;
-        let style_obj = ObjectString.fromCssString(this.style())
+        /**
+         * A new ObjectString representing this element’s styles.
+         * @type {ObjectString}
+         */
+        let $styles = this.styles
         switch (Util.Object.typeOf(value)) {
-          case 'function' : style_obj.setFn(prop, value, this); break;
-          case 'null'     : style_obj.delete(prop); break;
-          case 'undefined': return style_obj.get(prop);
+          case 'function' : return this.css(prop, value.call(this));
+          case 'null'     : $styles.delete(prop); break;
+          case 'undefined': return $styles.get(prop);
           case 'string'   : if (value.trim() === '') return this.css(prop, null);
-          default         : style_obj.set(prop, value); break; // boolean, number, infinite, NaN
+          default         : $styles.set(prop, value); break; // boolean, number, infinite, NaN
         }
-        return this.attr('style', style_obj.toCssString())
+        return this.attr('style', $styles.toCssString())
       case 'object': for (let i in prop) this.css(i, prop[i]); break;
       default      : throw new TypeError('Provided property must be a string or object.')
     }
@@ -390,7 +394,7 @@ module.exports = class Element {
    * Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * @param  {string} name  the suffix of the `[data-*]` attribute
-   * @param  {AttrValue=} value the value to assign to the attribute, or `null` to remove it
+   * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it
    * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
    *                             (or `undefined` if that attribute had not been set)
    */
