@@ -1,4 +1,4 @@
-var Util = require('extrajs').Util
+var xjs = require('extrajs').Util
 var ObjectString = require('./ObjectString.class.js')
 
 /**
@@ -177,10 +177,10 @@ module.exports = class Element {
    */
   attr(key = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (Util.Object.typeOf(key)) {
+    switch (xjs.Object.typeOf(key)) {
       case 'string':
         if (key.trim() === '') break;
-        switch (Util.Object.typeOf(value)) {
+        switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.attr(key, value.call(this));
           case 'null'     : this._attributes.delete(key); break;
           case 'undefined': return this._attributes.get(key);
@@ -229,7 +229,7 @@ module.exports = class Element {
    * @return {(Element|string=)} `this` if setting the ID, else the value of the ID (or `undefined` if not set)
    */
   id(id) {
-    if (Util.Object.typeOf(id)==='string' && id.trim()==='') return this.id(null)
+    if (xjs.Object.typeOf(id)==='string' && id.trim()==='') return this.id(null)
     return this.attr('id', id)
   }
 
@@ -249,7 +249,7 @@ module.exports = class Element {
    * @return {(Element|string=)} `this` if setting the class, else the value of the class (or `undefined` if not set)
    */
   class(class_) {
-    if (Util.Object.typeOf(class_)==='string' && class_.trim()==='') return this.class(null)
+    if (xjs.Object.typeOf(class_)==='string' && class_.trim()==='') return this.class(null)
     return this.attr('class', class_)
   }
 
@@ -313,7 +313,7 @@ module.exports = class Element {
    * @return {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    */
   style(arg) {
-    if (['number','infinite','boolean'].includes(Util.Object.typeOf(arg))) throw new Error('Provided argument cannot be a number or boolean.')
+    if (['number','infinite','boolean'].includes(xjs.Object.typeOf(arg))) throw new Error('Provided argument cannot be a number or boolean.')
     let returned = {
       object: function () {
         return this.attr('style', new ObjectString(arg).toCssString() || null)
@@ -325,7 +325,7 @@ module.exports = class Element {
         return this.attr('style', arg)
       },
     }
-    return (returned[Util.Object.typeOf(arg)] || returned.default).call(this)
+    return (returned[xjs.Object.typeOf(arg)] || returned.default).call(this)
   }
 
   /**
@@ -375,7 +375,7 @@ module.exports = class Element {
    */
   css(prop = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (Util.Object.typeOf(prop)) {
+    switch (xjs.Object.typeOf(prop)) {
       case 'string':
         if (prop.trim() === '') break;
         /**
@@ -383,7 +383,7 @@ module.exports = class Element {
          * @type {ObjectString}
          */
         let $styles = new ObjectString(this.styles)
-        switch (Util.Object.typeOf(value)) {
+        switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.css(prop, value.call(this));
           case 'null'     : $styles.delete(prop); break;
           case 'undefined': return $styles.get(prop);
@@ -408,7 +408,7 @@ module.exports = class Element {
    */
   data(name = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (Util.Object.typeOf(name)) {
+    switch (xjs.Object.typeOf(name)) {
       case 'string':
         if (name.trim()==='') break;
         return this.attr(`data-${name.trim()}`, value)
@@ -463,7 +463,7 @@ module.exports = class Element {
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
-    if (Util.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0]) // same as Element.concat.apply(null, elements[0])
+    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0]) // same as Element.concat.apply(null, elements[0])
     return elements
       .filter((el) => el !== null)
       .map((el) => el.html()).join('')
@@ -603,6 +603,6 @@ module.exports = class Element {
         return thing.toString()
       },
     }
-    return (returned[Util.Object.typeOf(thing)] || returned.default).call(null)
+    return (returned[xjs.Object.typeOf(thing)] || returned.default).call(null)
   }
 }
