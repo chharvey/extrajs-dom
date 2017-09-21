@@ -110,10 +110,15 @@ Set a “boolean attribute”:
 let el = new Element('div').attr('itemscope', '')
 return el.html() === `<div itemscope=""></div>`
 ```
-Get the value of an attribute (or `undefined` if the attribute had not been set):
+Get the value of an attribute (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').attr('itemtype', 'HTMLElement')
-return (el.attr('itemtype') === 'HTMLElement') && (el.attr('itemscope') === undefined)
+return (el.attr('itemtype') === 'HTMLElement') && (function () {
+  try {
+    console.log(el.attr('itemscope'))
+    return false
+  } catch (e) { return true }
+})()
 ```
 Remove an attribute:
 ```js
@@ -161,7 +166,7 @@ the function should take 0 arguments and return a string:
 let el = new Element('div').id(function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div"></div>`
 ```
-get the id (or `undefined` if the attribute had not been set):
+get the id (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').id('my-div')
 return el.id() === 'my-div'
@@ -187,7 +192,7 @@ the function should take 0 arguments and return a string:
 let el = new Element('div').class(function () { return `my-${this.name} your-div` })
 return el.html() === `<div class="my-div your-div"></div>`
 ```
-get the class (or `undefined` if the attribute had not been set):
+get the class (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').class('my-div your-div')
 return el.id() === 'my-div your-div'
@@ -244,7 +249,7 @@ let el2 = new Element('div').style(function () { return `content: '${this.name}'
 let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style({})
 return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`) && (el3.html() === `<div></div>`)
 ```
-get the value of `[style]` (or `undefined` if the attribute had not been set):
+get the value of `[style]` (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').style(function () { return `content: '${this.name}';` })
 return el.style() === 'content:\'div\';'
@@ -266,10 +271,15 @@ return (
   && el4.html() === `<div style="content:'true';"></div>`
 )
 ```
-Get the value of a css property (or `undefined` if the property had not been set):
+Get the value of a css property (throws a TypeError if the property had not been set):
 ```js
 let el = new Element('div').css('font-weight', '300')
-return (el.css('font-weight') === '300') && (el.css('font-style') === undefined)
+return (el.css('font-weight') === '300') && (function () {
+  try {
+    console.log(el.css('font-style'))
+    return false
+  } catch (e) { return true }
+})()
 ```
 Remove a css propety:
 ```js
@@ -318,7 +328,12 @@ return el.html() === `<div data-type="division"></div>`
 Get:
 ```js
 let el = new Element('div').attr('data-type','division').data('class','null')
-return (el.data('type') === 'division') && (el.data('quality') === undefined)
+return (el.data('type') === 'division') && (function () {
+  try {
+    console.log(el.data('quality'))
+    return false
+  } catch (e) { return true }
+})()
 ```
 reminder: get all the `[data-*]` custom attributes as an *object*
 (e.g. `{type: 'division', class: 'null'}`) using the `#dataset` getter function.
@@ -343,6 +358,13 @@ return (
   && el2.html() === `<div><strong>hello world</strong></div>`
   && el3.html() === `<div><strong>hello world</strong></div>`
 )
+```
+Throw an error for void elements:
+```js
+try {
+  let el = new Element('input').addContent(`submit`)
+  return false
+} catch (e) { return true }
 ```
 
 #### `#addElements()` (LOCKED)

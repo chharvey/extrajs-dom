@@ -91,7 +91,11 @@ module.exports = class Element {
    * @return {Object<string>} an object containing the property-value pairs of this element’s css
    */
   get styles() {
-    return ObjectString.fromCssString(this.style() || '').data
+    try {
+      return ObjectString.fromCssString(this.style()).data // throws an error if there is no `[style]` attribute
+    } catch (e) {
+      return {}
+    }
   }
 
   /**
@@ -170,25 +174,28 @@ module.exports = class Element {
    *   if you have strings and are not removing any attributes:
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
-   * @param {(string|Object<ValueArg>)=} key the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
+   * @param {(string|Object<ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
    * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
-   * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
-   *                             (or `undefined` if that attribute had not been set)
+   * @return {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
+   * @throws {TypeError} if the given attribute is not a string or object
+   * @throws {TypeError} if the given attribute has been removed or not set
    */
-  attr(key = '', value) {
+  attr(attr = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (Util.Object.typeOf(key)) {
+    switch (Util.Object.typeOf(attr)) {
       case 'string':
-        if (key.trim() === '') break;
+        if (attr.trim() === '') break;
         switch (Util.Object.typeOf(value)) {
-          case 'function' : return this.attr(key, value.call(this));
-          case 'null'     : this._attributes.delete(key); break;
-          case 'undefined': return this._attributes.get(key);
-          default         : this._attributes.set(key, value); break; // string, boolean, number, infinite, NaN
+          case 'function' : return this.attr(attr, value.call(this));
+          case 'null'     : this._attributes.delete(attr); break;
+          case 'undefined':
+            if (Util.Object.typeOf(this._attributes.get(attr)) === 'undefined') throw new TypeError(`Attribute '${attr}' is undefined.`);
+            return this._attributes.get(attr);
+          default         : this._attributes.set(attr, value); break; // string, boolean, number, infinite, NaN
         }
         break;
-      case 'object': for (let i in key) this.attr(i, key[i]); break;
-      default      : throw new TypeError('Provided key must be a string or object.')
+      case 'object': for (let i in attr) this.attr(i, attr[i]); break;
+      default      : throw new TypeError('Provided attribute must be a string or object.')
     }
     return this
   }
@@ -226,7 +233,7 @@ module.exports = class Element {
    * ```
    *
    * @param  {ValueArg=} id the value to set for the `id` attribute; nonempty string
-   * @return {(Element|string=)} `this` if setting the ID, else the value of the ID (or `undefined` if not set)
+   * @return {(Element|string)} `this` if setting the ID, else the value of the ID
    */
   id(id) {
     if (Util.Object.typeOf(id)==='string' && id.trim()==='') return this.id(null)
@@ -246,7 +253,7 @@ module.exports = class Element {
    * ```
    *
    * @param  {ValueArg=} class_ the value to set for the `class` attribute; nonempty string
-   * @return {(Element|string=)} `this` if setting the class, else the value of the class (or `undefined` if not set)
+   * @return {(Element|string)} `this` if setting the class, else the value of the class
    */
   class(class_) {
     if (Util.Object.typeOf(class_)==='string' && class_.trim()==='') return this.class(null)
@@ -269,7 +276,11 @@ module.exports = class Element {
    */
   addClass(class_str = '') {
     if (class_str.trim() === '') return this
-    return this.class(`${this.class() || ''} ${class_str}`)
+    try {
+      return this.class(`${this.class()} ${class_str}`) // throws an error if there is no `[class]` attribute
+    } catch (e) {
+      return this.class(class_str)
+    }
   }
 
   /**
@@ -286,10 +297,14 @@ module.exports = class Element {
    */
   removeClass(classname = '') {
     if (classname.trim() === '') return this
-    let classes = (this.class() || '').split(' ')
+    try {
+      let classes = this.class().split(' ') // throws an error if there is no `[class]` attribute
     let index = classes.indexOf(classname.trim())
     if (index >= 0) classes.splice(index, 1)
     return this.class(classes.join(' '))
+    } catch (e) {
+      return this
+    }
   }
 
   /**
@@ -301,14 +316,15 @@ module.exports = class Element {
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
    * this.style(null)                                      // remove the [style] attribute
-   * this.style()                                          // return the value of [style], as a string (or `undefined` if the attribute has not been set)
+   * this.style()                                          // return the value of [style], as a string
    * ```
    *
    * @param  {(ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
    * @return {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
+   * @throws {TypeError} if the given argument is a number or boolean
    */
   style(arg) {
-    if (['number','infinite','boolean'].includes(Util.Object.typeOf(arg))) throw new Error('Provided argument cannot be a number or boolean.')
+    if (['number','infinite','boolean'].includes(Util.Object.typeOf(arg))) throw new TypeError('Provided argument cannot be a number or boolean.')
     let returned = {
       object: function () {
         return this.attr('style', new ObjectString(arg).toCssString() || null)
@@ -365,8 +381,9 @@ module.exports = class Element {
    *
    * @param {(string|Object<ValueArg>)=} prop the name of the css property to set or get, or an object with ValueArg type values
    * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
-   * @return {(Element|string=)} `this` if setting a property, else the value of the property specified
-   *                             (or `undefined` if that property had not been set)
+   * @return {(Element|string)} `this` if setting a property, else the value of the property specified
+   * @throws {TypeError} if the given property is not a string or object
+   * @throws {TypeError} if the given property has been removed or not set
    */
   css(prop = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
@@ -381,7 +398,9 @@ module.exports = class Element {
         switch (Util.Object.typeOf(value)) {
           case 'function' : return this.css(prop, value.call(this));
           case 'null'     : $styles.delete(prop); break;
-          case 'undefined': return $styles.get(prop);
+          case 'undefined':
+            if (Util.Object.typeOf($styles.get(prop)) === 'undefined') throw new TypeError(`Property '${prop}' is undefined.`);
+            return $styles.get(prop);
           case 'string'   : if (value.trim() === '') return this.css(prop, null);
           default         : $styles.set(prop, value); break; // boolean, number, infinite, NaN
         }
@@ -398,8 +417,7 @@ module.exports = class Element {
    * Calling `this#data()` does nothing and returns `this`.
    * @param  {string=} name  the suffix of the `[data-*]` attribute
    * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it
-   * @return {(Element|string=)} `this` if setting an attribute, else the value of the attribute specified
-   *                             (or `undefined` if that attribute had not been set)
+   * @return {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    */
   data(name = '', value) {
     if (Util.Object.typeOf(name)==='string' && name.trim()==='') return this
@@ -411,9 +429,10 @@ module.exports = class Element {
    * **May not be called on elements that are void!**
    * @param {string} contents the contents to add
    * @return {Element} `this`
+   * @throws {TypeError} if this element is void
    */
   addContent(contents) {
-    if (this.isVoid) throw new Error('Cannot add contents to a void element.')
+    if (this.isVoid) throw new TypeError('Cannot add contents to a void element.')
     this._contents += contents
     return this
   }
@@ -561,16 +580,20 @@ module.exports = class Element {
     }
     let returned = {
       object: function () {
-        // REVIEW indentation
-    if (thing instanceof Element) {
-      for (let i in attr.list) {
-        if (i !== 'class' && i !== 'style' && !thing.attr(i)) thing.attr(i, attr.list[i])
-      }
-      return thing
-        .class(`${attr.list && attr.list.class || ''} ${thing.class() || ''}`)
-        .style(`${attr.list && attr.list.style}; ${thing.style()}`)
-        .html()
-    }
+        if (thing instanceof Element) {
+          for (let i in attr.list) {
+            try {
+              thing.attr(i)
+            } catch (e) {
+              if (i !== 'class' && i !== 'style') thing.attr(i, attr.list[i])
+            }
+          }
+          let classes = attr.list && attr.list.class || ''
+          let styles  = attr.list && attr.list.style || ''
+          try { classes = `${classes} ${thing.class()}` } catch (e) { ; }
+          try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
+          return thing.class(classes).style(styles).html()
+        }
         let returned = new Element('dl').attr(attr.list)
         for (let i in thing) {
           returned.addElements([
