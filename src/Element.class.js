@@ -1,5 +1,5 @@
-var xjs = require('extrajs').Util
-var ObjectString = require('./ObjectString.class.js')
+const xjs          = require('extrajs')
+const ObjectString = require('./ObjectString.class.js')
 
 /**
  * Represents an HTML element.
@@ -400,7 +400,7 @@ module.exports = class Element {
           case 'function' : return this.css(prop, value.call(this));
           case 'null'     : $styles.delete(prop); break;
           case 'undefined':
-            if (Util.Object.typeOf($styles.get(prop)) === 'undefined') throw new TypeError(`Property '${prop}' is undefined.`);
+            if (xjs.Object.typeOf($styles.get(prop)) === 'undefined') throw new TypeError(`Property '${prop}' is undefined.`);
             return $styles.get(prop);
           case 'string'   : if (value.trim() === '') return this.css(prop, null);
           default         : $styles.set(prop, value); break; // boolean, number, infinite, NaN

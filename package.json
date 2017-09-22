@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-element#readme",
   "dependencies": {
-    "extrajs": "^0.7.1"
+    "extrajs": "^0.8.0"
   }
 }

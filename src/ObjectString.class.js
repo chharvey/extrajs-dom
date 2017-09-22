@@ -1,4 +1,4 @@
-var xjs = require('extrajs').Util
+const xjs = require('extrajs')
 
 /**
  * An Object that contains string values only.

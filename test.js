@@ -1,4 +1,4 @@
-var Element = require('./index.js')
+const Element = require('./index.js')
 
 
 function element() {
