@@ -1,1 +1,1 @@
-module.exports = require('./Element.class.js')
+module.exports = require('./src/Element.class.js')

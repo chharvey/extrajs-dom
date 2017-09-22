@@ -42,13 +42,13 @@ return (el1.html() === `<path></path>` /* (invalid) */) && (el2.html() === `<pat
 
 ### Getters and Setters
 
-#### get `el#name` (LOCKED)
+#### get `string : #name` (LOCKED)
 Return the name of the element.
 ```js
 return new Element('div').name === 'div'
 ```
 
-#### get `el#isVoid` (LOCKED)
+#### get `boolean : #isVoid` (LOCKED)
 Return `true` if this element is void.
 ```js
 return (
@@ -59,7 +59,7 @@ return (
 )
 ```
 
-#### get `el#attributes` (LOCKED)
+#### get `Object<string> : #attributes` (LOCKED)
 Return an object of this element’s attributes.
 ```js
 let el = new Element('div').attr('class','panel')
@@ -67,14 +67,14 @@ let at = el.attributes // { class: 'panel' }
 return at.class === 'panel'
 ```
 
-#### get `el#contents` (LOCKED)
+#### get `?string : #contents` (LOCKED)
 Return a string of this element’s contents.
 ```js
 let el = new Element('div').addContent(`once upon ...`)
-return el.content === `once upon ...`
+return el.contents === `once upon ...`
 ```
 
-#### get `el#styles` (LOCKED)
+#### get `Object<string> : #styles` (LOCKED)
 Return an object of this element’s styles.
 ```js
 let el = new Element('div').attr('style','color: blue;')
@@ -82,7 +82,7 @@ let st = el.styles // { color: 'blue' }
 return st.color === 'blue'
 ```
 
-#### get `el#dataset` (LOCKED)
+#### get `Object<string> : #dataset` (LOCKED)
 Return an object of this element’s `data-*` custom attributes.
 ```js
 let el = new Element('div').attr('data-instanceof','Promise')
@@ -93,7 +93,7 @@ return da.instanceof === 'Promise'
 
 ### Attribute Methods
 
-#### `el#attr()` (STABLE)
+#### `#attr()` (STABLE)
 Set an attribute (string, boolean, or number value):
 ```js
 let el1 = new Element('div').attr('itemtype', 'HTMLElement') // string
@@ -110,10 +110,15 @@ Set a “boolean attribute”:
 let el = new Element('div').attr('itemscope', '')
 return el.html() === `<div itemscope=""></div>`
 ```
-Get the value of an attribute:
+Get the value of an attribute (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').attr('itemtype', 'HTMLElement')
-return el.attr('itemtype') === 'HTMLElement'
+return (el.attr('itemtype') === 'HTMLElement') && (function () {
+  try {
+    console.log(el.attr('itemscope'))
+    return false
+  } catch (e) { return true }
+})()
 ```
 Remove an attribute:
 ```js
@@ -122,6 +127,7 @@ el.attr('itemtype', null)
 return el.html() === `<div></div>`
 ```
 Set an attribute with a function (`this` refers to the element):
+the function should take 0 arguments and return a string:
 ```js
 let el = new Element('div').attr('id','my-div')
 el.attr('data-id', function () { return `my-${this.name}` })
@@ -139,14 +145,14 @@ el.attr({
 return el.html() === `<div itemprop="name" itemscope="" itemtype="Person"></div>`
 ```
 
-#### `el#attrStr()` (EXPERIMENTAL)
+#### `#attrStr()` (EXPERIMENTAL)
 Set (cannot remove) one or more attributes using one or more strings of the form `attr="val"`.
 ```js
 new Element('div').attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')
 return el.html() === `<div itemprop="name" itemscope="" itemtype="Person"></div>`
 ```
 
-#### `el#id()` (LOCKED)
+#### `#id()` (LOCKED)
 Set, remove, or get the `[id]` attribute. Shortcut for `#attr('id',value)`.
 
 set the id (string, boolean, or number):
@@ -155,23 +161,24 @@ let el = new Element('div').id('my-div')
 return el.html() === `<div id="my-div"></div>`
 ```
 set the id with a function (`this` refers to the element):
+the function should take 0 arguments and return a string:
 ```js
 let el = new Element('div').id(function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div"></div>`
 ```
-get the id:
+get the id (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').id('my-div')
 return el.id() === 'my-div'
 ```
 remove the id:
 ```js
-let el = new Element('div').id('my-div')
-el.id(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').id('my-div').id(null)
+let el2 = new Element('div').id('my-div').id('')
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`)
 ```
 
-#### `el#class()` (LOCKED)
+#### `#class()` (LOCKED)
 Set, remove, or get the `[class]` attribute. Shortcut for `#attr('class',value)`.
 
 set the class (string, boolean, or number):
@@ -180,23 +187,24 @@ let el = new Element('div').class('my-div your-div')
 return el.html() === `<div class="my-div your-div"></div>`
 ```
 set the class with a function (`this` refers to the element):
+the function should take 0 arguments and return a string:
 ```js
 let el = new Element('div').class(function () { return `my-${this.name} your-div` })
 return el.html() === `<div class="my-div your-div"></div>`
 ```
-get the class:
+get the class (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').class('my-div your-div')
 return el.id() === 'my-div your-div'
 ```
 remove the class:
 ```js
-let el = new Element('div').class('my-div your-div')
-el.id(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').class('my-div your-div').class(null)
+let el1 = new Element('div').class('my-div your-div').class('')
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`)
 ```
 
-#### `el#addClass()` (LOCKED)
+#### `#addClass()` (LOCKED)
 Append to the `[class]` attribute.
 ```js
 let el1 = new Element('div').class('my-div your-div').addClass('o-Object c-Component')
@@ -207,15 +215,15 @@ return (
 )
 ```
 
-#### `el#removeClass()` (LOCKED)
-Remove a class.
+#### `#removeClass()` (LOCKED)
+Remove one or more classes.
 ```js
 let el = new Element('div').class('my-div your-div o-Object c-Component')
-el.removeClass('o-Object')
-return el.html() === `<div class="my-div your-div c-Component"></div>`
+el.removeClass('o-Object', 'your-div')
+return el.html() === `<div class="my-div c-Component"></div>`
 ```
 
-#### `el#style()` (STABLE)
+#### `#style()` (STABLE)
 Shortcut for setting the `[style]` attribute.
 
 Set the style (string only):
@@ -229,27 +237,28 @@ let el = new Element('div').style({ background: 'none', 'font-weight': bold })
 return el.html() === `<div style="background:none;font-weight:bold;"></div>`
 ```
 set the style with a function (`this` refers to the element):
-note: function must return a string, not an object
+the function should take 0 arguments and return a string:
 ```js
 let el = new Element('div').style(function () { return `content: '${this.name}';` })
 return el.html() === `<div style="content:'div';"></div>`
 ```
 remove the `[style]` attribute:
 ```js
-let el = new Element('div').style(function () { return `content: '${this.name}';` })
-el.style(null)
-return el.html() === `<div></div>`
+let el1 = new Element('div').style(function () { return `content: '${this.name}';` }).style(null)
+let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style('')
+let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style({})
+return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`) && (el3.html() === `<div></div>`)
 ```
-get the value of `[style]`:
+get the value of `[style]` (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').style(function () { return `content: '${this.name}';` })
 return el.style() === 'content:\'div\';'
 ```
 reminder: get the value of `[style]` as an *object* (e.g. `{content: 'div'}`)
-using the `el.styles` getter.
+using the `#styles` getter function.
 
-#### `el#css()` (STABLE)
-Set a single css style (string, boolean, or number):
+#### `#css()` (STABLE)
+Set a single css style (string, boolean, or number value):
 ```js
 let el1 = new Element('div').css('background', 'red') // string
 let el2 = new Element('div').css('content', false) // boolean
@@ -262,10 +271,15 @@ return (
   && el4.html() === `<div style="content:'true';"></div>`
 )
 ```
-Get the value of a css property:
+Get the value of a css property (throws a TypeError if the property had not been set):
 ```js
 let el = new Element('div').css('font-weight', '300')
-return el.css('font-weight') === '300'
+return (el.css('font-weight') === '300') && (function () {
+  try {
+    console.log(el.css('font-style'))
+    return false
+  } catch (e) { return true }
+})()
 ```
 Remove a css propety:
 ```js
@@ -284,6 +298,7 @@ let el = new Element('div')
 return el.html() === `<div style="background:red;"></div>`
 ```
 Set an attribute with a function (`this` refers to the element):
+the function should take 0 arguments and return a string:
 ```js
 let el = new Element('div').attr('id','#c0ffee')
 el.css('color', function () { return this.attr('id') })
@@ -302,7 +317,7 @@ el.attr({
 return el.html() === `<div style="background:red;margin:1rem;opacity:0.5;"></div>`
 ```
 
-#### `el#data()` (LOCKED)
+#### `#data()` (LOCKED)
 Shortcut for setting any `[data-*]` custom attribute.
 
 Set:
@@ -313,10 +328,15 @@ return el.html() === `<div data-type="division"></div>`
 Get:
 ```js
 let el = new Element('div').attr('data-type','division').data('class','null')
-return el.data('type') === 'division'
+return (el.data('type') === 'division') && (function () {
+  try {
+    console.log(el.data('quality'))
+    return false
+  } catch (e) { return true }
+})()
 ```
-reminder: get all the `[data-*]` custom attributes as an *object* (e.g. `{type: 'division'}`)
-using the `el.dataset` getter.
+reminder: get all the `[data-*]` custom attributes as an *object*
+(e.g. `{type: 'division', class: 'null'}`) using the `#dataset` getter function.
 
 Remove:
 ```js
@@ -327,20 +347,27 @@ return el.html() === '<div data-class="null"></div>'
 
 ### Content Methods
 
-#### `el#addContent()` (LOCKED)
+#### `#addContent()` (LOCKED)
 Add text or html content:
 ```js
 let el1 = new Element('div').addContent(`hello world`)
-let el2 = new Element('div').addContent(`<strong>hello world<strong>`)
+let el2 = new Element('div').addContent(`<strong>hello world</strong>`)
 let el3 = new Element('div').addContent(new Element('strong').addContent(`hello world`).html())
 return (
   el1.html() === `<div>hello world</div>`
-  && el2.html() === `<div><strong>hello world<strong></div>`
-  && el3.html() === `<div><strong>hello world<strong></div>`
+  && el2.html() === `<div><strong>hello world</strong></div>`
+  && el3.html() === `<div><strong>hello world</strong></div>`
 )
 ```
+Throw an error for void elements:
+```js
+try {
+  let el = new Element('input').addContent(`submit`)
+  return false
+} catch (e) { return true }
+```
 
-#### `el#addElements()` (LOCKED)
+#### `#addElements()` (LOCKED)
 Add an array of Element objects as content:
 ```js
 let el = new Element('div').addElements([
@@ -348,17 +375,17 @@ let el = new Element('div').addElements([
   new Element('em').addContent(`world`),
   new Element('mark').addElements([ new Element('i').addContent(`!`) ]),
 ])
-return el.html() === `<div><strong>hello <strong><em>world</em><mark><i>!</i></mark></div>`
+return el.html() === `<div><strong>hello </strong><em>world</em><mark><i>!</i></mark></div>`
 ```
 
-#### `el#html()` (STABLE)
-Output as an html string. (see any of the above examples)
-
+#### `#html()` (STABLE)
+Output as an html string. (see any of the above examples.)
+May rename this to `#toString()`? as it applies to more than HTML elements.
 
 ### Static Methods
 
 #### `Element.concat()` (LOCKED)
-Concatenate multiple element outputs. useful if you need siblings with no parent
+Concatenate multiple element outputs. useful if you need siblings with no parent.
 
 multiple Element arguments:
 ```js
@@ -367,7 +394,7 @@ let snip = Element.concat(
   new Element('em').addContent(`world`),
   new Element('mark').addContent(`!`)
 )
-return snip === `<strong>hello <strong><em>world</em><mark>!</mark>`
+return snip === `<strong>hello </strong><em>world</em><mark>!</mark>`
 ```
 one single array argument:
 ```js
@@ -376,7 +403,7 @@ let snip = Element.concat([
   new Element('em').addContent(`world`),
   new Element('mark').addContent(`!`),
 ])
-return snip === `<strong>hello <strong><em>world</em><mark>!</mark>`
+return snip === `<strong>hello </strong><em>world</em><mark>!</mark>`
 ```
 
 #### `Element.data()` (EXPERIMENTAL)

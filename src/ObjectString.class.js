@@ -1,4 +1,4 @@
-var Util = require('extrajs').Util
+const xjs = require('extrajs')
 
 /**
  * An Object that contains string values only.
@@ -8,13 +8,23 @@ var Util = require('extrajs').Util
  */
 module.exports = class ObjectString {
   /**
+   * NOTE: TYPE DEFINITION
+   * This object’s values can be any one of the following types:
+   * - {string}  - the value is a string
+   * - {number}  - the value is a number converted to a string; may not be `NaN`
+   * - {boolean} - the value is a boolean converted to a string
+   * @type {(string|number|boolean)} ValueType
+   */
+  /**
    * Construct a new ObjectString object.
-   * @param {Object=} data the data with which to initialize this objectstring
+   * @param {Object<ValueType>=} data the data with which to initialize this objectstring
    */
   constructor(data = {}) {
     /** @private */ this._data = (function (d) {
       let returned = {}
-      for (let i in d) returned[i.trim()] = d[i].trim()
+      for (let i in d) {
+        if (i.trim() !== '') returned[i.trim()] = `${d[i]}`.trim()
+      }
       return returned
     })(data)
   }
@@ -45,7 +55,7 @@ module.exports = class ObjectString {
    * @return {Object<string>} a shallow clone of `this._obj`
    */
   get data() {
-    return Util.Object.cloneDeep(this._data)
+    return xjs.Object.cloneDeep(this._data)
   }
 
 
@@ -59,14 +69,14 @@ module.exports = class ObjectString {
    * objstr.set('key', 'value') // set the `key` key to `'value'`
    * objstr.set('key', '')      // set the `key` key to the empty string
    * ```
-   * @param {string} key the property to set
-   * @param {(string|number|boolean)} value the value to set
+   * @param {string} key the property to set; nonempty string
+   * @param {ValueType} value the value to set
    * @return {ObjectString} `this`
    */
   set(key, value) {
-    if (['number','infinite','boolean'].includes(Util.Object.typeOf(value))) return this.set(key, `${value}`)
-    if (Util.Object.typeOf(value) === 'NaN') throw new TypeError('Provided value cannot be NaN.')
-    this._data[key.trim()] = value.trim()
+    if (key.trim() === '') return this
+    if (xjs.Object.typeOf(value) === 'NaN') throw new TypeError('Provided value cannot be NaN.')
+    this._data[key.trim()] = `${value}`.trim()
     return this
   }
 
@@ -81,7 +91,7 @@ module.exports = class ObjectString {
    * obj.action('key', function () { return this.name })                  // set the `key` key to the name of `this`
    * ```
    * @param {string} key the key to set
-   * @param {function():string} valueFn a function to call
+   * @param {function():ValueType} valueFn a function to call
    * @param {*=} thisarg an object on which `valueFn` is called (if not provided, `this` is used)
    * @return {ObjectString} `this`
    */
