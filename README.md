@@ -1,6 +1,19 @@
 # extrajs-element
 An HTML element in Javascript.
 
+## Usage
+
+install:
+```bash
+$ npm install extrajs-element
+```
+use:
+```js
+const Element = require('extrajs-element')
+let el = new Element('span')
+console.log(el.html()) // <span></span>
+```
+
 ## API Docs (by example)
 
 This section serves as documentation by example.
@@ -23,8 +36,8 @@ The function definition block is omitted for brevity.
 #### `new Element(name, is_void = false)` (STABLE)
 Construct a new element.
 ```js
-let el1 = new Element('span')
-return el1.html() === `<span></span>`
+let el = new Element('span')
+return el.html() === `<span></span>`
 ```
 The constructor knows which HTML5 elements are void:
 ```js
@@ -97,19 +110,30 @@ return da.instanceof === 'Promise'
 Set an attribute (string, boolean, or number value):
 ```js
 let el1 = new Element('div').attr('itemtype', 'HTMLElement') // string
-let el2 = new Element('div').attr('data-block', true) // boolean
+let el2 = new Element('div').attr('data-block', true) // boolean value (not the same as boolean attribute. see below)
 let el3 = new Element('div').attr('data-nthchild', 3) // number
 return (
   el1.html() === `<div itemtype="HTMLElement"></div>`
-  && el1.html() === `<div data-block="true"></div>`
-  && el1.html() === `<div data-nthchild="3"></div>`
+  && el2.html() === `<div data-block="true"></div>`
+  && el3.html() === `<div data-nthchild="3"></div>`
 )
+```
+`NaN` cannot be provided and will throw an error:
+```js
+try {
+  let el = new Element('div').attr('data-price', NaN)
+  return;
+} catch (e) { return true }
 ```
 Set a “boolean attribute”:
 ```js
 let el = new Element('div').attr('itemscope', '')
 return el.html() === `<div itemscope=""></div>`
 ```
+**Note:** Boolean attributes are either present (empty string value, `attr=""`)
+or absent. Setting the value to a boolean value (`true` or `false`) will set the attribute value
+to an actual string (`"true"` or `"false"`), which by definition is not a boolean attribute.
+
 Get the value of an attribute (throws a TypeError if the attribute had not been set):
 ```js
 let el = new Element('div').attr('itemtype', 'HTMLElement')
@@ -127,7 +151,7 @@ el.attr('itemtype', null)
 return el.html() === `<div></div>`
 ```
 Set an attribute with a function (`this` refers to the element):
-the function should take 0 arguments and return a string:
+the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').attr('id','my-div')
 el.attr('data-id', function () { return `my-${this.name}` })
@@ -161,7 +185,7 @@ let el = new Element('div').id('my-div')
 return el.html() === `<div id="my-div"></div>`
 ```
 set the id with a function (`this` refers to the element):
-the function should take 0 arguments and return a string:
+the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').id(function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div"></div>`
@@ -187,7 +211,7 @@ let el = new Element('div').class('my-div your-div')
 return el.html() === `<div class="my-div your-div"></div>`
 ```
 set the class with a function (`this` refers to the element):
-the function should take 0 arguments and return a string:
+the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').class(function () { return `my-${this.name} your-div` })
 return el.html() === `<div class="my-div your-div"></div>`
@@ -200,7 +224,7 @@ return el.id() === 'my-div your-div'
 remove the class:
 ```js
 let el1 = new Element('div').class('my-div your-div').class(null)
-let el1 = new Element('div').class('my-div your-div').class('')
+let el2 = new Element('div').class('my-div your-div').class('')
 return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`)
 ```
 
@@ -237,16 +261,38 @@ let el = new Element('div').style({ background: 'none', 'font-weight': bold })
 return el.html() === `<div style="background:none;font-weight:bold;"></div>`
 ```
 set the style with a function (`this` refers to the element):
-the function should take 0 arguments and return a string:
+the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').style(function () { return `content: '${this.name}';` })
 return el.html() === `<div style="content:'div';"></div>`
 ```
+Note: css quotes must be escaped:
+```js
+let el1 = new Element('div').style('font-family: Helvetica Neue;') // no quotes
+let el2 = new Element('div').style('font-family: \'Helvetica Neue\';') // escaped quotes
+let el3 = new Element('div').style({ content: 'i’m using Helvetica Neue' }) // no quotes
+let el4 = new Element('div').style({ content: '\'i’m using Helvetica Neue\'' }) // escaped quotes
+return (
+  el1.html() === `<div style="font-family: Helvetica Neue;"></div>` // invalid css, but no js errors thrown
+  && el2.html() === `<div style="font-family: 'Helvetica Neue';"></div>` // valid css
+  && el3.html() === `<div style="content:i’m using Helvetica Neue;"></div>` // invalid css, but no js errors thrown
+  && el4.html() === `<div style="content:'i’m using Helvetica Neue';"></div>` // valid css
+)
+```
+Or if you don’t want to escape quotes, you can use a template literal:
+```js
+let el1 = new Element('div').style(`font-family: 'Helvetica Neue';`)
+let el2 = new Element('div').style({ content: `'i’m using Helvetica Neue'` })
+return (
+  el1.html() === `<div style="font-family: 'Helvetica Neue';"></div>`
+  && el2.html() === `<div style="content:'i’m using Helvetica Neue';"></div>`
+)
+```
 remove the `[style]` attribute:
 ```js
-let el1 = new Element('div').style(function () { return `content: '${this.name}';` }).style(null)
-let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style('')
-let el2 = new Element('div').style(function () { return `content: '${this.name}';` }).style({})
+let el1 = new Element('div').style('color: green;').style(null)
+let el2 = new Element('div').style('color: green;').style('')
+let el3 = new Element('div').style('color: green;').style({})
 return (el1.html() === `<div></div>`) && (el2.html() === `<div></div>`) && (el3.html() === `<div></div>`)
 ```
 get the value of `[style]` (throws a TypeError if the attribute had not been set):
@@ -297,12 +343,12 @@ let el = new Element('div')
   .css('font-weight', '') // does *NOT* set `font-weight:'';`. removes it!
 return el.html() === `<div style="background:red;"></div>`
 ```
-Set an attribute with a function (`this` refers to the element):
-the function should take 0 arguments and return a string:
+Set a property with a function (`this` refers to the element):
+the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').attr('id','#c0ffee')
 el.css('color', function () { return this.attr('id') })
-return el.html() === `<div id="#c0ffee" style="color:#c0fefe;"></div>`
+return el.html() === `<div id="#c0ffee" style="color:#c0ffee;"></div>`
 ```
 Set/remove (cannot get) multiple css properties with an object:
 ```js
