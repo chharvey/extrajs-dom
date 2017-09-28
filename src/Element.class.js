@@ -434,19 +434,25 @@ module.exports = class Element {
 
   /**
    * Add content to this element.
-   * **May not be called on elements that are void!**
-   * @param {string} contents the contents to add
+   * Multiple arguments may be passed, and each argument may be an Element or a string.
+   * Or, a single array of such entries may be passed as an argument.
+   * @stability STABLE
+   * @param {...(Element|string|Array<(Element|string)>)} contents the contents to add
    * @return {Element} `this`
    * @throws {TypeError} if this element is void
    */
-  addContent(contents) {
+  addContent(...contents) {
     if (this.isVoid) throw new TypeError('Cannot add contents to a void element.')
-    this._contents += contents
+    if (xjs.Object.typeOf(contents[0]) === 'array') return this.addContent(...contents[0])
+    this._contents += contents.map((c) =>
+      (c instanceof Element) ? c.html() : c
+    ).join('')
     return this
   }
 
   /**
-   * Add elements as children of this element.
+   * Add (nullable) elements as children of this element.
+   * @stability STABLE
    * @param {Array<?Element>} elems array of Element objects to add
    */
   addElements(elems) {
@@ -478,7 +484,7 @@ module.exports = class Element {
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
-    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0]) // same as Element.concat.apply(null, elements[0])
+    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0])
     return elements
       .filter((el) => el !== null)
       .map((el) => el.html()).join('')
@@ -523,6 +529,7 @@ module.exports = class Element {
    */
   /**
    * Return a new Element object, given JSON data.
+   * @stability EXPERIMENTAL
    * @param   {ElementJSON} $elem data for the Element object to construct
    * @returns {Element} a new Element object representing the given data
    */
@@ -530,8 +537,8 @@ module.exports = class Element {
     return new Element($elem.name, $elem.is_void)
       .attr($elem.attr)
       .addContent(($elem.content || []).map((c) =>
-        (xjs.Object.typeOf(c) === 'object') ? Element.fromJSON(c).html() : c
-      ).join(''))
+        (xjs.Object.typeOf(c) === 'object') ? Element.fromJSON(c) : c
+      ))
   }
 
   /**

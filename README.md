@@ -393,8 +393,8 @@ return el.html() === '<div data-class="null"></div>'
 
 ### Content Methods
 
-#### `#addContent()` (LOCKED)
-Add text or html content:
+#### `#addContent()` (STABLE)
+Add a single string of text or html content:
 ```js
 let el1 = new Element('div').addContent(`hello world`)
 let el2 = new Element('div').addContent(`<strong>hello world</strong>`)
@@ -405,12 +405,40 @@ return (
   && el3.html() === `<div><strong>hello world</strong></div>`
 )
 ```
+Add multiple strings and Element objects:
+```js
+let el = new Element('div').addContent(
+  `hello world `, // string
+  new Element('strong').addContent(`hello world `).html(), // string
+  new Element('em').addContent(new Element('i').addContent(`hola mundo`)) // Element
+)
+return el.html() === `<div>hello world <strong>hello world </strong><em><i>hola mundo</i></em></div>`
+```
+Or pass a single array argument:
+```js
+let el = new Element('div').addContent([
+  `hello `, // string
+  new Element('strong').addContent([`world`]), // Element
+  new Element('mark').addContent([ new Element('i').addContent(`!`) ]), // Element
+])
+return el.html() === `<div>hello <strong>world</strong><mark><i>!</i></mark></div>`
+```
 Throw an error for void elements:
 ```js
 try {
   let el = new Element('input').addContent(`submit`)
   return false
 } catch (e) { return true }
+```
+*NOTE* that this method has 4 types of parameters:
+```js
+try {
+  let el1 = new Element('s').addContent(`single string`)
+  let el2 = new Element('s').addContent(new Element('single-element'))
+  let el3 = new Element('s').addContent([`array`, `of`, `strings`])
+  let el4 = new Element('s').addContent([new Element('array'), new Element('of'), new Element('elements')])
+  return true
+} catch (e) { return false }
 ```
 
 #### `#addElements()` (LOCKED)
@@ -422,6 +450,15 @@ let el = new Element('div').addElements([
   new Element('mark').addElements([ new Element('i').addContent(`!`) ]),
 ])
 return el.html() === `<div><strong>hello </strong><em>world</em><mark><i>!</i></mark></div>`
+```
+Entries may be `null`:
+```js
+let el = new Element('div').addElements([
+  new Element('strong').addContent(`hello `),
+  (false) ? new Element('em').addContent(`world`) : null,
+  new Element('mark').addElements([ new Element('i').addContent(`!`) ]),
+])
+return el.html() === `<div><strong>hello </strong><mark><i>!</i></mark></div>`
 ```
 
 #### `#html()` (STABLE)
