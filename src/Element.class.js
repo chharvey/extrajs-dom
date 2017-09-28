@@ -125,7 +125,7 @@ module.exports = class Element {
    * - {ObjectString.ValueType}            - set the attribute to an ObjectString.ValueType value
    * - {function():ObjectString.ValueType} - call the function on `this` and then set the attribute to the result
    * - {null}                              - remove the attribute altogether
-   * @type {?(ValueArgType|function():ObjectString.ValueType)} ValueArg
+   * @type {?(ObjectString.ValueType|function():ObjectString.ValueType)} ValueArg
    */
   /**
    * Set or get attributes of this element.
@@ -482,6 +482,56 @@ module.exports = class Element {
     return elements
       .filter((el) => el !== null)
       .map((el) => el.html()).join('')
+  }
+
+  /**
+   * NOTE: TYPE DEFINITION
+   * ```json
+   * {
+   *   "$schema": "http://json-schema.org/schema#",
+   *   "title": "ElementJSON",
+   *   "type": "object",
+   *   "description": "A JSON object to be converted into an Element.",
+   *   "definitions": {
+   *     "ObjectString.ValueType": { "type": ["string", "number", "boolean"] }
+   *   },
+   *   "required": ["name"],
+   *   "additionalProperties": false,
+   *   "properties": {
+   *     "name"   : { "type": "string", "description": "the name of the Element" },
+   *     "is_void": { "type": "boolean", "description": "whether the Element is void" },
+   *     "attr"   : {
+   *       "type": "object",
+   *       "description": "the attributes of the Element",
+   *       "additionalProperties": { "$ref": "#/definitions/ObjectString.ValueType" }
+   *     },
+   *     "content": {
+   *       "type": "array",
+   *       "description": "the contents of the Element",
+   *       "items": {
+   *         "anyOf": [{ "type": "string" }, { "$ref": "#" }]
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   * @typedef  {Object} ElementJSON
+   * @property {string} name the name of the Element
+   * @property {boolean=} is_void whether the Element is void
+   * @property {Object<ObjectString.ValueType>=} attr the attributes of the Element
+   * @property {Array<(ElementJSON|string)>=} content the contents of the Element
+   */
+  /**
+   * Return a new Element object, given JSON data.
+   * @param   {ElementJSON} $elem data for the Element object to construct
+   * @returns {Element} a new Element object representing the given data
+   */
+  static fromJSON($elem) {
+    return new Element($elem.name, $elem.is_void)
+      .attr($elem.attr)
+      .addContent(($elem.content || []).map((c) =>
+        (xjs.Object.typeOf(c) === 'object') ? Element.fromJSON(c).html() : c
+      ).join(''))
   }
 
   /**

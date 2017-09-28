@@ -452,5 +452,25 @@ let snip = Element.concat([
 return snip === `<strong>hello </strong><em>world</em><mark>!</mark>`
 ```
 
+#### `Element.fromJSON()` (EXPERIMENTAL)
+Convert a JSON object into an Element.
+The argument must be JSON that validates to the schema seen in the `Element.ElementJSON` type.
+(See `Element.class.js:487` source code.)
+```js
+return Element.fromJSON({
+  "name": "a",
+  "attr": {
+    "style": "color:green;",
+    "href": "#0",
+    "aria-checked": false,
+    "datetime": 2017
+  },
+  "content": [
+    "click ",
+    { "name": "em", "content": ["here"] }
+  ]
+}).html() === `<a style="color:green;" href="#0" aria-checked="false" datetime="2017">click <em>here</em></a>`
+```
+
 #### `Element.data()` (EXPERIMENTAL)
 This one’s a doozie. Coming soon.
