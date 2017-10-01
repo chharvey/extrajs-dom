@@ -1,26 +1,28 @@
 {
-  "name": "extrajs-element",
-  "version": "2.0.0",
-  "description": "An HTML element in Javascript.",
+  "name": "extrajs-dom",
+  "version": "3.0.0",
+  "description": "A Javascript implementation of DOM.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chharvey/extrajs-element.git"
+    "url": "git+https://github.com/chharvey/extrajs-dom.git"
   },
   "keywords": [
-    "html-element",
-    "html",
-    "element"
+    "dom",
+    "tree",
+    "node",
+    "element",
+    "attribute"
   ],
   "author": "Chris Harvey <chrisharvey2pi@gmail.com> (https://chharvey.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chharvey/extrajs-element/issues"
+    "url": "https://github.com/chharvey/extrajs-dom/issues"
   },
-  "homepage": "https://github.com/chharvey/extrajs-element#readme",
+  "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
     "extrajs": "^0.8.0"
   }
