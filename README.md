@@ -1,4 +1,4 @@
-# extrajs-element
+# extrajs-dom
 A Javascript implementation of DOM.
 
 ## Usage
