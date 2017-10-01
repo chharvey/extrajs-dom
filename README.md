@@ -1,15 +1,15 @@
 # extrajs-element
-An HTML element in Javascript.
+A Javascript implementation of DOM.
 
 ## Usage
 
 install:
 ```bash
-$ npm install extrajs-element
+$ npm install extrajs-dom
 ```
 use:
 ```js
-const Element = require('extrajs-element')
+const Element = require('extrajs-dom').Element
 let el = new Element('span')
 console.log(el.html()) // <span></span>
 ```

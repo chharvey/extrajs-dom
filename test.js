@@ -1,4 +1,4 @@
-const Element = require('./index.js')
+const Element = require('./index.js').Element
 
 
 function element() {
