@@ -1,1 +1,3 @@
-module.exports = require('./src/Element.class.js')
+module.exports = {
+  Element: require('./src/Element.class.js')
+}
