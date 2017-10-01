@@ -13,6 +13,7 @@ module.exports = class Element {
    * the HTML specification (and thus the argument need not be explicilty provided).
    * Otherwise, `is_void` is false by default, unless explicitly specified.
    *
+   * @stability STABLE
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
    * @param {boolean=} is_void `true` if this element is void (has no closing tag)
@@ -58,6 +59,7 @@ module.exports = class Element {
 
   /**
    * Return this element’s name.
+   * @stability LOCKED
    * @return {string} the name of this Element
    */
   get name() { return this._NAME }
@@ -66,6 +68,7 @@ module.exports = class Element {
    * Return whether this element is a void element.
    * Void elements have no end tag, and have the
    * **nothing content model** (they must not have any contents).
+   * @stability LOCKED
    * @return {boolean} `true` if this element is void; `false` otherwise
    */
   get isVoid() { return this._VOID }
@@ -74,12 +77,14 @@ module.exports = class Element {
    * Return this element’s attributes object.
    * The key-value pairs of the object returned correspond to
    * the attribute-value pairs of this element.
+   * @stability LOCKED
    * @return {Object<string>} an object containing the attribute-value pairs of this element
    */
   get attributes() { return this._attributes.data }
 
   /**
    * Return the contents of this element.
+   * @stability LOCKED
    * @return {?string} this element’s contents, or `null` if this is a void element
    */
   get contents() { return this._contents }
@@ -88,6 +93,7 @@ module.exports = class Element {
    * Return this element’s styles object.
    * The key-value pairs of the object returned correspond to
    * the property-value pairs of this element’s css.
+   * @stability LOCKED
    * @return {Object<string>} an object containing the property-value pairs of this element’s css
    */
   get styles() {
@@ -107,6 +113,7 @@ module.exports = class Element {
    * this.attributes // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
    * this.dataset    // returns { foo:'bar', baz:'qux' }
    * ```
+   * @stability LOCKED
    * @return {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
    */
   get dataset() {
@@ -125,7 +132,7 @@ module.exports = class Element {
    * - {ObjectString.ValueType}            - set the attribute to an ObjectString.ValueType value
    * - {function():ObjectString.ValueType} - call the function on `this` and then set the attribute to the result
    * - {null}                              - remove the attribute altogether
-   * @type {?(ValueArgType|function():ObjectString.ValueType)} ValueArg
+   * @type {?(ObjectString.ValueType|function():ObjectString.ValueType)} ValueArg
    */
   /**
    * Set or get attributes of this element.
@@ -174,6 +181,7 @@ module.exports = class Element {
    *   if you have strings and are not removing any attributes:
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
+   * @stability STABLE
    * @param {(string|Object<ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
    * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @return {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
@@ -212,6 +220,7 @@ module.exports = class Element {
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
    * ```
+   * @stability EXPERIMENTAL
    * @param  {...string} attr_str a string of the format `'attribute="attr value"'`
    * @return {Element} `this`
    */
@@ -232,6 +241,7 @@ module.exports = class Element {
    * this.id()           // return the value of [id]
    * ```
    *
+   * @stability LOCKED
    * @param  {ValueArg=} id the value to set for the `id` attribute; nonempty string
    * @return {(Element|string)} `this` if setting the ID, else the value of the ID
    */
@@ -252,6 +262,7 @@ module.exports = class Element {
    * this.class()                       // return the value of [class]
    * ```
    *
+   * @stability LOCKED
    * @param  {ValueArg=} class_ the value to set for the `class` attribute; nonempty string
    * @return {(Element|string)} `this` if setting the class, else the value of the class
    */
@@ -271,6 +282,7 @@ module.exports = class Element {
    * this.addClass()                       // do nothing; return `this`
    * ```
    *
+   * @stability LOCKED
    * @param  {string=} class_str the classname(s) to add, space-separated; nonempty string
    * @return {Element} `this`
    */
@@ -293,6 +305,7 @@ module.exports = class Element {
    * this.removeClass()           // do nothing; return `this`
    * ```
    *
+   * @stability LOCKED
    * @param  {...string} classname classname to remove; must not contain spaces
    * @return {Element} `this`
    */
@@ -320,6 +333,7 @@ module.exports = class Element {
    * this.style()                                          // return the value of [style], as a string
    * ```
    *
+   * @stability STABLE
    * @param  {(ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
    * @return {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    * @throws {TypeError} if the given argument is a number or boolean
@@ -380,6 +394,7 @@ module.exports = class Element {
    * this.css()                                          // do nothing; return `this`
    * ```
    *
+   * @stability STABLE
    * @param {(string|Object<ValueArg>)=} prop the name of the css property to set or get, or an object with ValueArg type values
    * @param {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @return {(Element|string)} `this` if setting a property, else the value of the property specified
@@ -416,6 +431,7 @@ module.exports = class Element {
    * Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * Calling `this#data()` does nothing and returns `this`.
+   * @stability LOCKED
    * @param  {(string|Object<ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with ValueArg type values
    * @param  {ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @return {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
@@ -434,19 +450,25 @@ module.exports = class Element {
 
   /**
    * Add content to this element.
-   * **May not be called on elements that are void!**
-   * @param {string} contents the contents to add
+   * Multiple arguments may be passed, and each argument may be an Element or a string.
+   * Or, a single array of such entries may be passed as an argument.
+   * @stability STABLE
+   * @param {...(Element|string|Array<(Element|string)>)} contents the contents to add
    * @return {Element} `this`
    * @throws {TypeError} if this element is void
    */
-  addContent(contents) {
+  addContent(...contents) {
     if (this.isVoid) throw new TypeError('Cannot add contents to a void element.')
-    this._contents += contents
+    if (xjs.Object.typeOf(contents[0]) === 'array') return this.addContent(...contents[0])
+    this._contents += contents.map((c) =>
+      (c instanceof Element) ? c.html() : c
+    ).join('')
     return this
   }
 
   /**
    * Add elements as children of this element.
+   * @stability STABLE
    * @param {Array<?Element>} elems array of Element objects to add
    */
   addElements(elems) {
@@ -459,6 +481,7 @@ module.exports = class Element {
 
   /**
    * Render this element as an HTML string.
+   * @stability STABLE
    * @return {string} an HTML string representing this element
    */
   html() {
@@ -474,14 +497,66 @@ module.exports = class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
+   * @stability LOCKED
    * @param  {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @return {string} the combined HTML output of all the arguments/array entries
    */
   static concat(...elements) {
-    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0]) // same as Element.concat.apply(null, elements[0])
+    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0])
     return elements
       .filter((el) => el !== null)
       .map((el) => el.html()).join('')
+  }
+
+  /**
+   * NOTE: TYPE DEFINITION
+   * ```json
+   * {
+   *   "$schema": "http://json-schema.org/schema#",
+   *   "title": "ElementJSON",
+   *   "type": "object",
+   *   "description": "A JSON object to be converted into an Element.",
+   *   "definitions": {
+   *     "ObjectString.ValueType": { "type": ["string", "number", "boolean"] }
+   *   },
+   *   "required": ["name"],
+   *   "additionalProperties": false,
+   *   "properties": {
+   *     "name"   : { "type": "string", "description": "the name of the Element" },
+   *     "is_void": { "type": "boolean", "description": "whether the Element is void" },
+   *     "attr"   : {
+   *       "type": "object",
+   *       "description": "the attributes of the Element",
+   *       "additionalProperties": { "$ref": "#/definitions/ObjectString.ValueType" }
+   *     },
+   *     "content": {
+   *       "type": "array",
+   *       "description": "the contents of the Element",
+   *       "items": {
+   *         "anyOf": [{ "type": "string" }, { "$ref": "#" }]
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   * @typedef  {Object} ElementJSON
+   * @property {string} name the name of the Element
+   * @property {boolean=} is_void whether the Element is void
+   * @property {Object<ObjectString.ValueType>=} attr the attributes of the Element
+   * @property {Array<(ElementJSON|string)>=} content the contents of the Element
+   */
+  /**
+   * Return a new Element object, given JSON data.
+   * @stability EXPERIMENTAL
+   * @param   {ElementJSON} $elem data for the Element object to construct
+   * @returns {Element} a new Element object representing the given data
+   */
+  static fromJSON($elem) {
+    return new Element($elem.name, $elem.is_void)
+      .attr($elem.attr)
+      .addContent(($elem.content || []).map((c) =>
+        (xjs.Object.typeOf(c) === 'object') ? Element.fromJSON(c) : c
+      ))
   }
 
   /**
@@ -565,6 +640,7 @@ module.exports = class Element {
    * }
    * ```
    *
+   * @stability EXPERIMENTAL
    * @param  {*} thing the data to mark up
    * @param  {Object=} options configurations for the output
    * @param  {boolean=} options.ordered if the argument is an array, specify `true` to output an <ol> instead of a <ul>
