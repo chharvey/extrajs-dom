@@ -446,7 +446,7 @@ try {
 } catch (e) { return false }
 ```
 
-#### `#addElements()` (LOCKED)
+#### `#addElements()` (STABLE)
 Add an array of Element objects as content:
 ```js
 let el = new Element('div').addElements([

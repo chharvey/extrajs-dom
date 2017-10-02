@@ -4,9 +4,8 @@ const xjs = require('extrajs')
  * An Object that contains string values only.
  * Equivalent to @type {Object<string>}, with some added restrictions and methods.
  * @private
- * @module
  */
-module.exports = class ObjectString {
+class ObjectString {
   /**
    * NOTE: TYPE DEFINITION
    * This object’s values can be any one of the following types:
@@ -16,7 +15,7 @@ module.exports = class ObjectString {
    * @type {(string|number|boolean)} ValueType
    */
   /**
-   * Construct a new ObjectString object.
+   * @summary Construct a new ObjectString object.
    * @param {Object<ValueType>=} data the data with which to initialize this objectstring
    */
   constructor(data = {}) {
@@ -32,8 +31,8 @@ module.exports = class ObjectString {
 
 
   /**
-   * Return a shallow clone of this object’s data.
-   * The returned value may be modified without affecting this object.
+   * @summary Return a shallow clone of this object’s data.
+   * @description The returned value may be modified without affecting this object.
    *
    * Example:
    * ```js
@@ -61,9 +60,8 @@ module.exports = class ObjectString {
 
 
   /**
-   * Set a key, or override one if it exists.
-   * Both key and value strings will be trimmed.
-   *
+   * @summary Set a key, or override one if it exists.
+   * @description Both key and value strings will be trimmed.
    * Examples:
    * ```js
    * objstr.set('key', 'value') // set the `key` key to `'value'`
@@ -81,8 +79,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Set a key using a function called on an object.
-   * The function should take 0 arguments and return a string.
+   * @summary Set a key using a function called on an object.
+   * @description The function should take 0 arguments and return a string.
    * If no object is provided, the function is called on `this`.
    *
    * Examples:
@@ -100,9 +98,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Get the value of the given key, or `undefined` if it does not exist.
-   *
-   * Examples:
+   * @summary Get the value of the given key, or `undefined` if it does not exist.
+   * @description Examples:
    * ```js
    * objstr.get('key') // get the actual value of the `key` key (or `undefined` if it had not been set)
    * ```
@@ -114,9 +111,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Remove the provided key.
-   *
-   * Examples:
+   * @summary Remove the provided key.
+   * @description Examples:
    * ```js
    * obj.action('key') // delete the `key` key
    * ```
@@ -129,8 +125,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Convert this object into an string of html attributes
-   * The string is returned in the following format:
+   * @summary Convert this object into an string of html attributes.
+   * @description The string is returned in the following format:
    * ` key1="val1" key2="val2" key3="val3"`
    * @return {string} a string containing attribute-value pairs
    */
@@ -143,8 +139,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Convert this object into a css-valid string.
-   * The string is returned in the following format:
+   * @summary Convert this object into a css-valid string.
+   * @description The string is returned in the following format:
    * `key1:val1;key2:val2;key3:val3;`
    * @return {string} a valid css string containing property-value pairs
    */
@@ -159,7 +155,8 @@ module.exports = class ObjectString {
 
 
   /**
-   * Return a new ObjectString object, whose keys and values correspond to
+   * @summary Return a new ObjectString object generated from an html string.
+   * @description The returned object’s keys and values correspond to
    * the attributes and values given in the provided html string.
    * @param  {string} attr_string a snippet of html containing only attributes and values
    * @return {ObjectString} a new ObjectString object with the given html attribute-value pairs
@@ -169,7 +166,8 @@ module.exports = class ObjectString {
   }
 
   /**
-   * Return a new ObjectString object, whose keys and values correspond to
+   * @summary Return a new ObjectString object generated from a css string.
+   * @description The returned object’s keys and values correspond to
    * the properties and values given in the provided css string.
    * @param  {string} css_string a css-valid string
    * @return {ObjectString} a new ObjectString object with the given css property-value pairs
@@ -184,3 +182,5 @@ module.exports = class ObjectString {
     return returned
   }
 }
+
+module.exports = ObjectString
