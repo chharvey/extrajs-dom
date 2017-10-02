@@ -430,13 +430,18 @@ try {
   return false
 } catch (e) { return true }
 ```
-*NOTE* that this method has 4 types of parameters:
+*NOTE* that this method has 6 types of parameters:
 ```js
 try {
-  let el1 = new Element('s').addContent(`single string`)
-  let el2 = new Element('s').addContent(new Element('single-element'))
-  let el3 = new Element('s').addContent([`array`, `of`, `strings`])
-  let el4 = new Element('s').addContent([new Element('array'), new Element('of'), new Element('elements')])
+  let el = new Element('s')
+    .addContent(`single string`)
+    .addContent(new Element('single-element'))
+    .addContent([`single`, `array of`, `strings`])
+    .addContent([new Element('single'), new Element('array-of'), new Element('elements')])
+    .addContent(`multiple`, `strings`)
+    .addContent(new Element('multiple'), new Element('elements'))
+    .addContent(`mix of`, new Element('multiple-elements'), `and strings`)
+    .addContent([new Element('single-array'), `of strings and`, new Element('elements')])
   return true
 } catch (e) { return false }
 ```
