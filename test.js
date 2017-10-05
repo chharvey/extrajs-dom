@@ -162,6 +162,27 @@ function element_data() {
   console.log(s.dataset)
 }
 
+function element_addContent() {
+  try {
+    let x = new Element('div').addContent(null)
+    console.log(`pass null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent(null): ${e}`)
+  }
+  try {
+    let x = new Element('div').addContent('str', null)
+    console.log(`pass string and null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent('str', null): ${e}`)
+  }
+  try {
+    let x = new Element('div').addContent(['str', null])
+    console.log(`pass array of string and null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent(['str', null]): ${e}`)
+  }
+}
+
 function element_concat() {
   console.log(
     `concatenate arguments`,
@@ -202,4 +223,5 @@ function element_concat() {
 // element_style();
 // element_css();
 // element_data();
+// element_addContent();
 // element_concat();

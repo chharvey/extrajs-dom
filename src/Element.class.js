@@ -437,10 +437,10 @@ class Element {
 
   /**
    * @summary Add content to this element.
-   * @description Multiple arguments may be passed, and each argument may be an Element or a string.
+   * @description Multiple arguments may be passed, and each argument may be a (nullable) Element or a string.
    * Or, a single array of such entries may be passed as an argument.
    * @version STABLE
-   * @param   {...(Element|string|Array<(Element|string)>)} contents the contents to add
+   * @param   {...(?Element|string|Array<(?Element|string)>)} contents the contents to add
    * @returns {Element} `this`
    * @throws  {TypeError} if this element is void
    */
