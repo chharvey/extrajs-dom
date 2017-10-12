@@ -8,15 +8,26 @@ const xjs = require('extrajs')
 class ObjectString {
   /**
    * NOTE: TYPE DEFINITION
-   * This object’s values can be any one of the following types:
-   * - {string}  - the value is a string
-   * - {number}  - the value is a number converted to a string; may not be `NaN`
-   * - {boolean} - the value is a boolean converted to a string
-   * @type {(string|number|boolean)} ValueType
+   * @summary This object’s values can be any one of the following types.
+   * @description
+   * ```json
+   * {
+   *   "$schema"    : "http://json-schema.org/schema#",
+   *   "title"      : "ObjectString.ValueType",
+   *   "description": "This object’s values can be any one of the following types.",
+   *   "type"       : ["string", "number", "boolean"],
+   *   "oneOf"      : [
+   *     { "type": "string" , "description": "the value is a string" },
+   *     { "type": "number" , "description": "the value is a number converted to a string; may not be `NaN`" },
+   *     { "type": "boolean", "description": "the value is a boolean converted to a string" }
+   *   ]
+   * }
+   * ```
+   * @typedef {(string|number|boolean)} ObjectString.ValueType
    */
   /**
    * @summary Construct a new ObjectString object.
-   * @param {Object<ValueType>=} data the data with which to initialize this objectstring
+   * @param {Object<ObjectString.ValueType>=} data the data with which to initialize this objectstring
    */
   constructor(data = {}) {
     /** @private */ this._data = (function (d) {
@@ -68,7 +79,7 @@ class ObjectString {
    * objstr.set('key', '')      // set the `key` key to the empty string
    * ```
    * @param {string} key the property to set; nonempty string
-   * @param {ValueType} value the value to set
+   * @param {ObjectString.ValueType} value the value to set
    * @return {ObjectString} `this`
    */
   set(key, value) {
@@ -89,7 +100,7 @@ class ObjectString {
    * obj.action('key', function () { return this.name })                  // set the `key` key to the name of `this`
    * ```
    * @param {string} key the key to set
-   * @param {function():ValueType} valueFn a function to call
+   * @param {function():ObjectString.ValueType} valueFn a function to call
    * @param {*=} thisarg an object on which `valueFn` is called (if not provided, `this` is used)
    * @return {ObjectString} `this`
    */
