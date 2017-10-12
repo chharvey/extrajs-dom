@@ -125,16 +125,27 @@ class Element {
 
   /**
    * NOTE: TYPE DEFINITION
-   * A type to provide as a value argument for setting/removing an attribute.
-   * - {ObjectString.ValueType}            - set the attribute to an ObjectString.ValueType value
-   * - {function():ObjectString.ValueType} - call the function on `this` and then set the attribute to the result
-   * - {null}                              - remove the attribute altogether
-   * @type {?(ObjectString.ValueType|function():ObjectString.ValueType)} ValueArg
+   * @summary A type to provide as a value argument for setting/removing an attribute.
+   * @description
+   * ```json
+   * {
+   *   "$schema"    : "http://json-schema.org/schema#",
+   *   "title"      : "Element.ValueArg",
+   *   "description": "A type to provide as a value argument for setting/removing an attribute.",
+   *   "type"       : ["ObjectString.ValueType", "function():ObjectString.ValueType", "null"],
+   *   "oneOf"      : [
+   *     { "type": "ObjectString.ValueType"           , "description": "set the attribute to an ObjectString.ValueType value" },
+   *     { "type": "function():ObjectString.ValueType", "description": "call the function on `this` and then set the attribute to the result" },
+   *     { "type": "null"                             , "description": "remove the attribute altogether" }
+   *   ]
+   * }
+   * ```
+   * @typedef {?(ObjectString.ValueType|function():ObjectString.ValueType)} Element.ValueArg
    */
   /**
    * @summary Set or get attributes of this element.
    * @description
-   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
+   * If the key given is a string, and the value is a non-null {@link Element.ValueArg} type,
    * then the attribute will be set (or modified) with the result of the value.
    *
    * If the key is a string and the value is `null,`
@@ -144,8 +155,8 @@ class Element {
    * then this method returns the value of the attribute identified by the key.
    * If no such attribute exists, `undefined` is returned.
    *
-   * If an object key is provided, then no value argument may be provided.
-   * The object must have values of the {@link ValueArg} type;
+   * If an object is provided as the key, then no argument may be provided as the value.
+   * The object must have values of the {@link Element.ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * attributes. You may use this method with a single object argument to set and/or remove
    * multiple attributes (using `null` to remove).
@@ -153,7 +164,7 @@ class Element {
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
    * Examples:
-   * ```
+   * ```js
    * this.attr('itemtype', 'HTMLElement')                   // set the `[itemtype]` attribute
    * this.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
    * this.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `undefined` if it had not been set)
@@ -179,8 +190,8 @@ class Element {
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
    * @version STABLE
-   * @param   {(string|Object<ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
-   * @param   {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param   {(string|!Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
+   * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    * @throws  {TypeError} if the given attribute is not a string or object
    * @throws  {TypeError} if the given attribute has been removed or not set
@@ -212,7 +223,7 @@ class Element {
    * This method does not remove attributes.
    *
    * Examples:
-   * ```
+   * ```js
    * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
@@ -229,7 +240,7 @@ class Element {
   /**
    * @summary Shortcut method for setting/getting the `id` attribute of this element.
    * @description Examples:
-   * ```
+   * ```js
    * this.id('section1') // set the [id] attribute
    * this.id(function () { return this.name }) // set the [id] attribute using a function
    * this.id(null)       // remove the [id] attribute
@@ -237,7 +248,7 @@ class Element {
    * this.id()           // return the value of [id]
    * ```
    * @version LOCKED
-   * @param   {ValueArg=} id the value to set for the `id` attribute; nonempty string
+   * @param   {Element.ValueArg=} id the value to set for the `id` attribute; nonempty string
    * @returns {(Element|string)} `this` if setting the ID, else the value of the ID
    */
   id(id) {
@@ -256,7 +267,7 @@ class Element {
    * this.class()                       // return the value of [class]
    * ```
    * @version LOCKED
-   * @param   {ValueArg=} class_ the value to set for the `class` attribute; nonempty string
+   * @param   {Element.ValueArg=} class_ the value to set for the `class` attribute; nonempty string
    * @returns {(Element|string)} `this` if setting the class, else the value of the class
    */
   class(class_) {
@@ -269,7 +280,7 @@ class Element {
    * @description When adding classes, use this method instead of {@link Element#class},
    * as the latter will overwrite the `[class]` attribute.
    * Examples:
-   * ```
+   * ```js
    * this.addClass('o-Object c-Component') // add to the [class] attribute
    * this.addClass()                       // do nothing; return `this`
    * ```
@@ -289,7 +300,7 @@ class Element {
   /**
    * @summary Remove one or more tokens from this element’s `class` attribute.
    * @description Examples:
-   * ```
+   * ```js
    * this.removeClass('o-Object') // remove one class
    * this.removeClass('o-Object', 'c-Component') // remove multiple classes
    * this.removeClass()           // do nothing; return `this`
@@ -313,7 +324,7 @@ class Element {
   /**
    * @summary Shortcut method for setting/getting the `style` attribute of this element.
    * @description Examples:
-   * ```
+   * ```js
    * this.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
@@ -321,7 +332,7 @@ class Element {
    * this.style()                                          // return the value of [style], as a string
    * ```
    * @version STABLE
-   * @param   {(ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
+   * @param   {(Element.ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
    * @returns {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    * @throws  {TypeError} if the given argument is a number or boolean
    */
@@ -344,7 +355,7 @@ class Element {
   /**
    * @summary Set or get css properties of this element’s inline styles (`[style]` attribute).
    *
-   * @description If the key given is a string, and the value is a non-null {@link ValueArg} type,
+   * @description If the key given is a string, and the value is a non-null {@link Element.ValueArg} type,
    * then the property will be set (or modified) with the result of the value.
    *
    * If the key is a string and the value is `null,` or if the value is `''` (CHANGED!),
@@ -356,8 +367,8 @@ class Element {
    * (NOTE that css properties default to the `unset` value---either `inherit` or `initial`,
    * depending on whether the property is inherited or not.)
    *
-   * If an object key is provided, then no value argument may be provided.
-   * The object must have values of the {@link ValueArg} type;
+   * If an object is provided as the key, then no argument may be provided as the value.
+   * The object must have values of the {@link Element.ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * css properties. You may use this method with a single object argument to set and/or remove
    * multiple properties (using `null` to remove).
@@ -365,7 +376,7 @@ class Element {
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
    * Examples:
-   * ```
+   * ```js
    * this.css('background', 'red')                       // set the `background` property
    * this.css('font-weight', '')                         // remove the `font-weight` property
    * this.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)
@@ -382,8 +393,8 @@ class Element {
    * ```
    *
    * @version STABLE
-   * @param   {(string|Object<ValueArg>)=} prop the name of the css property to set or get, or an object with ValueArg type values
-   * @param   {ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param   {(string|Object<Element.ValueArg>)=} prop the name of the css property to set or get, or an object with Element.ValueArg type values
+   * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @returns {(Element|string)} `this` if setting a property, else the value of the property specified
    * @throws  {TypeError} if the given property is not a string or object
    * @throws  {TypeError} if the given property has been removed or not set
@@ -417,10 +428,10 @@ class Element {
   /**
    * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * @description Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
-   * Calling `this#data()` does nothing and returns `this`.
+   * Providing no arguments does nothing and returns `this`.
    * @version LOCKED
-   * @param   {(string|Object<ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with ValueArg type values
-   * @param   {ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
+   * @param   {(string|Object<Element.ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with Element.ValueArg type values
+   * @param   {Element.ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    */
   data(name = '', value) {
@@ -436,11 +447,29 @@ class Element {
   }
 
   /**
+   * NOTE: TYPE DEFINITION
+   * @summary Any argument passed to {@link Element#addContent}.
+   * @description
+   * ```json
+   * {
+   *   "$schema": "http://json-schema.org/schema#",
+   *   "title": "Element.ContentType",
+   *   "type": "object",
+   *   "description": "Any argument passed to {@link Element#addContent}.",
+   *   "type": ["Element", "null", "string", "array"]
+   *   "items": {
+   *     "type": ["Element", "null", "string"]
+   *   }
+   * }
+   * ```
+   * @typedef {(?Element|string|Array<(?Element|string)>)} Element.ContentType
+   */
+  /**
    * @summary Add content to this element.
    * @description Multiple arguments may be passed, and each argument may be a (nullable) Element or a string.
    * Or, a single array of such entries may be passed as an argument.
    * @version STABLE
-   * @param   {...(?Element|string|Array<(?Element|string)>)} contents the contents to add
+   * @param   {...Element.ContentType} contents the contents to add
    * @returns {Element} `this`
    * @throws  {TypeError} if this element is void
    */
