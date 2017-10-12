@@ -132,11 +132,11 @@ class Element {
    *   "$schema"    : "http://json-schema.org/schema#",
    *   "title"      : "Element.ValueArg",
    *   "description": "A type to provide as a value argument for setting/removing an attribute.",
-   *   "type"       : ["ObjectString.ValueType", "function():ObjectString.ValueType", "null"],
+   *   "type"       : ["{@link ObjectString.ValueType}", "function():{@link ObjectString.ValueType}", "null"],
    *   "oneOf"      : [
-   *     { "type": "ObjectString.ValueType"           , "description": "set the attribute to an ObjectString.ValueType value" },
-   *     { "type": "function():ObjectString.ValueType", "description": "call the function on `this` and then set the attribute to the result" },
-   *     { "type": "null"                             , "description": "remove the attribute altogether" }
+   *     { "type": "{@link ObjectString.ValueType}"           , "description": "set the attribute to an ObjectString.ValueType value" },
+   *     { "type": "function():{@link ObjectString.ValueType}", "description": "call the function on `this` and then set the attribute to the result" },
+   *     { "type": "null"                                     , "description": "remove the attribute altogether" }
    *   ]
    * }
    * ```
@@ -456,9 +456,9 @@ class Element {
    *   "title": "Element.ContentType",
    *   "type": "object",
    *   "description": "Any argument passed to {@link Element#addContent}.",
-   *   "type": ["Element", "null", "string", "array"]
+   *   "type": ["{@link Element}", "null", "string", "array"]
    *   "items": {
-   *     "type": ["Element", "null", "string"]
+   *     "type": ["{@link Element}", "null", "string"]
    *   }
    * }
    * ```
@@ -527,45 +527,44 @@ class Element {
 
   /**
    * NOTE: TYPE DEFINITION
+   * @summary A JSON object to be converted into an Element.
+   * @description
    * ```json
    * {
    *   "$schema": "http://json-schema.org/schema#",
-   *   "title": "ElementJSON",
+   *   "title": "Element.ElementJSON",
    *   "type": "object",
    *   "description": "A JSON object to be converted into an Element.",
-   *   "definitions": {
-   *     "ObjectString.ValueType": { "type": ["string", "number", "boolean"] }
-   *   },
    *   "required": ["name"],
    *   "additionalProperties": false,
    *   "properties": {
-   *     "name"   : { "type": "string", "description": "the name of the Element" },
-   *     "is_void": { "type": "boolean", "description": "whether the Element is void" },
+   *     "name"   : { "type": "string" , "description": "the name of the Element" },
+   *     "is_void": { "type": "boolean", "defuault": false, "description": "whether the Element is void" },
    *     "attr"   : {
    *       "type": "object",
    *       "description": "the attributes of the Element",
-   *       "additionalProperties": { "$ref": "#/definitions/ObjectString.ValueType" }
+   *       "additionalProperties": { "type": "{@link ObjectString.ValueType}" }
    *     },
    *     "content": {
    *       "type": "array",
    *       "description": "the contents of the Element",
    *       "items": {
-   *         "anyOf": [{ "type": "string" }, { "$ref": "#" }]
+   *         "oneOf": [{ "type": "string" }, { "$ref": "#" }]
    *       }
    *     }
    *   }
    * }
    * ```
-   * @typedef  {Object} ElementJSON
+   * @typedef  {Object} Element.ElementJSON
    * @property {string} name the name of the Element
    * @property {boolean=} is_void whether the Element is void
    * @property {Object<ObjectString.ValueType>=} attr the attributes of the Element
-   * @property {Array<(ElementJSON|string)>=} content the contents of the Element
+   * @property {Array<(Element.ElementJSON|string)>=} content the contents of the Element
    */
   /**
    * @summary Return a new Element object, given JSON data.
    * @version EXPERIMENTAL
-   * @param   {ElementJSON} $elem data for the Element object to construct
+   * @param   {Element.ElementJSON} $elem data for the Element object to construct
    * @returns {Element} a new Element object representing the given data
    */
   static fromJSON($elem) {

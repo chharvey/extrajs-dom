@@ -441,7 +441,7 @@ try {
     .addContent(`multiple`, `strings`)
     .addContent(new Element('multiple'), new Element('elements'))
     .addContent(`mix of`, new Element('multiple-elements'), `and strings`)
-    .addContent([new Element('single-array'), `of strings and`, new Element('elements')])
+    .addContent([new Element('single-array'), `mixing strings and`, new Element('elements')])
   return true
 } catch (e) { return false }
 ```
