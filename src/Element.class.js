@@ -153,7 +153,7 @@ class Element {
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
    * Examples:
-   * ```
+   * ```js
    * this.attr('itemtype', 'HTMLElement')                   // set the `[itemtype]` attribute
    * this.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
    * this.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `undefined` if it had not been set)
@@ -212,7 +212,7 @@ class Element {
    * This method does not remove attributes.
    *
    * Examples:
-   * ```
+   * ```js
    * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
@@ -229,7 +229,7 @@ class Element {
   /**
    * @summary Shortcut method for setting/getting the `id` attribute of this element.
    * @description Examples:
-   * ```
+   * ```js
    * this.id('section1') // set the [id] attribute
    * this.id(function () { return this.name }) // set the [id] attribute using a function
    * this.id(null)       // remove the [id] attribute
@@ -269,7 +269,7 @@ class Element {
    * @description When adding classes, use this method instead of {@link Element#class},
    * as the latter will overwrite the `[class]` attribute.
    * Examples:
-   * ```
+   * ```js
    * this.addClass('o-Object c-Component') // add to the [class] attribute
    * this.addClass()                       // do nothing; return `this`
    * ```
@@ -289,7 +289,7 @@ class Element {
   /**
    * @summary Remove one or more tokens from this element’s `class` attribute.
    * @description Examples:
-   * ```
+   * ```js
    * this.removeClass('o-Object') // remove one class
    * this.removeClass('o-Object', 'c-Component') // remove multiple classes
    * this.removeClass()           // do nothing; return `this`
@@ -313,7 +313,7 @@ class Element {
   /**
    * @summary Shortcut method for setting/getting the `style` attribute of this element.
    * @description Examples:
-   * ```
+   * ```js
    * this.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
@@ -365,7 +365,7 @@ class Element {
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
    * Examples:
-   * ```
+   * ```js
    * this.css('background', 'red')                       // set the `background` property
    * this.css('font-weight', '')                         // remove the `font-weight` property
    * this.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)

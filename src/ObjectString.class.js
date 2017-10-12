@@ -127,7 +127,7 @@ class ObjectString {
   /**
    * @summary Convert this object into an string of html attributes.
    * @description The string is returned in the following format:
-   * ` key1="val1" key2="val2" key3="val3"`
+   * ` key1="val1" key2="val2" key3="val3"`.
    * @return {string} a string containing attribute-value pairs
    */
   toAttrString() {
@@ -141,7 +141,7 @@ class ObjectString {
   /**
    * @summary Convert this object into a css-valid string.
    * @description The string is returned in the following format:
-   * `key1:val1;key2:val2;key3:val3;`
+   * `key1:val1;key2:val2;key3:val3;`.
    * @return {string} a valid css string containing property-value pairs
    */
   toCssString() {
