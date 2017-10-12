@@ -447,11 +447,29 @@ class Element {
   }
 
   /**
+   * NOTE: TYPE DEFINITION
+   * @summary Any argument passed to {@link Element#addContent}.
+   * @description
+   * ```json
+   * {
+   *   "$schema": "http://json-schema.org/schema#",
+   *   "title": "Element.ContentType",
+   *   "type": "object",
+   *   "description": "Any argument passed to {@link Element#addContent}.",
+   *   "type": ["Element", "null", "string", "array"]
+   *   "items": {
+   *     "type": ["Element", "null", "string"]
+   *   }
+   * }
+   * ```
+   * @typedef {(?Element|string|Array<(?Element|string)>)} Element.ContentType
+   */
+  /**
    * @summary Add content to this element.
    * @description Multiple arguments may be passed, and each argument may be a (nullable) Element or a string.
    * Or, a single array of such entries may be passed as an argument.
    * @version STABLE
-   * @param   {...(?Element|string|Array<(?Element|string)>)} contents the contents to add
+   * @param   {...Element.ContentType} contents the contents to add
    * @returns {Element} `this`
    * @throws  {TypeError} if this element is void
    */
