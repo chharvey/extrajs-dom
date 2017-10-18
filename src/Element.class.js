@@ -192,17 +192,18 @@ class Element {
    * @version STABLE
    * @param   {(string|!Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    * @throws  {TypeError} if the given attribute is not a string or object
    * @throws  {TypeError} if the given attribute has been removed or not set
    */
-  attr(attr = '', value) {
+  attr(attr = '', value, this_arg = this) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
       case 'string':
         if (attr.trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.attr(attr, value.call(this));
+          case 'function' : return this.attr(attr, value.call(this_arg));
           case 'null'     : this._attributes.delete(attr); break;
           case 'undefined':
             if (xjs.Object.typeOf(this._attributes.get(attr)) === 'undefined') throw new TypeError(`Attribute '${attr}' is undefined.`);

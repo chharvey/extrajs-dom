@@ -150,12 +150,19 @@ let el = new Element('div').attr('itemtype', 'HTMLElement')
 el.attr('itemtype', null)
 return el.html() === `<div></div>`
 ```
-Set an attribute with a function (`this` refers to the element):
+Set an attribute with a function (`this` refers to the element by default):
 the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').attr('id','my-div')
 el.attr('data-id', function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div" data-id="my-div"></div>`
+```
+Set an attribute with a function (providing a third argument uses another object as `this`):
+```js
+let data = { name: 'custom-element' }
+let el = new Element('div').attr('id','my-div')
+el.attr('data-id', function () { return `my-${this.name}` }, data)
+return el.html() === `<div id="my-div" data-id="my-custom-element"></div>`
 ```
 Set/remove (cannot get) multiple attributes with an object:
 ```js
