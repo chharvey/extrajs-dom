@@ -1,4 +1,4 @@
-# extrajs-element
+# extrajs-dom
 A Javascript implementation of DOM.
 
 ## Usage
@@ -150,12 +150,19 @@ let el = new Element('div').attr('itemtype', 'HTMLElement')
 el.attr('itemtype', null)
 return el.html() === `<div></div>`
 ```
-Set an attribute with a function (`this` refers to the element):
+Set an attribute with a function (`this` refers to the element by default):
 the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').attr('id','my-div')
 el.attr('data-id', function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div" data-id="my-div"></div>`
+```
+Set an attribute with a function (providing a third argument uses another object as `this`):
+```js
+let data = { name: 'custom-element' }
+let el = new Element('div').attr('id','my-div')
+el.attr('data-id', function () { return `my-${this.name}` }, data)
+return el.html() === `<div id="my-div" data-id="my-custom-element"></div>`
 ```
 Set/remove (cannot get) multiple attributes with an object:
 ```js
@@ -430,18 +437,23 @@ try {
   return false
 } catch (e) { return true }
 ```
-*NOTE* that this method has 4 types of parameters:
+*NOTE* that this method has 6 types of parameters:
 ```js
 try {
-  let el1 = new Element('s').addContent(`single string`)
-  let el2 = new Element('s').addContent(new Element('single-element'))
-  let el3 = new Element('s').addContent([`array`, `of`, `strings`])
-  let el4 = new Element('s').addContent([new Element('array'), new Element('of'), new Element('elements')])
+  let el = new Element('s')
+    .addContent(`single string`)
+    .addContent(new Element('single-element'))
+    .addContent([`single`, `array of`, `strings`])
+    .addContent([new Element('single'), new Element('array-of'), new Element('elements')])
+    .addContent(`multiple`, `strings`)
+    .addContent(new Element('multiple'), new Element('elements'))
+    .addContent(`mix of`, new Element('multiple-elements'), `and strings`)
+    .addContent([new Element('single-array'), `mixing strings and`, new Element('elements')])
   return true
 } catch (e) { return false }
 ```
 
-#### `#addElements()` (LOCKED)
+#### `#addElements()` (STABLE)
 Add an array of Element objects as content:
 ```js
 let el = new Element('div').addElements([

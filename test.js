@@ -16,7 +16,7 @@ function element() {
     let y = new Element('meta').addContents('hello world')
     console.log(y.html())
   } catch (e) {
-    console.log(`Failed to add contents to a void element.`)
+    console.error(`Failed to add contents to a void element.`)
   }
 
 }
@@ -38,7 +38,7 @@ function element_attr() {
     x = x.attr()
     console.log(`provide no args to #attr():\t`, x.html())
   } catch (e) {
-    console.log(`failed to call #attr() with no args: ${e}:\t`)
+    console.error(`failed to call #attr() with no args: ${e}`)
   }
   x = x.attr({
     attr1withobj: 'string',
@@ -57,12 +57,12 @@ function element_attr() {
     })
     console.log(`pass undefined as obj value to #attr():\t`, x.html())
   } catch (e) {
-    console.log(`failed to pass undefined in object to #attr(): ${e}:\t`)
+    console.error(`failed to pass undefined in object to #attr(): ${e}`)
   }
   try {
     x = x.attr('trying-NaN',NaN)
   } catch (e) {
-    console.log(`failed to pass NaN to #attr(): ${e}:\t`, x.html())
+    console.error(`failed to pass NaN to #attr(): ${e}:\t`, x.html())
   }
   x = x.attr('ternary1', (true) ? 'true' : null)
   console.log(`set attributes with ternary:\t`, x.html())
@@ -124,42 +124,63 @@ function element_data() {
     x = x.data('foo','bar')
     console.log(`x.data('foo','bar'):\t`, x.html())
   } catch (e) {
-    console.log(`failed to set #data('foo','bar'): ${e}:\t`)
+    console.error(`failed to set #data('foo','bar'): ${e}`)
   }
   try {
     let y = x.data('foo')
     console.log(`x.data('foo'):\t`, y)
   } catch (e) {
-    console.log(`failed to get #data('foo'): ${e}:\t`)
+    console.error(`failed to get #data('foo'): ${e}`)
   }
   try {
     let u;
     z = x.data('foo',u)
     console.log(`x.data('foo',undefined):\t`, z)
   } catch (e) {
-    console.log(`failed to set #data('foo',undefined): ${e}:\t`)
+    console.error(`failed to set #data('foo',undefined): ${e}`)
   }
   try {
     x = x.data('baz', function () { return this.data('foo') })
     console.log(`x.data('baz', <function>):\t`, x.html())
   } catch (e) {
-    console.log(`failed to set #data('baz',<function>): ${e}:\t`)
+    console.error(`failed to set #data('baz',<function>): ${e}`)
   }
   try {
     x = x.data('foo', null)
     console.log(`x.data('foo', null):\t`, x.html())
   } catch (e) {
-    console.log(`failed to remove with #data('foo',null): ${e}:\t`)
+    console.error(`failed to remove with #data('foo',null): ${e}`)
   }
   try {
     a = x.data()
     console.log(`x.data():\t`, a)
   } catch (e) {
-    console.log(`failed to call #data() with no args: ${e}:\t`)
+    console.error(`failed to call #data() with no args: ${e}`)
   }
   let s = new Element('span')
   console.log(x.dataset)
   console.log(s.dataset)
+}
+
+function element_addContent() {
+  try {
+    let x = new Element('div').addContent(null)
+    console.log(`pass null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent(null): ${e}`)
+  }
+  try {
+    let x = new Element('div').addContent('str', null)
+    console.log(`pass string and null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent('str', null): ${e}`)
+  }
+  try {
+    let x = new Element('div').addContent(['str', null])
+    console.log(`pass array of string and null to addContent():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call addContent(['str', null]): ${e}`)
+  }
 }
 
 function element_concat() {
@@ -202,4 +223,5 @@ function element_concat() {
 // element_style();
 // element_css();
 // element_data();
+// element_addContent();
 // element_concat();
