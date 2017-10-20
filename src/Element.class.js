@@ -709,7 +709,7 @@ class Element {
           .html()
       },
       default: function () {
-        return thing.toString()
+        return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
       },
     }
     return (returned[xjs.Object.typeOf(thing)] || returned.default).call(null)
