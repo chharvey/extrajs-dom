@@ -656,13 +656,13 @@ class Element {
    *
    * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
-   * @param   {Object=} options configurations for the output
+   * @param   {!Object=} options configurations for the output
    * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an <ol> instead of a <ul>
-   * @param   {Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
-   * @param   {Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
-   * @param   {Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
-   * @param   {Object<string>=} options.attributes.key   attributes of the key (<dt>)
-   * @param   {Object=} options.options configurations for nested items/keys/values
+   * @param   {!Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
+   * @param   {!Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
+   * @param   {!Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
+   * @param   {!Object<string>=} options.attributes.key   attributes of the key (<dt>)
+   * @param   {!Object=} options.options configurations for nested items/keys/values
    * @returns {string} the argument rendered as an HTML element
    */
   static data(thing, options = {}) {
