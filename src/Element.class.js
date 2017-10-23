@@ -723,24 +723,15 @@ class Element {
           return thing.class(classes).style(styles).html()
         }
         if (thing.view instanceof View) {
-          try {
-            return thing.view[options.display.name](...(options.display.args))
-          } catch (e) {
-            console.warn('Try checking your display name or arguments passed to the display function.')
-            console.err(e)
+          if (options.display && options.display.name) {
+            return thing.view[options.display.name](...(options.display.args || []))
+          } else {
             try {
-              return thing.view[options.display.name]()
-            } catch (er) {
-              console.warn('Check your display name.')
-              console.err(er)
-              try {
-                return thing.view()
-              } catch (err) {
-                console.warn('The following error was thrown:')
-                console.err(err)
-                thing.view = null
-                return Element.data(thing)
-              }
+              return thing.view()
+            } catch (err) {
+              console.err(err)
+              thing.view = null
+              return Element.data(thing, options)
             }
           }
         }
