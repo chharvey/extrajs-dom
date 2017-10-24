@@ -1,4 +1,5 @@
 const xjs          = require('extrajs')
+const View         = require('extrajs-view')
 const ObjectString = require('./ObjectString.class.js')
 
 /**
@@ -578,17 +579,24 @@ class Element {
 
   /**
    * @summary Mark up data using an HTML element.
-   * @description First and foremost, if the argument is an `Element` object, then this function returns
-   * that object’s `.html()` value (with any added attributes specified by the options below).
-   * Otherwise,
-   * If the argument is an array, then a `<ul>` element is returned, with `<li>` items.
-   * If the argument is a (non-array, non-function) object—even an Element object—then a `<dl>` element is returned, with
-   * `<dt>` keys and `<dd>` values.
-   * Then, each `<li>`, `<dt>`, and `<dd>` contains the result of this function called on that respective datum.
-   * If the argument is not an object (or is a function), then it is converted to a string and returned.
+   * @description This method returns different representations of data, depending on the argument given.
+   *
+   * 1. If the argument is a primitive type, then it is converted to a string and returned.
+   * 2. If the argument is an array, then a `<ul>` element is returned, with `<li>` items,
+   *    where each item is then evaluated by this same function.
+   * 3. If the argument is an object, then there are a few cases:
+   *   A. If the argument is an `Element` object, then this function returns
+   *      that object’s `.html()` value (with any added attributes specified by the options below).
+   *   B. If the argument is an object and has a `.view` getter function that returns a View object,
+   *      then the view is called, optionally with any specified display and arguments.
+   *   C. If the argument is a non-array, non-function, non-Element object and does not have a View,
+   *      then a `<dl>` element is returned, with `<dt>` keys and `<dd>` values,
+   *      where each `<dt>` displays the object’s own properties as strings, and each `<dd>` displays
+   *      the property value evaluated by this same function.
+   *   D. If the argument is a function, then it is converted to a string and returned.
    *
    * Optionally, an `options` argument may be supplied to enhance the data.
-   * The following template serves as an example:
+   * The following is an example:
    * ```js
    * let options = {
    *   ordered: true,
@@ -599,6 +607,7 @@ class Element {
    *   },
    *   options: {
    *     ordered: false,
+   *     display: { name: 'speaker', args: ['keynote', 3, true] },
    *   },
    * }
    * ```
@@ -624,6 +633,15 @@ class Element {
    * //   rel="external" href="//eg.com"></a>`
    * ```
    *
+   * If the object argument has a `.view` getter method, then that view is called.
+   * You may provide a specific display and arguments as necessary.
+   * ```js
+   * let jane = new Person('Jane Doe', new Date('1975-06-13')) // assuming jane.view returns a View object
+   * Element.data(jane) // returns jane.view()
+   * Element.data(jane, { display: { name:'speaker' } }) // returns jane.view.speaker()
+   * Element.data(jane, { display: { name:'speaker', args:['keynote',3,true] } }) // returns jane.view.speaker('keynote', 3, true)
+   * ```
+   *
    * This is the formal schema for the `options` parameter:
    * ```json
    * {
@@ -635,7 +653,16 @@ class Element {
    *   "properties": {
    *     "ordered": {
    *       "type": "boolean",
-   *       "description": "if the argument is an array, specify `true` to output an <ol> instead of a <ul>"
+   *       "description": "if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`"
+   *     },
+   *     "display": {
+   *       "type": "object",
+   *       "description": "provide a display function for the argument’s view, if it exists, to render",
+   *       "required": ["name"],
+   *       "properties": {
+   *         "name": { "type": "string", "description": "the name of the display" },
+   *         "args": { "type": "array",  "description": "any arguments to pass to the display" }
+   *       }
    *     },
    *     "attributes": {
    *       "type": "object",
@@ -657,13 +684,16 @@ class Element {
    *
    * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
-   * @param   {Object=} options configurations for the output
+   * @param   {!Object=} options configurations for the output
    * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an <ol> instead of a <ul>
-   * @param   {Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
-   * @param   {Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
-   * @param   {Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
-   * @param   {Object<string>=} options.attributes.key   attributes of the key (<dt>)
-   * @param   {Object=} options.options configurations for nested items/keys/values
+   * @param   {!Object=} options.display if the argument has a View, specify a display to render, or leave undefined to render the default display
+   * @param   {string}   options.display.name the name of the display (required if options.display is given)
+   * @param   {Array=}   options.display.args any arguments passed to the named display function
+   * @param   {!Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
+   * @param   {!Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
+   * @param   {!Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
+   * @param   {!Object<string>=} options.attributes.key   attributes of the key (<dt>)
+   * @param   {!Object=} options.options configurations for nested items/keys/values
    * @returns {string} the argument rendered as an HTML element
    */
   static data(thing, options = {}) {
@@ -693,6 +723,19 @@ class Element {
           try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
           return thing.class(classes).style(styles).html()
         }
+        if (thing.view instanceof View) {
+          if (options.display && options.display.name) {
+            return thing.view[options.display.name](...(options.display.args || []))
+          } else {
+            try {
+              return thing.view()
+            } catch (err) {
+              console.err(err)
+              thing.view = null
+              return Element.data(thing, options)
+            }
+          }
+        }
         let returned = new Element('dl').attr(attr.list)
         for (let i in thing) {
           returned.addElements([
@@ -710,7 +753,7 @@ class Element {
           .html()
       },
       default: function () {
-        return thing.toString()
+        return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
       },
     }
     return (returned[xjs.Object.typeOf(thing)] || returned.default).call(null)
