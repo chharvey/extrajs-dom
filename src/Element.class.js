@@ -723,10 +723,9 @@ class Element {
           } else {
             try {
               return thing.view()
-            } catch (err) {
-              console.err(err)
-              thing.view = null
-              return Element.data(thing, options)
+            } catch (err) { // if there is no default display
+              console.error(`NOTE: ${err.message}`)
+              return Element.data(Object.assign({}, thing), options)
             }
           }
         }
