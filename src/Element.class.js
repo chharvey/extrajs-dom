@@ -489,6 +489,7 @@ class Element {
   /**
    * @summary Add (nullable) elements as children of this element.
    * @version DEPRECATED
+   * @deprecated
    * @param   {Array<?Element>} elems array of Element objects (or `null`) to add
    * @returns {Element} `this`
    */
@@ -499,7 +500,7 @@ class Element {
 
   /**
    * @summary Render this element as an HTML string.
-   * @@version STABLE
+   * @version STABLE
    * @returns {string} an HTML string representing this element
    */
   html() {
