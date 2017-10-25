@@ -150,12 +150,19 @@ let el = new Element('div').attr('itemtype', 'HTMLElement')
 el.attr('itemtype', null)
 return el.html() === `<div></div>`
 ```
-Set an attribute with a function (`this` refers to the element):
+Set an attribute with a function (`this` refers to the element by default):
 the function should take 0 arguments and return a string, (non-`NaN`) number, or boolean:
 ```js
 let el = new Element('div').attr('id','my-div')
 el.attr('data-id', function () { return `my-${this.name}` })
 return el.html() === `<div id="my-div" data-id="my-div"></div>`
+```
+Set an attribute with a function (providing a third argument uses another object as `this`):
+```js
+let data = { name: 'custom-element' }
+let el = new Element('div').attr('id','my-div')
+el.attr('data-id', function () { return `my-${this.name}` }, data)
+return el.html() === `<div id="my-div" data-id="my-custom-element"></div>`
 ```
 Set/remove (cannot get) multiple attributes with an object:
 ```js
@@ -405,11 +412,12 @@ return (
   && el3.html() === `<div><strong>hello world</strong></div>`
 )
 ```
-Add multiple strings and Element objects:
+Add multiple strings and (nullible) Element objects:
 ```js
 let el = new Element('div').addContent(
   `hello world `, // string
   new Element('strong').addContent(`hello world `).html(), // string
+  (false) ? new Element('mark').addContent(`dlrow olleh `) : null, // null
   new Element('em').addContent(new Element('i').addContent(`hola mundo`)) // Element
 )
 return el.html() === `<div>hello world <strong>hello world </strong><em><i>hola mundo</i></em></div>`
@@ -419,7 +427,7 @@ Or pass a single array argument:
 let el = new Element('div').addContent([
   `hello `, // string
   new Element('strong').addContent([`world`]), // Element
-  new Element('mark').addContent([ new Element('i').addContent(`!`) ]), // Element
+  new Element('mark').addContent([ new Element('i').addContent(null) ]), // Element
 ])
 return el.html() === `<div>hello <strong>world</strong><mark><i>!</i></mark></div>`
 ```
@@ -430,7 +438,7 @@ try {
   return false
 } catch (e) { return true }
 ```
-*NOTE* that this method has 6 types of parameters:
+*NOTE* that this method has 8 types of parameters. It’s very flexible.
 ```js
 try {
   let el = new Element('s')
@@ -441,30 +449,13 @@ try {
     .addContent(`multiple`, `strings`)
     .addContent(new Element('multiple'), new Element('elements'))
     .addContent(`mix of`, new Element('multiple-elements'), `and strings`)
-    .addContent([new Element('single-array'), `of strings and`, new Element('elements')])
+    .addContent([new Element('single-array'), `mixing strings and`, new Element('elements')])
   return true
 } catch (e) { return false }
 ```
 
-#### `#addElements()` (STABLE)
-Add an array of Element objects as content:
-```js
-let el = new Element('div').addElements([
-  new Element('strong').addContent(`hello `),
-  new Element('em').addContent(`world`),
-  new Element('mark').addElements([ new Element('i').addContent(`!`) ]),
-])
-return el.html() === `<div><strong>hello </strong><em>world</em><mark><i>!</i></mark></div>`
-```
-Entries may be `null`:
-```js
-let el = new Element('div').addElements([
-  new Element('strong').addContent(`hello `),
-  (false) ? new Element('em').addContent(`world`) : null,
-  new Element('mark').addElements([ new Element('i').addContent(`!`) ]),
-])
-return el.html() === `<div><strong>hello </strong><mark><i>!</i></mark></div>`
-```
+#### `#addElements()` (DEPRECATED)
+Use `#addContent()` instead.
 
 #### `#html()` (STABLE)
 Output as an html string. (see any of the above examples.)

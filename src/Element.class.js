@@ -1,4 +1,5 @@
 const xjs          = require('extrajs')
+const View         = require('extrajs-view')
 const ObjectString = require('./ObjectString.class.js')
 
 /**
@@ -132,11 +133,11 @@ class Element {
    *   "$schema"    : "http://json-schema.org/schema#",
    *   "title"      : "Element.ValueArg",
    *   "description": "A type to provide as a value argument for setting/removing an attribute.",
-   *   "type"       : ["ObjectString.ValueType", "function():ObjectString.ValueType", "null"],
+   *   "type"       : ["{@link ObjectString.ValueType}", "function():{@link ObjectString.ValueType}", "null"],
    *   "oneOf"      : [
-   *     { "type": "ObjectString.ValueType"           , "description": "set the attribute to an ObjectString.ValueType value" },
-   *     { "type": "function():ObjectString.ValueType", "description": "call the function on `this` and then set the attribute to the result" },
-   *     { "type": "null"                             , "description": "remove the attribute altogether" }
+   *     { "type": "{@link ObjectString.ValueType}"           , "description": "set the attribute to an ObjectString.ValueType value" },
+   *     { "type": "function():{@link ObjectString.ValueType}", "description": "call the function on `this` and then set the attribute to the result" },
+   *     { "type": "null"                                     , "description": "remove the attribute altogether" }
    *   ]
    * }
    * ```
@@ -177,6 +178,7 @@ class Element {
    *   'data-id': null, // remove the `[data-id]` attribute
    * })
    * this.attr()                                            // do nothing; return `this`
+   * this.attr(null)                                        // do nothing; return `this`
    * ```
    *
    * Notes:
@@ -190,19 +192,21 @@ class Element {
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
    * @version STABLE
-   * @param   {(string|!Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
+   * @param   {(string|?Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
    * @throws  {TypeError} if the given attribute is not a string or object
    * @throws  {TypeError} if the given attribute has been removed or not set
    */
-  attr(attr = '', value) {
+  attr(attr = '', value, this_arg = this) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
+      case 'null': break;
       case 'string':
         if (attr.trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.attr(attr, value.call(this));
+          case 'function' : return this.attr(attr, value.call(this_arg));
           case 'null'     : this._attributes.delete(attr); break;
           case 'undefined':
             if (xjs.Object.typeOf(this._attributes.get(attr)) === 'undefined') throw new TypeError(`Attribute '${attr}' is undefined.`);
@@ -453,23 +457,23 @@ class Element {
    * ```json
    * {
    *   "$schema": "http://json-schema.org/schema#",
-   *   "title": "Element.ContentType",
+   *   "title": "Element.ContentArg",
    *   "type": "object",
    *   "description": "Any argument passed to {@link Element#addContent}.",
-   *   "type": ["Element", "null", "string", "array"]
+   *   "type": ["{@link Element}", "null", "string", "array"]
    *   "items": {
-   *     "type": ["Element", "null", "string"]
+   *     "type": ["{@link Element}", "null", "string"]
    *   }
    * }
    * ```
-   * @typedef {(?Element|string|Array<(?Element|string)>)} Element.ContentType
+   * @typedef {(?Element|string|Array<(?Element|string)>)} Element.ContentArg
    */
   /**
    * @summary Add content to this element.
    * @description Multiple arguments may be passed, and each argument may be a (nullable) Element or a string.
    * Or, a single array of such entries may be passed as an argument.
    * @version STABLE
-   * @param   {...Element.ContentType} contents the contents to add
+   * @param   {...Element.ContentArg} contents the contents to add
    * @returns {Element} `this`
    * @throws  {TypeError} if this element is void
    */
@@ -484,16 +488,13 @@ class Element {
 
   /**
    * @summary Add (nullable) elements as children of this element.
-   * @version STABLE
+   * @version DEPRECATED
    * @param   {Array<?Element>} elems array of Element objects (or `null`) to add
    * @returns {Element} `this`
    */
   addElements(elems) {
-    return this.addContent(
-      elems
-        .filter((el) => el !== null)
-        .map((el) => el.html()).join('')
-    )
+    console.warn('`Element#addElements` is DEPRECATED: use `Element#addContent` instead.')
+    return this.addContent(elems)
   }
 
   /**
@@ -527,45 +528,44 @@ class Element {
 
   /**
    * NOTE: TYPE DEFINITION
+   * @summary A JSON object to be converted into an Element.
+   * @description
    * ```json
    * {
    *   "$schema": "http://json-schema.org/schema#",
-   *   "title": "ElementJSON",
+   *   "title": "Element.ElementJSON",
    *   "type": "object",
    *   "description": "A JSON object to be converted into an Element.",
-   *   "definitions": {
-   *     "ObjectString.ValueType": { "type": ["string", "number", "boolean"] }
-   *   },
    *   "required": ["name"],
    *   "additionalProperties": false,
    *   "properties": {
-   *     "name"   : { "type": "string", "description": "the name of the Element" },
-   *     "is_void": { "type": "boolean", "description": "whether the Element is void" },
+   *     "name"   : { "type": "string" , "description": "the name of the Element" },
+   *     "is_void": { "type": "boolean", "defuault": false, "description": "whether the Element is void" },
    *     "attr"   : {
    *       "type": "object",
    *       "description": "the attributes of the Element",
-   *       "additionalProperties": { "$ref": "#/definitions/ObjectString.ValueType" }
+   *       "additionalProperties": { "type": "{@link ObjectString.ValueType}" }
    *     },
    *     "content": {
    *       "type": "array",
    *       "description": "the contents of the Element",
    *       "items": {
-   *         "anyOf": [{ "type": "string" }, { "$ref": "#" }]
+   *         "oneOf": [{ "type": "string" }, { "$ref": "#" }]
    *       }
    *     }
    *   }
    * }
    * ```
-   * @typedef  {Object} ElementJSON
+   * @typedef  {Object} Element.ElementJSON
    * @property {string} name the name of the Element
    * @property {boolean=} is_void whether the Element is void
    * @property {Object<ObjectString.ValueType>=} attr the attributes of the Element
-   * @property {Array<(ElementJSON|string)>=} content the contents of the Element
+   * @property {Array<(Element.ElementJSON|string)>=} content the contents of the Element
    */
   /**
    * @summary Return a new Element object, given JSON data.
    * @version EXPERIMENTAL
-   * @param   {ElementJSON} $elem data for the Element object to construct
+   * @param   {Element.ElementJSON} $elem data for the Element object to construct
    * @returns {Element} a new Element object representing the given data
    */
   static fromJSON($elem) {
@@ -578,17 +578,24 @@ class Element {
 
   /**
    * @summary Mark up data using an HTML element.
-   * @description First and foremost, if the argument is an `Element` object, then this function returns
-   * that object’s `.html()` value (with any added attributes specified by the options below).
-   * Otherwise,
-   * If the argument is an array, then a `<ul>` element is returned, with `<li>` items.
-   * If the argument is a (non-array, non-function) object—even an Element object—then a `<dl>` element is returned, with
-   * `<dt>` keys and `<dd>` values.
-   * Then, each `<li>`, `<dt>`, and `<dd>` contains the result of this function called on that respective datum.
-   * If the argument is not an object (or is a function), then it is converted to a string and returned.
+   * @description This method returns different representations of data, depending on the argument given.
+   *
+   * 1. If the argument is a primitive type, then it is converted to a string and returned.
+   * 2. If the argument is an array, then a `<ul>` element is returned, with `<li>` items,
+   *    where each item is then evaluated by this same function.
+   * 3. If the argument is an object, then there are a few cases:
+   *   A. If the argument is an `Element` object, then this function returns
+   *      that object’s `.html()` value (with any added attributes specified by the options below).
+   *   B. If the argument is an object and has a `.view` getter function that returns a View object,
+   *      then the view is called, optionally with any specified display and arguments.
+   *   C. If the argument is a non-array, non-function, non-Element object and does not have a View,
+   *      then a `<dl>` element is returned, with `<dt>` keys and `<dd>` values,
+   *      where each `<dt>` displays the object’s own properties as strings, and each `<dd>` displays
+   *      the property value evaluated by this same function.
+   *   D. If the argument is a function, then it is converted to a string and returned.
    *
    * Optionally, an `options` argument may be supplied to enhance the data.
-   * The following template serves as an example:
+   * The following is an example:
    * ```js
    * let options = {
    *   ordered: true,
@@ -599,6 +606,7 @@ class Element {
    *   },
    *   options: {
    *     ordered: false,
+   *     display: { name: 'speaker', args: ['keynote', 3, true] },
    *   },
    * }
    * ```
@@ -624,6 +632,15 @@ class Element {
    * //   rel="external" href="//eg.com"></a>`
    * ```
    *
+   * If the object argument has a `.view` getter method, then that view is called.
+   * You may provide a specific display and arguments as necessary.
+   * ```js
+   * let jane = new Person('Jane Doe', new Date('1975-06-13')) // assuming jane.view returns a View object
+   * Element.data(jane) // returns jane.view()
+   * Element.data(jane, { display: { name:'speaker' } }) // returns jane.view.speaker()
+   * Element.data(jane, { display: { name:'speaker', args:['keynote',3,true] } }) // returns jane.view.speaker('keynote', 3, true)
+   * ```
+   *
    * This is the formal schema for the `options` parameter:
    * ```json
    * {
@@ -635,16 +652,25 @@ class Element {
    *   "properties": {
    *     "ordered": {
    *       "type": "boolean",
-   *       "description": "if the argument is an array, specify `true` to output an <ol> instead of a <ul>"
+   *       "description": "if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`"
+   *     },
+   *     "display": {
+   *       "type": ["object","null"],
+   *       "description": "provide a display function for the argument’s view, if it exists, to render",
+   *       "required": ["name"],
+   *       "properties": {
+   *         "name": { "type": "string", "description": "the name of the display" },
+   *         "args": { "type": "array",  "description": "any arguments to pass to the display" }
+   *       }
    *     },
    *     "attributes": {
-   *       "type": "object",
+   *       "type": ["object","null"],
    *       "description": "describes how to render the output elements’ attributes",
    *       "additionalProperties": false,
    *       "properties": {
-   *         "list" : { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the list (<ul>, <ol>, or <dl>)" },
-   *         "value": { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the item or value (<li> or <dd>)" },
-   *         "key"  : { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the key (<dt>)" }
+   *         "list" : { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the list (`<ul>`, `<ol>`, or `<dl>`)" },
+   *         "value": { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the item or value (`<li>` or `<dd>`)" },
+   *         "key"  : { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the key (`<dt>`)" }
    *       }
    *     },
    *     "options": {
@@ -657,25 +683,23 @@ class Element {
    *
    * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
-   * @param   {Object=} options configurations for the output
-   * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an <ol> instead of a <ul>
-   * @param   {Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
-   * @param   {Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
-   * @param   {Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
-   * @param   {Object<string>=} options.attributes.key   attributes of the key (<dt>)
-   * @param   {Object=} options.options configurations for nested items/keys/values
+   * @param   {!Object=} options configurations for the output
+   * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`
+   * @param   {?Object=} options.display if the argument has a View, specify a display to render; undefined or null: render the default display
+   * @param   {string}   options.display.name the name of the display (required if options.display is given)
+   * @param   {Array=}   options.display.args any arguments passed to the named display function
+   * @param   {?Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
+   * @param   {?Object<string>=} options.attributes.list  attributes of the list (`<ul>`, `<ol>`, or `<dl>`)
+   * @param   {?Object<string>=} options.attributes.value attributes of the item or value (`<li>` or `<dd>`)
+   * @param   {?Object<string>=} options.attributes.key   attributes of the key (`<dt>`)
+   * @param   {!Object=} options.options configurations for nested items/keys/values
    * @returns {string} the argument rendered as an HTML element
    */
   static data(thing, options = {}) {
-    /**
-     * Configuration attributes for elements.
-     * Avoids TypeErrors (cannot read property of undefined).
-     * @type {Object<Object<string>=>}
-     */
     let attr = {
-      list: options.attributes && options.attributes.list,
-      val : options.attributes && options.attributes.value,
-      key : options.attributes && options.attributes.key,
+      list: (options.attributes && options.attributes.list ) || null,
+      val : (options.attributes && options.attributes.value) || null,
+      key : (options.attributes && options.attributes.key  ) || null,
     }
     let returned = {
       object: function () {
@@ -687,15 +711,27 @@ class Element {
               if (i !== 'class' && i !== 'style') thing.attr(i, attr.list[i])
             }
           }
-          let classes = attr.list && attr.list.class || ''
-          let styles  = attr.list && attr.list.style || ''
+          let classes = (attr.list && attr.list.class) || ''
+          let styles  = (attr.list && attr.list.style) || ''
           try { classes = `${classes} ${thing.class()}` } catch (e) { ; }
           try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
           return thing.class(classes).style(styles).html()
         }
+        if (thing.view instanceof View) {
+          if (options.display && options.display.name) {
+            return thing.view[options.display.name](...(options.display.args || []))
+          } else {
+            try {
+              return thing.view()
+            } catch (err) { // if there is no default display
+              console.error(`NOTE: ${err.message}`)
+              return Element.data(Object.assign({}, thing), options)
+            }
+          }
+        }
         let returned = new Element('dl').attr(attr.list)
         for (let i in thing) {
-          returned.addElements([
+          returned.addContent([
             new Element('dt').attr(attr.key).addContent(i),
             new Element('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
           ])
@@ -704,13 +740,13 @@ class Element {
       },
       array: function () {
         return new Element((options.ordered) ? 'ol' : 'ul').attr(attr.list)
-          .addElements(thing.map((el) =>
+          .addContent(thing.map((el) =>
             new Element('li').attr(attr.val).addContent(Element.data(el, options.options))
           ))
           .html()
       },
       default: function () {
-        return thing.toString()
+        return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
       },
     }
     return (returned[xjs.Object.typeOf(thing)] || returned.default).call(null)

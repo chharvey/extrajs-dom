@@ -1,3 +1,4 @@
+const View    = require('extrajs-view')
 const Element = require('./index.js').Element
 
 
@@ -39,6 +40,12 @@ function element_attr() {
     console.log(`provide no args to #attr():\t`, x.html())
   } catch (e) {
     console.error(`failed to call #attr() with no args: ${e}`)
+  }
+  try {
+    x = x.attr(null)
+    console.log(`provide null to #attr():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call #attr(null): ${e}`)
   }
   x = x.attr({
     attr1withobj: 'string',
@@ -218,6 +225,27 @@ function element_concat() {
   )
 }
 
+function element_data() {
+  class Person {
+    constructor(name) {
+      this.name = name
+    }
+    get view() {
+      return new View(function () {
+        return `<span>${this.name}</span>`
+      }, this)
+        .addDisplay(function cap(capitalize) {
+          return `<h1 style="text-transform: ${(capitalize) ? 'uppercase' : 'normal'}">${this.name}</h1>`
+        })
+    }
+  }
+  let chris = new Person('Chris')
+  // console.log(chris.view())
+  // console.log(chris.view.cap(true))
+  // console.log(chris.view.cap(false))
+  console.log(Element.data(chris, {display:{name:'cap'}}))
+}
+
 // element();
 // element_attr();
 // element_style();
@@ -225,3 +253,4 @@ function element_concat() {
 // element_data();
 // element_addContent();
 // element_concat();
+// element_data();
