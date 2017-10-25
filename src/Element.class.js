@@ -731,7 +731,7 @@ class Element {
         }
         let returned = new Element('dl').attr(attr.list)
         for (let i in thing) {
-          returned.addElements([
+          returned.addContent([
             new Element('dt').attr(attr.key).addContent(i),
             new Element('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
           ])
@@ -740,7 +740,7 @@ class Element {
       },
       array: function () {
         return new Element((options.ordered) ? 'ol' : 'ul').attr(attr.list)
-          .addElements(thing.map((el) =>
+          .addContent(thing.map((el) =>
             new Element('li').attr(attr.val).addContent(Element.data(el, options.options))
           ))
           .html()
