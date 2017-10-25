@@ -792,11 +792,8 @@ class Element {
         return returned.view.html()
       },
       array: function () {
-        return new Element((options.ordered) ? 'ol' : 'ul').attr(attr.list)
-          .addContent(thing.map((item) =>
-            new Element('li').attr(attr.val).addContent(Element.data(item, options.options))
-          ))
-          .view.html()
+        return (options.ordered) ? require('../class/HTMLOListElement.class.js').data(thing, options)
+                                 : require('../class/HTMLUListElement.class.js').data(thing, options)
       },
       default: function () {
         return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
