@@ -190,6 +190,23 @@ function element_addContent() {
   }
 }
 
+function element_toString() {
+  let data = ['one','two','three']
+  let x = new Element('ul')
+    .class('o-List')
+    .id('my-ul')
+    .data('length',data.length)
+    .addContent(data.map((d) => new Element('li').class('o-List__Item').addContent(d)))
+  console.log(x.toString())
+  let y = new Element('link').attr({href: 'http://example.com/stylesheet.css'})
+  console.log(y.toString())
+}
+
+function element_view() {
+  let x = new Element('div').attr({class:'my-div'}).addContent(`a div with an attr`)
+  console.log(x.view())
+}
+
 function element_concat() {
   console.log(
     `concatenate arguments`,
@@ -252,5 +269,7 @@ function element_data() {
 // element_css();
 // element_data();
 // element_addContent();
+// element_toString();
+// element_view();
 // element_concat();
 // element_data();
