@@ -486,16 +486,13 @@ class Element {
 
   /**
    * @summary Add (nullable) elements as children of this element.
-   * @version STABLE
+   * @version DEPRECATED
    * @param   {Array<?Element>} elems array of Element objects (or `null`) to add
    * @returns {Element} `this`
    */
   addElements(elems) {
-    return this.addContent(
-      elems
-        .filter((el) => el !== null)
-        .map((el) => el.html()).join('')
-    )
+    console.warn('`Element#addElements` is DEPRECATED: use `Element#addContent` instead.')
+    return this.addContent(elems)
   }
 
   /**
