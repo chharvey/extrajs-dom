@@ -41,6 +41,12 @@ function element_attr() {
   } catch (e) {
     console.error(`failed to call #attr() with no args: ${e}`)
   }
+  try {
+    x = x.attr(null)
+    console.log(`provide null to #attr():\t`, x.html())
+  } catch (e) {
+    console.error(`failed to call #attr(null): ${e}`)
+  }
   x = x.attr({
     attr1withobj: 'string',
     attr2withobj: 42,

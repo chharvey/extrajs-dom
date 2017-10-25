@@ -178,6 +178,7 @@ class Element {
    *   'data-id': null, // remove the `[data-id]` attribute
    * })
    * this.attr()                                            // do nothing; return `this`
+   * this.attr(null)                                        // do nothing; return `this`
    * ```
    *
    * Notes:
@@ -191,7 +192,7 @@ class Element {
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
    * @version STABLE
-   * @param   {(string|!Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
+   * @param   {(string|?Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
@@ -201,6 +202,7 @@ class Element {
   attr(attr = '', value, this_arg = this) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
+      case 'null': break;
       case 'string':
         if (attr.trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
