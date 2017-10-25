@@ -655,7 +655,7 @@ class Element {
    *       "description": "if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`"
    *     },
    *     "display": {
-   *       "type": "object",
+   *       "type": ["object","null"],
    *       "description": "provide a display function for the argument’s view, if it exists, to render",
    *       "required": ["name"],
    *       "properties": {
@@ -664,13 +664,13 @@ class Element {
    *       }
    *     },
    *     "attributes": {
-   *       "type": "object",
+   *       "type": ["object","null"],
    *       "description": "describes how to render the output elements’ attributes",
    *       "additionalProperties": false,
    *       "properties": {
-   *         "list" : { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the list (<ul>, <ol>, or <dl>)" },
-   *         "value": { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the item or value (<li> or <dd>)" },
-   *         "key"  : { "type": "object", "additionalProperties": { "type": "string" }, "description": "attributes of the key (<dt>)" }
+   *         "list" : { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the list (`<ul>`, `<ol>`, or `<dl>`)" },
+   *         "value": { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the item or value (`<li>` or `<dd>`)" },
+   *         "key"  : { "type": ["object","null"], "additionalProperties": { "type": "string" }, "description": "attributes of the key (`<dt>`)" }
    *       }
    *     },
    *     "options": {
@@ -684,27 +684,22 @@ class Element {
    * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
    * @param   {!Object=} options configurations for the output
-   * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an <ol> instead of a <ul>
-   * @param   {!Object=} options.display if the argument has a View, specify a display to render, or leave undefined to render the default display
+   * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`
+   * @param   {?Object=} options.display if the argument has a View, specify a display to render; undefined or null: render the default display
    * @param   {string}   options.display.name the name of the display (required if options.display is given)
    * @param   {Array=}   options.display.args any arguments passed to the named display function
-   * @param   {!Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
-   * @param   {!Object<string>=} options.attributes.list  attributes of the list (<ul>, <ol>, or <dl>)
-   * @param   {!Object<string>=} options.attributes.value attributes of the item or value (<li> or <dd>)
-   * @param   {!Object<string>=} options.attributes.key   attributes of the key (<dt>)
+   * @param   {?Object<Object<string>>=} options.attributes describes how to render the output elements’ attributes
+   * @param   {?Object<string>=} options.attributes.list  attributes of the list (`<ul>`, `<ol>`, or `<dl>`)
+   * @param   {?Object<string>=} options.attributes.value attributes of the item or value (`<li>` or `<dd>`)
+   * @param   {?Object<string>=} options.attributes.key   attributes of the key (`<dt>`)
    * @param   {!Object=} options.options configurations for nested items/keys/values
    * @returns {string} the argument rendered as an HTML element
    */
   static data(thing, options = {}) {
-    /**
-     * Configuration attributes for elements.
-     * Avoids TypeErrors (cannot read property of undefined).
-     * @type {Object<Object<string>=>}
-     */
     let attr = {
-      list: options.attributes && options.attributes.list,
-      val : options.attributes && options.attributes.value,
-      key : options.attributes && options.attributes.key,
+      list: (options.attributes && options.attributes.list ) || null,
+      val : (options.attributes && options.attributes.value) || null,
+      key : (options.attributes && options.attributes.key  ) || null,
     }
     let returned = {
       object: function () {
@@ -716,8 +711,8 @@ class Element {
               if (i !== 'class' && i !== 'style') thing.attr(i, attr.list[i])
             }
           }
-          let classes = attr.list && attr.list.class || ''
-          let styles  = attr.list && attr.list.style || ''
+          let classes = (attr.list && attr.list.class) || ''
+          let styles  = (attr.list && attr.list.style) || ''
           try { classes = `${classes} ${thing.class()}` } catch (e) { ; }
           try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
           return thing.class(classes).style(styles).html()
