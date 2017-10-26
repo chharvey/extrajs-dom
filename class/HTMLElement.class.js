@@ -8,10 +8,8 @@ const Element = require('../src/Element.class.js')
 class HTMLElement extends Element {
   /**
    * @summary Construct a new HTMLElement object.
-   * @description By default, the parameter `is_void` is true for “Void Elements” as in
-   * the HTML specification (and thus the argument need not be explicilty provided).
-   * Otherwise, `is_void` is false by default, unless explicitly specified.
-   * @see https://www.w3.org/TR/html/syntax.html#void-elements
+   * @description The voidness of this element is automatically determined for “Void Elements” as in
+   * {@link https://www.w3.org/TR/html/syntax.html#void-elements|the HTML specification}.
    * @version EXPERIMENTAL
    * @param {string} name the immutable name of the tag
    */

@@ -3,22 +3,26 @@ const View         = require('extrajs-view')
 const ObjectString = require('./ObjectString.class.js')
 
 /**
- * Represents an HTML element.
+ * Represents a DOM element.
+ * @see https://www.w3.org/TR/dom/#element
  */
 class Element {
   /**
    * @summary Construct a new Element object.
-   * @description By default, the parameter `is_void` is true for “Void Elements” as in
-   * the HTML specification (and thus the argument need not be explicilty provided).
-   * Otherwise, `is_void` is false by default, unless explicitly specified.
    * @version STABLE
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
-   * @param {boolean=} is_void `true` if this element is void (has no closing tag)
+   * @param {boolean} is_void `true` if this element is void (has no closing tag)
    */
   constructor(name, is_void = false) {
+    if (arguments.length === 1) {
+      console.warn(`WARNING: Parameter \`is_void\` SHOULD be considered \`false\` by default,
+        even for “void” HTML elements.
+        Use \`new HTMLElement()\` for the automated “void” behavior.`)
+    }
     /** @private @final */ this._NAME = name
     /** @private @final */ this._VOID = is_void || [
+      // CHANGED DEPRECATED: do not rely on this functionality!
       'area',
       'base',
       'br',
