@@ -1,11 +1,11 @@
-const Element = require('../src/Element.class.js')
+const HTMLElement = require('./HTMLElement.class.js')
 
 /**
  * Represents an HTML OL element.
  * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
- * @extends Element
+ * @extends HTMLElement
  */
-class HTMLOListElement extends Element {
+class HTMLOListElement extends HTMLElement {
   /**
    * @summary Construct a new HTMLOListElement object.
    * @version EXPERIMENTAL

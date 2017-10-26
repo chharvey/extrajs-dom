@@ -1,4 +1,4 @@
-const HTMLElement = require('../src/HTMLElement.class.js')
+const HTMLElement = require('./HTMLElement.class.js')
 
 /**
  * Represents an HTML DL element.
