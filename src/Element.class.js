@@ -781,21 +781,24 @@ class Element {
               return Element.data(Object.assign({}, thing), options)
             }
           }
-        }
-        let returned = new Element('dl').attr(attr.list)
+        } else {
+          const HTMLDListElement = require('../class/HTMLDListElement.class.js')
+          let returned = new HTMLDListElement().attr(attr.list)
+          // REVIEW INDENTATION
         for (let i in thing) {
           returned.addContent([
-            new Element('dt').attr(attr.key).addContent(i),
-            new Element('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
+            new HTMLElement('dt').attr(attr.key).addContent(i),
+            new HTMLElement('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
           ])
         }
         return returned.view.html()
+        }
       },
       array: function () {
         const HTMLListElement = (options.ordered) ? require('../class/HTMLOListElement.class.js')
                                                   : require('../class/HTMLUListElement.class.js')
         return new HTMLListElement().attr(attr.list).addContent(thing.map((item) =>
-          new Element('li').attr(attr.val).addContent(Element.data(item, options.options))
+          new HTMLLIElement().attr(attr.val).addContent(Element.data(item, options.options))
         )).view.html()
       },
       default: function () {
