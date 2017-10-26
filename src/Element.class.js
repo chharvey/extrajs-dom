@@ -792,8 +792,11 @@ class Element {
         return returned.view.html()
       },
       array: function () {
-        return (options.ordered) ? require('../class/HTMLOListElement.class.js').data(thing, options)
-                                 : require('../class/HTMLUListElement.class.js').data(thing, options)
+        const HTMLListElement = (options.ordered) ? require('../class/HTMLOListElement.class.js')
+                                                  : require('../class/HTMLUListElement.class.js')
+        return new HTMLListElement().attr(attr.list).addContent(thing.map((item) =>
+          new Element('li').attr(attr.val).addContent(Element.data(item, options.options))
+        )).view.html()
       },
       default: function () {
         return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
