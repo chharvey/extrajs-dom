@@ -1,5 +1,4 @@
 const xjs          = require('extrajs')
-const View         = require('extrajs-view')
 const ObjectString = require('./ObjectString.class.js')
 
 /**
@@ -643,7 +642,7 @@ class Element {
    * 3. If the argument is an object, then there are a few cases:
    *   A. If the argument is an `Element` object, then this function returns
    *      that object’s `.view.html()` value (with any added attributes specified by the options below).
-   *   B. If the argument is an object and has a `.view` getter function that returns a View object,
+   *   B. If the argument is an object and has a `.view` getter function that returns a [View](https://github.com/chharvey/extrajs-view/) object,
    *      then the view is called, optionally with any specified display and arguments.
    *   C. If the argument is a non-array, non-function, non-Element object and does not have a View,
    *      then a `<dl>` element is returned, with `<dt>` keys and `<dd>` values,
@@ -774,7 +773,7 @@ class Element {
           try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
           return thing.class(classes).style(styles).view.html()
         }
-        if (thing.view instanceof View) {
+        if (thing.view instanceof Function) { // `instanceof` will not recognize `require('extrajs-view')` as the same `View` class
           if (options.display && options.display.name) {
             return thing.view[options.display.name](...(options.display.args || []))
           } else {
