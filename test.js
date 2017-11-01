@@ -1,4 +1,3 @@
-const View    = require('extrajs-view')
 const Element = require('./index.js').Element
 
 
@@ -231,7 +230,7 @@ function element_data() {
       this.name = name
     }
     get view() {
-      return new View(function () {
+      return new (require('extrajs-view'))(function () {
         return `<span>${this.name}</span>`
       }, this)
         .addDisplay(function cap(capitalize) {
