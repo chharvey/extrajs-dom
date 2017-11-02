@@ -1,4 +1,9 @@
 const Element = require('./index.js').Element
+const HTMLElement      = require('./index.js').HTMLElement
+const HTMLOListElement = require('./index.js').HTMLOListElement
+const HTMLUListElement = require('./index.js').HTMLUListElement
+const HTMLDListElement = require('./index.js').HTMLDListElement
+const HTMLLIElement    = require('./index.js').HTMLLIElement
 
 
 function element() {
@@ -18,7 +23,15 @@ function element() {
   } catch (e) {
     console.error(`Failed to add contents to a void element.`)
   }
+}
 
+function subclasses() {
+  let html = new HTMLElement('html')
+  let ol = new HTMLOListElement()
+  let ul = new HTMLUListElement()
+  let dl = new HTMLDListElement()
+  let li = new HTMLLIElement()
+  console.log(...[html, ol, ul, dl, li].map((e) => e.html()))
 }
 
 function element_attr() {
@@ -263,6 +276,7 @@ function element_data() {
 }
 
 // element();
+// subclasses();
 // element_attr();
 // element_style();
 // element_css();

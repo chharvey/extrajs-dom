@@ -1,5 +1,6 @@
 const xjs          = require('extrajs')
 const ObjectString = require('./ObjectString.class.js')
+const View         = require('extrajs-view')
 
 /**
  * Represents a DOM element.
