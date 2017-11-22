@@ -1,6 +1,6 @@
 {
   "name": "extrajs-dom",
-  "version": "3.2.0-beta.1",
+  "version": "3.2.0-beta.2",
   "description": "A Javascript implementation of DOM.",
   "main": "index.js",
   "scripts": {
