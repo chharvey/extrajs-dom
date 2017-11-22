@@ -799,6 +799,7 @@ class Element {
         }
       },
       array: function () {
+        const HTMLLIElement   = require('../class/HTMLLIElement.class.js')
         const HTMLListElement = (options.ordered) ? require('../class/HTMLOListElement.class.js')
                                                   : require('../class/HTMLUListElement.class.js')
         return new HTMLListElement().attr(attr.list).addContent(thing.map((item) =>
