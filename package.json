@@ -24,9 +24,8 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
-    "extrajs": "^0.9.0"
-  },
-  "devDependencies": {
+    "extrajs": "^0.10.0",
     "extrajs-view": "^1.1.0"
-  }
+  },
+  "devDependencies": {}
 }
