@@ -457,9 +457,27 @@ try {
 #### `#addElements()` (DEPRECATED)
 Use `#addContent()` instead.
 
+#### `#toString()` (EXPERIMENTAL)
+Output a string representation of this object.
+
 #### `#html()` (STABLE)
-Output as an html string. (see any of the above examples.)
-May rename this to `#toString()`? as it applies to more than HTML elements.
+Output as an html string. Shortcut for `Element#view.html()`.
+```js
+let el = new Element('body').class('no-js')
+return el.html() === el.view.html()
+```
+
+#### `#view` (EXPERIMENTAL)
+Returns a View object. See the associated displays.
+The available displays are the default display and `html`, but this view may be extended in more specific elements, such as the `HTMLUListElement`, etc.
+##### `#view()` (STABLE)
+Default display. Outputs `this.toString()`.
+##### `#view.html()` (STABLE)
+Output as an html string. (See any of the above examples.)
+```js
+let el = new Element('body').class('no-js')
+return el.view.html() === `<body class="no-js"></body>`
+```
 
 ### Static Methods
 

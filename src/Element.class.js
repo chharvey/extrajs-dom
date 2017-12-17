@@ -1,23 +1,28 @@
 const xjs          = require('extrajs')
 const ObjectString = require('./ObjectString.class.js')
+const View         = require('extrajs-view')
 
 /**
- * Represents an HTML element.
+ * Represents a DOM element.
+ * @see https://www.w3.org/TR/dom/#element
  */
 class Element {
   /**
    * @summary Construct a new Element object.
-   * @description By default, the parameter `is_void` is true for “Void Elements” as in
-   * the HTML specification (and thus the argument need not be explicilty provided).
-   * Otherwise, `is_void` is false by default, unless explicitly specified.
    * @version STABLE
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
-   * @param {boolean=} is_void `true` if this element is void (has no closing tag)
+   * @param {boolean} is_void `true` if this element is void (has no closing tag)
    */
   constructor(name, is_void = false) {
+    if (arguments.length === 1) {
+      console.warn(`WARNING: Parameter \`is_void\` SHOULD be considered \`false\` by default,
+        even for “void” HTML elements.
+        Use \`new HTMLElement()\` for the automated “void” behavior.`)
+    }
     /** @private @final */ this._NAME = name
     /** @private @final */ this._VOID = is_void || [
+      // CHANGED DEPRECATED: do not rely on this functionality!
       'area',
       'base',
       'br',
@@ -106,9 +111,9 @@ class Element {
    * @description Note that the keys of this object do not contain the string `'data-'`.
    * Example:
    * ```js
-   * this.html()     // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
-   * this.attributes // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
-   * this.dataset    // returns { foo:'bar', baz:'qux' }
+   * this.view.html() // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
+   * this.attributes  // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
+   * this.dataset     // returns { foo:'bar', baz:'qux' }
    * ```
    * @version LOCKED
    * @returns {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
@@ -480,7 +485,7 @@ class Element {
     if (this.isVoid) throw new TypeError('Cannot add contents to a void element.')
     if (xjs.Object.typeOf(contents[0]) === 'array') return this.addContent(...contents[0])
     this._contents += contents.map((c) =>
-      (c instanceof Element) ? c.html() : c
+      (c instanceof Element) ? c.view.html() : c
     ).join('')
     return this
   }
@@ -498,20 +503,72 @@ class Element {
   }
 
   /**
+   * Render this object as a string.
+   * Override {@link Object#toString}.
+   * @override
+   * @version EXPERIMENTAL
+   * @returns {string} a string representation of this object
+   */
+  toString() {
+    return JSON.stringify({
+      name: this.name,
+      void: this.isVoid,
+      attributes: xjs.Object.cloneDeep(this.attributes),
+      contents: this.contents,
+    })
+  }
+
+  /**
    * @summary Render this element as an HTML string.
+   * @description Shortcut for `this.view.html()`.
    * @version STABLE
    * @returns {string} an HTML string representing this element
    */
   html() {
-    if (this.isVoid) return `<${this.name}${this._attributes.toAttrString()}/>`
-    return `<${this.name}${this._attributes.toAttrString()}>${this.contents}</${this.name}>`
+    return this.view.html()
+  }
+
+
+  /**
+   * @summary Render this DOM Element in XHTML syntax.
+   * @see Element.VIEW
+   * @version EXPERIMENTAL
+   * @type {View}
+   */
+  get view() {
+    /**
+     * @summary This view object is a set of functions returning XHTML output.
+     * @description Available displays:
+     * - `Element#view.default()` - default display
+     * @namespace Element.VIEW
+     * @type {View}
+     */
+    /**
+     * Default display. Takes no arguments.
+     * @summary Call `Element#view()` to render this display.
+     * @function Element.VIEW.default
+     * @version STABLE
+     * @returns {string} HTML output
+     */
+    return new View(function () { return this.toString() }, this) // TODO use `null` on extrajs-view@1.1.0
+      /**
+       * Return the default XHTML syntax representing this Element.
+       * @summary Call `Element#view.html()` to render this display.
+       * @function Element.VIEW.html
+       * @version STABLE
+       * @returns {string} HTML output
+       */
+      .addDisplay(function html() {
+        if (this.isVoid) return `<${this.name}${this._attributes.toAttrString()}/>`
+        return `<${this.name}${this._attributes.toAttrString()}>${this.contents}</${this.name}>`
+      })
   }
 
 
 
   /**
    * @summary Simple shortcut function to concatenate elements.
-   * @description This method calls `.html()` on each argument and concatenates the strings,
+   * @description This method calls `.view.html()` on each argument and concatenates the strings,
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
@@ -523,7 +580,7 @@ class Element {
     if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0])
     return elements
       .filter((el) => el !== null)
-      .map((el) => el.html()).join('')
+      .map((el) => el.view.html()).join('')
   }
 
   /**
@@ -581,11 +638,11 @@ class Element {
    * @description This method returns different representations of data, depending on the argument given.
    *
    * 1. If the argument is a primitive type, then it is converted to a string and returned.
-   * 2. If the argument is an array, then a `<ul>` element is returned, with `<li>` items,
+   * 2. If the argument is an array, then a `<ul>` or `<ol>` element is returned, with `<li>` items,
    *    where each item is then evaluated by this same function.
    * 3. If the argument is an object, then there are a few cases:
    *   A. If the argument is an `Element` object, then this function returns
-   *      that object’s `.html()` value (with any added attributes specified by the options below).
+   *      that object’s `.view.html()` value (with any added attributes specified by the options below).
    *   B. If the argument is an object and has a `.view` getter function that returns a [View](https://github.com/chharvey/extrajs-view/) object,
    *      then the view is called, optionally with any specified display and arguments.
    *   C. If the argument is a non-array, non-function, non-Element object and does not have a View,
@@ -715,7 +772,7 @@ class Element {
           let styles  = (attr.list && attr.list.style) || ''
           try { classes = `${classes} ${thing.class()}` } catch (e) { ; }
           try { styles  = `${styles}; ${thing.style()}` } catch (e) { ; }
-          return thing.class(classes).style(styles).html()
+          return thing.class(classes).style(styles).view.html()
         }
         if (thing.view instanceof Function) { // `instanceof` will not recognize `require('extrajs-view')` as the same `View` class
           if (options.display && options.display.name) {
@@ -728,22 +785,26 @@ class Element {
               return Element.data(Object.assign({}, thing), options)
             }
           }
-        }
-        let returned = new Element('dl').attr(attr.list)
+        } else {
+          const HTMLDListElement = require('../class/HTMLDListElement.class.js')
+          let returned = new HTMLDListElement().attr(attr.list)
+          // REVIEW INDENTATION
         for (let i in thing) {
           returned.addContent([
-            new Element('dt').attr(attr.key).addContent(i),
-            new Element('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
+            new HTMLElement('dt').attr(attr.key).addContent(i),
+            new HTMLElement('dd').attr(attr.val).addContent(Element.data(thing[i], options.options)),
           ])
         }
-        return returned.html()
+        return returned.view.html()
+        }
       },
       array: function () {
-        return new Element((options.ordered) ? 'ol' : 'ul').attr(attr.list)
-          .addContent(thing.map((el) =>
-            new Element('li').attr(attr.val).addContent(Element.data(el, options.options))
-          ))
-          .html()
+        const HTMLLIElement   = require('../class/HTMLLIElement.class.js')
+        const HTMLListElement = (options.ordered) ? require('../class/HTMLOListElement.class.js')
+                                                  : require('../class/HTMLUListElement.class.js')
+        return new HTMLListElement().attr(attr.list).addContent(thing.map((item) =>
+          new HTMLLIElement().attr(attr.val).addContent(Element.data(item, options.options))
+        )).view.html()
       },
       default: function () {
         return (thing===null) ? 'null' : (thing===undefined) ? 'undefined' : thing.toString()
