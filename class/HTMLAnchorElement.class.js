@@ -12,7 +12,7 @@ class HTMLAnchorElement extends HTMLElement {
    * @summary Construct a new HTMLAnchorElement object.
    * @param {(string|URL)} baseurl TEMP url to use as the base
    */
-  constructor(_document) {
+  constructor(baseurl) {
     super('a')
 
     this.baseurl = baseurl // TEMP
@@ -45,11 +45,61 @@ class HTMLAnchorElement extends HTMLElement {
     else this._setTheURL()
   }
 
+
+  /**
+   * Reflect the `target` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-target
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  target(val) { return this.attr('target', val) }
+
+  /**
+   * Reflect the `download` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-download
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  download(val) { return this.attr('download', val) }
+
+  /**
+   * Reflect the `ping` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-ping
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  ping(val) { return this.attr('ping', val) }
+
+  /**
+   * Reflect the `rel` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-rel
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  rel(val) { return this.attr('rel', val) }
+
+  /**
+   * Reflect the `hreflang` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-hreflang
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  hreflang(val) { return this.attr('hreflang', val) }
+
+  /**
+   * Reflect the `type` content attribute.
+   * @see https://html.spec.whatwg.org/multipage/text-level-semantics.html#dom-a-type
+   * @param   {string} val the value to set
+   * @returns {(HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   */
+  type(val) { return this.attr('type', val) }
+
+
   /**
    * @summary Set or get this element’s href.
    * @see https://www.w3.org/TR/html/links.html#dom-htmlhyperlinkelementutils-href
    * @param   {string=} url the value to set
-   * @returns {(Element|URL|string)} `this` if setting the attribute, else URL of this element or the value of its `href` attribute
+   * @returns {(HTMLAnchorElement|URL|string)} `this` if setting the attribute, else URL of this element or the value of its `href` attribute
    */
   href(url) {
     if (arguments.length) {
