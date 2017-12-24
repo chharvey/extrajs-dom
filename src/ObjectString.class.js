@@ -31,7 +31,7 @@ class ObjectString {
    */
   constructor(data = {}) {
     /** @private */ this._data = (function (d) {
-      let returned = {}
+      const returned = {}
       for (let i in d) {
         if (i.trim() !== '') returned[i.trim()] = `${d[i]}`.trim()
       }
@@ -142,11 +142,11 @@ class ObjectString {
    * @return {string} a string containing attribute-value pairs
    */
   toAttrString() {
-    let returned = ''
+    const returned = []
     for (let i in this._data) {
-      returned += ` ${i}="${this._data[i]}"`
+      returned.push(` ${i}="${this._data[i]}"`)
     }
-    return returned
+    return returned.join('')
   }
 
   /**
@@ -156,11 +156,11 @@ class ObjectString {
    * @return {string} a valid css string containing property-value pairs
    */
   toCssString() {
-    let returned = ''
+    const returned = []
     for (let i in this._data) {
-      returned += `${i}:${this._data[i]};`
+      returned.push(`${i}:${this._data[i]};`)
     }
-    return returned
+    return returned.join('')
   }
 
 
@@ -184,7 +184,7 @@ class ObjectString {
    * @return {ObjectString} a new ObjectString object with the given css property-value pairs
    */
   static fromCssString(css_string) {
-    let returned = new ObjectString()
+    const returned = new ObjectString()
     css_string.split(';').map((rule) => rule.split(':')).forEach(function (rule_arr) {
       rule_arr[0] = rule_arr[0] && rule_arr[0].trim() // css property
       rule_arr[1] = rule_arr[1] && rule_arr[1].trim() // css value
