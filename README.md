@@ -503,6 +503,33 @@ let snip = Element.concat([
 return snip === `<strong>hello </strong><em>world</em><mark>!</mark>`
 ```
 
+#### `Element.documentFragment()` (EXPERIMENTAL)
+Updated version of `Element.concat()`, allowing strings. Static parallel of `Element#addContent()`.
+**NOTE:** This method might only be temporary and might be replaced with a `DocumentFragment` class.
+
+multiple arguments:
+```js
+let snip = Element.documentFragment(
+  new Element('strong').addContent(`hello`),
+  ` to the `,
+  new Element('em').addContent(`world`),
+  null,
+  new Element('mark').addContent(`!`)
+)
+return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
+```
+one single array argument:
+```js
+let snip = Element.documentFragment([
+  new Element('strong').addContent(`hello`),
+  ` to the `,
+  new Element('em').addContent(`world`),
+  null,
+  new Element('mark').addContent(`!`),
+])
+return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
+```
+
 #### `Element.fromJSON()` (EXPERIMENTAL)
 Convert a JSON object into an Element.
 The argument must be JSON that validates to the schema seen in the `Element.ElementJSON` type.

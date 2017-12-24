@@ -584,6 +584,22 @@ class Element {
   }
 
   /**
+   * @summary Return a concatenation of content.
+   * @description Very similar to {@link Element#addContent},
+   * but does not require a parent element.
+   * @todo TODO TEMP: create a DocumentFragment class
+   * @version EXPERIMENTAL
+   * @param   {...Element.ContentArg} contents the contents to concatenate
+   * @returns {string} the resulting output of concatenation
+   */
+  static documentFragment(...contents) {
+    if (xjs.Object.typeOf(contents[0]) === 'array') return Element.documentFragment(...contents[0])
+    return contents.map((c) =>
+      (c instanceof Element) ? c.view.html() : c
+    ).join('')
+  }
+
+  /**
    * NOTE: TYPE DEFINITION
    * @summary A JSON object to be converted into an Element.
    * @description
