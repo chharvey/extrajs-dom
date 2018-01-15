@@ -572,7 +572,7 @@ class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
-   * @version LOCKED
+   * @version DEPRECATED
    * @param   {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @returns {string} the combined HTML output of all the arguments/array entries
    */
