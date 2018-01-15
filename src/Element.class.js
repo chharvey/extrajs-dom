@@ -572,7 +572,7 @@ class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
-   * @version LOCKED
+   * @version DEPRECATED
    * @param   {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @returns {string} the combined HTML output of all the arguments/array entries
    */
@@ -581,22 +581,6 @@ class Element {
     return elements
       .filter((el) => el !== null)
       .map((el) => el.view.html()).join('')
-  }
-
-  /**
-   * @summary Return a concatenation of content.
-   * @description Very similar to {@link Element#addContent},
-   * but does not require a parent element.
-   * @todo TODO TEMP: create a DocumentFragment class
-   * @version EXPERIMENTAL
-   * @param   {...Element.ContentArg} contents the contents to concatenate
-   * @returns {string} the resulting output of concatenation
-   */
-  static documentFragment(...contents) {
-    if (xjs.Object.typeOf(contents[0]) === 'array') return Element.documentFragment(...contents[0])
-    return contents.map((c) =>
-      (c instanceof Element) ? c.view.html() : c
-    ).join('')
   }
 
   /**

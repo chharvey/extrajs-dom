@@ -481,7 +481,10 @@ return el.view.html() === `<body class="no-js"></body>`
 
 ### Static Methods
 
-#### `Element.concat()` (LOCKED)
+#### `Element.concat()` (DEPRECATED)
+
+**DEPRECATED. Use `DocumentFragment.concat()` instead.**
+
 Concatenate multiple element outputs. useful if you need siblings with no parent.
 
 multiple Element arguments:
@@ -501,33 +504,6 @@ let snip = Element.concat([
   new Element('mark').addContent(`!`),
 ])
 return snip === `<strong>hello </strong><em>world</em><mark>!</mark>`
-```
-
-#### `Element.documentFragment()` (EXPERIMENTAL)
-Updated version of `Element.concat()`, allowing strings. Static parallel of `Element#addContent()`.
-**NOTE:** This method might only be temporary and might be replaced with a `DocumentFragment` class.
-
-multiple arguments:
-```js
-let snip = Element.documentFragment(
-  new Element('strong').addContent(`hello`),
-  ` to the `,
-  new Element('em').addContent(`world`),
-  null,
-  new Element('mark').addContent(`!`)
-)
-return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
-```
-one single array argument:
-```js
-let snip = Element.documentFragment([
-  new Element('strong').addContent(`hello`),
-  ` to the `,
-  new Element('em').addContent(`world`),
-  null,
-  new Element('mark').addContent(`!`),
-])
-return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
 ```
 
 #### `Element.fromJSON()` (EXPERIMENTAL)
