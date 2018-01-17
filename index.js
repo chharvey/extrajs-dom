@@ -1,4 +1,5 @@
 module.exports = {
+  Node            : require('./class/Node.class.js'),
   DocumentFragment: require('./class/DocumentFragment.class.js'),
   Element         : require('./src/Element.class.js'),
   HTMLElement     : require('./class/HTMLElement.class.js'),
