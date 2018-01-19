@@ -1,14 +1,30 @@
+const xjs = {}
+
 /**
- * Represents a node.
+ * Wrapper for a Node.
  * @see https://www.w3.org/TR/dom/#node
  */
-class Node {
+xjs.Node = class {
   /**
-   * @summary Construct a new Node object.
+   * @summary Construct a new xjs.Node object.
    * @version EXPERIMENTAL
+   * @param {Node} node the node to wrap
    */
-  constructor() {
+  constructor(node) {
+    /**
+     * @summary The wrapped DOM Node.
+     * @private
+     * @final
+     * @type {Node}
+     */
+    this._NODE = node
   }
+
+  /**
+   * @summary This wrapper’s node.
+   * @type {Node}
+   */
+  get node() { return this._NODE }
 
 
   /**
@@ -51,4 +67,4 @@ class Node {
   }
 }
 
-module.exports = Node
+module.exports = xjs.Node
