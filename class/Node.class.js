@@ -19,7 +19,6 @@ xjs.Node = class {
      */
     this._NODE = node
   }
-
   /**
    * @summary This wrapper’s node.
    * @type {Node}

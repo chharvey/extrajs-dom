@@ -1,71 +1,88 @@
+const xjs = {
+  Object : require('extrajs').Object,
+  Node   : require('./Node.class.js'),
+  Element: require('./Element.class.js'),
+}
+
 /**
- * Represents a document fragment node.
+ * Wrapper for a DocumentFragment.
  * @see https://www.w3.org/TR/dom/#documentfragment
  */
-class DocumentFragment {
+xjs.DocumentFragment = class extends xjs.Node {
   /**
-   * @summary Construct a new DocumentFragment object.
+   * @summary Construct a new xjs.DocumentFragment object.
    * @version EXPERIMENTAL
+   * @param {DocumentFragment} node the node to wrap
    */
-  constructor() {
+  constructor(node) {
+    super(node)
+  }
+  /**
+   * @summary This wrapper’s node.
+   * @type {DocumentFragment}
+   */
+  get node() { return super.node }
+
+  /**
+   * @summary {@link DocumentFragment#append}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
+   *   .append(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // (unwrapped) DOM Node
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).innerHTML
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @param   {...(Node|xjs.Node|?string)} contents the contents to append
+   * @returns {DocumentFragment} this
+   */
+  append(...contents) {
+    this.node.append(...contents)
+    return this
   }
 
-
   /**
-   * @summary Return a concatenation of content.
-   * @description Concatenate multiple element/string outputs. Useful if you need siblings with no parent.
-   *
-   * @example <caption>multiple arguments</caption>
-   * let snip = DocumentFragment.concat(
-   *   new Element('strong').addContent(`hello`),
-   *   ` to the `,
-   *   new Element('em').addContent(`world`),
-   *   null,
-   *   new Element('mark').addContent(`!`)
-   * )
-   * return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
-   *
-   * @example <caption>one single array argument</caption>
-   * let snip = DocumentFragment.concat([
-   *   new Element('strong').addContent(`hello`),
-   *   ` to the `,
-   *   new Element('em').addContent(`world`),
-   *   null,
-   *   new Element('mark').addContent(`!`),
-   * ])
-   * return snip === `<strong>hello</strong> to the <em>world</em><mark>!</mark>`
-   *
+   * @summary The "innerHTML" of this document fragment.
+   * @description A concatenation of all the `outerHTML` and/or data of the fragment’s node children.
    * @version EXPERIMENTAL
-   * @param   {...Element.ContentArg} contents the contents to concatenate
-   * @returns {string} the resulting output of concatenation
+   * @type {string}
    */
-  static concat(...contents) {
-    if (xjs.Object.typeOf(contents[0]) === 'array') return Element.documentFragment(...contents[0])
-    return contents.map((c) =>
-      (c instanceof Element) ? c.view.html() : c
-    ).join('')
-  }
-
-  /**
-   * @summary Return the "innerHTML" of a document fragment.
-   * @version EXPERIMENTAL
-   * @param   {DocumentFragment} frag the document fragment to stringify
-   * @returns {string} a concatenation of the `outerHTML` of the fragment’s element children
-   */
-  static innerHTML(frag) {
-    return Array.from(frag.childNodes).map(function (node) {
+  get innerHTML() {
+    return Array.from(this.node.childNodes).map(function (node) {
       // https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+      // TODO make this a static property of Node
       let mapfn = {
         1: (el)   => el.outerHTML    , // ELEMENT_NODE
         2: (node) => null            , // ATTRIBUTE_NODE
-        3: (text) => text.textContent, // TEXT_NODE
-        8: (comm) => null            , // COMMENT_NODE
-        11: (frag) => DocumentFragment.innerHTML(frag), // DOCUMENT_FRAGMENT_NODE
+        3: (text) => text.data, // TEXT_NODE
+        8: (comm) => `<!--${c.data}-->`, // COMMENT_NODE
+        11: (frag) => new xjs.DocumentFragment(frag).innerHTML, // DOCUMENT_FRAGMENT_NODE
         default: (node) => null,
       }
       return (mapfn[node.nodeType] || mapfn.default)(node)
     }).join('')
   }
+
+
+  /**
+   * @summary Concatenate multiple contents into text.
+   * @version EXPERIMENTAL
+   * @param   {...(Node|xjs.Node|?string)} contents the contents to concatenate
+   * @returns {string} the resulting output of concatenation
+   */
+  static concat(...contents) {
+    return new xjs.DocumentFragment(new DocumentFragment()).append(...contents).innerHTML
+  }
 }
 
-module.exports = DocumentFragment
+module.exports = xjs.DocumentFragment
