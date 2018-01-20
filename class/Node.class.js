@@ -27,7 +27,7 @@ xjs.Node = class {
 
 
   /**
-   * @summary {@link Node#textContent}, but returns this object when done if setting.
+   * @summary {@link Node#textContent}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * @version LOCKED
    * @param   {string=} text the content to set
