@@ -27,6 +27,21 @@ xjs.Node = class {
 
 
   /**
+   * @summary {@link Node#textContent}, but returns this object when done if setting.
+   * @description This method exists simply for chaining.
+   * @version LOCKED
+   * @param   {string=} text the content to set
+   * @returns {(xjs.Node|string)} `this` if setting; the textContent if getting
+   */
+  textContent(text) {
+    if (arguments.length) {
+      this.node.textContent = text
+      return this
+    } else return this.node.textContent
+  }
+
+
+  /**
    * @summary Remove all inner whitespace text nodes from a node, and return it.
    * @example
    * let snip = new HTMLElement('div').addContent(`

@@ -23,6 +23,7 @@ xjs.DocumentFragment = class extends xjs.Node {
    */
   get node() { return super.node }
 
+
   /**
    * @summary {@link DocumentFragment#append}, but returns this object when done.
    * @description This method exists simply for chaining.
@@ -43,8 +44,8 @@ xjs.DocumentFragment = class extends xjs.Node {
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).innerHTML
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * @param   {...(Node|xjs.Node|?string)} contents the contents to append
-   * @returns {DocumentFragment} this
+   * @param   {...?(Node|xjs.Node|string)} contents the contents to append
+   * @returns {xjs.DocumentFragment} `this`
    */
   append(...contents) {
     this.node.append(...contents)
@@ -77,7 +78,7 @@ xjs.DocumentFragment = class extends xjs.Node {
   /**
    * @summary Concatenate multiple contents into text.
    * @version EXPERIMENTAL
-   * @param   {...(Node|xjs.Node|?string)} contents the contents to concatenate
+   * @param   {...?(Node|xjs.Node|string)} contents the contents to concatenate
    * @returns {string} the resulting output of concatenation
    */
   static concat(...contents) {
