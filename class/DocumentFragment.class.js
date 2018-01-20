@@ -7,6 +7,7 @@ const xjs = {
 /**
  * Wrapper for a DocumentFragment.
  * @see https://www.w3.org/TR/dom/#documentfragment
+ * @extends xjs.Node
  */
 xjs.DocumentFragment = class extends xjs.Node {
   /**

@@ -6,6 +6,7 @@ const xjs = {
 /**
  * Wrapper for an Element.
  * @see https://www.w3.org/TR/dom/#element
+ * @extends xjs.Node
  */
 xjs.Element = class extends xjs.Node {
   /**

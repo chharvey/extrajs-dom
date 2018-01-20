@@ -1,38 +1,102 @@
-const Element = require('../src/Element.class.js')
+const xjs = {
+  Element: require('./Element.class.js'),
+}
 
 /**
- * Represents an HTML element.
- * @see https://www.w3.org/TR/html/dom.html#htmlelement-htmlelement
- * @extends Element
+ * Wrapper for an HTML element.
+ * @see https://www.w3.org/TR/html52/dom.html#htmlelement
+ * @extends xjs.Element
  */
-class HTMLElement extends Element {
+xjs.HTMLElement = class extends xjs.Element {
   /**
-   * @summary Construct a new HTMLElement object.
-   * @description The voidness of this element is automatically determined for “Void Elements” as in
-   * {@link https://www.w3.org/TR/html/syntax.html#void-elements|the HTML specification}.
+   * @summary Construct a new xjs.HTMLElement object.
    * @version EXPERIMENTAL
-   * @param {string} name the immutable name of the tag
+   * @param {HTMLElement} node the node to wrap
    */
-  constructor(name) {
-    super(name, [
-      'area',
-      'base',
-      'br',
-      'col',
-      'embed',
-      'hr',
-      'img',
-      'input',
-      'keygen',
-      'link',
-      'menuitem',
-      'meta',
-      'param',
-      'source',
-      'track',
-      'wbr',
-    ].includes(name))
+  constructor(node) {
+    super(node)
+  }
+  /**
+   * @summary This wrapper’s node.
+   * @type {HTMLElement}
+   */
+  get node() { return super.node }
+
+  ////////////////////
+  // GLOBAL ATTRIBUTES
+  ////////////////////
+  /**
+   * @summary {@link HTMLElement#title}, but returns this object when done (if setting).
+   * @description This method exists simply for chaining.
+   * @version EXPERIMENTAL
+   * @param   {string=} value the value to set
+   * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
+   */
+  title(value) {
+    if (arguments.length) {
+      this.node.title = value
+      return this
+    } else return this.node.title
+  }
+
+  /**
+   * @summary {@link HTMLElement#lang}, but returns this object when done (if setting).
+   * @description This method exists simply for chaining.
+   * @version EXPERIMENTAL
+   * @param   {string=} value the value to set
+   * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
+   */
+  lang(value) {
+    if (arguments.length) {
+      this.node.lang = value
+      return this
+    } else return this.node.lang
+  }
+
+  /**
+   * @summary {@link HTMLElement#dir}, but returns this object when done (if setting).
+   * @description This method exists simply for chaining.
+   * @version EXPERIMENTAL
+   * @param   {string=} value the value to set
+   * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
+   */
+  dir(value) {
+    if (arguments.length) {
+      this.node.dir = value
+      return this
+    } else return this.node.dir
+  }
+
+  ///////////////////
+  // USER INTERACTION
+  ///////////////////
+  /**
+   * @summary {@link HTMLElement#hidden}, but returns this object when done (if setting).
+   * @description This method exists simply for chaining.
+   * @version EXPERIMENTAL
+   * @param   {boolean=} value the value to set
+   * @returns {(xjs.Element|boolean)} `this` if setting; the attribute value if getting
+   */
+  hidden(value) {
+    if (arguments.length) {
+      this.node.hidden = value
+      return this
+    } else return this.node.hidden
+  }
+
+  /**
+   * @summary {@link HTMLElement#tabIndex}, but returns this object when done (if setting).
+   * @description This method exists simply for chaining.
+   * @version EXPERIMENTAL
+   * @param   {number=} value the value to set
+   * @returns {(xjs.Element|number)} `this` if setting; the attribute value if getting
+   */
+  tabIndex(value) {
+    if (arguments.length) {
+      this.node.tabIndex = value
+      return this
+    } else return this.node.tabIndex
   }
 }
 
-module.exports = HTMLElement
+module.exports = xjs.HTMLElement
