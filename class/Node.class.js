@@ -52,44 +52,41 @@ xjs.Node = class {
     } else return this.node.textContent
   }
 
-
   /**
-   * @summary Remove all inner whitespace text nodes from a node, and return it.
+   * @summary Remove all inner whitespace text nodes from this node, and return it.
    * @example
-   * let snip = new HTMLElement('div').addContent(`
+   * let snip = new HTMLElement(document.createElement('div')).addContent(`
    *   <h1>
    *     <em>Hello </em>
    *     <b>Worl d</b>
    *   </h1>
    * `)
-   * let snipTrimmed = Node.trimInner(snip)
-   * return snip.innerHTML === `
+   * let snipTrimmed = new xjs.Node(snip).trimInner()
+   * return snip.node.innerHTML === `
    *   <h1>
    *     <em>Hello </em>
    *     <b>Worl d</b>
    *   </h1>
    * `
-   *   && snipTrimmed.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
-   * @param   {Node} node the node from which to remove all whitespace
-   * @returns {Node} the modified node
+   *   && snipTrimmed.node.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
+   * @returns {xjs.Node} `this`
    */
-  static trimInner(node) {
-    Array.from(node.childNodes).forEach(function (child) { // NB: `NodeList#forEach()` does not work quite as well as `Array#forEach()`
+  trimInner() {
+    Array.from(this.node.childNodes).forEach(function (child) { // NB: `NodeList#forEach()` does not work quite as well as `Array#forEach()`
       if (child.nodeType === 3 && child.textContent.trim() === '') child.remove()
-      else if (child.nodeType === 1) Node.trimInner(child)
+      else if (child.nodeType === 1) new xjs.Node(child).trimInner()
     })
-    return node
+    return this
   }
 
   /**
-   * @summary Remove all child nodes from a node, and return the modified node.
-   * @param   {Node} node the node from which to remove all child nodes
-   * @returns {Node} the given node, emptied
+   * @summary Remove all child nodes from this node, and return it.
+   * @returns {xjs.Node} `this`
    */
-  static empty(node) {
-    // node.childNodes.forEach(function (child) { child.remove() } ) // NB: `NodeList#forEach()` does not work quite as well as `Array#forEach()`
-    while (node.hasChildNodes()) node.firstChild.remove()
-    return node
+  empty() {
+    // this.node.childNodes.forEach(function (child) { child.remove() } ) // NB: `NodeList#forEach()` does not work quite as well as `Array#forEach()`
+    while (this.node.hasChildNodes()) this.node.firstChild.remove()
+    return this
   }
 }
 
