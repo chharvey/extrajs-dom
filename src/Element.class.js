@@ -252,15 +252,14 @@ class Element {
    * this.id('section1') // set the [id] attribute
    * this.id(function () { return this.name }) // set the [id] attribute using a function
    * this.id(null)       // remove the [id] attribute
-   * this.id('')         // remove the [id] attribute
+   * this.id('')         // set the [id] attribute to the empty string: `[id=""]`
    * this.id()           // return the value of [id]
    * ```
    * @version LOCKED
-   * @param   {Element.ValueArg=} id the value to set for the `id` attribute; nonempty string
+   * @param   {Element.ValueArg=} id the value to set for the `id` attribute
    * @returns {(Element|string)} `this` if setting the ID, else the value of the ID
    */
   id(id) {
-    if (xjs.Object.typeOf(id)==='string' && id.trim()==='') return this.id(null)
     return this.attr('id', id)
   }
 
@@ -271,15 +270,14 @@ class Element {
    * this.class('o-Object c-Component') // set the [class] attribute
    * this.class(function () { return this.name }) // set the [class] attribute using a function
    * this.class(null)                   // remove the [class] attribute
-   * this.class('')                     // remove the [class] attribute
+   * this.class('')                     // set the [class] attribute to the empty string: `[class=""]`
    * this.class()                       // return the value of [class]
    * ```
    * @version LOCKED
-   * @param   {Element.ValueArg=} class_ the value to set for the `class` attribute; nonempty string
+   * @param   {Element.ValueArg=} class_ the value to set for the `class` attribute
    * @returns {(Element|string)} `this` if setting the class, else the value of the class
    */
   class(class_) {
-    if (xjs.Object.typeOf(class_)==='string' && class_.trim()==='') return this.class(null)
     return this.attr('class', class_)
   }
 
@@ -337,6 +335,8 @@ class Element {
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
    * this.style(null)                                      // remove the [style] attribute
+   * this.style({})                                        // remove the [style] attribute
+   * this.style('')                                        // set the [style] attribute to the empty string: `[style=""]`
    * this.style()                                          // return the value of [style], as a string
    * ```
    * @version STABLE
@@ -351,6 +351,7 @@ class Element {
         return this.attr('style', new ObjectString(arg).toCssString() || null)
       },
       string: function () {
+        if (arg.trim() === '') return this.attr('style', '')
         return this.style(ObjectString.fromCssString(arg).data)
       },
       default: function () { // function, null, undefined
@@ -572,7 +573,7 @@ class Element {
    * or, if a single array is given, does the same to each entry in the array.
    * `null` is allowed as an argument (or as an entry in the array).
    * If an array is given, only one array is allowed.
-   * @version LOCKED
+   * @version DEPRECATED
    * @param   {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
    * @returns {string} the combined HTML output of all the arguments/array entries
    */

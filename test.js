@@ -254,6 +254,57 @@ function element_concat() {
   )
 }
 
+function element_documentFragment() {
+  console.log(
+    `concatenate elements`,
+    Element.documentFragment(
+      new HTMLElement('em'),
+      new HTMLElement('strong'),
+      new HTMLElement('mark')
+    )
+  )
+  console.log(
+    `concatenate null arguments`,
+    Element.documentFragment(
+      new HTMLElement('em'),
+      null,
+      new HTMLElement('mark')
+    )
+  )
+  console.log(
+    `concatenate string arguments`,
+    Element.documentFragment(
+      new HTMLElement('em'),
+      'a string',
+      new HTMLElement('mark')
+    )
+  )
+  console.log(
+    `concatenate array`,
+    Element.documentFragment([
+      new HTMLElement('em'),
+      new HTMLElement('strong'),
+      new HTMLElement('mark'),
+    ])
+  )
+  console.log(
+    `concatenate array with null entry`,
+    Element.documentFragment([
+      new HTMLElement('em'),
+      null,
+      new HTMLElement('mark'),
+    ])
+  )
+  console.log(
+    `concatenate array with string entry`,
+    Element.documentFragment([
+      new HTMLElement('em'),
+      'a string',
+      new HTMLElement('mark'),
+    ])
+  )
+}
+
 function element_data() {
   class Person {
     constructor(name) {
@@ -285,4 +336,5 @@ function element_data() {
 // element_toString();
 // element_view();
 // element_concat();
+// element_documentFragment();
 // element_data();

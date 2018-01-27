@@ -481,7 +481,10 @@ return el.view.html() === `<body class="no-js"></body>`
 
 ### Static Methods
 
-#### `Element.concat()` (LOCKED)
+#### `Element.concat()` (DEPRECATED)
+
+**DEPRECATED. Use `DocumentFragment.concat()` instead.**
+
 Concatenate multiple element outputs. useful if you need siblings with no parent.
 
 multiple Element arguments:
