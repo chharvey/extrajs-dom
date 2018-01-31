@@ -4,7 +4,7 @@ const xjs = {
 
 /**
  * Wrapper for an HTML element.
- * @see https://www.w3.org/TR/html52/dom.html#htmlelement
+ * @see https://www.w3.org/TR/html/dom.html#htmlelement
  * @extends xjs.Element
  */
 xjs.HTMLElement = class extends xjs.Element {

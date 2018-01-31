@@ -1,18 +1,26 @@
-const HTMLElement = require('./HTMLElement.class.js')
-
-/**
- * Represents an HTML OL element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
- * @extends HTMLElement
- */
-class HTMLOListElement extends HTMLElement {
-  /**
-   * @summary Construct a new HTMLOListElement object.
-   * @version EXPERIMENTAL
-   */
-  constructor() {
-    super('ol')
-  }
+const xjs = {
+  HTMLElement: require('./HTMLElement.class.js'),
 }
 
-module.exports = HTMLOListElement
+/**
+ * Wrapper for HTML `ol` element.
+ * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
+ * @extends xjs.HTMLElement
+ */
+xjs.HTMLOListElement = class extends xjs.HTMLElement {
+  /**
+   * @summary Construct a new xjs.HTMLOListElement object.
+   * @version EXPERIMENTAL
+   * @param {HTMLOListElement} node the node to wrap
+   */
+  constructor(node) {
+    super(node)
+  }
+  /**
+   * @summary This wrapper’s node.
+   * @type {HTMLOListElement}
+   */
+  get node() { return super.node }
+}
+
+module.exports = xjs.HTMLOListElement

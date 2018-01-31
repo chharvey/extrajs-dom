@@ -1,32 +1,26 @@
 const URL = require('url').URL
-const HTMLElement = require('./HTMLElement.class.js')
-
-const xjs = {}
+const xjs = {
+  HTMLElement: require('./HTMLElement.class.js'),
+}
 
 /**
  * Wrapper for HTML `a` element.
- * @see https://www.w3.org/TR/html52/textlevel-semantics.html#htmlanchorelement
+ * @see https://www.w3.org/TR/html/textlevel-semantics.html#htmlanchorelement
  * @version EXPERIMENTAL
  */
-xjs.HTMLAnchorElement = class {
+xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
   /**
    * @summary Construct a new xjs.HTMLAnchorElement object.
    * @param {HTMLAnchorElement} node the node to wrap
    */
   constructor(node) {
-    /**
-     * @summary The wrapped DOM Node.
-     * @private
-     * @final
-     * @type {HTMLAnchorElement}
-     */
-    this._NODE = node
+    super(node)
   }
   /**
-   * This wrapper’s node.
-   * @type {Node}
+   * @summary This wrapper’s node.
+   * @type {HTMLAnchorElement}
    */
-  get node() { return this._NODE }
+  get node() { return super.node }
 
   /**
    * @summary Reflect the `href` content attribute.
