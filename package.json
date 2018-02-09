@@ -1,6 +1,6 @@
 {
   "name": "extrajs-dom",
-  "version": "4.0.0-alpha",
+  "version": "4.0.0-alpha.1",
   "description": "A Javascript implementation of DOM.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
-    "extrajs": "^0.10.1",
+    "extrajs": "^0.11.0-beta",
     "extrajs-view": "^1.1.2"
   },
   "devDependencies": {}
