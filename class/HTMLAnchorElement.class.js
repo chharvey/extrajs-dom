@@ -28,7 +28,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
    * @param   {string=} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
-  href(url) { return this.attr('href', val) }
+  href(val) { return this.attr('href', val) }
 
   /**
    * @summary Reflect the `target` content attribute.
