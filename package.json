@@ -27,5 +27,7 @@
     "extrajs": "^0.11.0-beta",
     "extrajs-view": "^1.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jsdom": "^11.6.2"
+  }
 }
