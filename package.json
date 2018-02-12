@@ -4,7 +4,7 @@
   "description": "A Javascript implementation of DOM.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test/test-v4.js  &&  node test/Document_sitemap.js"
   },
   "repository": {
     "type": "git",
