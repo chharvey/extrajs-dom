@@ -1,0 +1,70 @@
+<script type="application/schema+json" title="SitemapList.jsd">
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/pending/SitemapList.jsd",
+  "title": "https://chharvey.github.io/schemaorg-jsd/pending/SitemapList",
+  "description": "A sitemap of a webpage.",
+  "allOf": [
+    { "$ref": "ItemList.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}
+</script>
+<script type="application/schema+json" title="sitemap.prop.jsd">
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/pending/sitemap.prop.jsd",
+  "title": "https://chharvey.github.io/schemaorg-jsd/pending/sitemap",
+  "description": "A sitemap of a webpage.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "SitemapList.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}
+</script>
+<script type="application/ld+json" title="schemaorg-sitemap.jsonld">
+{
+  "@context": {
+    "sdo" : "http://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "superClassOf": { "@reverse": "rdfs:subClassOf" },
+    "valueOf"     : { "@reverse": "sdo:rangeIncludes" }
+  },
+  "@graph": [
+    {
+      "@type": "sdo:Class",
+      "@id": "http://chharvey.github.io/schemaorg-jsd/pending/SitemapList",
+      "sdo:name": "SitemapList",
+      "rdfs:subClassOf": { "@id": "sdo:ItemList" },
+      "valueOf": { "@id": "http://chharvey.github.io/schemaorg-jsd/pending/sitemap" }
+    },
+    {
+      "@type": "sdo:Property",
+      "@id": "http://chharvey.github.io/schemaorg-jsd/pending/sitemap",
+      "sdo:name": "sitemap",
+      "sdo:domainIncludes": [{ "@id": "sdo:WebPage" }],
+      "sdo:rangeIncludes": [{ "@id": "http://chharvey.github.io/schemaorg-jsd/pending/SitemapList" }]
+    }
+  ]
+}
+</script>
+<template>
+  <ol role="directory" itemprop="sitemap" itemscope="" itemtype="http://chharvey.github.io/schemaorg-jsd/pending/SitemapList">
+    <template>
+      <li itemprop="itemlistElement" itemscope="" itemtype="http://schema.org/WebPage">
+        <a href="{{ url }}" itemprop="url">
+          <slot itemprop="name">{{ name }}</slot>
+        </a>
+      </li>
+    </template>
+  </ol>
+</template>
