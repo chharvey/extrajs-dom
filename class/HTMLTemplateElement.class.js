@@ -1,3 +1,8 @@
+const fs = require('fs')
+const util = require('util')
+
+const jsdom = require('jsdom')
+
 const xjs = {
   HTMLElement: require('./HTMLElement.class.js'),
 }
@@ -58,6 +63,35 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     let frag = this.content().cloneNode(true)
     this._renderer.call(null, frag, data)
     return frag
+  }
+
+
+  /**
+   * @summary Read an HTML file and return the first `<template>` element found while walking the DOM tree.
+   * @param   {string} filepath the path to the file
+   * @returns {HTMLTemplateElement} the first found `<template>` descendant
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
+  static async readTemplateFile(filepath) {
+    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return xjs.HTMLTemplateElement._readTemplateFile_process(filepath, data)
+  }
+  /**
+   * @summary Synchronous version of {@link HTMLTemplateElement.readTemplateFile}.
+   * @param   {string} filepath the path to the file
+   * @returns {HTMLTemplateElement} the first found `<template>` descendant
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
+  static readTemplateFileSync(filepath) {
+    let data = fs.readFileSync(filepath, 'utf8')
+    return xjs.HTMLTemplateElement._readTemplateFile_process(filepath, data)
+  }
+  static _readTemplateFile_process(filepath, data) {
+    let elem = jsdom.JSDOM.fragment(data).querySelector('template')
+    if (elem === null) {
+      throw new ReferenceError(`No template element was found in file: ${filepath}`)
+    }
+    return elem
   }
 }
 
