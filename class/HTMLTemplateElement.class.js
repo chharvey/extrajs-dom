@@ -68,30 +68,32 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Read an HTML file and return the first `<template>` element found while walking the DOM tree.
+   * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
+   * To access the actual element, call {@link xjs.HTMLTemplateElement#node}.
    * @param   {string} filepath the path to the file
    * @returns {HTMLTemplateElement} the first found `<template>` descendant
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
-  static async readTemplateFile(filepath) {
+  static async fromFile(filepath) {
     let data = await util.promisify(fs.readFile)(filepath, 'utf8')
-    return xjs.HTMLTemplateElement._readTemplateFile_process(filepath, data)
+    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
   }
   /**
-   * @summary Synchronous version of {@link HTMLTemplateElement.readTemplateFile}.
+   * @summary Synchronous version of {@link HTMLTemplateElement.fromFile}.
    * @param   {string} filepath the path to the file
-   * @returns {HTMLTemplateElement} the first found `<template>` descendant
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
-  static readTemplateFileSync(filepath) {
+  static fromFileSync(filepath) {
     let data = fs.readFileSync(filepath, 'utf8')
-    return xjs.HTMLTemplateElement._readTemplateFile_process(filepath, data)
+    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
   }
-  static _readTemplateFile_process(filepath, data) {
+  static _fromFile_process(filepath, data) {
     let elem = jsdom.JSDOM.fragment(data).querySelector('template')
     if (elem === null) {
       throw new ReferenceError(`No template element was found in file: ${filepath}`)
     }
-    return elem
+    return new xjs.HTMLTemplateElement(elem)
   }
 }
 
