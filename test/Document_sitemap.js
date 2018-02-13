@@ -24,5 +24,5 @@ let website = {
   }
 }
 
-let outline = xjs.Document.sitemap(website['custom:sitemap'].itemListElement)
+let outline = xjs.Document.TEMPLATES.xSitemap.render(website['custom:sitemap'].itemListElement).querySelector('ol')
 console.log(outline.outerHTML)

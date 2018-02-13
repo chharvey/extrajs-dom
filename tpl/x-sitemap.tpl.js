@@ -6,7 +6,6 @@ const xjs = {
  * @summary Sitemap display.
  * @param   {DocumentFragment} frag the template content with which to render
  * @param   {Array<{name:string, url:string}>} data array of data, each representing a subpage // TODO use sdo.WebPage
- * @returns {DocumentFragment} modified fragment
  */
 function xSitemap(frag, data) {
   let container = frag.querySelector('ol')
