@@ -28,5 +28,8 @@
     "extrajs-view": "^1.1.2",
     "jsdom": "^11.6.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^1.0.1"
+  }
 }
