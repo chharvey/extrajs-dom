@@ -88,6 +88,13 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     let data = fs.readFileSync(filepath, 'utf8')
     return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
   }
+  /**
+   * @summary Internall processing for {@link xjs.HTMLTemplateElement.fromFile|.fromFile{,Sync}}.
+   * @param   {string} filepath the path to the file
+   * @param   {string} data the result of fs.readFile{,Sync}
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
   static _fromFile_process(filepath, data) {
     let elem = jsdom.JSDOM.fragment(data).querySelector('template')
     if (elem === null) {
