@@ -19,7 +19,18 @@ let website = {
       { "@type": "WebPage", "name": "Sponsor | A 2016 Event"     , "url": "https://2016.asce-event.org/sponsor/"      },
       { "@type": "WebPage", "name": "Exhibit | A 2016 Event"     , "url": "https://2016.asce-event.org/exhibit/"      },
       { "@type": "WebPage", "name": "About | A 2016 Event"       , "url": "https://2016.asce-event.org/about/"        },
-      { "@type": "WebPage", "name": "Contact | A 2016 Event"     , "url": "https://2016.asce-event.org/contact/"      }
+      {
+        "@type": "WebPage",
+        "name": "Contact | A 2016 Event",
+        "url": "https://2016.asce-event.org/contact/",
+        "custom:sitemap": {
+          "@type": "custom:SitemapList",
+          "itemListElement": [
+            { "@type": "WebPage", "name": "Submit Feedback | Contact | A 2016 Event"         , "url": "https://2016.asce-event.org/contact/submit-feedback"     },
+            { "@type": "WebPage", "name": "Talk to a Representative | Contact | A 2016 Event", "url": "https://2016.asce-event.org/contact/talk-representative" }
+          ]
+        }
+      }
     ]
   }
 }

@@ -1,3 +1,5 @@
+const path = require('path')
+
 const xjs = {
   HTMLTemplateElement: require('../class/HTMLTemplateElement.class.js'),
 }
@@ -12,6 +14,15 @@ function xSitemap(frag, data) {
   let itemrenderer = new xjs.HTMLTemplateElement(container.querySelector('template')).setRenderer(function (f, d) {
     f.querySelector('[itemprop="url" ]').href        = d.url
     f.querySelector('[itemprop="name"]').textContent = d.name
+
+    let subsitemap = d['custom:sitemap'] && d['custom:sitemap'].itemListElement
+    if (subsitemap) {
+      f.querySelector('[itemscope=""]').append(
+        new xjs.HTMLTemplateElement(
+          xjs.HTMLTemplateElement.readTemplateFileSync(path.join(__dirname, './x-sitemap.tpl.html'))
+        ).setRenderer(xSitemap).render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
+      )
+    }
   })
   container.append(...data.map((subpage) => itemrenderer.render(subpage)))
 }
