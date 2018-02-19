@@ -235,34 +235,41 @@ xjs.Element = class extends xjs.Node {
 
   /**
    * @summary Append tokens to this element’s `[class]` attribute.
+   * @description Argument(s) can also be space-separate tokens.
    * @example
-   * this.addClass('o-Object c-Component') // add to the [class] attribute
+   * this.addClass('o-Object', 'c-Component')          // add tokens to the [class] attribute
+   * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.addClass()                       // do nothing; return `this`
    * @version LOCKED
-   * @param   {...string=} tokens the classname(s) to add; tokens must be non-empty and must not have whitespace
+   * @param   {...string=} tokens the classname(s) to add
    * @returns {xjs.Element} `this`
    */
   addClass(...tokens) {
-    tokens.forEach(function (t) {
-      if (t.trim() !== '') this.node.classList.add(t)
-    })
+    tokens.forEach(function (token) {
+      token.split(' ').forEach(function (t) {
+        if (t.trim() !== '') this.node.classList.add(t)
+      }, this)
+    }, this)
     return this
   }
 
   /**
    * @summary Remove one or more tokens from this element’s `[class]` attribute.
+   * @description Argument(s) can also be space-separate tokens.
    * @example
-   * this.removeClass('o-Object') // remove one class
-   * this.removeClass('o-Object', 'c-Component') // remove multiple classes
+   * this.removeClass('o-Object', 'c-Component')          // remove tokens from the [class] attribute
+   * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.removeClass()           // do nothing; return `this`
    * @version LOCKED
    * @param   {...string} tokens classname(s) to remove; tokens must be non-empty and must not have whitespace
-   * @returns {Element} `this`
+   * @returns {xjs.Element} `this`
    */
   removeClass(...tokens) {
-    tokens.forEach(function (t) {
-      if (t.trim() !== '') this.node.classList.remove(t)
-    })
+    tokens.forEach(function (token) {
+      token.split(' ').forEach(function (t) {
+        if (t.trim() !== '') this.node.classList.remove(t)
+      }, this)
+    }, this)
   }
 }
 
