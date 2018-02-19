@@ -14,6 +14,16 @@ const xjs = {
  */
 xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
+   * @summary A rendering function.
+   * @description This function’s signature must be `(DocumentFragment, *) => undefined`.
+   * It must take a document fragment and any data, and optionally modify the fragment using the data.
+   * It should not have a `this` context, and it should not have a return value.
+   * @function xjs.HTMLTemplateElement~RenderingFunction
+   * @param   {DocumentFragment} frag a document fragment
+   * @param   {*} data data
+   */
+
+  /**
    * @summary Construct a new xjs.HTMLTemplateElement object.
    * @param {HTMLTemplateElement} node the node to wrap
    */
@@ -21,12 +31,10 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     super(node)
 
     /**
-     * @summary The rendering function added to this wrapper.
-     * @param   {DocumentFragment} f a document fragment
-     * @param   {*} d data
-     * @returns {DocumentFragment} the modified document fragment
+     * @summary The default rendering function added to this wrapper.
+     * @type {xjs.HTMLTemplateElement~RenderingFunction}
      */
-    this._renderer = (f, d) => f
+    this._renderer = (f, d) => {}
   }
   /**
    * @summary This wrapper’s node.
@@ -43,10 +51,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Set this template’s rendering function.
-   * @description The argument must be a rendering function with the signature `function (frag, data) => frag`.
-   * The function must take a document fragment and any data, and optionally modify the fragment using the data.
-   * It should not have a `this` context, and it should not have a return value.
-   * @param   {function(DocumentFragment, *)} renderer modifies the template by filling it in with data
+   * @param   {xjs.HTMLTemplateElement~RenderingFunction} renderer modifies the template by filling it in with data
    * @returns {xjs.HTMLTemplateElement} `this`
    */
   setRenderer(renderer) {
@@ -88,6 +93,13 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     let data = fs.readFileSync(filepath, 'utf8')
     return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
   }
+  /**
+   * @summary Internall processing for {@link xjs.HTMLTemplateElement.fromFile|.fromFile{,Sync}}.
+   * @param   {string} filepath the path to the file
+   * @param   {string} data the result of fs.readFile{,Sync}
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
   static _fromFile_process(filepath, data) {
     let elem = jsdom.JSDOM.fragment(data).querySelector('template')
     if (elem === null) {
