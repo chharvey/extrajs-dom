@@ -123,7 +123,7 @@ xjs.Element = class extends xjs.Node {
    *
    * If the key is a string and the value is not provided (or `undefined`),
    * then this method returns the string value of the attribute identified by the key.
-   * If no such attribute exists, then `null` is returned.
+   * If no such attribute exists, then `null` is returned. (An Error is no longer thrown.)
    *
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object must have values of the {@link Element.ValueArg} type;
@@ -133,24 +133,26 @@ xjs.Element = class extends xjs.Node {
    *
    * If no arguments are provided, or if the key is `''` or `null`, this method does nothing and returns `this`.
    *
-   * Examples:
-   * ```js
-   * this.attr('itemtype', 'Person')                        // set the `[itemtype]` attribute
-   * this.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
-   * this.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `null` if it had not been set)
-   * this.attr('itemprop', null)                            // remove the `[itemprop]` attribute
-   * this.attr('data-id', function () { return this.id() }) // set the `[data-id]` attribute to this element’s ID
-   * this.attr({                                            // set/remove multiple attributes all at once
+   * @example
+   * this.attr('itemtype', 'Person') // set an attribute (string)
+   * this.attr('data-block', true)   // set an attribute (boolean)
+   * this.attr('data-nthchild', 3)   // set an attribute (number)
+   * this.attr('itemscope', '')      // set a boolean attribute
+   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
+   * this.attr('itemprop', null)     // remove an attribute
+   * this.attr('data-id', function () { return this.id() })                    // set an attribute using this element’s context
+   * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using another given context
+   * this.attr({            // set/remove multiple attributes all at once
    *   itemprop : 'name',
    *   itemscope: '',
    *   itemtype : 'Person',
-   *   'data-id': null, // remove the `[data-id]` attribute
+   *   'data-id': null,
    * })
-   * this.attr()                                            // do nothing; return `this`
-   * this.attr('')                                          // do nothing; return `this`
-   * this.attr(null)                                        // do nothing; return `this`
-   * ```
+   * this.attr()              // do nothing; return `this`
+   * this.attr('')            // do nothing; return `this`
+   * this.attr(null)          // do nothing; return `this`
    *
+   * @description
    * Notes:
    * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
    * - Since this method returns `this`, it can be chained, e.g.,
@@ -165,7 +167,7 @@ xjs.Element = class extends xjs.Node {
    * @param   {(string|?Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
+   * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
    * @throws  {TypeError} if the given attribute is not a string or object
    */
   attr(attr = '', value, this_arg = this) {
@@ -235,33 +237,40 @@ xjs.Element = class extends xjs.Node {
 
   /**
    * @summary Append tokens to this element’s `[class]` attribute.
+   * @description Argument(s) can also be space-separate tokens.
    * @example
-   * this.addClass('o-Object c-Component') // add to the [class] attribute
+   * this.addClass('o-Object', 'c-Component')          // add tokens to the [class] attribute
+   * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.addClass()                       // do nothing; return `this`
    * @version LOCKED
-   * @param   {...string=} tokens the classname(s) to add; tokens must be non-empty and must not have whitespace
+   * @param   {...string=} tokens the classname(s) to add
    * @returns {xjs.Element} `this`
    */
   addClass(...tokens) {
-    tokens.forEach(function (t) {
-      if (t.trim() !== '') this.node.classList.add(t)
+    tokens.forEach(function (token) {
+      token.split(' ').forEach(function (t) {
+        if (t.trim() !== '') this.node.classList.add(t)
+      })
     })
     return this
   }
 
   /**
    * @summary Remove one or more tokens from this element’s `[class]` attribute.
+   * @description Argument(s) can also be space-separate tokens.
    * @example
-   * this.removeClass('o-Object') // remove one class
-   * this.removeClass('o-Object', 'c-Component') // remove multiple classes
+   * this.removeClass('o-Object', 'c-Component')          // remove tokens from the [class] attribute
+   * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.removeClass()           // do nothing; return `this`
    * @version LOCKED
    * @param   {...string} tokens classname(s) to remove; tokens must be non-empty and must not have whitespace
-   * @returns {Element} `this`
+   * @returns {xjs.Element} `this`
    */
   removeClass(...tokens) {
-    tokens.forEach(function (t) {
-      if (t.trim() !== '') this.node.classList.remove(t)
+    tokens.forEach(function (token) {
+      token.split(' ').forEach(function (t) {
+        if (t.trim() !== '') this.node.classList.remove(t)
+      })
     })
   }
 }

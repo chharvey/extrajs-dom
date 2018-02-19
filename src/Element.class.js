@@ -9,6 +9,20 @@ const View         = require('extrajs-view')
 class Element {
   /**
    * @summary Construct a new Element object.
+   *
+   * @example
+   * // Construct a new element:
+   * let el = new Element('span')
+   * return el.html() === `<span></span>`
+   * // The constructor knows which HTML5 elements are void:
+   * let el1 = new Element('meta')
+   * let el2 = new Element('link')
+   * return (el1.html() === `<meta/>`) && (el2.html() === `<link/>`)
+   * // The constructor does not know non-HTML elements:
+   * let el1 = new Element('path')
+   * let el2 = new Element('path', true)
+   * return (el1.html() === `<path></path>`) && (el2.html() === `<path/>`)
+   *
    * @version STABLE
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
@@ -64,7 +78,14 @@ class Element {
    * @summary Return whether this element is a void element.
    * @description Void elements have no end tag, and have the
    * **nothing content model** (they must not have any contents).
-   * @version LOCKED
+   * @example
+   * return (
+   *   !new Element('div').isVoid
+   *   && new Element('img').isVoid
+   *   && !new Element('rect').isVoid
+   *   && new Element('rect',true).isVoid
+   * )
+   * @version DEPRECATED
    * @returns {boolean} `true` if this element is void; `false` otherwise
    */
   get isVoid() { return this._VOID }
@@ -73,7 +94,11 @@ class Element {
    * @summary Return this element’s attributes object.
    * @description The key-value pairs of the object returned correspond to
    * the attribute-value pairs of this element.
-   * @version LOCKED
+   * @example
+   * let el = new Element('div').attr('class','panel')
+   * let at = el.attributes // { class: 'panel' }
+   * return at.class === 'panel'
+   * @version DEPRECATED
    * @returns {Object<string>} an object containing the attribute-value pairs of this element
    */
   get attributes() { return this._attributes.data }
@@ -82,7 +107,11 @@ class Element {
    * @summary Return this element’s styles object.
    * @description The key-value pairs of the object returned correspond to
    * the property-value pairs of this element’s css.
-   * @version LOCKED
+   * @example
+   * let el = new Element('div').attr('style','color: blue;')
+   * let st = el.styles // { color: 'blue' }
+   * return st.color === 'blue'
+   * @version EXPERIMENTAL
    * @returns {Object<string>} an object containing the property-value pairs of this element’s css
    */
   get styles() {
@@ -96,13 +125,17 @@ class Element {
   /**
    * @summary Return an object containing all the `[data-*]` attribute-value pairs of this element.
    * @description Note that the keys of this object do not contain the string `'data-'`.
-   * Example:
-   * ```js
+   *
+   * @example
    * this.view.html() // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
    * this.attributes  // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
    * this.dataset     // returns { foo:'bar', baz:'qux' }
-   * ```
-   * @version LOCKED
+   *
+   * let el = new Element('div').attr('data-instanceof','Promise')
+   * let da = el.dataset // { instanceof: 'Promise' }
+   * return da.instanceof === 'Promise'
+   *
+   * @version EXPERIMENTAL
    * @returns {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
    */
   get dataset() {
@@ -122,12 +155,11 @@ class Element {
    * Multiple arguments may be provided.
    * This method does not remove attributes.
    *
-   * Examples:
-   * ```js
+   * @example
    * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
-   * ```
+   *
    * @version EXPERIMENTAL
    * @param   {...string} attr_str a string of the format `'attribute="attr value"'`
    * @returns {Element} `this`
@@ -140,19 +172,21 @@ class Element {
 
   /**
    * @summary Shortcut method for setting/getting the `style` attribute of this element.
-   * @description Examples:
-   * ```js
+   * @description
+   *
+   * @example
    * this.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
+   * this.style('font-family: \'Helvetica Neue\';')        // quotes must be escaped (or you could use a template literal)
    * this.style(null)                                      // remove the [style] attribute
    * this.style({})                                        // remove the [style] attribute
    * this.style('')                                        // set the [style] attribute to the empty string: `[style=""]`
-   * this.style()                                          // return the value of [style], as a string
-   * ```
-   * @version STABLE
+   * this.style()                                          // return the value of [style], as a string (or `null` if absent)
+   *
+   * @version EXPERIMENTAL
    * @param   {(Element.ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
-   * @returns {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
+   * @returns {(xjs.Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    * @throws  {TypeError} if the given argument is a number or boolean
    */
   style(arg) {
@@ -195,9 +229,10 @@ class Element {
    *
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
-   * Examples:
-   * ```js
-   * this.css('background', 'red')                       // set the `background` property
+   * @example
+   * this.css('background', 'red')                       // set a property (string)
+   * this.css('content', false)                          // set a property (boolean)
+   * this.css('opacity', 0.5)                            // set a property (number)
    * this.css('font-weight', '')                         // remove the `font-weight` property
    * this.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)
    * this.css('font-weight', null)                       // remove the `font-weight` property
@@ -210,12 +245,11 @@ class Element {
    *   'text-align': '',   // remove the `text-align` property
    * })
    * this.css()                                          // do nothing; return `this`
-   * ```
    *
-   * @version STABLE
+   * @version EXPERIMENTAL
    * @param   {(string|Object<Element.ValueArg>)=} prop the name of the css property to set or get, or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
-   * @returns {(Element|string)} `this` if setting a property, else the value of the property specified
+   * @returns {(xjs.Element|string)} `this` if setting a property, else the value of the property specified
    * @throws  {TypeError} if the given property is not a string or object
    * @throws  {TypeError} if the given property has been removed or not set
    */
@@ -249,10 +283,23 @@ class Element {
    * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * @description Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * Providing no arguments does nothing and returns `this`.
-   * @version LOCKED
+   *
+   * @example
+   * this.data('type','division') // <div data-type="division"></div>
+   *
+   * @example
+   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
+   * this.data('type') === 'division'                       // true
+   * this.data('quality')                                   // null
+   *
+   * @example
+   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
+   * this.data('type', null)                                // <div data-class="null"></div>
+   *
+   * @version EXPERIMENTAL
    * @param   {(string|Object<Element.ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
+   * @returns {(xjs.Element|string)} `this` if setting an attribute, else the value of the attribute specified
    */
   data(name = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
@@ -332,9 +379,23 @@ class Element {
    */
   /**
    * @summary Return a new Element object, given JSON data.
+   * @example
+   * Element.fromJSON({
+   *   "name": "a",
+   *   "attr": {
+   *     "style": "color:green;",
+   *     "href": "#0",
+   *     "aria-checked": false,
+   *     "datetime": 2017
+   *   },
+   *   "content": [
+   *     "click ",
+   *     { "name": "em", "content": ["here"] }
+   *   ]
+   * }) // <a style="color:green;" href="#0" aria-checked="false" datetime="2017">click <em>here</em></a>
    * @version EXPERIMENTAL
    * @param   {Element.ElementJSON} $elem data for the Element object to construct
-   * @returns {Element} a new Element object representing the given data
+   * @returns {xjs.Element} a new Element object representing the given data
    */
   static fromJSON($elem) {
     return new Element($elem.name, $elem.is_void)

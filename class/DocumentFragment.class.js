@@ -84,6 +84,12 @@ xjs.DocumentFragment = class extends xjs.Node {
 
   /**
    * @summary Concatenate multiple contents into text.
+   * @example
+   * xjs.DocumentFragment.concat(
+   *   new xjs.Element(document.createElement('strong')).append(`hello `),
+   *   new xjs.Element(document.createElement('em'    )).append(`world`),
+   *   new xjs.Element(document.createElement('mark'  )).append(`!`)
+   * ) // '<strong>hello </strong><em>world</em><mark>!</mark>'
    * @version EXPERIMENTAL
    * @param   {...?(Node|xjs.Node|string)} contents the contents to concatenate
    * @returns {string} the resulting output of concatenation
