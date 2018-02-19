@@ -1,8 +1,5 @@
-const path = require('path')
-
 const xjs = {
   Node: require('./Node.class.js'),
-  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
 
 /**
@@ -24,23 +21,7 @@ xjs.Document = class extends xjs.Node {
    * @type {Document}
    */
   get node() { return super.node }
-
-
 }
 
-/**
- * @summary A set of component builders.
- * @namespace
- */
-xjs.Document.TEMPLATES = {
-  /**
-   * @summary A website’s sitemap, in the form of a document outline.
-   * @description An `<ol role="directory">` with link list items to subpages.
-   * @version EXPERIMENTAL
-   * @see /tpl/x-sitemap.tpl.js
-   * @type {xjs.HTMLTemplateElement}
-   */
-  xSitemap: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, '../tpl/x-sitemap.tpl.html')).setRenderer(require('../tpl/x-sitemap.tpl.js')),
-}
 
 module.exports = xjs.Document
