@@ -1,3 +1,5 @@
+const jsdom = require('jsdom')
+
 const xjs = {
   Object : require('extrajs').Object,
   Node   : require('./Node.class.js'),
@@ -87,7 +89,7 @@ xjs.DocumentFragment = class extends xjs.Node {
    * @returns {string} the resulting output of concatenation
    */
   static concat(...contents) {
-    return new xjs.DocumentFragment(new DocumentFragment()).append(...contents).innerHTML()
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment('')).append(...contents).innerHTML()
   }
 }
 

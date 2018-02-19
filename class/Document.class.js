@@ -26,21 +26,21 @@ xjs.Document = class extends xjs.Node {
   get node() { return super.node }
 
 
-  /**
-   * @summary Return a website’s sitemap, in the form of a document outline.
-   * @version EXPERIMENTAL
-   * @param   {Array<{name:string, url:string}>} websitedata array of data, each representing a subpage // TODO use sdo.WebPage
-   * @returns {HTMLOListElement} an `<ol role="directory">` with link list items to subpages
-   */
-  static sitemap(websitedata) {
-    return xjs.Document.TEMPLATES.xSitemap.render(websitedata).querySelector('ol')
-  }
 }
 
+/**
+ * @summary A set of component builders.
+ * @namespace
+ */
 xjs.Document.TEMPLATES = {
-  xSitemap: new xjs.HTMLTemplateElement(
-    xjs.HTMLTemplateElement.readTemplateFileSync(path.join(__dirname, '../tpl/x-sitemap.tpl.html'))
-  ).setRenderer(require('../tpl/x-sitemap.tpl.js')),
+  /**
+   * @summary A website’s sitemap, in the form of a document outline.
+   * @description An `<ol role="directory">` with link list items to subpages.
+   * @version EXPERIMENTAL
+   * @see /tpl/x-sitemap.tpl.js
+   * @type {xjs.HTMLTemplateElement}
+   */
+  xSitemap: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, '../tpl/x-sitemap.tpl.html')).setRenderer(require('../tpl/x-sitemap.tpl.js')),
 }
 
 module.exports = xjs.Document
