@@ -18,9 +18,9 @@ function xSitemap(frag, data) {
     let subsitemap = d['custom:sitemap'] && d['custom:sitemap'].itemListElement
     if (subsitemap) {
       f.querySelector('[itemscope=""]').append(
-        new xjs.HTMLTemplateElement(
-          xjs.HTMLTemplateElement.readTemplateFileSync(path.join(__dirname, './x-sitemap.tpl.html'))
-        ).setRenderer(xSitemap).render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
+        xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, './x-sitemap.tpl.html'))
+          .setRenderer(xSitemap)
+          .render((Array.isArray(subsitemap)) ? subsitemap : [subsitemap])
       )
     }
   })

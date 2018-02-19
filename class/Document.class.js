@@ -40,9 +40,7 @@ xjs.Document.TEMPLATES = {
    * @see /tpl/x-sitemap.tpl.js
    * @type {xjs.HTMLTemplateElement}
    */
-  xSitemap: new xjs.HTMLTemplateElement(
-    xjs.HTMLTemplateElement.readTemplateFileSync(path.join(__dirname, '../tpl/x-sitemap.tpl.html'))
-  ).setRenderer(require('../tpl/x-sitemap.tpl.js')),
+  xSitemap: xjs.HTMLTemplateElement.fromFileSync(path.join(__dirname, '../tpl/x-sitemap.tpl.html')).setRenderer(require('../tpl/x-sitemap.tpl.js')),
 }
 
 module.exports = xjs.Document
