@@ -39,10 +39,10 @@ xjs.HTMLUListElement = class extends xjs.HTMLElement {
    *
    * @example
    * let {document} = new jsdom.JSDOM(`
-   * <ul class="list">
+   * <ul>
    *   <template>
-   *     <li class="list-item">
-   *       <a class="list-link" href="{{ url }}" itemprop="significantLink">{{ text }}</a>
+   *     <li>
+   *       <a href="{{ url }}">{{ text }}</a>
    *     </li>
    *   </template>
    * </ul>
@@ -53,10 +53,10 @@ xjs.HTMLUListElement = class extends xjs.HTMLElement {
    *   { "url": "#2", "text": "Career resources" },
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
-   * new xjs.HTMLListElement(document.querySelector('ul.list'))
+   * new xjs.HTMLUListElement(document.querySelector('ul'))
    *   .populate(data, function (f, d) {
-   *     f.querySelector('.list-link').href        = d.url
-   *     f.querySelector('.list-link').textContent = d.text
+   *     f.querySelector('a').href        = d.url
+   *     f.querySelector('a').textContent = d.text
    *   })
    *
    * @param   {Array} data any array of things
