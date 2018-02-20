@@ -1,13 +1,13 @@
 const xjs = {
-  HTMLElement: require('./HTMLElement.class.js'),
+  HTMLListElement: require('./HTMLListElement.class.js'),
 }
 
 /**
  * Wrapper for HTML `ol` element.
  * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
- * @extends xjs.HTMLElement
+ * @extends xjs.HTMLListElement
  */
-xjs.HTMLOListElement = class extends xjs.HTMLElement {
+xjs.HTMLOListElement = class extends xjs.HTMLListElement {
   /**
    * @summary Construct a new xjs.HTMLOListElement object.
    * @version EXPERIMENTAL
