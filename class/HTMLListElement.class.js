@@ -37,6 +37,28 @@ xjs.HTMLListElement = class extends xjs.HTMLElement {
    * - This element may also already have any number of `<li>` children; they are not affected.
    * - {@link xjs.HTMLOListElement} and {@link xjs.HTMLUListElement} inherit this method.
    *
+   * @example
+   * let {document} = new jsdom.JSDOM(`
+   * <ul class="list">
+   *   <template>
+   *     <li class="list-item">
+   *       <a class="list-link" href="{{ url }}" itemprop="significantLink">{{ text }}</a>
+   *     </li>
+   *   </template>
+   * </ul>
+   * `).window
+   * let data = [
+   *   { "url": "#0", "text": "Career Connections" },
+   *   { "url": "#1", "text": "Getting Licensed & Certified" },
+   *   { "url": "#2", "text": "Career resources" },
+   *   { "url": "#3", "text": "Code of Ethics" }
+   * ]
+   * new xjs.HTMLListElement(document.querySelector('ul.list'))
+   *   .populate(data, function (f, d) {
+   *     f.querySelector('.list-link').href        = d.url
+   *     f.querySelector('.list-link').textContent = d.text
+   *   })
+   *
    * @param   {Array} data any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction} [renderer=(f,d) => {}] a typical rendering function
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,

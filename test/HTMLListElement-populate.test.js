@@ -31,9 +31,9 @@ let data = [
 let list = document.querySelector('ul.list')
 
 new xjs.HTMLListElement(list)
-  .populate(data, function (frag, d) {
-    frag.querySelector('.list-link').href        = d.url
-    frag.querySelector('.list-link').textContent = d.text
+  .populate(data, function (f, d) {
+    f.querySelector('.list-link').href        = d.url
+    f.querySelector('.list-link').textContent = d.text
   })
 
 console.log(list.outerHTML)
