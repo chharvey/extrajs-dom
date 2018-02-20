@@ -8,6 +8,8 @@ module.exports = {
   HTMLUListElement: require('./class/HTMLUListElement.class.js'),
   HTMLDListElement: require('./class/HTMLDListElement.class.js'),
   HTMLLIElement   : require('./class/HTMLLIElement.class.js'),
+  HTMLTableSectionElement: require('./class/HTMLTableSectionElement.class.js'),
+  HTMLTableRowElement    : require('./class/HTMLTableRowElement.class.js'),
   HTMLAnchorElement: require('./class/HTMLAnchorElement.class.js'),
   HTMLTemplateElement: require('./class/HTMLTemplateElement.class.js'),
 }

@@ -6,6 +6,7 @@ const xjs = {
   HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
 
+
 /**
  * Wrapper for HTML `ul` element.
  * @see https://www.w3.org/TR/html/grouping-content.html#htmlulistelement-htmlulistelement
@@ -63,7 +64,7 @@ xjs.HTMLUListElement = class extends xjs.HTMLElement {
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
-   * @returns {xjs.HTMLListElement} `this`
+   * @returns {xjs.HTMLUListElement} `this`
    */
   populate(data, renderer = (f,d) => {}) {
     let template = this.node.querySelector('template')

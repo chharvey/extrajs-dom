@@ -1,6 +1,11 @@
+const jsdom = require('jsdom')
+
 const xjs = {
+  DocumentFragment: require('./DocumentFragment.class.js'),
   HTMLElement: require('./HTMLElement.class.js'),
+  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
+
 
 /**
  * Wrapper for HTML `tr` element.
@@ -53,7 +58,7 @@ xjs.HTMLTableRowElement = class extends xjs.HTMLElement {
    *   { "url": "#2", "text": "Career resources" },
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
-   * new xjs.HTMLDListElement(document.querySelector('tr'))
+   * new xjs.HTMLTableRowElement(document.querySelector('tr'))
    *   .populate(data, function (f, d) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
@@ -63,7 +68,7 @@ xjs.HTMLTableRowElement = class extends xjs.HTMLElement {
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
    * @throws  {ReferenceError} if this `<tr>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<td>`.
-   * @returns {xjs.HTMLListElement} `this`
+   * @returns {xjs.HTMLTableRowElement} `this`
    */
   populate(data, renderer = (f,d) => {}) {
     let template = this.node.querySelector('template')

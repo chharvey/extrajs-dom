@@ -1,6 +1,11 @@
+const jsdom = require('jsdom')
+
 const xjs = {
+  DocumentFragment: require('./DocumentFragment.class.js'),
   HTMLElement: require('./HTMLElement.class.js'),
+  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
+
 
 /**
  * Wrapper for HTML `thead`, `tfoot`, and `tbody` elements.
@@ -51,7 +56,7 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
    *   { "url": "#2", "text": "Career resources" },
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
-   * new xjs.HTMLDListElement(document.querySelector('tbody'))
+   * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
    *   .populate(data, function (f, d) {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
@@ -61,7 +66,7 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
-   * @returns {xjs.HTMLListElement} `this`
+   * @returns {xjs.HTMLTableSectionElement} `this`
    */
   populate(data, renderer = (f,d) => {}) {
     let template = this.node.querySelector('template')
