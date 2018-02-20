@@ -34,7 +34,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
      * @summary The default rendering function added to this wrapper.
      * @type {xjs.HTMLTemplateElement~RenderingFunction}
      */
-    this._renderer = (f, d) => {}
+    this._renderer = (f,d) => {}
   }
   /**
    * @summary This wrapper’s node.
