@@ -1,13 +1,18 @@
+const jsdom = require('jsdom')
+
 const xjs = {
-  HTMLListElement: require('./HTMLListElement.class.js'),
+  DocumentFragment: require('./DocumentFragment.class.js'),
+  HTMLElement: require('./HTMLElement.class.js'),
+  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
+
 
 /**
  * Wrapper for HTML `ol` element.
  * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
- * @extends xjs.HTMLListElement
+ * @extends xjs.HTMLElement
  */
-xjs.HTMLOListElement = class extends xjs.HTMLListElement {
+xjs.HTMLOListElement = class extends xjs.HTMLElement {
   /**
    * @summary Construct a new xjs.HTMLOListElement object.
    * @version EXPERIMENTAL
