@@ -271,6 +271,21 @@ xjs.Element = class extends xjs.Node {
       }, this)
     }, this)
   }
+
+  /**
+   * @summary Replace a segment of this element’s class string with a new string segment.
+   * @example
+   * let element = jsdom.JSDOM.fragment(`<i class="glyphicons glphicons-{{ icon }}"></i>`).querySelector('i')
+   * new xjs.Element(element).replaceClass('{{ icon }}', 'mobile')
+   * element.outerHTML // <a class="glyphicons glphicons-mobile"></a>
+   * @param   {string} old_string the segment of this element’s `[class]` attribute value to remove
+   * @param   {string} new_string the string with which to replace the removed segment
+   * @returns {xjs.Element} `this`
+   */
+  replaceClassString(old_string, new_string) {
+    this.node.className = this.node.className.replace(old_string, new_string)
+    return this
+  }
 }
 
 module.exports = xjs.Element
