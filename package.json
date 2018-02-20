@@ -4,7 +4,7 @@
   "description": "A Javascript implementation of DOM.",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test-v4.js"
+    "test": "node test/index.js"
   },
   "repository": {
     "type": "git",
