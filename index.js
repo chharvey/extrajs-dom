@@ -4,11 +4,12 @@ module.exports = {
   DocumentFragment: require('./class/DocumentFragment.class.js'),
   Element         : require('./class/Element.class.js'),
   HTMLElement     : require('./class/HTMLElement.class.js'),
-  HTMLListElement : require('./class/HTMLListElement.class.js'),
   HTMLOListElement: require('./class/HTMLOListElement.class.js'),
   HTMLUListElement: require('./class/HTMLUListElement.class.js'),
   HTMLDListElement: require('./class/HTMLDListElement.class.js'),
   HTMLLIElement   : require('./class/HTMLLIElement.class.js'),
+  HTMLTableSectionElement: require('./class/HTMLTableSectionElement.class.js'),
+  HTMLTableRowElement    : require('./class/HTMLTableRowElement.class.js'),
   HTMLAnchorElement: require('./class/HTMLAnchorElement.class.js'),
   HTMLTemplateElement: require('./class/HTMLTemplateElement.class.js'),
 }

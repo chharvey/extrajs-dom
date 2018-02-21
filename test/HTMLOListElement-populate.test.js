@@ -10,13 +10,13 @@ let {document} = new jsdom.JSDOM(`
 <html lang="en">
 <head><title>test</title></head>
 <body>
-<ul class="list">
+<ol class="list">
   <template>
     <li class="list-item">
       <a class="list-link" href="{{ url }}" itemprop="significantLink">{{ text }}</a>
     </li>
   </template>
-</ul>
+</ol>
 </body>
 </html>
 `).window
@@ -28,9 +28,9 @@ let data = [
   { "url": "#3", "text": "Code of Ethics" }
 ]
 
-let list = document.querySelector('ul.list')
+let list = document.querySelector('ol.list')
 
-new xjs.HTMLListElement(list)
+new xjs.HTMLOListElement(list)
   .populate(data, function (f, d) {
     f.querySelector('.list-link').href        = d.url
     f.querySelector('.list-link').textContent = d.text
