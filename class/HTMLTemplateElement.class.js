@@ -10,7 +10,7 @@ const xjs = {
 /**
  * Wrapper for HTML `template` element.
  * @see https://www.w3.org/TR/html52/semantics-scripting.html#htmltemplateelement
- * @version EXPERIMENTAL
+ * @extends xjs.HTMLElement
  */
 xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
@@ -34,6 +34,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
 
     /**
      * @summary The default rendering function added to this wrapper.
+     * @private
      * @type {xjs.HTMLTemplateElement~RenderingFunction}
      */
     this._renderer = (f,d) => {}
@@ -79,7 +80,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
    * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
    * To access the actual element, call {@link xjs.HTMLTemplateElement#node}.
    * @param   {string} filepath the path to the file
-   * @returns {HTMLTemplateElement} the first found `<template>` descendant
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
   static async fromFile(filepath) {
@@ -98,6 +99,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   }
   /**
    * @summary Internall processing for {@link xjs.HTMLTemplateElement.fromFile|.fromFile{,Sync}}.
+   * @private
    * @param   {string} filepath the path to the file
    * @param   {string} data the result of fs.readFile{,Sync}
    * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped

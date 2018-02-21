@@ -6,7 +6,7 @@ const xjs = {
 /**
  * Wrapper for HTML `a` element.
  * @see https://www.w3.org/TR/html/textlevel-semantics.html#htmlanchorelement
- * @version EXPERIMENTAL
+ * @extends xjs.HTMLElement
  */
 xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
   /**
