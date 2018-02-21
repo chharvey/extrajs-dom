@@ -10,7 +10,6 @@ const xjs = {
 xjs.Document = class extends xjs.Node {
   /**
    * @summary Construct a new xjs.Document object.
-   * @version EXPERIMENTAL
    * @param {Document} node the node to wrap
    */
   constructor(node) {

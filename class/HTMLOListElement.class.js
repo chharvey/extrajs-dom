@@ -10,7 +10,6 @@ const xjs = {
 xjs.HTMLOListElement = class extends xjs.HTMLElement {
   /**
    * @summary Construct a new xjs.HTMLOListElement object.
-   * @version EXPERIMENTAL
    * @param {HTMLOListElement} node the node to wrap
    */
   constructor(node) {

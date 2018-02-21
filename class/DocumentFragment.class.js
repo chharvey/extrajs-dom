@@ -14,7 +14,6 @@ const xjs = {
 xjs.DocumentFragment = class extends xjs.Node {
   /**
    * @summary Construct a new xjs.DocumentFragment object.
-   * @version EXPERIMENTAL
    * @param {DocumentFragment} node the node to wrap
    */
   constructor(node) {
@@ -29,7 +28,6 @@ xjs.DocumentFragment = class extends xjs.Node {
 
   /**
    * @summary Get the "innerHTML" of this document fragment.
-   * @version EXPERIMENTAL
    * @returns {string} a concatenation of all the `outerHTML` and/or data of the fragment’s node children
    */
   innerHTML() {
@@ -90,7 +88,6 @@ xjs.DocumentFragment = class extends xjs.Node {
    *   new xjs.Element(document.createElement('em'    )).append(`world`),
    *   new xjs.Element(document.createElement('mark'  )).append(`!`)
    * ) // '<strong>hello </strong><em>world</em><mark>!</mark>'
-   * @version EXPERIMENTAL
    * @param   {...?(Node|xjs.Node|string)} contents the contents to concatenate
    * @returns {string} the resulting output of concatenation
    */

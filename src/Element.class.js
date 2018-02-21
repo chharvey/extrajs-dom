@@ -23,7 +23,6 @@ class Element {
    * let el2 = new Element('path', true)
    * return (el1.html() === `<path></path>`) && (el2.html() === `<path/>`)
    *
-   * @version STABLE
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
    * @param {boolean} is_void `true` if this element is void (has no closing tag)
@@ -85,7 +84,6 @@ class Element {
    *   && !new Element('rect').isVoid
    *   && new Element('rect',true).isVoid
    * )
-   * @version DEPRECATED
    * @returns {boolean} `true` if this element is void; `false` otherwise
    */
   get isVoid() { return this._VOID }
@@ -98,7 +96,6 @@ class Element {
    * let el = new Element('div').attr('class','panel')
    * let at = el.attributes // { class: 'panel' }
    * return at.class === 'panel'
-   * @version DEPRECATED
    * @returns {Object<string>} an object containing the attribute-value pairs of this element
    */
   get attributes() { return this._attributes.data }
@@ -111,7 +108,6 @@ class Element {
    * let el = new Element('div').attr('style','color: blue;')
    * let st = el.styles // { color: 'blue' }
    * return st.color === 'blue'
-   * @version EXPERIMENTAL
    * @returns {Object<string>} an object containing the property-value pairs of this element’s css
    */
   get styles() {
@@ -135,7 +131,6 @@ class Element {
    * let da = el.dataset // { instanceof: 'Promise' }
    * return da.instanceof === 'Promise'
    *
-   * @version EXPERIMENTAL
    * @returns {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
    */
   get dataset() {
@@ -160,7 +155,6 @@ class Element {
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
    *
-   * @version EXPERIMENTAL
    * @param   {...string} attr_str a string of the format `'attribute="attr value"'`
    * @returns {Element} `this`
    */
@@ -184,7 +178,6 @@ class Element {
    * this.style('')                                        // set the [style] attribute to the empty string: `[style=""]`
    * this.style()                                          // return the value of [style], as a string (or `null` if absent)
    *
-   * @version EXPERIMENTAL
    * @param   {(Element.ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
    * @returns {(xjs.Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    * @throws  {TypeError} if the given argument is a number or boolean
@@ -246,7 +239,6 @@ class Element {
    * })
    * this.css()                                          // do nothing; return `this`
    *
-   * @version EXPERIMENTAL
    * @param   {(string|Object<Element.ValueArg>)=} prop the name of the css property to set or get, or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @returns {(xjs.Element|string)} `this` if setting a property, else the value of the property specified
@@ -296,7 +288,6 @@ class Element {
    * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
    * this.data('type', null)                                // <div data-class="null"></div>
    *
-   * @version EXPERIMENTAL
    * @param   {(string|Object<Element.ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @returns {(xjs.Element|string)} `this` if setting an attribute, else the value of the attribute specified
@@ -393,7 +384,6 @@ class Element {
    *     { "name": "em", "content": ["here"] }
    *   ]
    * }) // <a style="color:green;" href="#0" aria-checked="false" datetime="2017">click <em>here</em></a>
-   * @version EXPERIMENTAL
    * @param   {Element.ElementJSON} $elem data for the Element object to construct
    * @returns {xjs.Element} a new Element object representing the given data
    */
@@ -510,7 +500,6 @@ class Element {
    * }
    * ```
    *
-   * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
    * @param   {!Object=} options configurations for the output
    * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`

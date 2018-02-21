@@ -11,7 +11,6 @@ const xjs = {
 xjs.Element = class extends xjs.Node {
   /**
    * @summary Construct a new xjs.Element object.
-   * @version STABLE
    * @param {Element} node the node to wrap
    */
   constructor(node) {
@@ -26,7 +25,6 @@ xjs.Element = class extends xjs.Node {
 
   /**
    * @summary This element’s tag name in lowercase.
-   * @version LOCKED
    * @type {string}
    */
   get tagName() { return this.node.tagName.toLowerCase() }
@@ -34,7 +32,6 @@ xjs.Element = class extends xjs.Node {
   /**
    * @summary {@link Element#innerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version LOCKED
    * @param   {string=} markup the html to set
    * @returns {(xjs.Element|string)} `this` if setting; the innerHTML if getting
    */
@@ -49,7 +46,6 @@ xjs.Element = class extends xjs.Node {
    * @summary {@link Element#outerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * @todo TODO: setter is not defined yet; only use this method as a getter.
-   * @version EXPERIMENTAL
    * @param   {string=} markup the html to set
    * @returns {(xjs.Element|string)} `this` if setting; the outerHTML if getting
    */
@@ -163,7 +159,6 @@ xjs.Element = class extends xjs.Node {
    *   if you have strings and are not removing any attributes:
    *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
    *
-   * @version STABLE
    * @param   {(string|?Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
@@ -199,7 +194,6 @@ xjs.Element = class extends xjs.Node {
    * this.id(function () { return this.name }) // set the [id] attribute using a function
    * this.id(null)       // remove the [id] attribute
    * this.id()           // return the value of [id]
-   * @version LOCKED
    * @param   {Element.ValueArg=} value the value to set for the `id` attribute
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(xjs.Element|string)} `this` if setting; the ID if getting
@@ -222,7 +216,6 @@ xjs.Element = class extends xjs.Node {
    * this.class(function () { return this.name }) // set the [class] attribute using a function
    * this.class(null)                   // remove the [class] attribute
    * this.class()                       // return the value of [class]
-   * @version LOCKED
    * @param   {Element.ValueArg=} value the value to set for the `class` attribute
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(xjs.Element|string)} `this` if setting; the class if getting
@@ -242,7 +235,6 @@ xjs.Element = class extends xjs.Node {
    * this.addClass('o-Object', 'c-Component')          // add tokens to the [class] attribute
    * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.addClass()                       // do nothing; return `this`
-   * @version LOCKED
    * @param   {...string=} tokens the classname(s) to add
    * @returns {xjs.Element} `this`
    */
@@ -262,7 +254,6 @@ xjs.Element = class extends xjs.Node {
    * this.removeClass('o-Object', 'c-Component')          // remove tokens from the [class] attribute
    * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.removeClass()           // do nothing; return `this`
-   * @version LOCKED
    * @param   {...string} tokens classname(s) to remove; tokens must be non-empty and must not have whitespace
    * @returns {xjs.Element} `this`
    */

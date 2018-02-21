@@ -10,7 +10,6 @@ const xjs = {
 /**
  * Wrapper for HTML `template` element.
  * @see https://www.w3.org/TR/html52/semantics-scripting.html#htmltemplateelement
- * @version EXPERIMENTAL
  */
 xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**

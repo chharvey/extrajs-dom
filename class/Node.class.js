@@ -7,7 +7,6 @@ const xjs = {}
 xjs.Node = class {
   /**
    * @summary Construct a new xjs.Node object.
-   * @version EXPERIMENTAL
    * @param {Node} node the node to wrap
    */
   constructor(node) {
@@ -48,7 +47,6 @@ xjs.Node = class {
   /**
    * @summary {@link Node#textContent}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version LOCKED
    * @param   {string=} text the content to set
    * @returns {(xjs.Node|string)} `this` if setting; the textContent if getting
    */

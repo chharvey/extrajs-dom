@@ -10,7 +10,6 @@ const xjs = {
 xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary Construct a new xjs.HTMLElement object.
-   * @version EXPERIMENTAL
    * @param {HTMLElement} node the node to wrap
    */
   constructor(node) {
@@ -28,7 +27,6 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement#title}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version EXPERIMENTAL
    * @param   {string=} value the value to set
    * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
    */
@@ -42,7 +40,6 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement#lang}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version EXPERIMENTAL
    * @param   {string=} value the value to set
    * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
    */
@@ -56,7 +53,6 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement#dir}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version EXPERIMENTAL
    * @param   {string=} value the value to set
    * @returns {(xjs.Element|string)} `this` if setting; the attribute value if getting
    */
@@ -73,7 +69,6 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement#hidden}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version EXPERIMENTAL
    * @param   {boolean=} value the value to set
    * @returns {(xjs.Element|boolean)} `this` if setting; the attribute value if getting
    */
@@ -87,7 +82,6 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement#tabIndex}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @version EXPERIMENTAL
    * @param   {number=} value the value to set
    * @returns {(xjs.Element|number)} `this` if setting; the attribute value if getting
    */
