@@ -12,6 +12,13 @@ xjs.Node = class {
    */
   constructor(node) {
     /**
+     * @summary Throw an error if `null` is passed to constructor.
+     * @description HACK: This error should be thrown by compiler, not runner.
+     * @type {TypeError}
+     */
+    if (node === null) throw new TypeError('Node cannot be null.')
+
+    /**
      * @summary The wrapped DOM Node.
      * @private
      * @final
