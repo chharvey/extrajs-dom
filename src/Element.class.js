@@ -150,6 +150,11 @@ class Element {
    * Multiple arguments may be provided.
    * This method does not remove attributes.
    *
+   * Move to Element#attr if needed:
+   *   Note you can also use the method {@link Element#attrStr}
+   *   if you have strings and are not removing any attributes:
+   *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
+   *
    * @example
    * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
