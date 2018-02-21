@@ -75,7 +75,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
    * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
    * To access the actual element, call {@link xjs.HTMLTemplateElement#node}.
    * @param   {string} filepath the path to the file
-   * @returns {HTMLTemplateElement} the first found `<template>` descendant
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
   static async fromFile(filepath) {

@@ -36,7 +36,7 @@ xjs.Node = class {
    * @description Simplifies chaining when performing void tasks,
    * especially tasks that have not been defined in this implementation.
    * @param   {function():undefined} executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
-   * @returns {Node} `this`
+   * @returns {xjs.Node} `this`
    */
   exe(executable) {
     executable.call(this)
