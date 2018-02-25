@@ -63,6 +63,84 @@ xjs.HTMLElement = class extends xjs.Element {
     } else return this.node.dir
   }
 
+  /**
+   * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
+   * @description
+   * This method is similar to {@link xjs.Element#attr} in that it sets attributes,
+   * except that this method only sets attributes starting with the `data-` prefix, and that
+   * the attribute names passed to this method differ from the those passed to {@link xjs.Element#attr}.
+   *
+   * When the key given is a string, it represents the data- attribute to set or get.
+   * It must not include the prefix `'data-'`, and it must be given in **camelCase** format (e.g. `'hasJs'`), as specified in
+   * {@link https://w3.org/TR/html52/dom.html#dom-domstringmap-__setter__-name-value-name|HTML 5.2 | DOMStringMap setter}.
+   *
+   * Note that if you wish to use the HTML attribute syntax **kebab-case** format, as specified in
+   * {@link https://w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
+   * you should use the {@link xjs.Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
+   *
+   * If the key is a string and the value is `null,`
+   * then the data- attribute identified by the key is removed from this element.
+   *
+   * If the key is a string and the value is not provided (or `undefined`),
+   * then this method returns the string value of the data- attribute identified by the key.
+   * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
+   * If no such attribute exists, then `null` is returned.
+   *
+   * If an object is provided as the key, then no argument may be provided as the value.
+   * The object’s keys must be in **camelCase** format, as if each key were passed separately.
+   * The object must have values of the {@link xjs.Element~ValueArg} type;
+   * thus for each key-value pair in the object, this method assigns corresponding
+   * data- attributes. You may use this method with a single object argument to set and/or remove
+   * multiple attributes (using `null` to remove).
+   *
+   * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
+   *
+   * @example
+   * this.data('typeof', 'division') // set the `[data-typeof]` attribute to `"division"`
+   * this.data('typeOf', 'division') // set the `[data-type-of]` attribute
+   * this.data('instanceOf')         // get the value of the `[data-instance-of]` attribute (`null` if it had not been set)
+   * this.data('id', null)           // remove the `[data-id]` attribute
+   * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute (probably not intended)
+   * this.data('id', function () { return this.id() }) // set the `[data-id]` attribute using this xjs.HTMLElement’s context
+   * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using another given context
+   * this.attr({                     // set/remove multiple `[data-*]` attributes all at once
+   *   prop  : 'name',
+   *   scope : '',
+   *   typeOf: 'Person',
+   *   id    : null,
+   * })
+   *
+   * this.data()     // do nothing; return `this`
+   * this.data('')   // do nothing; return `this`
+   * this.data({})   // do nothing; return `this`
+   * this.data(null) // do nothing; return `this`
+   *
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
+   * @param   {(string|?Object<xjs.Element~ValueArg>)=} data_attr the suffix of the `[data-*]` attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
+   * @param   {xjs.Element~ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
+   * @throws  {TypeError} if the given attribute is not a string or nullable object
+   */
+  data(data_attr = '', value, this_arg = this) {
+    // REVIEW: object lookups too complicated here; using standard switches
+    switch (xjs.Object.typeOf(data_attr)) {
+      case 'null': break;
+      case 'string':
+        if (data_attr.trim() === '') break;
+        switch (xjs.Object.typeOf(value)) {
+          case 'function' : return this.data(data_attr, value.call(this_arg));
+          case 'null'     : delete this.node.dataset[data_attr]; break;
+          case 'undefined': let returned = this.node.dataset[data_attr]; return (returned || returned === '') ? returned : null;
+          default         : this.node.dataset[data_attr] = value; break;
+        }
+        break;
+      case 'object': for (let i in data_attr) this.data(i, data_attr[i]); break;
+      default      : throw new TypeError('Provided name must be a string or (nullable) object.')
+    }
+    return this
+  }
+
   ///////////////////
   // USER INTERACTION
   ///////////////////

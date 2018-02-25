@@ -37,28 +37,6 @@ class Element {
     }
   }
 
-  /**
-   * @summary Return an object containing all the `[data-*]` attribute-value pairs of this element.
-   * @description Note that the keys of this object do not contain the string `'data-'`.
-   *
-   * @example
-   * this.view.html() // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
-   * this.attributes  // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
-   * this.dataset     // returns { foo:'bar', baz:'qux' }
-   *
-   * let el = new Element('div').attr('data-instanceof','Promise')
-   * let da = el.dataset // { instanceof: 'Promise' }
-   * return da.instanceof === 'Promise'
-   *
-   * @returns {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
-   */
-  get dataset() {
-    let returned = new ObjectString()
-    for (let i in this._attributes.data) {
-      if (i.slice(0,5) === 'data-') returned.set(i.slice(5), this._attributes.data[i])
-    }
-    return returned.data
-  }
 
 
 
@@ -195,38 +173,6 @@ class Element {
     return this
   }
 
-  /**
-   * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
-   * @description Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
-   * Providing no arguments does nothing and returns `this`.
-   *
-   * @example
-   * this.data('type','division') // <div data-type="division"></div>
-   *
-   * @example
-   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
-   * this.data('type') === 'division'                       // true
-   * this.data('quality')                                   // null
-   *
-   * @example
-   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
-   * this.data('type', null)                                // <div data-class="null"></div>
-   *
-   * @param   {(string|Object<Element.ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with Element.ValueArg type values
-   * @param   {Element.ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @returns {(xjs.Element|string)} `this` if setting an attribute, else the value of the attribute specified
-   */
-  data(name = '', value) {
-    // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(name)) {
-      case 'string':
-        if (name.trim()==='') break;
-        return this.attr(`data-${name.trim()}`, value)
-      case 'object': for (let i in name) this.data(i, key[i]); break;
-      default      : throw new TypeError('Provided name must be a string or object.')
-    }
-    return this
-  }
 
 
 

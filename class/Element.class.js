@@ -118,7 +118,8 @@ xjs.Element = class extends xjs.Node {
    *
    * If the key is a string and the value is not provided (or `undefined`),
    * then this method returns the string value of the attribute identified by the key.
-   * If no such attribute exists, then `null` is returned. (An Error is no longer thrown.)
+   * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
+   * If no such attribute exists, then `null` is returned.
    *
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object must have values of the {@link xjs.Element~ValueArg} type;
@@ -126,7 +127,7 @@ xjs.Element = class extends xjs.Node {
    * attributes. You may use this method with a single object argument to set and/or remove
    * multiple attributes (using `null` to remove).
    *
-   * If no arguments are provided, or if the key is `''` or `null`, this method does nothing and returns `this`.
+   * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
    *
    * Notes:
    * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
@@ -144,25 +145,26 @@ xjs.Element = class extends xjs.Node {
    * this.attr('data-nthchild', 3)   // set an attribute (number)
    * this.attr('data-block', true)   // set an attribute (boolean)
    * this.attr('itemscope', '')      // set a boolean attribute
-   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
+   * this.attr('itemtype')           // get the value of the attribute (`null` if it had not been set)
    * this.attr('itemprop', null)     // remove an attribute
-   * this.attr('data-id', function () { return this.id() })                    // set an attribute using this element’s context
+   * this.attr('data-id', function () { return this.id() })                    // set an attribute using this xjs.Element’s context
    * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using another given context
-   * this.attr({            // set/remove multiple attributes all at once
+   * this.attr({                     // set/remove multiple attributes all at once
    *   itemprop : 'name',
    *   itemscope: '',
    *   itemtype : 'Person',
    *   'data-id': null,
    * })
-   * this.attr()              // do nothing; return `this`
-   * this.attr('')            // do nothing; return `this`
-   * this.attr(null)          // do nothing; return `this`
+   * this.attr()     // do nothing; return `this`
+   * this.attr('')   // do nothing; return `this`
+   * this.attr({})   // do nothing; return `this`
+   * this.attr(null) // do nothing; return `this`
    *
-   * @param   {?(string|Object<?xjs.Element~ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with ValueArg type values
-   * @param   {?xjs.Element~ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
+   * @param   {(string|?Object<xjs.Element~ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
+   * @param   {xjs.Element~ValueArg=} value the value to assign the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
-   * @throws  {TypeError} if the given attribute is not a string or object or null
+   * @throws  {TypeError} if the given attribute is not a string or nullable object
    */
   attr(attr = '', value, this_arg = this) {
     // REVIEW: object lookups too complicated here; using standard switches
@@ -178,7 +180,7 @@ xjs.Element = class extends xjs.Node {
         }
         break;
       case 'object': for (let i in attr) this.attr(i, attr[i]); break;
-      default      : throw new TypeError('Provided attribute must be a (nullable) string or object.')
+      default      : throw new TypeError('Provided attribute must be a string or (nullable) object.')
     }
     return this
   }
