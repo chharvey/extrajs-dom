@@ -1,9 +1,10 @@
 {
   "name": "extrajs-dom",
   "version": "4.0.0-beta",
-  "description": "A Javascript implementation of DOM.",
+  "description": "Javascript extensions to DOM.",
   "main": "index.js",
   "scripts": {
+    "build": "gulp build",
     "test": "node test.js"
   },
   "repository": {
