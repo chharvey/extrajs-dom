@@ -1,18 +1,25 @@
-const HTMLElement = require('./HTMLElement.class.js')
-
-/**
- * Represents an HTML LI element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmllielement-htmllielement
- * @extends HTMLElement
- */
-class HTMLLIElement extends HTMLElement {
-  /**
-   * @summary Construct a new HTMLLIElement object.
-   * @version EXPERIMENTAL
-   */
-  constructor() {
-    super('li')
-  }
+const xjs = {
+  HTMLElement: require('./HTMLElement.class.js'),
 }
 
-module.exports = HTMLLIElement
+/**
+ * Wrapper for HTML `li` element.
+ * @see https://www.w3.org/TR/html/grouping-content.html#htmllielement-htmllielement
+ * @extends xjs.HTMLElement
+ */
+xjs.HTMLLIElement = class extends xjs.HTMLElement {
+  /**
+   * @summary Construct a new xjs.HTMLLIElement object.
+   * @param {HTMLLIElement} node the node to wrap
+   */
+  constructor(node) {
+    super(node)
+  }
+  /**
+   * @summary This wrapper’s node.
+   * @type {HTMLLIElement}
+   */
+  get node() { return super.node }
+}
+
+module.exports = xjs.HTMLLIElement

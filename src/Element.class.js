@@ -9,7 +9,20 @@ const View         = require('extrajs-view')
 class Element {
   /**
    * @summary Construct a new Element object.
-   * @version STABLE
+   *
+   * @example
+   * // Construct a new element:
+   * let el = new Element('span')
+   * return el.html() === `<span></span>`
+   * // The constructor knows which HTML5 elements are void:
+   * let el1 = new Element('meta')
+   * let el2 = new Element('link')
+   * return (el1.html() === `<meta/>`) && (el2.html() === `<link/>`)
+   * // The constructor does not know non-HTML elements:
+   * let el1 = new Element('path')
+   * let el2 = new Element('path', true)
+   * return (el1.html() === `<path></path>`) && (el2.html() === `<path/>`)
+   *
    * @see https://www.w3.org/TR/html/syntax.html#void-elements
    * @param {string} name the immutable name of the tag
    * @param {boolean} is_void `true` if this element is void (has no closing tag)
@@ -59,18 +72,18 @@ class Element {
 
 
 
-  /**
-   * Return this element’s name.
-   * @version LOCKED
-   * @returns {string} the name of this Element
-   */
-  get name() { return this._NAME }
 
   /**
    * @summary Return whether this element is a void element.
    * @description Void elements have no end tag, and have the
    * **nothing content model** (they must not have any contents).
-   * @version LOCKED
+   * @example
+   * return (
+   *   !new Element('div').isVoid
+   *   && new Element('img').isVoid
+   *   && !new Element('rect').isVoid
+   *   && new Element('rect',true).isVoid
+   * )
    * @returns {boolean} `true` if this element is void; `false` otherwise
    */
   get isVoid() { return this._VOID }
@@ -79,23 +92,22 @@ class Element {
    * @summary Return this element’s attributes object.
    * @description The key-value pairs of the object returned correspond to
    * the attribute-value pairs of this element.
-   * @version LOCKED
+   * @example
+   * let el = new Element('div').attr('class','panel')
+   * let at = el.attributes // { class: 'panel' }
+   * return at.class === 'panel'
    * @returns {Object<string>} an object containing the attribute-value pairs of this element
    */
   get attributes() { return this._attributes.data }
 
   /**
-   * @summary Return the contents of this element.
-   * @version LOCKED
-   * @returns {?string} this element’s contents, or `null` if this is a void element
-   */
-  get contents() { return this._contents }
-
-  /**
    * @summary Return this element’s styles object.
    * @description The key-value pairs of the object returned correspond to
    * the property-value pairs of this element’s css.
-   * @version LOCKED
+   * @example
+   * let el = new Element('div').attr('style','color: blue;')
+   * let st = el.styles // { color: 'blue' }
+   * return st.color === 'blue'
    * @returns {Object<string>} an object containing the property-value pairs of this element’s css
    */
   get styles() {
@@ -109,13 +121,16 @@ class Element {
   /**
    * @summary Return an object containing all the `[data-*]` attribute-value pairs of this element.
    * @description Note that the keys of this object do not contain the string `'data-'`.
-   * Example:
-   * ```js
+   *
+   * @example
    * this.view.html() // returns '<span data-foo="bar" data-baz="qux" fizz="buzz"></span>'
    * this.attributes  // returns { 'data-foo':'bar', 'data-baz':'qux', fizz:'buzz' }
    * this.dataset     // returns { foo:'bar', baz:'qux' }
-   * ```
-   * @version LOCKED
+   *
+   * let el = new Element('div').attr('data-instanceof','Promise')
+   * let da = el.dataset // { instanceof: 'Promise' }
+   * return da.instanceof === 'Promise'
+   *
    * @returns {Object<string>} an object containing keys and values corresponing to this element’s `[data-*]` custom attributes
    */
   get dataset() {
@@ -128,101 +143,6 @@ class Element {
 
 
 
-  /**
-   * NOTE: TYPE DEFINITION
-   * @summary A type to provide as a value argument for setting/removing an attribute.
-   * @description
-   * ```json
-   * {
-   *   "$schema"    : "http://json-schema.org/schema#",
-   *   "title"      : "Element.ValueArg",
-   *   "description": "A type to provide as a value argument for setting/removing an attribute.",
-   *   "type"       : ["{@link ObjectString.ValueType}", "function():{@link ObjectString.ValueType}", "null"],
-   *   "oneOf"      : [
-   *     { "type": "{@link ObjectString.ValueType}"           , "description": "set the attribute to an ObjectString.ValueType value" },
-   *     { "type": "function():{@link ObjectString.ValueType}", "description": "call the function on `this` and then set the attribute to the result" },
-   *     { "type": "null"                                     , "description": "remove the attribute altogether" }
-   *   ]
-   * }
-   * ```
-   * @typedef {?(ObjectString.ValueType|function():ObjectString.ValueType)} Element.ValueArg
-   */
-  /**
-   * @summary Set or get attributes of this element.
-   * @description
-   * If the key given is a string, and the value is a non-null {@link Element.ValueArg} type,
-   * then the attribute will be set (or modified) with the result of the value.
-   *
-   * If the key is a string and the value is `null,`
-   * then the attribute identified by the key is removed from this element.
-   *
-   * If the key is a string and the value is not provided (or `undefined`),
-   * then this method returns the value of the attribute identified by the key.
-   * If no such attribute exists, `undefined` is returned.
-   *
-   * If an object is provided as the key, then no argument may be provided as the value.
-   * The object must have values of the {@link Element.ValueArg} type;
-   * thus for each key-value pair in the object, this method assigns corresponding
-   * attributes. You may use this method with a single object argument to set and/or remove
-   * multiple attributes (using `null` to remove).
-   *
-   * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
-   *
-   * Examples:
-   * ```js
-   * this.attr('itemtype', 'HTMLElement')                   // set the `[itemtype]` attribute
-   * this.attr('itemscope', '')                             // set the boolean `[itemscope]` attribute
-   * this.attr('itemtype')                                  // get the value of the `[itemtype]` attribute (or `undefined` if it had not been set)
-   * this.attr('itemprop', null)                            // remove the `[itemprop]` attribute
-   * this.attr('data-id', function () { return this.id() }) // set the `[data-id]` attribute to this element’s ID
-   * this.attr({                                            // set/remove multiple attributes all at once
-   *   itemprop : 'name',
-   *   itemscope: '',
-   *   itemtype : 'Person',
-   *   'data-id': null, // remove the `[data-id]` attribute
-   * })
-   * this.attr()                                            // do nothing; return `this`
-   * this.attr(null)                                        // do nothing; return `this`
-   * ```
-   *
-   * Notes:
-   * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
-   * - Since this method returns `this`, it can be chained, e.g.,
-   *   `my_elem.attr('itemscope', '').attr('itemtype','Thing').attr('itemprop', null)`.
-   *   However, it may be simpler to use an object argument:
-   *   `my_elem.attr({ itemscope:'', itemtype:'Thing', itemprop:null })`.
-   *   Note you can also use the method {@link Element#attrStr}
-   *   if you have strings and are not removing any attributes:
-   *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
-   *
-   * @version STABLE
-   * @param   {(string|?Object<Element.ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with Element.ValueArg type values
-   * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
-   * @throws  {TypeError} if the given attribute is not a string or object
-   * @throws  {TypeError} if the given attribute has been removed or not set
-   */
-  attr(attr = '', value, this_arg = this) {
-    // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(attr)) {
-      case 'null': break;
-      case 'string':
-        if (attr.trim() === '') break;
-        switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.attr(attr, value.call(this_arg));
-          case 'null'     : this._attributes.delete(attr); break;
-          case 'undefined':
-            if (xjs.Object.typeOf(this._attributes.get(attr)) === 'undefined') throw new TypeError(`Attribute '${attr}' is undefined.`);
-            return this._attributes.get(attr);
-          default         : this._attributes.set(attr, value); break; // string, boolean, number, infinite, NaN
-        }
-        break;
-      case 'object': for (let i in attr) this.attr(i, attr[i]); break;
-      default      : throw new TypeError('Provided attribute must be a string or object.')
-    }
-    return this
-  }
 
   /**
    * @summary Add (or modify) one or more attributes, given strings.
@@ -230,13 +150,16 @@ class Element {
    * Multiple arguments may be provided.
    * This method does not remove attributes.
    *
-   * Examples:
-   * ```js
+   * Move to Element#attr if needed:
+   *   Note you can also use the method {@link Element#attrStr}
+   *   if you have strings and are not removing any attributes:
+   *   `my_elem.attrStr('itemscope=""', 'itemtype="Thing"')`.
+   *
+   * @example
    * this.attr('itemprop','name').attr('itemscope','').attr('itemtype':'Person') // old
    * this.attrStr('itemprop="name"', 'itemscope=""', 'itemtype="Person"')        // new
    * this.attrStr() // do nothing; return `this`
-   * ```
-   * @version EXPERIMENTAL
+   *
    * @param   {...string} attr_str a string of the format `'attribute="attr value"'`
    * @returns {Element} `this`
    */
@@ -245,103 +168,23 @@ class Element {
     return this
   }
 
-  /**
-   * @summary Shortcut method for setting/getting the `id` attribute of this element.
-   * @description Examples:
-   * ```js
-   * this.id('section1') // set the [id] attribute
-   * this.id(function () { return this.name }) // set the [id] attribute using a function
-   * this.id(null)       // remove the [id] attribute
-   * this.id('')         // set the [id] attribute to the empty string: `[id=""]`
-   * this.id()           // return the value of [id]
-   * ```
-   * @version LOCKED
-   * @param   {Element.ValueArg=} id the value to set for the `id` attribute
-   * @returns {(Element|string)} `this` if setting the ID, else the value of the ID
-   */
-  id(id) {
-    return this.attr('id', id)
-  }
-
-  /**
-   * @summary Shortcut method for setting/getting the `class` attribute of this element.
-   * @description Examples:
-   * ```
-   * this.class('o-Object c-Component') // set the [class] attribute
-   * this.class(function () { return this.name }) // set the [class] attribute using a function
-   * this.class(null)                   // remove the [class] attribute
-   * this.class('')                     // set the [class] attribute to the empty string: `[class=""]`
-   * this.class()                       // return the value of [class]
-   * ```
-   * @version LOCKED
-   * @param   {Element.ValueArg=} class_ the value to set for the `class` attribute
-   * @returns {(Element|string)} `this` if setting the class, else the value of the class
-   */
-  class(class_) {
-    return this.attr('class', class_)
-  }
-
-  /**
-   * @summary Append to this element’s `[class]` attribute.
-   * @description When adding classes, use this method instead of {@link Element#class},
-   * as the latter will overwrite the `[class]` attribute.
-   * Examples:
-   * ```js
-   * this.addClass('o-Object c-Component') // add to the [class] attribute
-   * this.addClass()                       // do nothing; return `this`
-   * ```
-   * @version LOCKED
-   * @param   {string=} class_str the classname(s) to add, space-separated; nonempty string
-   * @returns {Element} `this`
-   */
-  addClass(class_str = '') {
-    if (class_str.trim() === '') return this
-    try {
-      return this.class(`${this.class()} ${class_str}`) // throws an error if there is no `[class]` attribute
-    } catch (e) {
-      return this.class(class_str)
-    }
-  }
-
-  /**
-   * @summary Remove one or more tokens from this element’s `class` attribute.
-   * @description Examples:
-   * ```js
-   * this.removeClass('o-Object') // remove one class
-   * this.removeClass('o-Object', 'c-Component') // remove multiple classes
-   * this.removeClass()           // do nothing; return `this`
-   * ```
-   * @version LOCKED
-   * @param   {...string} classname classname to remove; must not contain spaces
-   * @returns {Element} `this`
-   */
-  removeClass(...classname) {
-    try {
-      return this.class((this.class())
-        .split(' ')
-        .filter((str) => !classname.includes(str))
-        .join(' ')
-      )
-    } catch (e) {
-      return this
-    }
-  }
 
   /**
    * @summary Shortcut method for setting/getting the `style` attribute of this element.
-   * @description Examples:
-   * ```js
+   * @description
+   *
+   * @example
    * this.style('background:none; font-weight:bold;')      // set the [style] attribute, with a string
    * this.style({background:'none', 'font-weight':'bold'}) // set the [style] attribute, with an object
    * this.style(function () { return 'background:none; font-weight:bold;' }) // set the [style] attribute, with a function: the function must return a string
+   * this.style('font-family: \'Helvetica Neue\';')        // quotes must be escaped (or you could use a template literal)
    * this.style(null)                                      // remove the [style] attribute
    * this.style({})                                        // remove the [style] attribute
    * this.style('')                                        // set the [style] attribute to the empty string: `[style=""]`
-   * this.style()                                          // return the value of [style], as a string
-   * ```
-   * @version STABLE
+   * this.style()                                          // return the value of [style], as a string (or `null` if absent)
+   *
    * @param   {(Element.ValueArg|Object<string>)=} arg the value to set for the `style` attribute; not a number or boolean though
-   * @returns {(Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
+   * @returns {(xjs.Element|Object<string>|string=)} `this` if setting the style, else the value of the style (or `undefined` if not set)
    * @throws  {TypeError} if the given argument is a number or boolean
    */
   style(arg) {
@@ -384,9 +227,10 @@ class Element {
    *
    * If no arguments are provided, or if the key is `''`, this method does nothing and returns `this`.
    *
-   * Examples:
-   * ```js
-   * this.css('background', 'red')                       // set the `background` property
+   * @example
+   * this.css('background', 'red')                       // set a property (string)
+   * this.css('content', false)                          // set a property (boolean)
+   * this.css('opacity', 0.5)                            // set a property (number)
    * this.css('font-weight', '')                         // remove the `font-weight` property
    * this.css('text-align')                              // get the value of the `text-align` property (or `undefined` if it had not been set)
    * this.css('font-weight', null)                       // remove the `font-weight` property
@@ -399,12 +243,10 @@ class Element {
    *   'text-align': '',   // remove the `text-align` property
    * })
    * this.css()                                          // do nothing; return `this`
-   * ```
    *
-   * @version STABLE
    * @param   {(string|Object<Element.ValueArg>)=} prop the name of the css property to set or get, or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to set, or `null` to remove the value, or `undefined` (or not provided) to get it
-   * @returns {(Element|string)} `this` if setting a property, else the value of the property specified
+   * @returns {(xjs.Element|string)} `this` if setting a property, else the value of the property specified
    * @throws  {TypeError} if the given property is not a string or object
    * @throws  {TypeError} if the given property has been removed or not set
    */
@@ -438,10 +280,22 @@ class Element {
    * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
    * @description Shorthand method for <code>this.attr(`data-${name}`, value)</code>.
    * Providing no arguments does nothing and returns `this`.
-   * @version LOCKED
+   *
+   * @example
+   * this.data('type','division') // <div data-type="division"></div>
+   *
+   * @example
+   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
+   * this.data('type') === 'division'                       // true
+   * this.data('quality')                                   // null
+   *
+   * @example
+   * this.attr('data-type','division').data('class','null') // <div data-type="division" data-class="null"></div>
+   * this.data('type', null)                                // <div data-class="null"></div>
+   *
    * @param   {(string|Object<Element.ValueArg>)=} name the suffix of the `[data-*]` attribute (nonempty string), or an object with Element.ValueArg type values
    * @param   {Element.ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @returns {(Element|string)} `this` if setting an attribute, else the value of the attribute specified
+   * @returns {(xjs.Element|string)} `this` if setting an attribute, else the value of the attribute specified
    */
   data(name = '', value) {
     // REVIEW: object lookups too complicated here; using standard switches
@@ -473,116 +327,15 @@ class Element {
    * ```
    * @typedef {(?Element|string|Array<(?Element|string)>)} Element.ContentArg
    */
-  /**
-   * @summary Add content to this element.
-   * @description Multiple arguments may be passed, and each argument may be a (nullable) Element or a string.
-   * Or, a single array of such entries may be passed as an argument.
-   * @version STABLE
-   * @param   {...Element.ContentArg} contents the contents to add
-   * @returns {Element} `this`
-   * @throws  {TypeError} if this element is void
-   */
-  addContent(...contents) {
-    if (this.isVoid) throw new TypeError('Cannot add contents to a void element.')
-    if (xjs.Object.typeOf(contents[0]) === 'array') return this.addContent(...contents[0])
-    this._contents += contents.map((c) =>
-      (c instanceof Element) ? c.view.html() : c
-    ).join('')
-    return this
-  }
-
-  /**
-   * @summary Add (nullable) elements as children of this element.
-   * @version DEPRECATED
-   * @deprecated
-   * @param   {Array<?Element>} elems array of Element objects (or `null`) to add
-   * @returns {Element} `this`
-   */
-  addElements(elems) {
-    console.warn('`Element#addElements` is DEPRECATED: use `Element#addContent` instead.')
-    return this.addContent(elems)
-  }
-
-  /**
-   * Render this object as a string.
-   * Override {@link Object#toString}.
-   * @override
-   * @version EXPERIMENTAL
-   * @returns {string} a string representation of this object
-   */
-  toString() {
-    return JSON.stringify({
-      name: this.name,
-      void: this.isVoid,
-      attributes: xjs.Object.cloneDeep(this.attributes),
-      contents: this.contents,
-    })
-  }
-
-  /**
-   * @summary Render this element as an HTML string.
-   * @description Shortcut for `this.view.html()`.
-   * @version STABLE
-   * @returns {string} an HTML string representing this element
-   */
-  html() {
-    return this.view.html()
-  }
-
-
-  /**
-   * @summary Render this DOM Element in XHTML syntax.
-   * @see Element.VIEW
-   * @version EXPERIMENTAL
-   * @type {View}
-   */
-  get view() {
-    /**
-     * @summary This view object is a set of functions returning XHTML output.
-     * @description Available displays:
-     * - `Element#view.default()` - default display
-     * @namespace Element.VIEW
-     * @type {View}
-     */
-    /**
-     * Default display. Takes no arguments.
-     * @summary Call `Element#view()` to render this display.
-     * @function Element.VIEW.default
-     * @version STABLE
-     * @returns {string} HTML output
-     */
-    return new View(function () { return this.toString() }, this) // TODO use `null` on extrajs-view@1.1.0
-      /**
-       * Return the default XHTML syntax representing this Element.
-       * @summary Call `Element#view.html()` to render this display.
-       * @function Element.VIEW.html
-       * @version STABLE
-       * @returns {string} HTML output
-       */
-      .addDisplay(function html() {
-        if (this.isVoid) return `<${this.name}${this._attributes.toAttrString()}/>`
-        return `<${this.name}${this._attributes.toAttrString()}>${this.contents}</${this.name}>`
-      })
-  }
 
 
 
-  /**
-   * @summary Simple shortcut function to concatenate elements.
-   * @description This method calls `.view.html()` on each argument and concatenates the strings,
-   * or, if a single array is given, does the same to each entry in the array.
-   * `null` is allowed as an argument (or as an entry in the array).
-   * If an array is given, only one array is allowed.
-   * @version DEPRECATED
-   * @param   {...?Element|Array<?Element>} elements one or more elements to output, or an array of elements
-   * @returns {string} the combined HTML output of all the arguments/array entries
-   */
-  static concat(...elements) {
-    if (xjs.Object.typeOf(elements[0]) === 'array') return Element.concat(...elements[0])
-    return elements
-      .filter((el) => el !== null)
-      .map((el) => el.view.html()).join('')
-  }
+
+
+
+
+
+
 
   /**
    * NOTE: TYPE DEFINITION
@@ -622,9 +375,22 @@ class Element {
    */
   /**
    * @summary Return a new Element object, given JSON data.
-   * @version EXPERIMENTAL
+   * @example
+   * Element.fromJSON({
+   *   "name": "a",
+   *   "attr": {
+   *     "style": "color:green;",
+   *     "href": "#0",
+   *     "aria-checked": false,
+   *     "datetime": 2017
+   *   },
+   *   "content": [
+   *     "click ",
+   *     { "name": "em", "content": ["here"] }
+   *   ]
+   * }) // <a style="color:green;" href="#0" aria-checked="false" datetime="2017">click <em>here</em></a>
    * @param   {Element.ElementJSON} $elem data for the Element object to construct
-   * @returns {Element} a new Element object representing the given data
+   * @returns {xjs.Element} a new Element object representing the given data
    */
   static fromJSON($elem) {
     return new Element($elem.name, $elem.is_void)
@@ -739,7 +505,6 @@ class Element {
    * }
    * ```
    *
-   * @version EXPERIMENTAL
    * @param   {*} thing the data to mark up
    * @param   {!Object=} options configurations for the output
    * @param   {boolean=} options.ordered if the argument is an array, specify `true` to output an `<ol>` instead of a `<ul>`
