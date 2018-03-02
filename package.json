@@ -1,10 +1,11 @@
 {
   "name": "extrajs-dom",
-  "version": "4.0.0-beta",
-  "description": "A Javascript implementation of DOM.",
+  "version": "4.0.0",
+  "description": "Javascript extensions to DOM.",
   "main": "index.js",
   "scripts": {
-    "test": "node test/index.js"
+    "build": "gulp build",
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,7 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
-    "extrajs": "^0.11.0-beta",
+    "extrajs": "^0.11.0",
     "extrajs-view": "^1.1.2",
     "jsdom": "^11.6.2"
   },
