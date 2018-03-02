@@ -57,10 +57,11 @@ const createMyLink = (url, text) =>
 - Method chaining
 - `xjs.Node#empty()` removes all children
 - `xjs.Node#trimInner()` removes all empty and whitespace-only Text node descendants
-- `xjs.Node#exe()` takes a custom function for any unsupported features you might need
+- `xjs.Node#exe()` executes a custom function for any unsupported features you might need
 - `xjs.Element#attr()` sets/removes multiple attributes in one step
 - `xjs.Element#attr()` and all other **attribute reflectors** (e.g. `#href()`) may take a function argument
 - `xjs.Element#replaceClassString()` replaces string fragments in the `[class]` attribute
 - `xjs.DocumentFragment#innerHTML()` does what you would expect
-- Render components with `xjs.HTMLTemplateElement` (see that page’s docs for details)
+- Render components with `xjs.HTMLTemplateElement`
+  (see [“Create a component with extrajs-dom and jsdom”](https://github.com/chharvey/extrajs-view/wiki/Create-a-component-with-extrajs-dom-and-jsdom) for details)
 - Populate `<ol>`, `<ul>`, `<tbody>`, and `<tr>` as lists of data *(coming in v4.1)*

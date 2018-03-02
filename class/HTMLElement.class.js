@@ -70,7 +70,7 @@ xjs.HTMLElement = class extends xjs.Element {
    *
    * When the given key is a string, it represents the CSS property name to set or get.
    * It must be given in **kebab-case** format (e.g. `'text-align'`), as specified in
-   * {@link https://www.w3.org/TR/CSS2/syndata.html#declaration|CSS 2.1 | Declarations and properties}.
+   * {@link https://w3.org/TR/CSS2/syndata.html#declaration|CSS 2.1 | Declarations and properties}.
    *
    * If the key is a string and the value is a non-null {@link xjs.Element~ValueArg} type,
    * *except for the empty string `''`,*

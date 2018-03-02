@@ -88,7 +88,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
   }
   /**
-   * @summary Synchronous version of {@link HTMLTemplateElement.fromFile}.
+   * @summary Synchronous version of {@link xjs.HTMLTemplateElement.fromFile}.
    * @param   {string} filepath the path to the file
    * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
