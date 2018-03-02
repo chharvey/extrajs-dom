@@ -142,13 +142,13 @@ xjs.Element = class extends xjs.Node {
    *
    * @example
    * this.attr('itemtype', 'Person') // set an attribute (string)
-   * this.attr('data-nthchild', 3)   // set an attribute (number)
-   * this.attr('data-block', true)   // set an attribute (boolean)
+   * this.attr('data-nthchild', 3)   // set an attribute (number)  (the value will be `"3"`)
+   * this.attr('data-block', true)   // set an attribute (boolean) (the value will be `"true"`)
    * this.attr('itemscope', '')      // set a boolean attribute
-   * this.attr('itemtype')           // get the value of the attribute (`null` if it had not been set)
+   * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this element’s context
+   * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
    * this.attr('itemprop', null)     // remove an attribute
-   * this.attr('data-id', function () { return this.id() })                    // set an attribute using this xjs.Element’s context
-   * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using another given context
+   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
    * this.attr({                     // set/remove multiple attributes all at once
    *   itemprop : 'name',
    *   itemscope: '',
@@ -163,7 +163,7 @@ xjs.Element = class extends xjs.Node {
    * @param   {(string|?Object<xjs.Element~ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
    * @param   {xjs.Element~ValueArg=} value the value to assign the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
+   * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    * @throws  {TypeError} if the given attribute is not a string or nullable object
    */
   attr(attr = '', value, this_arg = this) {
@@ -190,14 +190,17 @@ xjs.Element = class extends xjs.Node {
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs.Element#attr}.
    * @example
-   * this.id('section1') // set the [id] attribute
+   * this.id('section1') // set the [id] attribute (string)
+   * this.id(42)         // set the [id] attribute (number)  (the value will be `"42"`)
+   * this.id(false)      // set the [id] attribute (boolean) (the value will be `"false"`)
    * this.id('')         // set the [id] attribute to the empty string: `[id=""]`
-   * this.id(function () { return this.name }) // set the [id] attribute using a function
+   * this.id(function () { return this.tagName })                             // set the [id] attribute using a function in this element’s context
+   * this.id(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [id] attribute using a function in another given context
    * this.id(null)       // remove the [id] attribute
-   * this.id()           // return the value of [id]
+   * this.id()           // get the value of [id] (or `null` if it had not been set)
    * @param   {?xjs.Element~ValueArg=} value the value to set for the `id` attribute
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|string)} `this` if setting; the ID if getting
+   * @returns {(xjs.Element|?string)} `this` if setting; the ID if getting (or `null` if it hasn’t been set)
    */
   id(value, this_arg = this) {
     if (arguments.length) {
@@ -212,14 +215,17 @@ xjs.Element = class extends xjs.Node {
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs.Element#attr}.
    * @example
-   * this.class('o-Object c-Component') // set the [class] attribute
+   * this.class('o-Object c-Component') // set the [class] attribute (string)
+   * this.class(42)                     // set the [class] attribute (number)  (the value will be `"42"`)
+   * this.class(false)                  // set the [class] attribute (boolean) (the value will be `"false"`)
    * this.class('')                     // set the [class] attribute to the empty string: `[class=""]`
-   * this.class(function () { return this.name }) // set the [class] attribute using a function
+   * this.class(function () { return this.tagName })                             // set the [class] attribute using a function in this element’s context
+   * this.class(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [class] attribute using a function in another given context
    * this.class(null)                   // remove the [class] attribute
-   * this.class()                       // return the value of [class]
+   * this.class()                       // return the value of [class] (or `null` if it had not been set)
    * @param   {?xjs.Element~ValueArg=} value the value to set for the `class` attribute
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|string)} `this` if setting; the class if getting
+   * @returns {(xjs.Element|string)} `this` if setting; the class if getting (or `null` if it hasn’t been set)
    */
   class(value, this_arg = this) {
     if (arguments.length) {
@@ -230,12 +236,12 @@ xjs.Element = class extends xjs.Node {
   }
 
   /**
-   * @summary Append tokens to this element’s `[class]` attribute.
-   * @description Argument(s) can also be space-separate tokens.
+   * @summary Append one or more tokens to this element’s `[class]` attribute.
+   * @description Argument(s) can also be space-separated tokens.
    * @example
-   * this.addClass('o-Object', 'c-Component')          // add tokens to the [class] attribute
+   * this.addClass('o-Object', 'c-Component')          // add token(s) to the [class] attribute
    * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
-   * this.addClass()                       // do nothing; return `this`
+   * this.addClass()                                   // do nothing; return `this`
    * @param   {...string=} tokens the classname(s) to add
    * @returns {xjs.Element} `this`
    */
@@ -250,11 +256,11 @@ xjs.Element = class extends xjs.Node {
 
   /**
    * @summary Remove one or more tokens from this element’s `[class]` attribute.
-   * @description Argument(s) can also be space-separate tokens.
+   * @description Argument(s) can also be space-separated tokens.
    * @example
-   * this.removeClass('o-Object', 'c-Component')          // remove tokens from the [class] attribute
+   * this.removeClass('o-Object', 'c-Component')          // remove token(s) from the [class] attribute
    * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
-   * this.removeClass()           // do nothing; return `this`
+   * this.removeClass()                                   // do nothing; return `this`
    * @param   {...string} tokens classname(s) to remove
    * @returns {xjs.Element} `this`
    */
