@@ -145,7 +145,7 @@ xjs.Element = class extends xjs.Node {
    * this.attr('data-nthchild', 3)   // set an attribute (number)  (the value will be `"3"`)
    * this.attr('data-block', true)   // set an attribute (boolean) (the value will be `"true"`)
    * this.attr('itemscope', '')      // set a boolean attribute
-   * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this element’s context
+   * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
    * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
    * this.attr('itemprop', null)     // remove an attribute
    * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
@@ -161,7 +161,7 @@ xjs.Element = class extends xjs.Node {
    * this.attr(null) // do nothing; return `this`
    *
    * @param   {(string|?Object<xjs.Element~ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
-   * @param   {xjs.Element~ValueArg=} value the value to assign the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
+   * @param   {xjs.Element~ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    * @throws  {TypeError} if the given attribute is not a string or nullable object
@@ -194,7 +194,7 @@ xjs.Element = class extends xjs.Node {
    * this.id(42)         // set the [id] attribute (number)  (the value will be `"42"`)
    * this.id(false)      // set the [id] attribute (boolean) (the value will be `"false"`)
    * this.id('')         // set the [id] attribute to the empty string: `[id=""]`
-   * this.id(function () { return this.tagName })                             // set the [id] attribute using a function in this element’s context
+   * this.id(function () { return this.tagName })                             // set the [id] attribute using a function in this xjs.Element’s context
    * this.id(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [id] attribute using a function in another given context
    * this.id(null)       // remove the [id] attribute
    * this.id()           // get the value of [id] (or `null` if it had not been set)
@@ -219,7 +219,7 @@ xjs.Element = class extends xjs.Node {
    * this.class(42)                     // set the [class] attribute (number)  (the value will be `"42"`)
    * this.class(false)                  // set the [class] attribute (boolean) (the value will be `"false"`)
    * this.class('')                     // set the [class] attribute to the empty string: `[class=""]`
-   * this.class(function () { return this.tagName })                             // set the [class] attribute using a function in this element’s context
+   * this.class(function () { return this.tagName })                             // set the [class] attribute using a function in this xjs.Element’s context
    * this.class(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [class] attribute using a function in another given context
    * this.class(null)                   // remove the [class] attribute
    * this.class()                       // return the value of [class] (or `null` if it had not been set)

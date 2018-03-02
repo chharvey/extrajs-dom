@@ -64,19 +64,22 @@ xjs.HTMLElement = class extends xjs.Element {
   }
 
   /**
-   * @summary Set/get/remove a `[data-*]` custom attribute with a name and a value.
+   * @summary {@link HTMLElement.dataset}, with extended functionality.
    * @description
    * This method is similar to {@link xjs.Element#attr} in that it sets attributes,
    * except that this method only sets attributes starting with the `data-` prefix, and that
    * the attribute names passed to this method differ from the those passed to {@link xjs.Element#attr}.
    *
-   * When the key given is a string, it represents the data- attribute to set or get.
+   * When the given key is a string, it represents the data- attribute to set or get.
    * It must not include the prefix `'data-'`, and it must be given in **camelCase** format (e.g. `'hasJs'`), as specified in
    * {@link https://w3.org/TR/html52/dom.html#dom-domstringmap-__setter__-name-value-name|HTML 5.2 | DOMStringMap setter}.
    *
    * Note that if you wish to use the HTML attribute syntax **kebab-case** format, as specified in
    * {@link https://w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
    * you should use the {@link xjs.Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
+   *
+   * If the key is a string and the value is a non-null {@link xjs.Element~ValueArg} type,
+   * then the data- attribute will be set (or modified) with the result of the given value.
    *
    * If the key is a string and the value is `null,`
    * then the data- attribute identified by the key is removed from this element.
@@ -96,20 +99,22 @@ xjs.HTMLElement = class extends xjs.Element {
    * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
    *
    * @example
-   * this.data('typeof', 'division') // set the `[data-typeof]` attribute to `"division"`
+   * this.data('typeof', 'division') // set the `[data-typeof]` attribute (string)
+   * this.data('typeof', 42)         // set the `[data-typeof]` attribute (number)  (the value will be `"42"`)
+   * this.data('typeof', true)       // set the `[data-typeof]` attribute (boolean) (the value will be `"true"`)
    * this.data('typeOf', 'division') // set the `[data-type-of]` attribute
+   * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute *(probably not intended)*
+   * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
+   * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
+   * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using a function in another given context
+   * this.data('instanceOf', null)   // remove the `[data-instance-of]` attribute
    * this.data('instanceOf')         // get the value of the `[data-instance-of]` attribute (`null` if it had not been set)
-   * this.data('id', null)           // remove the `[data-id]` attribute
-   * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute (probably not intended)
-   * this.data('id', function () { return this.id() }) // set the `[data-id]` attribute using this xjs.HTMLElement’s context
-   * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using another given context
-   * this.attr({                     // set/remove multiple `[data-*]` attributes all at once
+   * this.data({                     // set/remove multiple `[data-*]` attributes all at once
    *   prop  : 'name',
    *   scope : '',
    *   typeOf: 'Person',
    *   id    : null,
    * })
-   *
    * this.data()     // do nothing; return `this`
    * this.data('')   // do nothing; return `this`
    * this.data({})   // do nothing; return `this`
@@ -119,7 +124,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {(string|?Object<xjs.Element~ValueArg>)=} data_attr the suffix of the `[data-*]` attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
    * @param   {xjs.Element~ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
    * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute doesn’t exist)
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    * @throws  {TypeError} if the given attribute is not a string or nullable object
    */
   data(data_attr = '', value, this_arg = this) {
