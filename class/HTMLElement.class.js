@@ -64,6 +64,92 @@ xjs.HTMLElement = class extends xjs.Element {
   }
 
   /**
+   * @summary {@link HTMLElement.style}, with extended functionality.
+   * @description
+   * This method manipulates an element’s associated {@link CSSStyleDeclaration} object.
+   *
+   * When the given key is a string, it represents the CSS property name to set or get.
+   * It must be given in **kebab-case** format (e.g. `'text-align'`), as specified in
+   * {@link https://www.w3.org/TR/CSS2/syndata.html#declaration|CSS 2.1 | Declarations and properties}.
+   *
+   * If the key is a string and the value is a non-null {@link xjs.Element~ValueArg} type,
+   * *except for the empty string `''`,*
+   * then the CSS property will be set (or modified) with the result of the given value.
+   *
+   * If the key is a string and the value is `null` or the empty string `''`,
+   * then the CSS property identified by the key is removed from this element.
+   *
+   * If the key is a string and the value is not provided (or `undefined`),
+   * then this method returns the string value of the CSS property identified by the key.
+   * If no such property exists, then `null` is returned.
+   * (Note that css properties default to the `unset` value---either `inherit` or `initial`,
+   * depending on whether the property is inherited or not.)
+   *
+   * If an object is provided as the key, then no argument may be provided as the value.
+   * The object must have values of the {@link xjs.Element~ValueArg} type;
+   * thus for each key-value pair in the object, this method assigns corresponding
+   * CSS properties. You may use this method with a single object argument to set and/or remove
+   * multiple properties (using `null` to remove).
+   *
+   * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
+   *
+   * @example
+   * this.style('background', 'red')      // set the `background` property (string) (the value will be `red`)
+   * this.style('opacity', 0.5)           // set the `opacity` property (number)
+   * this.style('content', false)         // set the `content` property (boolean)
+   * this.style('content', '\'truthy\'')  // set the `content` property (quoted string, must be escaped) (the value will be `'truthy'`)
+   * this.style('content', '"truthy"')    // or you could use double-quotes
+   * this.style('content', `'truthy'`)    // or you could use a template literal
+   * this.style('font-weight', 'bold')    // set the `font-weight` property
+   * this.style('justify-content', function () { return this.data('jc') })                 // set the `justify-content` property using a function in this xjs.HTMLElement’s context
+   * this.style('justify-content', function () { return this.jc }, { jc: 'space-around' }) // set the `justify-content` property using a function in another given context
+   * this.style('font-style', null)       // remove the `font-style` property
+   * this.style('font-style', '')         // remove the `font-style` property // *note that this syntax differs from the typical syntax shown by xjs.Element#attr
+   * this.style('text-align')             // get the value of the `text-align` property (or `null` if it had not been set)
+   * this.style({                         // set/remove multiple properties all at once
+   *   background  : 'red',
+   *   margin      : '1rem',
+   *   opacity     : 0.5,
+   *   content     : `''`, // sets the css `content: '';`
+   *   visibility  : null, // remove the `visibility` property
+   *   'text-align': '',   // remove the `text-align` property
+   * })
+   * this.style()     // do nothing; return `this`
+   * this.style('')   // do nothing; return `this`
+   * this.style({})   // do nothing; return `this`
+   * this.style(null) // do nothing; return `this`
+   *
+   * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
+   * @param   {(string|?Object<xjs.Element~ValueArg>)=} prop the name of the css property to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
+   * @param   {xjs.Element~ValueArg=} value the value to assign to the property, or `null` or `''` to remove it, or `undefined` (or not provided) to get it
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|string)} `this` if setting a property, else the value of the property specified (or `null` if that property hasn’t been set)
+   * @throws  {TypeError} if the given property is not a string or nullable object
+   */
+  style(prop = '', value, this_arg = this) {
+    // REVIEW: object lookups too complicated here; using standard switches
+    switch (xjs.Object.typeOf(prop)) {
+      case 'null': break;
+      case 'string':
+        if (prop.trim() === '') break;
+        switch (xjs.Object.typeOf(value)) {
+          case 'function' : return this.style(prop, value.call(this_arg));
+          case 'undefined': return this.node.style.getPropertyValue(prop) || null;
+          default         :
+            switch (value) {
+              case ''  :
+              case null: this.node.style.removeProperty(prop); break;
+              default  : this.node.style.setProperty(prop, value); break; // string, boolean, number, infinite, NaN
+            }
+        }
+        break;
+      case 'object': for (let i in prop) this.style(i, prop[i]); break;
+      default      : throw new TypeError('Provided property must be a string or (nullable) object.')
+    }
+    return this
+  }
+
+  /**
    * @summary {@link HTMLElement.dataset}, with extended functionality.
    * @description
    * This method is similar to {@link xjs.Element#attr} in that it sets attributes,
