@@ -30,12 +30,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {xjs.Element~ValueArg=} val the value to set
    * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  title(value) {
-    if (arguments.length) {
-      this.node.title = value
-      return this
-    } else return this.node.title
-  }
+  title(val) { return this.attr('title', val) }
 
   /**
    * @summary Reflect the `lang` content attribute.
@@ -43,12 +38,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {xjs.Element~ValueArg=} val the value to set
    * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  lang(value) {
-    if (arguments.length) {
-      this.node.lang = value
-      return this
-    } else return this.node.lang
-  }
+  lang(val) { return this.attr('lang', val) }
 
   /**
    * @summary Reflect the `dir` content attribute.
@@ -56,12 +46,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {xjs.Element~ValueArg=} val the value to set
    * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  dir(value) {
-    if (arguments.length) {
-      this.node.dir = value
-      return this
-    } else return this.node.dir
-  }
+  dir(val) { return this.attr('dir', val) }
 
   /**
    * @summary {@link HTMLElement.style}, with extended functionality.
@@ -241,12 +226,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {xjs.Element~ValueArg=} val the value to set
    * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  hidden(value) {
-    if (arguments.length) {
-      this.node.hidden = value
-      return this
-    } else return this.node.hidden
-  }
+  hidden(val) { return this.attr('hidden', val) }
 
   /**
    * @summary Reflect the `tabindex` content attribute.
@@ -254,12 +234,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * @param   {xjs.Element~ValueArg=} val the value to set
    * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  tabIndex(value) {
-    if (arguments.length) {
-      this.node.tabIndex = value
-      return this
-    } else return this.node.tabIndex
-  }
+  tabIndex(val) { return this.attr('tabindex', val) }
 }
 
 module.exports = xjs.HTMLElement
