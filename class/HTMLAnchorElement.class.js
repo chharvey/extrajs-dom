@@ -25,56 +25,56 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
   /**
    * @summary Reflect the `href` content attribute.
    * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
-   * @param   {string=} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   href(val) { return this.attr('href', val) }
 
   /**
    * @summary Reflect the `target` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   target(val) { return this.attr('target', val) }
 
   /**
    * @summary Reflect the `download` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-download
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   download(val) { return this.attr('download', val) }
 
   /**
    * @summary Reflect the `rel` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   rel(val) { return this.attr('rel', val) }
 
   /**
    * @summary Reflect the `rev` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   rev(val) { return this.attr('rel', val) }
 
   /**
    * @summary Reflect the `hreflang` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   hreflang(val) { return this.attr('hreflang', val) }
 
   /**
    * @summary Reflect the `type` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
-   * @param   {string} val the value to set
-   * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @returns {(xjs.HTMLAnchorElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
   type(val) { return this.attr('type', val) }
 }
