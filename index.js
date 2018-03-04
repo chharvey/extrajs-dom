@@ -12,6 +12,7 @@ module.exports = {
   HTMLTableSectionElement: require('./class/HTMLTableSectionElement.class.js'),
   HTMLTableRowElement    : require('./class/HTMLTableRowElement.class.js'),
   HTMLAnchorElement: require('./class/HTMLAnchorElement.class.js'),
+  HTMLDataElement    : require('./class/HTMLDataElement.class.js'),
   HTMLTimeElement    : require('./class/HTMLTimeElement.class.js'),
   HTMLTemplateElement: require('./class/HTMLTemplateElement.class.js'),
 }
