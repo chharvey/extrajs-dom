@@ -25,11 +25,10 @@ xjs.HTMLDataElement = class extends xjs.HTMLElement {
    * @summary Reflect the `value` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
    * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns {(xjs.HTMLDataElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  value(val) {
-    return this.attr('value', val)
-  }
+  value(val, this_arg = this) { return this.attr('value', val, this_arg) }
 }
 
 module.exports = xjs.HTMLDataElement

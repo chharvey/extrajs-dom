@@ -25,43 +25,31 @@ xjs.HTMLElement = class extends xjs.Element {
   // GLOBAL ATTRIBUTES
   ////////////////////
   /**
-   * @summary {@link HTMLElement#title}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `title` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  title(value) {
-    if (arguments.length) {
-      this.node.title = value
-      return this
-    } else return this.node.title
-  }
+  title(val, this_arg = this) { return this.attr('title', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#lang}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `lang` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  lang(value) {
-    if (arguments.length) {
-      this.node.lang = value
-      return this
-    } else return this.node.lang
-  }
+  lang(val, this_arg = this) { return this.attr('lang', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#dir}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `dir` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  dir(value) {
-    if (arguments.length) {
-      this.node.dir = value
-      return this
-    } else return this.node.dir
-  }
+  dir(val, this_arg = this) { return this.attr('dir', val, this_arg) }
 
   /**
    * @summary {@link HTMLElement.style}, with extended functionality.
@@ -236,30 +224,22 @@ xjs.HTMLElement = class extends xjs.Element {
   // USER INTERACTION
   ///////////////////
   /**
-   * @summary {@link HTMLElement#hidden}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {boolean=} value the value to set
-   * @returns {(xjs.HTMLElement|boolean)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `hidden` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  hidden(value) {
-    if (arguments.length) {
-      this.node.hidden = value
-      return this
-    } else return this.node.hidden
-  }
+  hidden(val, this_arg = this) { return this.attr('hidden', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#tabIndex}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {number=} value the value to set
-   * @returns {(xjs.HTMLElement|number)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `tabindex` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  tabIndex(value) {
-    if (arguments.length) {
-      this.node.tabIndex = value
-      return this
-    } else return this.node.tabIndex
-  }
+  tabIndex(val, this_arg = this) { return this.attr('tabindex', val, this_arg) }
 }
 
 module.exports = xjs.HTMLElement

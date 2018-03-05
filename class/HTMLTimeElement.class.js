@@ -25,11 +25,12 @@ xjs.HTMLTimeElement = class extends xjs.HTMLElement {
    * @summary Reflect the `datetime` content attribute.
    * @description This method accepts {@link Date} objects when setting. When getting, it will always return a string.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmltimeelement-datetime
-   * @param   {(string|Date)=} val the value to set
-   * @returns {(xjs.HTMLTimeElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {(xjs.Element~ValueArg|Date)=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLTimeElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  dateTime(val) {
-    return this.attr('datetime', (val instanceof Date) ? val.toISOString() : val)
+  dateTime(val, this_arg = this) {
+    return this.attr('datetime', (val instanceof Date) ? val.toISOString() : val, this_arg)
   }
 }
 
