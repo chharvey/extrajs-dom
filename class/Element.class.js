@@ -241,6 +241,7 @@ xjs.Element = class extends xjs.Node {
    * @example
    * this.addClass('o-Object', 'c-Component')          // add token(s) to the [class] attribute
    * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
+   * this.addClass('')                                 // do nothing; return `this`
    * this.addClass()                                   // do nothing; return `this`
    * @param   {...string=} tokens the classname(s) to add
    * @returns {xjs.Element} `this`
@@ -260,6 +261,7 @@ xjs.Element = class extends xjs.Node {
    * @example
    * this.removeClass('o-Object', 'c-Component')          // remove token(s) from the [class] attribute
    * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
+   * this.removeClass('')                                 // do nothing; return `this`
    * this.removeClass()                                   // do nothing; return `this`
    * @param   {...string} tokens classname(s) to remove
    * @returns {xjs.Element} `this`
