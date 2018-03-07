@@ -1,6 +1,6 @@
 {
   "name": "extrajs-dom",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Javascript extensions to DOM.",
   "main": "index.js",
   "scripts": {
