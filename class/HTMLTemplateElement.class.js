@@ -16,11 +16,13 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
    * @summary A rendering function.
    * @description This function’s signature must be `(DocumentFragment, *) => undefined`.
-   * It MUST take (1) a document fragment and (2) any data, and optionally modify the fragment using the data.
-   * It SHOULD not have a `this` context, and it SHOULD not have a return value.
-   * If the function does have a `this` context, a `this_arg` may be provided upon calling `xjs.HTMLTemplateElement#render()`.
+   * Its arguments MUST be (1) a document fragment and (2) any data, and
+   * it may optionally modify the fragment using the data.
+   * It SHOULD NOT have a `this` context, and it SHOULD NOT have a return value.
+   * If this function does have a `this` context, a `this_arg` may be passed to
+   * {@link xjs.HTMLTemplateElement#render}.
    * Any return value of the function does nothing.
-   * @function xjs.HTMLTemplateElement~RenderingFunction
+   * @typedef {function} xjs.HTMLTemplateElement~RenderingFunction
    * @param   {DocumentFragment} frag a document fragment
    * @param   {*} data data
    */
@@ -65,7 +67,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
    * @summary Render this template with some data.
    * @param   {*=} data the data to fill
-   * @param   {*=} this_arg an object to take the context of `this`, if any
+   * @param   {*=} this_arg a `this` context, if any, in which a {@link xjs.HTMLTemplateElement~RenderingFunction} is called
    * @returns {DocumentFragment} the rendered output
    */
   render(data, this_arg = null) {
