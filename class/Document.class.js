@@ -22,4 +22,5 @@ xjs.Document = class extends xjs.Node {
   get node() { return super.node }
 }
 
+
 module.exports = xjs.Document

@@ -2,7 +2,7 @@ const jsdom = require('jsdom')
 
 const xjs = {
   ...require('extrajs'),
-  ...require('./index.js'),
+  ...require('../index.js'),
 }
 
 let document = new jsdom.JSDOM(`

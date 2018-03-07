@@ -5,7 +5,7 @@ const xjs = {
 
 /**
  * Wrapper for HTML `a` element.
- * @see https://www.w3.org/TR/html/textlevel-semantics.html#htmlanchorelement
+ * @see https://www.w3.org/TR/html52/textlevel-semantics.html#htmlanchorelement
  * @extends xjs.HTMLElement
  */
 xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
@@ -24,7 +24,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `href` content attribute.
-   * @see https://www.w3.org/TR/html52/links.html#element-attrdef-a-href
+   * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
    * @param   {string=} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
@@ -32,6 +32,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `target` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
    * @param   {string} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
@@ -47,7 +48,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `rel` content attribute.
-   * @see https://www.w3.org/TR/html52/links.html#element-attrdef-a-rel
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
    * @param   {string} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
@@ -55,7 +56,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `rev` content attribute.
-   * @see https://www.w3.org/TR/html52/links.html#element-attrdef-a-rev
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
    * @param   {string} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
@@ -63,6 +64,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `hreflang` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
    * @param   {string} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */
@@ -70,6 +72,7 @@ xjs.HTMLAnchorElement = class extends xjs.HTMLElement {
 
   /**
    * @summary Reflect the `type` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
    * @param   {string} val the value to set
    * @returns {(xjs.HTMLAnchorElement|string)} `this` if setting the attribute, else the value of the attribute
    */

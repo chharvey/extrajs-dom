@@ -9,3 +9,9 @@ gulp.task('docs:api', function () {
 })
 
 gulp.task('build', ['docs:api'])
+
+gulp.task('test', function () {
+  require('./test/HTMLOListElement-populate.test.js');
+  require('./test/HTMLUListElement-populate.test.js');
+  require('./test/HTMLTimeElement-dateTime.test.js');
+})
