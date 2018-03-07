@@ -58,14 +58,19 @@ xjs.HTMLUListElement = class extends xjs.HTMLElement {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
    *   })
+   * new xjs.HTMLUListElement(document.querySelector('ul'))
+   *  .populate(data, function (f, d) {
+   *    // some code involving `this`
+   *  }, other_context)
    *
    * @param   {Array} data any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the rendering function
    * @returns {xjs.HTMLUListElement} `this`
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate(data, renderer = (f,d) => {}) {
+  populate(data, renderer = (f,d) => {}, this_arg = this) {
     let template = this.node.querySelector('template')
     if (template===null) {
       throw new ReferenceError('This <ul> does not have a <template> descendant.')
@@ -76,7 +81,7 @@ xjs.HTMLUListElement = class extends xjs.HTMLElement {
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(
       new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...data.map((datum) => component.render(datum, this)))
+        .append(...data.map((datum) => component.render(datum, this_arg)))
     )
   }
 }
