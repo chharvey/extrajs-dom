@@ -61,9 +61,9 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
    *
    * @param   {Array} data any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
+   * @returns {xjs.HTMLOListElement} `this`
    * @throws  {ReferenceError} if this `<ol>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
-   * @returns {xjs.HTMLOListElement} `this`
    */
   populate(data, renderer = (f,d) => {}) {
     let template = this.node.querySelector('template')
@@ -76,7 +76,7 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(
       new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...data.map((datum) => component.render(datum)))
+        .append(...data.map((datum) => component.render(datum, this)))
     )
   }
 }

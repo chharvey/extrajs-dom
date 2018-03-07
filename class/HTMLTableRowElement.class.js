@@ -66,9 +66,9 @@ xjs.HTMLTableRowElement = class extends xjs.HTMLElement {
    *
    * @param   {Array} data any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
+   * @returns {xjs.HTMLTableRowElement} `this`
    * @throws  {ReferenceError} if this `<tr>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<td>`.
-   * @returns {xjs.HTMLTableRowElement} `this`
    */
   populate(data, renderer = (f,d) => {}) {
     let template = this.node.querySelector('template')
@@ -81,7 +81,7 @@ xjs.HTMLTableRowElement = class extends xjs.HTMLElement {
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(
       new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...data.map((datum) => component.render(datum)))
+        .append(...data.map((datum) => component.render(datum, this)))
     )
   }
 }
