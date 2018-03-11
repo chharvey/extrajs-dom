@@ -47,8 +47,39 @@ xjs.DocumentFragment = class extends xjs.Node {
   }
 
   /**
-   * @function xjs.ParentNode#append
-   * @summary {@link ParentNode#append}, but returns this object when done.
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
+   *   .prepend(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).innerHTML()
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#prepend
+   * @param   {...?(Node|xjs.Node|string)} contents the contents to prepend
+   * @returns {xjs.DocumentFragment} `this`
+   */
+  prepend(...contents) {
+    this.node.prepend(...contents.map((c) =>
+      (c instanceof xjs.Node) ? c.node :
+      (c === null) ? '' : c
+    ))
+    return this
+  }
+
+  /**
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
    * @description This method exists simply for chaining.
    * @example
    * let strong = document.createElement('strong')
@@ -67,11 +98,11 @@ xjs.DocumentFragment = class extends xjs.Node {
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#append
    * @param   {...?(Node|xjs.Node|string)} contents the contents to append
    * @returns {xjs.DocumentFragment} `this`
    */
   append(...contents) {
-    // TODO return xjs.ParentNode.append.call(this, ...contents)
     this.node.append(...contents.map((c) =>
       (c instanceof xjs.Node) ? c.node :
       (c === null) ? '' : c
