@@ -1,4 +1,5 @@
 const xjs = {
+  Object: require('extrajs').Object,
   Element: require('./Element.class.js'),
 }
 
