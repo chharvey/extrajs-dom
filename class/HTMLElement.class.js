@@ -173,10 +173,11 @@ xjs.HTMLElement = class extends xjs.Element {
    * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
    *
    * @example
-   * this.data('typeof', 'division') // set the `[data-typeof]` attribute (string)
+   * this.data('typeof', 'my type')  // set the `[data-typeof]` attribute (string)
    * this.data('typeof', 42)         // set the `[data-typeof]` attribute (number)  (the value will be `"42"`)
    * this.data('typeof', true)       // set the `[data-typeof]` attribute (boolean) (the value will be `"true"`)
-   * this.data('typeOf', 'division') // set the `[data-type-of]` attribute
+   * this.data('typeOf', 'my type')  // set the `[data-type-of]` attribute
+   * this.data('type-of', 'my type') // ERROR! "Uncaught DOMException: Failed to set the 'type-of' property on 'DOMStringMap': 'type-of' is not a valid property name."
    * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute *(probably not intended)*
    * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
    * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
