@@ -131,51 +131,69 @@ xjs.DocumentFragment = class extends xjs.Node {
    * the appended contents will instead be a `Document` object, as defined by
    * {@link https://www.w3.org/TR/html-imports/|HTML Imports}, rather than a `DocumentFragment` object.
    *
+   * Note: `DocumentFragment#querySelectorAll` does *not* traverse inside `<template>` elements,
+   * so any `<link>` elements inside `<template>` elements will be left untouched.
+   * To modify those, you will need to call this method on that `<template>`’s contents (another DocumentFragment).
+   *
    * In the example below,
    * The `link[rel="import"]` in this fragment has `[data-import="template"]`, and so is replaced with
-   * the contents of `template#item-template` in `x-linked-doc.tpl.html`---namely,
-   * a `DocumentFragment` containing the `section` element.
-   * However, if `[data-import="document"]`, then the replaced content would consist of
-   * a `DocumentFragment` (or a `Document`) containing the entirety of `x-linked-doc.tpl.html`,
-   * including both the `template#item-template` along with the `h2`.
+   * the contents of `template#sect-template` in `x-linked-doc.tpl.html`---namely,
+   * a `DocumentFragment` containing only the `section` element.
+   * However, if the link had had `[data-import="document"]`, then the replaced content would consist of
+   * a `DocumentFragment` containing the entirety of `x-linked-doc.tpl.html`,
+   * including both the `h1` along with the `template#sect-template`.
    *
    * @example
+   * // x-linked-doc.tpl.html:
+   * <h1>top-level hed</h1>
+   * <template id="sect-template">
+   *   <section>
+   *     <h2>section hed</h2>
+   *     <p>a graf</p>
+   *   </section>
+   * </template>
+   *
+   * // main.js:
+   * // assume `this` is an `xjs.DocumentFragment` instance.
    * this.innerHTML() === `
    *   <ol>
    *     <template id="list-template">
    *       <li>
-   *         <link rel="import" href="../tpl/x-linked-doc.tpl.html" data-import="template"/>
+   *         <link rel="import" data-import="template" href="./x-linked-doc.tpl.html"/>
    *       </li>
    *     </template>
    *   </ol>
    * `
    *
-   * // x-linked-doc.tpl.html:
-   * <template id="item-template">
-   *   <section>
-   *     <h1>a hed</h1>
-   *     <p>a graf</p>
-   *   </section>
-   * </template>
-   * <h2>another hed</h2>
+   * // This call will do nothing, as there are no direct `<link>` descendants:
+   * // `.querySelectorAll` does not traverse inside `<template>`s.
+   * this.importLinks(__dirname)
+   *
+   * // This call will work as intended.
+   * let innerfrag = new xjs.DocumentFragment(this.node.querySelector('template').content)
+   * innerfrag.importLinks(__dirname)
    *
    * @param   {string} relativepath should always be `__dirname` when called
    * @returns {xjs.DocumentFragment} `this`
    */
   importLinks(relativepath) {
+    let test = jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link')
+    if (!('import' in test)) { // if `HTMLLinkElement#import` is not yet supported
+      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
+      // REVIEW-INDENTATION
     this.node.querySelectorAll('link[rel="import"][data-import]').forEach(function (link) {
-      // if `HTMLLinkElement#import` is not yet supported, `'import' in link` will be false
       const import_switch = {
-        'document': () => ('import' in link) ? link.import.cloneNode(true)                                   : jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
-        'template': () => ('import' in link) ? link.import.querySelector('template').content.cloneNode(true) : xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
+        'document': () => jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
+        'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
         default() { return null },
       }
       let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(null)
-      if (imported && link.parentElement) {
-        link.parentElement.append(imported)
+      if (imported) {
+        link.after(imported)
         link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
       }
     })
+    }
     return this
   }
 
