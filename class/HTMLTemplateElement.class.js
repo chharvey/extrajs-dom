@@ -54,6 +54,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
    */
   content() { return this.node.content }
 
+
   /**
    * @summary Set this template’s rendering function.
    * @param   {xjs.HTMLTemplateElement~RenderingFunction} renderer modifies the template by filling it in with data
