@@ -35,19 +35,19 @@ xjs.DocumentFragment = class extends xjs.Node {
    * @returns {string} a concatenation of all the `outerHTML` and/or data of the fragment’s node children
    */
   innerHTML() {
-    return Array.from(this.node.childNodes).map(function (node) {
-      // https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
-      // TODO make this a static property of Node
-      let mapfn = {
-        1: (el)   => el.outerHTML    , // ELEMENT_NODE
-        2: (node) => null            , // ATTRIBUTE_NODE
-        3: (text) => text.data, // TEXT_NODE
-        8: (comm) => `<!--${c.data}-->`, // COMMENT_NODE
-        11: (frag) => new xjs.DocumentFragment(frag).innerHTML(), // DOCUMENT_FRAGMENT_NODE
-        default: (node) => null,
-      }
-      return (mapfn[node.nodeType] || mapfn.default)(node)
-    }).join('')
+    const {Node} = new jsdom.JSDOM().window
+    // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+    const returned = {
+      [Node.ELEMENT_NODE]          : (el)   => el.outerHTML         ,
+      [Node.ATTRIBUTE_NODE]        : (attr) => null                 ,
+      [Node.TEXT_NODE]             : (text) => text.data            ,
+      [Node.COMMENT_NODE]          : (comm) => `<!--${comm.data}-->`,
+      [Node.DOCUMENT_FRAGMENT_NODE]: (frag) => new xjs.DocumentFragment(frag).innerHTML(),
+      default(node) { return null },
+    }
+    return Array.from(this.node.childNodes).map((node) =>
+      (returned[node.nodeType] || returned.default).call(null, node)
+    ).join('')
   }
 
   /**
