@@ -69,7 +69,7 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
    * @summary Render this template with some data.
    * @param   {*=} data the data to fill
-   * @param   {*=} this_arg a `this` context, if any, in which a {@link xjs.HTMLTemplateElement~RenderingFunction} is called
+   * @param   {?Object=} this_arg a `this` context, if any, in which a {@link xjs.HTMLTemplateElement~RenderingFunction} is called
    * @param   {!Object=} options additional rendering options
    * @todo WARNING: in the next breaking release (v5), the order of params will be: `data`, `options`, `this_arg`
    * @returns {DocumentFragment} the rendered output
