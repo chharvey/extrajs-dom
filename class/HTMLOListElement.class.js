@@ -1,5 +1,3 @@
-const jsdom = require('jsdom')
-
 const xjs = {
   DocumentFragment: require('./DocumentFragment.class.js'),
   HTMLElement: require('./HTMLElement.class.js'),
@@ -79,10 +77,7 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(
-      new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...dataset.map((data) => component.render(data, this_arg)))
-    )
+    return this.append(...dataset.map((data) => component.render(data, this_arg)))
   }
 }
 
