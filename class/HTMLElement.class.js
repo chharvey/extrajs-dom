@@ -1,4 +1,5 @@
 const xjs = {
+  Object: require('extrajs').Object,
   Element: require('./Element.class.js'),
 }
 
@@ -25,43 +26,31 @@ xjs.HTMLElement = class extends xjs.Element {
   // GLOBAL ATTRIBUTES
   ////////////////////
   /**
-   * @summary {@link HTMLElement#title}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `title` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  title(value) {
-    if (arguments.length) {
-      this.node.title = value
-      return this
-    } else return this.node.title
-  }
+  title(val, this_arg = this) { return this.attr('title', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#lang}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `lang` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  lang(value) {
-    if (arguments.length) {
-      this.node.lang = value
-      return this
-    } else return this.node.lang
-  }
+  lang(val, this_arg = this) { return this.attr('lang', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#dir}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {string=} value the value to set
-   * @returns {(xjs.HTMLElement|string)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `dir` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  dir(value) {
-    if (arguments.length) {
-      this.node.dir = value
-      return this
-    } else return this.node.dir
-  }
+  dir(val, this_arg = this) { return this.attr('dir', val, this_arg) }
 
   /**
    * @summary {@link HTMLElement.style}, with extended functionality.
@@ -185,10 +174,11 @@ xjs.HTMLElement = class extends xjs.Element {
    * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
    *
    * @example
-   * this.data('typeof', 'division') // set the `[data-typeof]` attribute (string)
+   * this.data('typeof', 'my type')  // set the `[data-typeof]` attribute (string)
    * this.data('typeof', 42)         // set the `[data-typeof]` attribute (number)  (the value will be `"42"`)
    * this.data('typeof', true)       // set the `[data-typeof]` attribute (boolean) (the value will be `"true"`)
-   * this.data('typeOf', 'division') // set the `[data-type-of]` attribute
+   * this.data('typeOf', 'my type')  // set the `[data-type-of]` attribute
+   * this.data('type-of', 'my type') // ERROR! "Uncaught DOMException: Failed to set the 'type-of' property on 'DOMStringMap': 'type-of' is not a valid property name."
    * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute *(probably not intended)*
    * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
    * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
@@ -236,30 +226,22 @@ xjs.HTMLElement = class extends xjs.Element {
   // USER INTERACTION
   ///////////////////
   /**
-   * @summary {@link HTMLElement#hidden}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {boolean=} value the value to set
-   * @returns {(xjs.HTMLElement|boolean)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `hidden` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  hidden(value) {
-    if (arguments.length) {
-      this.node.hidden = value
-      return this
-    } else return this.node.hidden
-  }
+  hidden(val, this_arg = this) { return this.attr('hidden', val, this_arg) }
 
   /**
-   * @summary {@link HTMLElement#tabIndex}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
-   * @param   {number=} value the value to set
-   * @returns {(xjs.HTMLElement|number)} `this` if setting; the attribute value if getting
+   * @summary Reflect the `tabindex` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  tabIndex(value) {
-    if (arguments.length) {
-      this.node.tabIndex = value
-      return this
-    } else return this.node.tabIndex
-  }
+  tabIndex(val, this_arg = this) { return this.attr('tabindex', val, this_arg) }
 }
 
 module.exports = xjs.HTMLElement

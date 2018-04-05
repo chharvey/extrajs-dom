@@ -5,7 +5,7 @@ const xjs = {
   ...require('../index.js'),
 }
 
-let {document} = new jsdom.JSDOM(`
+const {document} = new jsdom.JSDOM(`
 <!doctype html>
 <html lang="en">
 <head><title>test</title></head>

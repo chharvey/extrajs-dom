@@ -61,14 +61,19 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
    *   })
+   * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
+   *  .populate(data, function (f, d) {
+   *    // some code involving `this`
+   *  }, other_context)
    *
    * @param   {Array} data any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the rendering function
+   * @returns {xjs.HTMLTableSectionElement} `this`
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
-   * @returns {xjs.HTMLTableSectionElement} `this`
    */
-  populate(data, renderer = (f,d) => {}) {
+  populate(data, renderer = (f,d) => {}, this_arg = this) {
     let template = this.node.querySelector('template')
     if (template===null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
@@ -79,7 +84,7 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(
       new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...data.map((datum) => component.render(datum)))
+        .append(...data.map((datum) => component.render(datum, this_arg)))
     )
   }
 }

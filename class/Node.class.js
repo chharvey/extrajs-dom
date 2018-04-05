@@ -31,18 +31,6 @@ xjs.Node = class {
    */
   get node() { return this._NODE }
 
-  /**
-   * @summary Execute a function acting on this node, and then return this node.
-   * @description Simplifies chaining when performing void tasks,
-   * especially tasks that have not been defined in this implementation.
-   * @param   {function():undefined} executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
-   * @returns {xjs.Node} `this`
-   */
-  exe(executable) {
-    executable.call(this)
-    return this
-  }
-
 
   /**
    * @summary {@link Node#textContent}, but returns this object when done (if setting).
@@ -55,6 +43,18 @@ xjs.Node = class {
       this.node.textContent = text
       return this
     } else return this.node.textContent
+  }
+
+  /**
+   * @summary Execute a function acting on this node, and then return this node.
+   * @description Simplifies chaining when performing void tasks,
+   * especially tasks that have not been defined in this implementation.
+   * @param   {function():undefined} executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
+   * @returns {xjs.Node} `this`
+   */
+  exe(executable) {
+    executable.call(this)
+    return this
   }
 
   /**

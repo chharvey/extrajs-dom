@@ -24,22 +24,20 @@ xjs.HTMLMetaElement = class extends xjs.HTMLElement {
   /**
    * @summary Reflect the `name` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
-   * @param   {string=} val the value to set
-   * @returns {(xjs.HTMLMetaElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLMetaElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  name(val) {
-    return this.attr('name', val)
-  }
+  name(val, this_arg = this) { return this.attr('name', val, this_arg) }
 
   /**
    * @summary Reflect the `content` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-content
-   * @param   {string=} val the value to set
-   * @returns {(xjs.HTMLMetaElement|string)} `this` if setting the attribute, else the value of the attribute
+   * @param   {xjs.Element~ValueArg=} val the value to set
+   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns {(xjs.HTMLMetaElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  content(val) {
-    return this.attr('content', val)
-  }
+  content(val, this_arg = this) { return this.attr('content', val, this_arg) }
 }
 
 module.exports = xjs.HTMLMetaElement
