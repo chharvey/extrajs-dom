@@ -68,15 +68,13 @@ xjs.HTMLTableRowElement = class extends xjs.HTMLElement {
    *
    * @param   {Array} dataset any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
-   * @param   {?Object=} this_arg provide a `this` context to the rendering function
    * @param   {!Object=} options additional rendering options for all items
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
-   * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
+   * @param   {?Object=} this_arg provide a `this` context to the rendering function
    * @returns {xjs.HTMLTableRowElement} `this`
    * @throws  {ReferenceError} if this `<tr>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<td>`.
    */
-  populate(dataset, renderer = (f,d,o) => {}, this_arg = this, options = {}) {
+  populate(dataset, renderer = (f,d,o) => {}, options = {}, this_arg = this) {
     let template = this.node.querySelector('template')
     if (template===null) {
       throw new ReferenceError('This <tr> does not have a <template> descendant.')
