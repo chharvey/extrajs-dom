@@ -69,12 +69,11 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
    * @summary Render this template with some data.
    * @param   {*=} data the data to fill
-   * @param   {?Object=} this_arg a `this` context, if any, in which a {@link xjs.HTMLTemplateElement~RenderingFunction} is called
    * @param   {!Object=} options additional rendering options
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `data`, `options`, `this_arg`
+   * @param   {?Object=} this_arg a `this` context, if any, in which a {@link xjs.HTMLTemplateElement~RenderingFunction} is called
    * @returns {DocumentFragment} the rendered output
    */
-  render(data, this_arg = null, options = {}) {
+  render(data, options = {}, this_arg = null) {
     let frag = this.content().cloneNode(true)
     this._renderer.call(this_arg, frag, data, options)
     return frag

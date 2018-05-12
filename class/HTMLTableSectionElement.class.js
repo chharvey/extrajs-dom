@@ -81,7 +81,7 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
+    return this.append(...dataset.map((data) => component.render(data, options, this_arg)))
   }
 }
 
