@@ -1,5 +1,3 @@
-const jsdom = require('jsdom')
-
 const xjs = {
   DocumentFragment: require('./DocumentFragment.class.js'),
   HTMLElement: require('./HTMLElement.class.js'),
@@ -63,14 +61,17 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
    *    // some code involving `this`
    *  }, other_context)
    *
-   * @param   {Array} data any array of things
+   * @param   {Array} dataset any array of things
    * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the rendering function
+   * @param   {?Object=} this_arg provide a `this` context to the rendering function
+   * @param   {!Object=} options additional rendering options for all items
+   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
+   * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
    * @returns {xjs.HTMLOListElement} `this`
    * @throws  {ReferenceError} if this `<ol>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate(data, renderer = (f,d) => {}, this_arg = this) {
+  populate(dataset, renderer = (f,d,o) => {}, this_arg = this, options = {}) {
     let template = this.node.querySelector('template')
     if (template===null) {
       throw new ReferenceError('This <ol> does not have a <template> descendant.')
@@ -79,10 +80,7 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
     let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(
-      new xjs.DocumentFragment(jsdom.JSDOM.fragment(''))
-        .append(...data.map((datum) => component.render(datum, this_arg)))
-    )
+    return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
   }
 }
 
