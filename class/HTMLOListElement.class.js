@@ -52,12 +52,12 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs.HTMLOListElement(document.querySelector('ol'))
-   *   .populate(data, function (f, d) {
+   *   .populate(data, function (f, d, o) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
    *   })
    * new xjs.HTMLOListElement(document.querySelector('ol'))
-   *  .populate(data, function (f, d) {
+   *  .populate(data, function (f, d, o) {
    *    // some code involving `this`
    *  }, other_context)
    *

@@ -55,12 +55,12 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
-   *   .populate(data, function (f, d) {
+   *   .populate(data, function (f, d, o) {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
    *   })
    * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
-   *  .populate(data, function (f, d) {
+   *  .populate(data, function (f, d, o) {
    *    // some code involving `this`
    *  }, other_context)
    *
