@@ -179,31 +179,29 @@ xjs.DocumentFragment = class extends xjs.Node {
   importLinks(relativepath) {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      // REVIEW:INDENTATION
-    this.node.querySelectorAll('link[rel="import"][data-import]').forEach(function (link) {
-      const import_switch = {
-        'document': () => jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
-        'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
-        default() { return null },
-      }
-      let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(null)
-      if (imported) {
-        link.after(imported)
-        link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
-      }
-    })
+      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
+        const import_switch = {
+          'document': () => jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
+          'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
+          default() { return null },
+        }
+        let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(null)
+        if (imported) {
+          link.after(imported)
+          link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
+        }
+      })
     }
     return this
   }
   /**
    * @summary Asynchronous version of {@link xjs.DocumentFragment#importLinks}.
    * @param   {string} relativepath should always be `__dirname` when called
-   * @returns {xjs.DocumentFragment} `this`
    */
   async importLinksAsync(relativepath) {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      await Promise.all(Array.from(this.node.querySelectorAll('link[rel="import"][data-import]')).map(async function (link) {
+      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
         const import_switch = {
           'document': async () => jsdom.JSDOM.fragment(await util.promisify(fs.readFile)(path.resolve(relativepath, link.href), 'utf8')),
           'template': async () => (await xjs.HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
@@ -216,7 +214,6 @@ xjs.DocumentFragment = class extends xjs.Node {
         }
       }))
     }
-    return this
   }
 
 
