@@ -204,7 +204,7 @@ xjs.DocumentFragment = class extends xjs.Node {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
         const import_switch = {
-          'document': () => jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
+          'document': () => xjs.DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
           'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
           default() { return null },
         }
@@ -226,7 +226,7 @@ xjs.DocumentFragment = class extends xjs.Node {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
         const import_switch = {
-          'document': async () => jsdom.JSDOM.fragment(await util.promisify(fs.readFile)(path.resolve(relativepath, link.href), 'utf8')),
+          'document': async () => (await xjs.DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
           'template': async () => (await xjs.HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
           async default() { return null },
         }
