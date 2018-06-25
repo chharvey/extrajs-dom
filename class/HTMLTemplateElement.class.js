@@ -14,6 +14,47 @@ const xjs = {
  */
 xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
   /**
+   * @summary Internall processing for {@link xjs.HTMLTemplateElement.fromFile|.fromFile{,Sync}}.
+   * @private
+   * @param   {string} filepath the path to the file
+   * @param   {string} data the result of fs.readFile{,Sync}
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
+  static _fromFile_process(filepath, data) {
+    let elem = jsdom.JSDOM.fragment(data).querySelector('template')
+    if (elem === null) {
+      throw new ReferenceError(`No template element was found in file: ${filepath}`)
+    }
+    return new xjs.HTMLTemplateElement(elem)
+  }
+
+  /**
+   * @summary Read an HTML file and return the first `<template>` element found while walking the DOM tree.
+   * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
+   * To access the actual element, call {@link xjs.HTMLTemplateElement#node}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
+  static async fromFile(filepath) {
+    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
+  }
+
+  /**
+   * @summary Synchronous version of {@link xjs.HTMLTemplateElement.fromFile}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
+   * @throws  {ReferenceError} if there is no `<template>` descendant
+   */
+  static fromFileSync(filepath) {
+    let data = fs.readFileSync(filepath, 'utf8')
+    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
+  }
+
+
+  /**
    * @summary A rendering function.
    * @description This function’s signature must be `(DocumentFragment, *, !Object) => undefined`.
    * Its arguments MUST be (1) a document fragment, (2) any data, and (3) any rendering options.
@@ -78,45 +119,6 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     let frag = this.content().cloneNode(true)
     this._renderer.call(this_arg, frag, data, options)
     return frag
-  }
-
-
-  /**
-   * @summary Read an HTML file and return the first `<template>` element found while walking the DOM tree.
-   * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
-   * To access the actual element, call {@link xjs.HTMLTemplateElement#node}.
-   * @param   {string} filepath the path to the file
-   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
-   * @throws  {ReferenceError} if there is no `<template>` descendant
-   */
-  static async fromFile(filepath) {
-    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
-    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
-  }
-  /**
-   * @summary Synchronous version of {@link xjs.HTMLTemplateElement.fromFile}.
-   * @param   {string} filepath the path to the file
-   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
-   * @throws  {ReferenceError} if there is no `<template>` descendant
-   */
-  static fromFileSync(filepath) {
-    let data = fs.readFileSync(filepath, 'utf8')
-    return xjs.HTMLTemplateElement._fromFile_process(filepath, data)
-  }
-  /**
-   * @summary Internall processing for {@link xjs.HTMLTemplateElement.fromFile|.fromFile{,Sync}}.
-   * @private
-   * @param   {string} filepath the path to the file
-   * @param   {string} data the result of fs.readFile{,Sync}
-   * @returns {xjs.HTMLTemplateElement} the first found `<template>` descendant, wrapped
-   * @throws  {ReferenceError} if there is no `<template>` descendant
-   */
-  static _fromFile_process(filepath, data) {
-    let elem = jsdom.JSDOM.fragment(data).querySelector('template')
-    if (elem === null) {
-      throw new ReferenceError(`No template element was found in file: ${filepath}`)
-    }
-    return new xjs.HTMLTemplateElement(elem)
   }
 }
 

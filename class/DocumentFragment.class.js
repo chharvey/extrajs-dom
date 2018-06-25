@@ -17,6 +17,29 @@ const xjs = {
  */
 xjs.DocumentFragment = class extends xjs.Node {
   /**
+   * @summary Read an HTML file and return a document fragment with its contents.
+   * @description The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
+   * To access the actual element, call {@link xjs.DocumentFragment#node}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.DocumentFragment} the fragment, wrapped
+   */
+  static async fromFile(filepath) {
+    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment(data))
+  }
+
+  /**
+   * @summary Synchronous version of {@link xjs.DocumentFragment.fromFile}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.DocumentFragment} the fragment, wrapped
+   */
+  static fromFileSync(filepath) {
+    let data = fs.readFileSync(filepath, 'utf8')
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment(data))
+  }
+
+
+  /**
    * @summary Construct a new xjs.DocumentFragment object.
    * @param {DocumentFragment} node the node to wrap
    */
