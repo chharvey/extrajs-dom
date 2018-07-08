@@ -4,7 +4,7 @@ const path = require('path')
 const jsdom = require('jsdom')
 
 const xjs = {
-  Node   : require('./Node.class.js'),
+  Node   : require('../dist/class/Node.class.js').default,
   HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
 

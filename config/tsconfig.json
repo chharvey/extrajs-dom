@@ -5,6 +5,7 @@
     "removeComments"   : true,
     "strictNullChecks" : true,
     "noImplicitAny"    : true,
+    "noImplicitThis"   : true,
     "noEmitOnError"    : true
   }
 }
