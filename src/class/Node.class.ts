@@ -27,7 +27,7 @@ export default class xjs_Node {
    * @param   text the content to set
    * @returns `this` if setting; the textContent if getting
    */
-  textContent(text?: string): (xjs_Node|string) {
+  textContent(text?: string): (this|string) {
     if (arguments.length) {
       this.node.textContent = <string>text
       return this
@@ -41,7 +41,7 @@ export default class xjs_Node {
    * @param   executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
    * @returns `this`
    */
-  exe(executable: (this: xjs_Node) => void): xjs_Node {
+  exe(executable: (this: xjs_Node) => void): this {
     executable.call(this)
     return this
   }
@@ -65,7 +65,7 @@ export default class xjs_Node {
    *   && snipTrimmed.node.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
    * @returns `this`
    */
-  trimInner(): xjs_Node {
+  trimInner(): this {
     // TODO make an enum for node types
     // xjs_Node.nodeType[3] = 'TEXT_NODE'
     // xjs_Node.nodeType[1] = 'ELEMENT_NODE'
@@ -80,7 +80,7 @@ export default class xjs_Node {
    * @summary Remove all child nodes from this node, and return it.
    * @returns `this`
    */
-  empty(): xjs_Node {
+  empty(): this {
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
       child.remove()
     })

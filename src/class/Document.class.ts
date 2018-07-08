@@ -78,7 +78,7 @@ export default class xjs_Document extends xjs_Node {
    * @param   relativepath should always be `__dirname` when called
    * @returns `this`
    */
-  importLinks(relativepath: string): xjs_Document {
+  importLinks(relativepath: string): this {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {

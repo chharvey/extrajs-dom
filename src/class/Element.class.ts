@@ -17,7 +17,7 @@ const xjs = {
  *   (unless another `thisArg` is passed elsewhere);
  *   and the return value---which must be a string, number, or boolean---is set as the attribute value.
  */
-type ValueArg = ((this: any) => string|number|boolean) | string | number | boolean | null
+export type ValueArg = ((this: any) => string|number|boolean) | string | number | boolean | null
 
 /**
  * Wrapper for an Element.
@@ -48,7 +48,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   markup the html to set
    * @returns `this` if setting; the innerHTML if getting
    */
-  innerHTML(markup?: string): (xjs_Element|string) {
+  innerHTML(markup?: string): (this|string) {
     if (arguments.length) {
       this.node.innerHTML = <string>markup
       return this
@@ -62,7 +62,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   markup the html to set
    * @returns `this` if setting; the outerHTML if getting
    */
-  outerHTML(markup?: string): (xjs_Element|string) {
+  outerHTML(markup?: string): (this|string) {
     if (arguments.length) {
       throw new Error('feature not supported yet')
       return this
@@ -93,7 +93,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   contents the contents to prepend
    * @returns `this`
    */
-  prepend(...contents: (xjs_Node|Node|string|null)[]): xjs_Element {
+  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -125,7 +125,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   contents the contents to append
    * @returns `this`
    */
-  append(...contents: (xjs_Node|Node|string|null)[]): xjs_Element {
+  append(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -192,7 +192,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    */
-  attr(attr: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (xjs_Element|string|null) {
+  attr(attr: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
       case 'null': break;
@@ -205,7 +205,7 @@ export default class xjs_Element extends xjs_Node {
           default         : this.node.setAttribute(<string>attr, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <{ [index: string]: ValueArg }>attr) this.attr(i, (<{ [index: string]: ValueArg }>attr)[i]); break;
+      case 'object': for (let i in <object>attr) this.attr(i, (<{ [index: string]: ValueArg }>attr)[i]); break;
       default: break;
     }
     return this
@@ -228,7 +228,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this` if setting; the ID if getting (or `null` if it hasn’t been set)
    */
-  id(value?: (ValueArg|null), this_arg: any = this): (xjs_Element|string|null) {
+  id(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     if (arguments.length) {
       if (xjs.Object.typeOf(value) === 'string') this.node.id = <string>value
       else this.attr('id', value, this_arg)
@@ -253,7 +253,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this` if setting; the class if getting (or `null` if it hasn’t been set)
    */
-  class(value?: (ValueArg|null), this_arg: any = this): (xjs_Element|string|null) {
+  class(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     if (arguments.length) {
       if (xjs.Object.typeOf(value) === 'string') this.node.className = <string>value
       else this.attr('class', value, this_arg)
@@ -272,7 +272,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   tokens the classname(s) to add
    * @returns `this`
    */
-  addClass(...tokens: string[]): xjs_Element {
+  addClass(...tokens: string[]): this {
     tokens.forEach((token) => {
       token.split(' ').forEach((t) => {
         if (t.trim() !== '') this.node.classList.add(t)
@@ -292,7 +292,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   tokens classname(s) to remove
    * @returns `this`
    */
-  removeClass(...tokens: string[]): xjs_Element {
+  removeClass(...tokens: string[]): this {
     tokens.forEach((token) => {
       token.split(' ').forEach((t) => {
         if (t.trim() !== '') this.node.classList.remove(t)
@@ -311,7 +311,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   new_ the string with which to replace the removed segment
    * @returns `this`
    */
-  replaceClassString(old_: string, new_: string): xjs_Element {
+  replaceClassString(old_: string, new_: string): this {
     this.node.className = this.node.className.replace(old_, new_)
     return this
   }

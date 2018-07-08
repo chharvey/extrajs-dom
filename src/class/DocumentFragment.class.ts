@@ -110,7 +110,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   contents the contents to prepend
    * @returns `this`
    */
-  prepend(...contents: (xjs_Node|Node|string|null)[]): xjs_DocumentFragment {
+  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -142,7 +142,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   contents the contents to append
    * @returns `this`
    */
-  append(...contents: (xjs_Node|Node|string|null)[]): xjs_DocumentFragment {
+  append(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -212,7 +212,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   relativepath should always be `__dirname` when called
    * @returns `this`
    */
-  importLinks(relativepath: string): xjs_DocumentFragment {
+  importLinks(relativepath: string): this {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
