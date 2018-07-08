@@ -2,8 +2,8 @@ const fs = require('fs')
 const util = require('util')
 
 const xjs = {
+  DocumentFragment: require('../dist/class/DocumentFragment.class.js').default,
   HTMLElement: require('./HTMLElement.class.js'),
-  DocumentFragment: require('./DocumentFragment.class.js'),
 }
 
 /**

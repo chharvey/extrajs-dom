@@ -1,5 +1,5 @@
 const xjs = {
-  DocumentFragment: require('./DocumentFragment.class.js'),
+  DocumentFragment: require('../dist/class/DocumentFragment.class.js').default,
   HTMLElement: require('./HTMLElement.class.js'),
   HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
