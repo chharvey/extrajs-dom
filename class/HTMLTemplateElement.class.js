@@ -27,7 +27,6 @@ xjs.HTMLTemplateElement = class extends xjs.HTMLElement {
     }
     return new xjs.HTMLTemplateElement(elem)
   }
-
   /**
    * @summary Synchronous version of {@link xjs.HTMLTemplateElement.fromFile}.
    * @param   {string} filepath the path to the file
