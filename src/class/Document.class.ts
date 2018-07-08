@@ -1,4 +1,4 @@
-import {dev_HTMLLinkElement} from '../dev.d'
+import {dev_Document, dev_HTMLLinkElement} from '../dev.d'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
 
@@ -25,7 +25,7 @@ export default class xjs_Document extends xjs_Node {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): Document { return <Document>super.node }
+  get node(): dev_Document { return <dev_Document>super.node }
 
 
   /**
