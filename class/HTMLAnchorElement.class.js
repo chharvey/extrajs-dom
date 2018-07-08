@@ -1,6 +1,6 @@
 const URL = require('url').URL
 const xjs = {
-  HTMLElement: require('./HTMLElement.class.js'),
+  HTMLElement: require('../dist/class/HTMLElement.class.js').default,
 }
 
 /**

@@ -3,7 +3,7 @@ module.exports = {
   Document        : require('./dist/class/Document.class.js').default,
   DocumentFragment: require('./dist/class/DocumentFragment.class.js').default,
   Element         : require('./dist/class/Element.class.js').default,
-  HTMLElement     : require('./class/HTMLElement.class.js'),
+  HTMLElement     : require('./dist/class/HTMLElement.class.js').default,
   HTMLMetaElement : require('./class/HTMLMetaElement.class.js'),
   HTMLOListElement: require('./class/HTMLOListElement.class.js'),
   HTMLUListElement: require('./class/HTMLUListElement.class.js'),

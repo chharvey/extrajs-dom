@@ -16,6 +16,7 @@ declare interface dev_Document         extends Document        , dev_ParentNode 
 declare interface dev_DocumentFragment extends DocumentFragment, dev_ParentNode {}
 declare interface dev_Element          extends Element         , dev_ParentNode, dev_ChildNode {}
 
+declare interface dev_HTMLElement     extends HTMLElement    , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLLinkElement extends HTMLLinkElement, dev_ParentNode, dev_ChildNode {}
 
-export {dev_Document, dev_DocumentFragment, dev_Element, dev_HTMLLinkElement}
+export {dev_Document, dev_DocumentFragment, dev_Element, dev_HTMLElement, dev_HTMLLinkElement}

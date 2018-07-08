@@ -1,26 +1,26 @@
+import {dev_HTMLElement} from '../dev.d'
+import xjs_Element, {ValueArg} from './Element.class'
+
 const xjs = {
   Object: require('extrajs').Object,
-  Element: require('../dist/class/Element.class.js').default,
 }
 
 /**
  * Wrapper for an HTML element.
  * @see https://www.w3.org/TR/html/dom.html#htmlelement
- * @extends xjs.Element
  */
-xjs.HTMLElement = class extends xjs.Element {
+export default class xjs_HTMLElement extends xjs_Element {
   /**
-   * @summary Construct a new xjs.HTMLElement object.
-   * @param {HTMLElement} node the node to wrap
+   * @summary Construct a new xjs_HTMLElement object.
+   * @param node the node to wrap
    */
-  constructor(node) {
+  constructor(node: HTMLElement) {
     super(node)
   }
   /**
    * @summary This wrapper’s node.
-   * @type {HTMLElement}
    */
-  get node() { return super.node }
+  get node(): dev_HTMLElement { return <dev_HTMLElement>super.node }
 
   ////////////////////
   // GLOBAL ATTRIBUTES
@@ -28,29 +28,35 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary Reflect the `title` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
-   * @param   {xjs.Element~ValueArg=} val the value to set
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @param   val the value to set
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  title(val, this_arg = this) { return this.attr('title', val, this_arg) }
+  title(val?: ValueArg, this_arg: any = this): (this|string|null) {
+    return this.attr('title', val, this_arg)
+  }
 
   /**
    * @summary Reflect the `lang` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
-   * @param   {xjs.Element~ValueArg=} val the value to set
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @param   val the value to set
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  lang(val, this_arg = this) { return this.attr('lang', val, this_arg) }
+  lang(val?: ValueArg, this_arg: any = this): (this|string|null) {
+    return this.attr('lang', val, this_arg)
+  }
 
   /**
    * @summary Reflect the `dir` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
-   * @param   {xjs.Element~ValueArg=} val the value to set
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @param   val the value to set
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  dir(val, this_arg = this) { return this.attr('dir', val, this_arg) }
+  dir(val?: ValueArg, this_arg: any = this): (this|string|null) {
+    return this.attr('dir', val, this_arg)
+  }
 
   /**
    * @summary {@link HTMLElement.style}, with extended functionality.
@@ -61,7 +67,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * It must be given in **kebab-case** format (e.g. `'text-align'`), as specified in
    * {@link https://w3.org/TR/CSS2/syndata.html#declaration|CSS 2.1 | Declarations and properties}.
    *
-   * If the key is a string and the value is a non-null {@link xjs.Element~ValueArg} type,
+   * If the key is a string and the value is a non-null {@link ValueArg} type,
    * *except for the empty string `''`,*
    * then the CSS property will be set (or modified) with the result of the given value.
    *
@@ -75,7 +81,7 @@ xjs.HTMLElement = class extends xjs.Element {
    * depending on whether the property is inherited or not.)
    *
    * If an object is provided as the key, then no argument may be provided as the value.
-   * The object must have values of the {@link xjs.Element~ValueArg} type;
+   * The object must have values of the {@link ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * CSS properties. You may use this method with a single object argument to set and/or remove
    * multiple properties (using `null` to remove).
@@ -109,31 +115,30 @@ xjs.HTMLElement = class extends xjs.Element {
    * this.style(null) // do nothing; return `this`
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
-   * @param   {(string|?Object<xjs.Element~ValueArg>)=} prop the name of the css property to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
-   * @param   {xjs.Element~ValueArg=} value the value to assign to the property, or `null` or `''` to remove it, or `undefined` (or not provided) to get it
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|string)} `this` if setting a property, else the value of the property specified (or `null` if that property hasn’t been set)
-   * @throws  {TypeError} if the given property is not a string or nullable object
+   * @param   prop the name of the css property to set or get (nonempty string), or an object with {@link ValueArg} type values
+   * @param   value the value to assign to the property, or `null` or `''` to remove it, or `undefined` (or not provided) to get it
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting a property, else the value of the property specified (or `null` if that property hasn’t been set)
    */
-  style(prop = '', value, this_arg = this) {
+  style(prop: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(prop)) {
       case 'null': break;
       case 'string':
-        if (prop.trim() === '') break;
+        if ((<string>prop).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.style(prop, value.call(this_arg));
-          case 'undefined': return this.node.style.getPropertyValue(prop) || null;
+          case 'function' : return this.style(prop, (<Function>value).call(this_arg));
+          case 'undefined': return this.node.style.getPropertyValue(<string>prop) || null;
           default         :
             switch (value) {
               case ''  :
-              case null: this.node.style.removeProperty(prop); break;
-              default  : this.node.style.setProperty(prop, value); break; // string, boolean, number, infinite, NaN
+              case null: this.node.style.removeProperty(<string>prop); break;
+              default  : this.node.style.setProperty(<string>prop, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
             }
         }
         break;
-      case 'object': for (let i in prop) this.style(i, prop[i]); break;
-      default      : throw new TypeError('Provided property must be a string or (nullable) object.')
+      case 'object': for (let i in <object>prop) this.style(i, (<{ [index: string]: ValueArg }>prop)[i]); break;
+      default: break;
     }
     return this
   }
@@ -141,9 +146,9 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary {@link HTMLElement.dataset}, with extended functionality.
    * @description
-   * This method is similar to {@link xjs.Element#attr} in that it sets attributes,
+   * This method is similar to {@link xjs_Element#attr} in that it sets attributes,
    * except that this method only sets attributes starting with the `data-` prefix, and that
-   * the attribute names passed to this method differ from the those passed to {@link xjs.Element#attr}.
+   * the attribute names passed to this method differ from the those passed to {@link xjs_Element#attr}.
    *
    * When the given key is a string, it represents the data- attribute to set or get.
    * It must not include the prefix `'data-'`, and it must be given in **camelCase** format (e.g. `'hasJs'`), as specified in
@@ -151,9 +156,9 @@ xjs.HTMLElement = class extends xjs.Element {
    *
    * Note that if you wish to use the HTML attribute syntax **kebab-case** format, as specified in
    * {@link https://w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
-   * you should use the {@link xjs.Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
+   * you should use the {@link xjs_Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
    *
-   * If the key is a string and the value is a non-null {@link xjs.Element~ValueArg} type,
+   * If the key is a string and the value is a non-null {@link ValueArg} type,
    * then the data- attribute will be set (or modified) with the result of the given value.
    *
    * If the key is a string and the value is `null,`
@@ -166,7 +171,7 @@ xjs.HTMLElement = class extends xjs.Element {
    *
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object’s keys must be in **camelCase** format, as if each key were passed separately.
-   * The object must have values of the {@link xjs.Element~ValueArg} type;
+   * The object must have values of the {@link ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * data- attributes. You may use this method with a single object argument to set and/or remove
    * multiple attributes (using `null` to remove).
@@ -197,27 +202,26 @@ xjs.HTMLElement = class extends xjs.Element {
    * this.data(null) // do nothing; return `this`
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
-   * @param   {(string|?Object<xjs.Element~ValueArg>)=} data_attr the suffix of the `[data-*]` attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
-   * @param   {xjs.Element~ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
-   * @throws  {TypeError} if the given attribute is not a string or nullable object
+   * @param   data_attr the suffix of the `[data-*]` attribute to set or get (nonempty string), or an object with {@link ValueArg} type values
+   * @param   value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    */
-  data(data_attr = '', value, this_arg = this) {
+  data(data_attr: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(data_attr)) {
       case 'null': break;
       case 'string':
-        if (data_attr.trim() === '') break;
+        if ((<string>data_attr).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.data(data_attr, value.call(this_arg));
-          case 'null'     : delete this.node.dataset[data_attr]; break;
-          case 'undefined': let returned = this.node.dataset[data_attr]; return (returned || returned === '') ? returned : null;
-          default         : this.node.dataset[data_attr] = value; break;
+          case 'function' : return this.data(data_attr, (<Function>value).call(this_arg));
+          case 'null'     : delete this.node.dataset[<string>data_attr]; break;
+          case 'undefined': let returned: (string|undefined) = this.node.dataset[<string>data_attr]; return (xjs.Object.typeOf(returned) === 'string') ? <string>returned : null;
+          default         : this.node.dataset[<string>data_attr] = (<(string|number|boolean)>value).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in data_attr) this.data(i, data_attr[i]); break;
-      default      : throw new TypeError('Provided name must be a string or (nullable) object.')
+      case 'object': for (let i in <object>data_attr) this.data(i, (<{ [index: string]: ValueArg }>data_attr)[i]); break;
+      default: break;
     }
     return this
   }
@@ -228,20 +232,22 @@ xjs.HTMLElement = class extends xjs.Element {
   /**
    * @summary Reflect the `hidden` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
-   * @param   {xjs.Element~ValueArg=} val the value to set
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @param   val the value to set
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  hidden(val, this_arg = this) { return this.attr('hidden', val, this_arg) }
+  hidden(val?: ValueArg, this_arg: any = this): (this|string|null) {
+    return this.attr('hidden', val, this_arg)
+  }
 
   /**
    * @summary Reflect the `tabindex` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
-   * @param   {xjs.Element~ValueArg=} val the value to set
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.HTMLElement|?string)} `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @param   val the value to set
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
    */
-  tabIndex(val, this_arg = this) { return this.attr('tabindex', val, this_arg) }
+  tabIndex(val?: ValueArg, this_arg: any = this): (this|string|null) {
+    return this.attr('tabindex', val, this_arg)
+  }
 }
-
-module.exports = xjs.HTMLElement
