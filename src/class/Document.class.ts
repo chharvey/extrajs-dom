@@ -1,9 +1,11 @@
+import {dev_HTMLLinkElement} from '../dev.d'
+import xjs_Node from './Node.class'
+
 const path = require('path')
 
 const jsdom = require('jsdom')
 
 const xjs = {
-  Node: require('../dist/class/Node.class.js').default,
   DocumentFragment: require('./DocumentFragment.class.js'),
   HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
@@ -11,21 +13,19 @@ const xjs = {
 /**
  * Wrapper for a DocumentFragment.
  * @see https://www.w3.org/TR/dom/#document
- * @extends xjs.Node
  */
-xjs.Document = class extends xjs.Node {
+export default class xjs_Document extends xjs_Node {
   /**
-   * @summary Construct a new xjs.Document object.
-   * @param {Document} node the node to wrap
+   * @summary Construct a new xjs_Document object.
+   * @param node the node to wrap
    */
-  constructor(node) {
+  constructor(node: Document) {
     super(node)
   }
   /**
    * @summary This wrapper’s node.
-   * @type {Document}
    */
-  get node() { return super.node }
+  get node(): Document { return <Document>super.node }
 
 
   /**
@@ -75,19 +75,19 @@ xjs.Document = class extends xjs.Node {
    * // This call will work as intended.
    * this.importLinks(__dirname)
    *
-   * @param   {string} relativepath should always be `__dirname` when called
-   * @returns {xjs.Document} `this`
+   * @param   relativepath should always be `__dirname` when called
+   * @returns `this`
    */
-  importLinks(relativepath) {
+  importLinks(relativepath: string): xjs_Document {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
-        const import_switch = {
+      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
+        const switch_: { [index: string]: () => (DocumentFragment|null) } = {
           'document': () => xjs.DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
           'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
           default() { return null },
         }
-        let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
+        let imported = (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
         if (imported) {
           link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
@@ -97,27 +97,24 @@ xjs.Document = class extends xjs.Node {
     return this
   }
   /**
-   * @summary Asynchronous version of {@link xjs.Document#importLinks}.
-   * @param   {string} relativepath should always be `__dirname` when called
+   * @summary Asynchronous version of {@link xjs_Document#importLinks}.
+   * @param   relativepath should always be `__dirname` when called
    */
-  async importLinksAsync(relativepath) {
+  async importLinksAsync(relativepath: string): Promise<void[]> {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
-        const import_switch = {
+      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
+        const switch_: { [index: string]: () => Promise<(DocumentFragment|null)> } = {
           'document': async () => (await xjs.DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
           'template': async () => (await xjs.HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
           async default() { return null },
         }
-        let imported = await (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
+        let imported = await (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
         if (imported) {
           link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))
-    }
+    } else return Promise.all([])
   }
 }
-
-
-module.exports = xjs.Document
