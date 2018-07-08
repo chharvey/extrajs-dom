@@ -1,6 +1,6 @@
 const xjs = {
   Object: require('extrajs').Object,
-  Element: require('./Element.class.js'),
+  Element: require('../dist/class/Element.class.js').default,
 }
 
 /**
