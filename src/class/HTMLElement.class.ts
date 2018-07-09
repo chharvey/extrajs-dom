@@ -361,7 +361,7 @@ export default class xjs_HTMLElement extends xjs_Element {
         switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.data(data_attr, (<ValueFunction>value).call(this_arg));
           case 'null'     : delete this.node.dataset[<string>data_attr]; break;
-          case 'undefined': let returned: (string|undefined) = this.node.dataset[<string>data_attr]; return (xjs.Object.typeOf(returned) === 'string') ? <string>returned : null;
+          case 'undefined': let returned: string|undefined = this.node.dataset[<string>data_attr]; return (xjs.Object.typeOf(returned) === 'string') ? <string>returned : null;
           default         : this.node.dataset[<string>data_attr] = (<(string|number|boolean)>value).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;

@@ -33,7 +33,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
   static async fromFile(filepath: string): Promise<xjs_HTMLTemplateElement> {
-    let elem: (HTMLTemplateElement|null) = (await xjs_DocumentFragment.fromFile(filepath)).node.querySelector('template')
+    let elem: HTMLTemplateElement|null = (await xjs_DocumentFragment.fromFile(filepath)).node.querySelector('template')
     if (elem === null) {
       throw new ReferenceError(`No \`template\` element was found in file: ${filepath}`)
     }
@@ -46,7 +46,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if there is no `<template>` descendant
    */
   static fromFileSync(filepath: string): xjs_HTMLTemplateElement {
-    let elem: (HTMLTemplateElement|null) = xjs_DocumentFragment.fromFileSync(filepath).node.querySelector('template')
+    let elem: HTMLTemplateElement|null = xjs_DocumentFragment.fromFileSync(filepath).node.querySelector('template')
     if (elem === null) {
       throw new ReferenceError(`No \`template\` element was found in file: ${filepath}`)
     }
