@@ -140,6 +140,94 @@ export default class xjs_Element extends xjs_Node {
 
 
   /**
+   * @description DEPRECATED.
+   * If no argument is provided, this method does nothing and returns `this`.
+   * @example
+   * this.attr()     // do nothing; return `this`
+   * @returns `this`
+   */
+  attr(): this;
+  /**
+   * @summary Get an attribute of this element.
+   * @description
+   * If the key is a string and the value is not provided (or `undefined`),
+   * then this method returns the string value of the attribute identified by the key.
+   * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
+   * If no such attribute exists, then `null` is returned.
+   *
+   * If the key is `''`, this method does nothing and returns `this`.
+   *
+   * @example
+   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
+   * this.attr('')   // do nothing; return `this`
+   *
+   * @todo TODO handle case of empty string
+   * @param   attr the name of the attribute to get (nonempty string)
+   * @returns the value of the attribute specified (or `null` if that attribute hasn’t been set)
+   */
+  attr(attr: string): string|null;
+  /**
+   * @summary Set or remove an attribute of this element.
+   * @description
+   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
+   * then the attribute will be set (or modified) with the result of the value.
+   *
+   * If the key is a string and the value is `null,`
+   * then the attribute identified by the key is removed from this element.
+   *
+   * Notes:
+   * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
+   * - Since this method returns `this`, it can be chained, e.g.,
+   *   ```js
+   *   my_elem.attr('itemscope', '').attr('itemtype','Thing').attr('itemprop', null)
+   *   ```
+   *   However, it may be simpler to use an object argument:
+   *   ```js
+   *   my_elem.attr({ itemscope:'', itemtype:'Thing', itemprop:null })
+   *   ```
+   *
+   * @example
+   * this.attr('itemtype', 'Person') // set an attribute (string)
+   * this.attr('data-nthchild', 3)   // set an attribute (number)  (the value will be `"3"`)
+   * this.attr('data-block', true)   // set an attribute (boolean) (the value will be `"true"`)
+   * this.attr('itemscope', '')      // set a boolean attribute
+   * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
+   * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
+   * this.attr('itemprop', null)     // remove an attribute
+   *
+   * @todo TODO handle case of empty string
+   * @param   attr the name of the attribute to set (nonempty string)
+   * @param   value the value to assign to the attribute, or `null` to remove it
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  attr(attr: string, value: ValueArg, this_arg?: any): this;
+  /**
+   * @summary Set or remove attributes of this element.
+   * @description
+   * If an object is provided as the key, then no argument may be provided as the value.
+   * The object must have values of the {@link ValueArg} type;
+   * thus for each key-value pair in the object, this method assigns corresponding
+   * attributes. You may use this method with a single object argument to set and/or remove
+   * multiple attributes (using `null` to remove).
+   *
+   * If the key is `{}` or `null`, this method does nothing and returns `this`.
+   *
+   * @example
+   * this.attr({                     // set/remove multiple attributes all at once
+   *   itemprop : 'name',
+   *   itemscope: '',
+   *   itemtype : 'Person',
+   *   'data-id': null,
+   * })
+   * this.attr({})   // do nothing; return `this`
+   * this.attr(null) // do nothing; return `this`
+   *
+   * @param   attr an object with {@link ValueArg} type values
+   * @returns `this`
+   */
+  attr(attr: { [index: string]: ValueArg }|null): this;
+  /*
    * @summary Set or get attributes of this element.
    * @description
    * If the key given is a string, and the value is a non-null {@link ValueArg} type,
@@ -197,7 +285,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    */
-  attr(attr: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
+  attr(attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
       case 'null': break;
@@ -217,7 +305,12 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}, but returns this object when done (if setting).
+   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}.
+   * @returns the value of the `id` attribute, or `null` if it had not been set
+   */
+  id(): string|null;
+  /**
+   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}, and return this object when done.
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example
@@ -228,12 +321,12 @@ export default class xjs_Element extends xjs_Node {
    * this.id(function () { return this.tagName })                             // set the [id] attribute using a function in this xjs.Element’s context
    * this.id(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [id] attribute using a function in another given context
    * this.id(null)       // remove the [id] attribute
-   * this.id()           // get the value of [id] (or `null` if it had not been set)
-   * @param   value the value to set for the `id` attribute
+   * @param   value the value to set for the `id` attribute, or `null` to remove it
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting; the ID if getting (or `null` if it hasn’t been set)
+   * @returns `this`
    */
-  id(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
+  id(value: ValueArg, this_arg?: any): this;
+  id(value?: any, this_arg: any = this): any {
     if (arguments.length) {
       if (xjs.Object.typeOf(value) === 'string') this.node.id = <string>value
       else this.attr('id', value, this_arg)
@@ -242,7 +335,12 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}, but returns this object when done (if setting).
+   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}.
+   * @returns the value of the `class` attribute, or `null` if it had not been set
+   */
+  class(): string|null;
+  /**
+   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}, and return this object when done.
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example
@@ -253,14 +351,14 @@ export default class xjs_Element extends xjs_Node {
    * this.class(function () { return this.tagName })                             // set the [class] attribute using a function in this xjs.Element’s context
    * this.class(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [class] attribute using a function in another given context
    * this.class(null)                   // remove the [class] attribute
-   * this.class()                       // return the value of [class] (or `null` if it had not been set)
-   * @param   value the value to set for the `class` attribute
+   * @param   value the value to set for the `class` attribute, or `null` to remove it
    * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting; the class if getting (or `null` if it hasn’t been set)
+   * @returns `this`
    */
-  class(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
+  class(value: ValueArg, this_arg?: any): this;
+  class(value?: any, this_arg: any = this): any {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.className = <string>value
+      if (xjs.Object.typeOf(value) === 'string') this.node.className = value
       else this.attr('class', value, this_arg)
       return this
     } else return this.node.className

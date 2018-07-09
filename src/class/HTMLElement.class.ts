@@ -28,33 +28,54 @@ export default class xjs_HTMLElement extends xjs_Element {
   /**
    * @summary Reflect the `title` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  title(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  title(): string|null;
+  /**
+   * @summary Reflect the `title` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  title(val: ValueArg, this_arg?: any): this;
+  title(val?: any, this_arg: any = this): any {
     return this.attr('title', val, this_arg)
   }
 
   /**
    * @summary Reflect the `lang` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  lang(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  lang(): string|null;
+  /**
+   * @summary Reflect the `lang` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  lang(val: ValueArg, this_arg?: any): this;
+  lang(val?: any, this_arg: any = this): any {
     return this.attr('lang', val, this_arg)
   }
 
   /**
    * @summary Reflect the `dir` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  dir(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  dir(): string|null;
+  /**
+   * @summary Reflect the `dir` content attribute.
+   * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  dir(val: ValueArg, this_arg?: any): this;
+  dir(val?: any, this_arg: any = this): any {
     return this.attr('dir', val, this_arg)
   }
 
@@ -232,22 +253,36 @@ export default class xjs_HTMLElement extends xjs_Element {
   /**
    * @summary Reflect the `hidden` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  hidden(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  hidden(): string|null;
+  /**
+   * @summary Reflect the `hidden` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  hidden(val: ValueArg, this_arg?: any): this;
+  hidden(val?: any, this_arg: any = this): any {
     return this.attr('hidden', val, this_arg)
   }
 
   /**
    * @summary Reflect the `tabindex` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  tabIndex(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  tabIndex(): string|null;
+  /**
+   * @summary Reflect the `tabindex` content attribute.
+   * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  tabIndex(val: ValueArg, this_arg?: any): this;
+  tabIndex(val?: any, this_arg: any = this): any {
     return this.attr('tabindex', val, this_arg)
   }
 }

@@ -22,22 +22,36 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
   /**
    * @summary Reflect the `name` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  name(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  name(): string|null;
+  /**
+   * @summary Reflect the `name` content attribute.
+   * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  name(val: ValueArg, this_arg?: any): this;
+  name(val?: any, this_arg: any = this): any {
     return this.attr('name', val, this_arg)
   }
 
   /**
    * @summary Reflect the `content` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-content
-   * @param   val the value to set
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting the attribute, else the value of the attribute (or `null` if it hasn’t been set)
+   * @returns the value of the attribute, or `null` if it hasn’t been set
    */
-  content(val?: ValueArg, this_arg: any = this): (this|string|null) {
+  content(): string|null;
+  /**
+   * @summary Reflect the `content` content attribute.
+   * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-content
+   * @param   val the value to set, or `null` to remove
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this`
+   */
+  content(val: ValueArg, this_arg?: any): this;
+  content(val?: any, this_arg: any = this): any {
     return this.attr('content', val, this_arg)
   }
 }
