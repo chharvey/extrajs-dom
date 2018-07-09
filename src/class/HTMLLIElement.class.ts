@@ -3,7 +3,7 @@ import xjs_HTMLElement from './HTMLElement.class'
 
 /**
  * Wrapper for HTML `li` element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmllielement-htmllielement
+ * @see https://www.w3.org/TR/html52/grouping-content.html#htmllielement
  */
 export default class xjs_HTMLLIElement extends xjs_HTMLElement {
   /**

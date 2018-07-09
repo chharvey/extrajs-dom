@@ -3,7 +3,7 @@ import xjs_HTMLElement from './HTMLElement.class'
 
 /**
  * Wrapper for HTML `dl` element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmldlistelement-htmldlistelement
+ * @see https://www.w3.org/TR/html52/grouping-content.html#htmldlistelement
  */
 export default class xjs_HTMLDListElement extends xjs_HTMLElement {
   /**

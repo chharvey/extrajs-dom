@@ -94,7 +94,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
   /**
    * @summary Render this template with some data.
    * @param   data the data to fill
-   * @param   this_arg a `this` context, if any, in which a {@link xjs_HTMLTemplateElement~RenderingFunction} is called
+   * @param   this_arg a `this` context, if any, in which a {@link RenderingFunction} is called
    * @param   options additional rendering options
    * @todo WARNING: in the next breaking release (v5), the order of params will be: `data`, `options`, `this_arg`
    * @returns the rendered output
