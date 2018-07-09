@@ -143,10 +143,9 @@ export default class xjs_Element extends xjs_Node {
 
 
   /**
-   * @description DEPRECATED.
+   * @summary Get and set attributes of this element.
+   * @description
    * If no argument is provided, this method does nothing and returns `this`.
-   * @example
-   * this.attr()     // do nothing; return `this`
    * @returns `this`
    */
   attr(): this;
@@ -206,7 +205,7 @@ export default class xjs_Element extends xjs_Node {
    * @summary Set or remove an attribute of this element, using a function.
    * @description
    * If the key given is a string, and the value is a {@link ValueFunction} type,
-   * then the attribute will be set (or modified) with the result of the value.
+   * then the attribute will be set (or modified) with the result of the given function.
    *
    * @example
    * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
@@ -244,64 +243,6 @@ export default class xjs_Element extends xjs_Node {
    * @returns `this`
    */
   attr(attr: { [index: string]: ValueType }|null): this;
-  /*
-   * @summary Set or get attributes of this element.
-   * @description
-   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
-   * then the attribute will be set (or modified) with the result of the value.
-   *
-   * If the key is a string and the value is `null,`
-   * then the attribute identified by the key is removed from this element.
-   *
-   * If the key is a string and the value is not provided (or `undefined`),
-   * then this method returns the string value of the attribute identified by the key.
-   * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
-   * If no such attribute exists, then `null` is returned.
-   *
-   * If an object is provided as the key, then no argument may be provided as the value.
-   * The object must have values of the {@link ValueArg} type;
-   * thus for each key-value pair in the object, this method assigns corresponding
-   * attributes. You may use this method with a single object argument to set and/or remove
-   * multiple attributes (using `null` to remove).
-   *
-   * If no argument is provided, or if the key is `''`, `{}`, or `null`, this method does nothing and returns `this`.
-   *
-   * Notes:
-   * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
-   * - Since this method returns `this`, it can be chained, e.g.,
-   *   ```js
-   *   my_elem.attr('itemscope', '').attr('itemtype','Thing').attr('itemprop', null)
-   *   ```
-   *   However, it may be simpler to use an object argument:
-   *   ```js
-   *   my_elem.attr({ itemscope:'', itemtype:'Thing', itemprop:null })
-   *   ```
-   *
-   * @example
-   * this.attr('itemtype', 'Person') // set an attribute (string)
-   * this.attr('data-nthchild', 3)   // set an attribute (number)  (the value will be `"3"`)
-   * this.attr('data-block', true)   // set an attribute (boolean) (the value will be `"true"`)
-   * this.attr('itemscope', '')      // set a boolean attribute
-   * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
-   * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
-   * this.attr('itemprop', null)     // remove an attribute
-   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
-   * this.attr({                     // set/remove multiple attributes all at once
-   *   itemprop : 'name',
-   *   itemscope: '',
-   *   itemtype : 'Person',
-   *   'data-id': null,
-   * })
-   * this.attr()     // do nothing; return `this`
-   * this.attr('')   // do nothing; return `this`
-   * this.attr({})   // do nothing; return `this`
-   * this.attr(null) // do nothing; return `this`
-   *
-   * @param   attr the name of the attribute to set or get (nonempty string), or an object with {@link ValueArg} type values
-   * @param   value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
-   */
   attr(attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {

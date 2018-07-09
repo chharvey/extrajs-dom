@@ -26,16 +26,12 @@ export default class xjs_HTMLTimeElement extends xjs_HTMLElement {
    */
   dateTime(): string|null;
   /**
-   * @summary Reflect the `datetime` content attribute.
    * @description This method accepts a {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date|Date} object as the value to set.
-   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmltimeelement-datetime
    * @param   val the value to set, or `null` to remove
    * @returns `this`
    */
   dateTime(val: ValueType|Date): this;
   /**
-   * @summary Reflect the `datetime` content attribute.
-   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmltimeelement-datetime
    * @param   val the function to call when setting the value
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`

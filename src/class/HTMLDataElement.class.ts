@@ -26,15 +26,11 @@ export default class xjs_HTMLDataElement extends xjs_HTMLElement {
    */
   value(): string|null;
   /**
-   * @summary Reflect the `value` content attribute.
-   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
    * @param   val the value to set, or `null` to remove
    * @returns `this`
    */
   value(val: ValueType): this;
   /**
-   * @summary Reflect the `value` content attribute.
-   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
    * @param   val the function to call when setting the value
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
