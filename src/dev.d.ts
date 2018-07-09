@@ -17,14 +17,25 @@ declare interface dev_DocumentFragment extends DocumentFragment, dev_ParentNode 
 declare interface dev_Element          extends Element         , dev_ParentNode, dev_ChildNode {}
 
 declare interface dev_HTMLElement       extends HTMLElement      , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLAnchorElement extends HTMLAnchorElement, dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLMetaElement   extends HTMLMetaElement  , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLLinkElement   extends HTMLLinkElement  , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLDListElement  extends HTMLDListElement , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLLIElement     extends HTMLLIElement    , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLAnchorElement extends HTMLAnchorElement, dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLDataElement   extends HTMLDataElement  , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLTimeElement   extends HTMLTimeElement  , dev_ParentNode, dev_ChildNode {}
 
 export {
   dev_Document,
   dev_DocumentFragment,
   dev_Element,
+
   dev_HTMLElement,
+  dev_HTMLMetaElement,
+  dev_HTMLLinkElement,
+  dev_HTMLDListElement,
+  dev_HTMLLIElement,
   dev_HTMLAnchorElement,
-  dev_HTMLLinkElement
+  dev_HTMLDataElement,
+  dev_HTMLTimeElement,
 }

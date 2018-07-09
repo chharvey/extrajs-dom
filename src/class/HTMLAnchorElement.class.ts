@@ -1,5 +1,5 @@
 import {dev_HTMLAnchorElement} from '../dev.d'
-import xjs_Element, {ValueArg} from './Element.class'
+import {ValueArg} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
 
