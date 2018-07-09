@@ -39,7 +39,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @returns the fragment, wrapped
    */
   static async fromFile(filepath: string): Promise<xjs_DocumentFragment> {
-    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
+    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
     return new xjs_DocumentFragment(jsdom.JSDOM.fragment(data))
   }
   /**
@@ -48,7 +48,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @returns the fragment, wrapped
    */
   static fromFileSync(filepath: string): xjs_DocumentFragment {
-    let data = fs.readFileSync(filepath, 'utf8')
+    let data: string = fs.readFileSync(filepath, 'utf8')
     return new xjs_DocumentFragment(jsdom.JSDOM.fragment(data))
   }
 

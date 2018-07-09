@@ -16,14 +16,15 @@ declare interface dev_Document         extends Document        , dev_ParentNode 
 declare interface dev_DocumentFragment extends DocumentFragment, dev_ParentNode {}
 declare interface dev_Element          extends Element         , dev_ParentNode, dev_ChildNode {}
 
-declare interface dev_HTMLElement       extends HTMLElement      , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLMetaElement   extends HTMLMetaElement  , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLLinkElement   extends HTMLLinkElement  , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLDListElement  extends HTMLDListElement , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLLIElement     extends HTMLLIElement    , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLAnchorElement extends HTMLAnchorElement, dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLDataElement   extends HTMLDataElement  , dev_ParentNode, dev_ChildNode {}
-declare interface dev_HTMLTimeElement   extends HTMLTimeElement  , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLElement             extends HTMLElement            , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLMetaElement         extends HTMLMetaElement        , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLLinkElement         extends HTMLLinkElement        , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLDListElement        extends HTMLDListElement       , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLLIElement           extends HTMLLIElement          , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLAnchorElement       extends HTMLAnchorElement      , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLDataElement         extends HTMLDataElement        , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLTimeElement         extends HTMLTimeElement        , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLTemplateElement     extends HTMLTemplateElement    , dev_ParentNode, dev_ChildNode {}
 
 export {
   dev_Document,
@@ -38,4 +39,5 @@ export {
   dev_HTMLAnchorElement,
   dev_HTMLDataElement,
   dev_HTMLTimeElement,
+  dev_HTMLTemplateElement,
 }
