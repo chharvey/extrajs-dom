@@ -6,7 +6,7 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
 
 /**
  * Wrapper for HTML `thead`, `tfoot`, and `tbody` elements.
- * @see https://www.w3.org/TR/html/tabular-data.html#htmltablesectionelement
+ * @see https://www.w3.org/TR/html52/tabular-data.html#htmltablesectionelement
  */
 export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**

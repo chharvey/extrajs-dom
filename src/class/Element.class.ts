@@ -39,12 +39,14 @@ export default class xjs_Element extends xjs_Node {
 
   /**
    * @summary This element’s tag name in lowercase.
+   * @see https://www.w3.org/TR/dom/#dom-element-tagname
    */
   get tagName(): string { return this.node.tagName.toLowerCase() }
 
   /**
-   * @summary {@link Element#innerHTML}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
+   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
    * @param   markup the html to set
    * @returns `this` if setting; the innerHTML if getting
    */
@@ -56,9 +58,10 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * @summary {@link Element#outerHTML}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * @todo TODO: setter is not defined yet; only use this method as a getter.
+   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML
    * @param   markup the html to set
    * @returns `this` if setting; the outerHTML if getting
    */
@@ -90,6 +93,7 @@ export default class xjs_Element extends xjs_Node {
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * @todo TODO xjs.ParentNode#prepend
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
    * @param   contents the contents to prepend
    * @returns `this`
    */
@@ -122,6 +126,7 @@ export default class xjs_Element extends xjs_Node {
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * @todo TODO xjs.ParentNode#append
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
    * @param   contents the contents to append
    * @returns `this`
    */
@@ -212,7 +217,7 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * @summary {@link Element#id}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example
@@ -237,7 +242,7 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * @summary {@link Element#className}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example

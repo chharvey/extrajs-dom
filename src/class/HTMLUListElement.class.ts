@@ -6,7 +6,7 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
 
 /**
  * Wrapper for HTML `ul` element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmlulistelement-htmlulistelement
+ * @see https://www.w3.org/TR/html52/grouping-content.html#htmlulistelement
  */
 export default class xjs_HTMLUListElement extends xjs_HTMLElement {
   /**

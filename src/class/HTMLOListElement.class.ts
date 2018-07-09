@@ -6,7 +6,7 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
 
 /**
  * Wrapper for HTML `ol` element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
+ * @see https://www.w3.org/TR/html52/grouping-content.html#htmlolistelement
  */
 export default class xjs_HTMLOListElement extends xjs_HTMLElement {
   /**
