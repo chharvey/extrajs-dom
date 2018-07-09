@@ -6,6 +6,7 @@ const typescript = require('gulp-typescript')
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./config/tsconfig.json')
+const typedocconfig = require('./config/typedoc.json')
 
 
 gulp.task('compile', async function () {
@@ -14,13 +15,12 @@ gulp.task('compile', async function () {
     .pipe(gulp.dest('./dist/class/'))
 })
 
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs:api', function () {
-  return gulp.src(['./README.md', './class/*.class.js', '!./class/{Attr,DOMException,NamedNodeMap,Tree}.class.js'], {read:false})
-    .pipe(jsdoc(require('./config/jsdoc.json')))
+gulp.task('docs', async function () {
+  return gulp.src('./src/class/*.class.ts')
+    .pipe(typedoc(typedocconfig))
 })
 
-gulp.task('build', ['compile', 'docs:api'])
+gulp.task('build', ['compile', 'docs'])
 
 gulp.task('test', function () {
   require('./test/DocumentFragment-importLinks.test.js');
