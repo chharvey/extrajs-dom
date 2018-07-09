@@ -94,12 +94,11 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
   /**
    * @summary Render this template with some data.
    * @param   data the data to fill
-   * @param   this_arg a `this` context, if any, in which a {@link xjs_HTMLTemplateElement~RenderingFunction} is called
    * @param   options additional rendering options
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `data`, `options`, `this_arg`
+   * @param   this_arg a `this` context, if any, in which a {@link RenderingFunction} is called
    * @returns the rendered output
    */
-  render(data?: any, this_arg: any = null, options = {}): DocumentFragment {
+  render(data?: any, options = {}, this_arg: any = null): DocumentFragment {
     let frag = this.content().cloneNode(true)
     this._renderer.call(this_arg, frag, data, options)
     return <DocumentFragment>frag // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>

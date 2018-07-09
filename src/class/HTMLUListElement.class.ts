@@ -60,15 +60,14 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    *
    * @param   dataset any array of things
    * @param   renderer a typical rendering function
-   * @param   this_arg provide a `this` context to the rendering function
    * @param   options additional rendering options for all items
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
+   * @param   this_arg provide a `this` context to the rendering function
    * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
    * @returns `this`
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, this_arg: any = this, options = {}): this {
+  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, options = {}, this_arg: any = this): this {
     let template: (HTMLTemplateElement|null) = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <ul> does not have a <template> descendant.')
@@ -77,6 +76,6 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
     let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
+    return this.append(...dataset.map((data) => component.render(data, options, this_arg)))
   }
 }
