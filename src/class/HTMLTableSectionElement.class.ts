@@ -1,29 +1,25 @@
-const xjs = {
-  DocumentFragment: require('../dist/class/DocumentFragment.class.js').default,
-  HTMLElement: require('../dist/class/HTMLElement.class.js').default,
-  HTMLTemplateElement: require('../dist/class/HTMLTemplateElement.class.js').default,
-}
+import {dev_HTMLTableSectionElement} from '../dev.d'
+import xjs_DocumentFragment from './DocumentFragment.class'
+import xjs_HTMLElement from './HTMLElement.class'
+import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 
 
 /**
  * Wrapper for HTML `thead`, `tfoot`, and `tbody` elements.
  * @see https://www.w3.org/TR/html/tabular-data.html#htmltablesectionelement
- * @extends xjs.HTMLElement
  */
-xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
+export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs.HTMLTableSectionElement object.
-   * @version EXPERIMENTAL
-   * @param {HTMLTableSectionElement} node the node to wrap
+   * @summary Construct a new xjs_HTMLTableSectionElement object.
+   * @param node the node to wrap
    */
-  constructor(node) {
+  constructor(node: HTMLTableSectionElement) {
     super(node)
   }
   /**
    * @summary This wrapper’s node.
-   * @type {HTMLTableSectionElement}
    */
-  get node() { return super.node }
+  get node(): dev_HTMLTableSectionElement { return <dev_HTMLTableSectionElement>super.node }
 
   /**
    * @summary Populate this list with items containing data.
@@ -54,37 +50,35 @@ xjs.HTMLTableSectionElement = class extends xjs.HTMLElement {
    *   { "url": "#2", "text": "Career resources" },
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
-   * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
+   * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
    *   .populate(data, function (f, d, o) {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
    *   })
-   * new xjs.HTMLTableSectionElement(document.querySelector('tbody'))
+   * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
    *  .populate(data, function (f, d, o) {
    *    // some code involving `this`
    *  }, other_context)
    *
-   * @param   {Array} dataset any array of things
-   * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
-   * @param   {?Object=} this_arg provide a `this` context to the rendering function
-   * @param   {!Object=} options additional rendering options for all items
+   * @param   dataset any array of things
+   * @param   renderer a typical rendering function
+   * @param   this_arg provide a `this` context to the rendering function
+   * @param   options additional rendering options for all items
    * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
    * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
-   * @returns {xjs.HTMLTableSectionElement} `this`
+   * @returns `this`
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
    */
-  populate(dataset, renderer = (f,d,o) => {}, this_arg = this, options = {}) {
-    let template = this.node.querySelector('template')
-    if (template===null) {
+  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, this_arg: any = this, options = {}): this {
+    let template: (HTMLTemplateElement|null) = this.node.querySelector('template')
+    if (template === null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
     }
     if (template.content.children.length !== 1 || !template.content.children[0].matches('tr')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
-    let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
+    let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
   }
 }
-
-module.exports = xjs.HTMLTableSectionElement
