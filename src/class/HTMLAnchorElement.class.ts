@@ -1,5 +1,5 @@
 import {dev_HTMLAnchorElement} from '../dev.d'
-import {ValueArg} from './Element.class'
+import {ValueType,ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
 
@@ -30,10 +30,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `href` content attribute.
    * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  href(val: ValueArg, this_arg?: any): this;
+  href(val: ValueType): this;
+  /**
+   * @summary Reflect the `href` content attribute.
+   * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  href(val: ValueFunction, this_arg?: any): this;
   href(val?: any, this_arg: any = this): any {
     return this.attr('href', val, this_arg)
   }
@@ -48,10 +55,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `target` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  target(val: ValueArg, this_arg?: any): this;
+  target(val: ValueType): this;
+  /**
+   * @summary Reflect the `target` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  target(val: ValueFunction, this_arg?: any): this;
   target(val?: any, this_arg: any = this): any {
     return this.attr('target', val, this_arg)
   }
@@ -66,10 +80,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `download` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-download
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  download(val: ValueArg, this_arg?: any): this;
+  download(val: ValueType): this;
+  /**
+   * @summary Reflect the `download` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-download
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  download(val: ValueFunction, this_arg?: any): this;
   download(val?: any, this_arg: any = this): any {
     return this.attr('download', val, this_arg)
   }
@@ -84,10 +105,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `rel` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  rel(val: ValueArg, this_arg?: any): this;
+  rel(val: ValueType): this;
+  /**
+   * @summary Reflect the `rel` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  rel(val: ValueFunction, this_arg?: any): this;
   rel(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
@@ -102,10 +130,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `rev` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  rev(val: ValueArg, this_arg?: any): this;
+  rev(val: ValueType): this;
+  /**
+   * @summary Reflect the `rev` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  rev(val: ValueFunction, this_arg?: any): this;
   rev(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
@@ -120,10 +155,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `hreflang` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  hreflang(val: ValueArg, this_arg?: any): this;
+  hreflang(val: ValueType): this;
+  /**
+   * @summary Reflect the `hreflang` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  hreflang(val: ValueFunction, this_arg?: any): this;
   hreflang(val?: any, this_arg: any = this): any {
     return this.attr('hreflang', val, this_arg)
   }
@@ -138,10 +180,17 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @summary Reflect the `type` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  type(val: ValueArg, this_arg?: any): this;
+  type(val: ValueType): this;
+  /**
+   * @summary Reflect the `type` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  type(val: ValueFunction, this_arg?: any): this;
   type(val?: any, this_arg: any = this): any {
     return this.attr('type', val, this_arg)
   }

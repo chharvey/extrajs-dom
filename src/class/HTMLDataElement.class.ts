@@ -1,5 +1,5 @@
 import {dev_HTMLDataElement} from '../dev.d'
-import {ValueArg} from './Element.class'
+import {ValueType,ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
 /**
@@ -29,10 +29,17 @@ export default class xjs_HTMLDataElement extends xjs_HTMLElement {
    * @summary Reflect the `value` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
    * @param   val the value to set, or `null` to remove
-   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
    * @returns `this`
    */
-  value(val: ValueArg, this_arg?: any): this;
+  value(val: ValueType): this;
+  /**
+   * @summary Reflect the `value` content attribute.
+   * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
+   * @param   val the function to call when setting the value
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function
+   * @returns `this`
+   */
+  value(val: ValueFunction, this_arg?: any): this;
   value(val?: any, this_arg: any = this): any {
     return this.attr('value', val, this_arg)
   }
