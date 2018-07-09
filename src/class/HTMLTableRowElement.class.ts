@@ -6,7 +6,7 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
 
 /**
  * Wrapper for HTML `tr` element.
- * @see https://www.w3.org/TR/html/tabular-data.html#htmltablerowelement
+ * @see https://www.w3.org/TR/html52/tabular-data.html#htmltablerowelement
  */
 export default class xjs_HTMLTableRowElement extends xjs_HTMLElement {
   /**

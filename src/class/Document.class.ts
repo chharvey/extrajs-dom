@@ -34,7 +34,7 @@ export default class xjs_Document extends xjs_Node {
    * - if `[data-import="template"]`, then the replaced contents will be the contents of the first `template` descendant in the link’s imported document
    * - if the `[data-import]` attribute value is neither `"document"` nor `"template"`, or if it is absent, then the `link` element is completely ignored and left as-is
    *
-   * Note: If {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLLinkElement/import|HTMLLinkElement#import}
+   * Note: If {@link https://developer.mozilla.org/en-US/docs/Web/Web_Components/HTML_Imports|HTMLLinkElement#import}
    * is supported (by the browser or jsdom), then when `[data-import="document"]` is set,
    * the appended contents will instead be a `Document` object, as defined by
    * {@link https://www.w3.org/TR/html-imports/|HTML Imports}, rather than a `DocumentFragment` object.

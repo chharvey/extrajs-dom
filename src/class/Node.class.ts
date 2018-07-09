@@ -22,7 +22,7 @@ export default class xjs_Node {
 
 
   /**
-   * @summary {@link Node#textContent}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * @param   text the content to set
    * @returns `this` if setting; the textContent if getting

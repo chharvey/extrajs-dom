@@ -7,7 +7,7 @@ const xjs = {
 
 /**
  * Wrapper for an HTML element.
- * @see https://www.w3.org/TR/html/dom.html#htmlelement
+ * @see https://www.w3.org/TR/html52/dom.html#htmlelement
  */
 export default class xjs_HTMLElement extends xjs_Element {
   /**
@@ -59,9 +59,9 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary {@link HTMLElement.style}, with extended functionality.
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style|HTMLElement#style}, with extended functionality.
    * @description
-   * This method manipulates an element’s associated {@link CSSStyleDeclaration} object.
+   * This method manipulates an element’s associated {@link https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration|CSSStyleDeclaration} object.
    *
    * When the given key is a string, it represents the CSS property name to set or get.
    * It must be given in **kebab-case** format (e.g. `'text-align'`), as specified in
@@ -144,7 +144,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary {@link HTMLElement.dataset}, with extended functionality.
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset|HTMLElement#dataset}, with extended functionality.
    * @description
    * This method is similar to {@link xjs_Element#attr} in that it sets attributes,
    * except that this method only sets attributes starting with the `data-` prefix, and that
@@ -152,10 +152,10 @@ export default class xjs_HTMLElement extends xjs_Element {
    *
    * When the given key is a string, it represents the data- attribute to set or get.
    * It must not include the prefix `'data-'`, and it must be given in **camelCase** format (e.g. `'hasJs'`), as specified in
-   * {@link https://w3.org/TR/html52/dom.html#dom-domstringmap-__setter__-name-value-name|HTML 5.2 | DOMStringMap setter}.
+   * {@link https://www.w3.org/TR/html52/dom.html#dom-domstringmap-__setter__-name-value-name|HTML 5.2 | DOMStringMap setter}.
    *
    * Note that if you wish to use the HTML attribute syntax **kebab-case** format, as specified in
-   * {@link https://w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
+   * {@link https://www.w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
    * you should use the {@link xjs_Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
    *
    * If the key is a string and the value is a non-null {@link ValueArg} type,
