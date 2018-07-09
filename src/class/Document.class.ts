@@ -6,7 +6,7 @@ const path = require('path')
 const jsdom = require('jsdom')
 
 /**
- * Wrapper for a DocumentFragment.
+ * Wrapper for a Document.
  * @see https://www.w3.org/TR/dom/#document
  */
 export default class xjs_Document extends xjs_Node {
@@ -74,7 +74,7 @@ export default class xjs_Document extends xjs_Node {
    * @returns `this`
    */
   importLinks(relativepath: string): this {
-    const xjs_DocumentFragment = require('./DocumentFragment.class').default
+    const xjs_DocumentFragment    = require('./DocumentFragment.class').default
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
@@ -98,7 +98,7 @@ export default class xjs_Document extends xjs_Node {
    * @param   relativepath should always be `__dirname` when called
    */
   async importLinksAsync(relativepath: string): Promise<void[]> {
-    const xjs_DocumentFragment = require('./DocumentFragment.class').default
+    const xjs_DocumentFragment    = require('./DocumentFragment.class').default
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
