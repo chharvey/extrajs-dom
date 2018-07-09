@@ -1,6 +1,8 @@
 const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
+const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
+// require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./config/tsconfig.json')
