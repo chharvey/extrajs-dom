@@ -47,32 +47,45 @@ export default class xjs_Element extends xjs_Node {
   get tagName(): string { return this.node.tagName.toLowerCase() }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, but returns this object when done (if setting).
-   * @description This method exists simply for chaining.
+   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}.
    * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
-   * @param   markup the html to set
-   * @returns `this` if setting; the innerHTML if getting
+   * @returns the `innerHTML` of this element
    */
-  innerHTML(markup?: string): (this|string) {
+  innerHTML(): string;
+  /**
+   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, and returns this object when done.
+   * @description This method exists simply for chaining.
+   * @param   markup the html to set
+   * @returns `this`
+   */
+  innerHTML(markup: string): this;
+  innerHTML(markup?: any): any {
     if (arguments.length) {
-      this.node.innerHTML = <string>markup
+      this.node.innerHTML = markup
       return this
-    } else return <string>this.node.innerHTML
+    }
+    return this.node.innerHTML
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}, but returns this object when done (if setting).
+   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}.
+   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML
+   * @returns the `outerHTML` of this element
+   */
+  outerHTML(): string;
+  /**
+   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}, and returns this object when done.
    * @description This method exists simply for chaining.
    * @todo TODO: setter is not defined yet; only use this method as a getter.
-   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML
    * @param   markup the html to set
-   * @returns `this` if setting; the outerHTML if getting
+   * @returns `this`
    */
-  outerHTML(markup?: string): (this|string) {
+  outerHTML(markup: string): this;
+  outerHTML(markup?: any): any {
     if (arguments.length) {
       throw new Error('feature not supported yet')
-      return this
-    } else return <string>this.node.outerHTML
+    }
+    return this.node.outerHTML
   }
 
   /**
@@ -264,6 +277,7 @@ export default class xjs_Element extends xjs_Node {
 
   /**
    * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}.
+   * @see https://www.w3.org/TR/dom/#dom-element-id
    * @returns the value of the `id` attribute, or `null` if it had not been set
    */
   id(): string|null;
@@ -303,6 +317,7 @@ export default class xjs_Element extends xjs_Node {
 
   /**
    * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}.
+   * @see https://www.w3.org/TR/dom/#dom-element-classname
    * @returns the value of the `class` attribute, or `null` if it had not been set
    */
   class(): string|null;
