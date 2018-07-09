@@ -4,9 +4,7 @@ const path = require('path')
 const jsdom = require('jsdom')
 
 const xjs = {
-  Object : require('extrajs').Object,
   Node   : require('./Node.class.js'),
-  Element: require('./Element.class.js'),
   HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
 
@@ -16,6 +14,43 @@ const xjs = {
  * @extends xjs.Node
  */
 xjs.DocumentFragment = class extends xjs.Node {
+  /**
+   * @summary Concatenate multiple contents into text.
+   * @example
+   * xjs.DocumentFragment.concat(
+   *   new xjs.Element(document.createElement('strong')).append(`hello `),
+   *   new xjs.Element(document.createElement('em'    )).append(`world`),
+   *   new xjs.Element(document.createElement('mark'  )).append(`!`)
+   * ) // '<strong>hello </strong><em>world</em><mark>!</mark>'
+   * @param   {...?(Node|xjs.Node|string)} contents the contents to concatenate
+   * @returns {string} the resulting output of concatenation
+   */
+  static concat(...contents) {
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment('')).append(...contents).innerHTML()
+  }
+
+  /**
+   * @summary Read an HTML file and return a document fragment with its contents.
+   * @description The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
+   * To access the actual element, call {@link xjs.DocumentFragment#node}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.DocumentFragment} the fragment, wrapped
+   */
+  static async fromFile(filepath) {
+    let data = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment(data))
+  }
+  /**
+   * @summary Synchronous version of {@link xjs.DocumentFragment.fromFile}.
+   * @param   {string} filepath the path to the file
+   * @returns {xjs.DocumentFragment} the fragment, wrapped
+   */
+  static fromFileSync(filepath) {
+    let data = fs.readFileSync(filepath, 'utf8')
+    return new xjs.DocumentFragment(jsdom.JSDOM.fragment(data))
+  }
+
+
   /**
    * @summary Construct a new xjs.DocumentFragment object.
    * @param {DocumentFragment} node the node to wrap
@@ -133,7 +168,7 @@ xjs.DocumentFragment = class extends xjs.Node {
    *
    * Note: `DocumentFragment#querySelectorAll` does *not* traverse inside `<template>` elements,
    * so any `<link>` elements inside `<template>` elements will be left untouched.
-   * To modify those, you will need to call this method on that `<template>`’s contents (another DocumentFragment).
+   * To modify those, you will need to call this method on that `<template>`’s contents (another `DocumentFragment`).
    *
    * In the example below,
    * The `link[rel="import"]` in this fragment has `[data-import="template"]`, and so is replaced with
@@ -177,40 +212,43 @@ xjs.DocumentFragment = class extends xjs.Node {
    * @returns {xjs.DocumentFragment} `this`
    */
   importLinks(relativepath) {
-    let test = jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link')
-    if (!('import' in test)) { // if `HTMLLinkElement#import` is not yet supported
+    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      // REVIEW-INDENTATION
-    this.node.querySelectorAll('link[rel="import"][data-import]').forEach(function (link) {
-      const import_switch = {
-        'document': () => jsdom.JSDOM.fragment(fs.readFileSync(path.resolve(relativepath, link.href), 'utf8')),
-        'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
-        default() { return null },
-      }
-      let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(null)
-      if (imported) {
-        link.after(imported)
-        link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
-      }
-    })
+      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
+        const import_switch = {
+          'document': () => xjs.DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
+          'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
+          default() { return null },
+        }
+        let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
+        if (imported) {
+          link.after(imported)
+          link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
+        }
+      })
     }
     return this
   }
-
-
   /**
-   * @summary Concatenate multiple contents into text.
-   * @example
-   * xjs.DocumentFragment.concat(
-   *   new xjs.Element(document.createElement('strong')).append(`hello `),
-   *   new xjs.Element(document.createElement('em'    )).append(`world`),
-   *   new xjs.Element(document.createElement('mark'  )).append(`!`)
-   * ) // '<strong>hello </strong><em>world</em><mark>!</mark>'
-   * @param   {...?(Node|xjs.Node|string)} contents the contents to concatenate
-   * @returns {string} the resulting output of concatenation
+   * @summary Asynchronous version of {@link xjs.DocumentFragment#importLinks}.
+   * @param   {string} relativepath should always be `__dirname` when called
    */
-  static concat(...contents) {
-    return new xjs.DocumentFragment(jsdom.JSDOM.fragment('')).append(...contents).innerHTML()
+  async importLinksAsync(relativepath) {
+    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
+      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
+      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
+        const import_switch = {
+          'document': async () => (await xjs.DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
+          'template': async () => (await xjs.HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
+          async default() { return null },
+        }
+        let imported = await (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
+        if (imported) {
+          link.after(imported)
+          link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
+        }
+      }))
+    }
   }
 }
 

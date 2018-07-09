@@ -305,33 +305,11 @@ function element_documentFragment() {
   )
 }
 
-function element_data() {
-  class Person {
-    constructor(name) {
-      this.name = name
-    }
-    get view() {
-      return new (require('extrajs-view'))(function () {
-        return `<span>${this.name}</span>`
-      }, this)
-        .addDisplay(function cap(capitalize) {
-          return `<h1 style="text-transform: ${(capitalize) ? 'uppercase' : 'normal'}">${this.name}</h1>`
-        })
-    }
-  }
-  let chris = new Person('Chris')
-  // console.log(chris.view())
-  // console.log(chris.view.cap(true))
-  // console.log(chris.view.cap(false))
-  console.log(Element.data(chris, {display:{name:'cap'}}))
-}
-
 // element();
 // subclasses();
 // element_attr();
 // element_style();
 // element_css();
-// element_data();
 // element_addContent();
 // element_toString();
 // element_view();
