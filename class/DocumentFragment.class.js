@@ -1,11 +1,11 @@
 const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const jsdom = require('jsdom')
 
 const xjs = {
   Node   : require('./Node.class.js'),
-  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
 }
 
 /**
@@ -212,12 +212,13 @@ xjs.DocumentFragment = class extends xjs.Node {
    * @returns {xjs.DocumentFragment} `this`
    */
   importLinks(relativepath) {
+    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class.js')
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
         const import_switch = {
           'document': () => xjs.DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
-          'template': () => xjs.HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
+          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
           default() { return null },
         }
         let imported = (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
@@ -234,12 +235,13 @@ xjs.DocumentFragment = class extends xjs.Node {
    * @param   {string} relativepath should always be `__dirname` when called
    */
   async importLinksAsync(relativepath) {
+    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class.js')
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
         const import_switch = {
           'document': async () => (await xjs.DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
-          'template': async () => (await xjs.HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
+          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
           async default() { return null },
         }
         let imported = await (import_switch[link.getAttribute('data-import')] || import_switch.default).call(this)
