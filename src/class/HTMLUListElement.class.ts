@@ -3,12 +3,54 @@ import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 
+const path = require('path')
+
 
 /**
  * Wrapper for HTML `ul` element.
  * @see https://www.w3.org/TR/html52/grouping-content.html#htmlulistelement
  */
 export default class xjs_HTMLUListElement extends xjs_HTMLElement {
+  /**
+   * @summary Return a new `xjs.HTMLTemplateElement` object that renders a `<ul>` filled with `<li>`s.
+   * @example
+   * const my_tpl = (await xjs.HTMLUListElement.template())
+   *   .exe(function () {
+   *     new xjs.HTMLUListElement(this.content().querySelector('ul')).addClass('o-List')
+   *     new xjs.HTMLLIElement(this.content().querySelector('template').content.querySelector('li')).addClass('o-List__Item')
+   *   })
+   *   .setRenderer(function (frag, data, opts) {
+   *     new xjs.HTMLUListElement(frag.querySelector('ul')).populate(data, function (f, d, o) {
+   *       f.querySelector('li').append(d)
+   *     }, null, opts)
+   *   })
+   * my_tpl.render([1,2,3,4,5]) // returns:
+   * // ```html
+   * // <ul class="o-List">
+   * //   <template>
+   * //     <li class="o-List__Item">1</li>
+   * //     <li class="o-List__Item">2</li>
+   * //     <li class="o-List__Item">3</li>
+   * //     <li class="o-List__Item">4</li>
+   * //     <li class="o-List__Item">5</li>
+   * //   </template>
+   * // </ul>
+   * // ```
+   * @param   renderer a typical rendering function, used for rendering the list
+   * @returns a template rendering a `<ul>` element
+   */
+  static async template(): Promise<xjs_HTMLTemplateElement> {
+    return xjs_HTMLTemplateElement.fromFile(path.join(__dirname, '../../src/tpl/x-htmlulistelement.tpl.html')) // relative to `dist`
+  }
+  /**
+   * @summary Synchronous version of {@link xjs_HTMLUListElement.template}.
+   * @returns a template rendering a `<ul>` element
+   */
+  static templateSync(): xjs_HTMLTemplateElement {
+    return xjs_HTMLTemplateElement.fromFileSync(path.join(__dirname, '../../src/tpl/x-htmlulistelement.tpl.html')) // relative to `dist`
+  }
+
+
   /**
    * @summary Construct a new xjs_HTMLUListElement object.
    * @param node the node to wrap
