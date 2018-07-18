@@ -1,28 +1,25 @@
-const xjs = {
-  DocumentFragment: require('./DocumentFragment.class.js'),
-  HTMLElement: require('./HTMLElement.class.js'),
-  HTMLTemplateElement: require('./HTMLTemplateElement.class.js'),
-}
+import {dev_HTMLOListElement} from '../dev.d'
+import xjs_DocumentFragment from './DocumentFragment.class'
+import xjs_HTMLElement from './HTMLElement.class'
+import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 
 
 /**
  * Wrapper for HTML `ol` element.
- * @see https://www.w3.org/TR/html/grouping-content.html#htmlolistelement-htmlolistelement
- * @extends xjs.HTMLElement
+ * @see https://www.w3.org/TR/html52/grouping-content.html#htmlolistelement
  */
-xjs.HTMLOListElement = class extends xjs.HTMLElement {
+export default class xjs_HTMLOListElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs.HTMLOListElement object.
-   * @param {HTMLOListElement} node the node to wrap
+   * @summary Construct a new xjs_HTMLOListElement object.
+   * @param node the node to wrap
    */
-  constructor(node) {
+  constructor(node: HTMLOListElement) {
     super(node)
   }
   /**
    * @summary This wrapper’s node.
-   * @type {HTMLOListElement}
    */
-  get node() { return super.node }
+  get node(): dev_HTMLOListElement { return <dev_HTMLOListElement>super.node }
 
   /**
    * @summary Populate this list with items containing data.
@@ -51,35 +48,34 @@ xjs.HTMLOListElement = class extends xjs.HTMLElement {
    *   { "url": "#2", "text": "Career resources" },
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
-   * new xjs.HTMLOListElement(document.querySelector('ol'))
-   *   .populate(data, function (f, d) {
+   * new xjs_HTMLOListElement(document.querySelector('ol'))
+   *   .populate(data, function (f, d, o) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
    *   })
-   * new xjs.HTMLOListElement(document.querySelector('ol'))
-   *  .populate(data, function (f, d) {
+   * new xjs_HTMLOListElement(document.querySelector('ol'))
+   *  .populate(data, function (f, d, o) {
    *    // some code involving `this`
    *  }, other_context)
    *
-   * @param   {Array} dataset any array of things
-   * @param   {xjs.HTMLTemplateElement~RenderingFunction=} renderer a typical rendering function
-   * @param   {!Object=} options additional rendering options for all items
-   * @param   {?Object=} this_arg provide a `this` context to the rendering function
-   * @returns {xjs.HTMLOListElement} `this`
+   * @param   dataset any array of things
+   * @param   renderer a typical rendering function
+   * @param   options additional rendering options for all items
+   * @param   this_arg provide a `this` context to the rendering function
+   * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
+   * @returns `this`
    * @throws  {ReferenceError} if this `<ol>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate(dataset, renderer = (f,d,o) => {}, options = {}, this_arg = this) {
-    let template = this.node.querySelector('template')
-    if (template===null) {
+  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, options = {}, this_arg: any = this): this {
+    let template: (HTMLTemplateElement|null) = this.node.querySelector('template')
+    if (template === null) {
       throw new ReferenceError('This <ol> does not have a <template> descendant.')
     }
     if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let component = new xjs.HTMLTemplateElement(template).setRenderer(renderer)
+    let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
     return this.append(...dataset.map((data) => component.render(data, options, this_arg)))
   }
 }
-
-module.exports = xjs.HTMLOListElement

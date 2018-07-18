@@ -1,58 +1,75 @@
+import {dev_Element} from '../dev.d'
+import xjs_Node from './Node.class'
+
 const xjs = {
   Object: require('extrajs').Object,
-  Node  : require('./Node.class.js'),
 }
+
+/**
+ * @summary A type to provide as a value argument for setting/removing an attribute.
+ * @description
+ * - If it is a string, number, or boolean, then the attribute value will be set to
+ *   that value, stringified (number and boolean converted to a string).
+ * - If it is `null`, the attribute is removed.
+ * - If it is a function,
+ *   it must take zero arguments and return a single primitive value;
+ *   any `this` context in the function will almost always point to this `xjs.Element` object
+ *   (unless another `thisArg` is passed elsewhere);
+ *   and the return value---which must be a string, number, or boolean---is set as the attribute value.
+ */
+export type ValueArg = ((this: any) => string|number|boolean) | string | number | boolean | null
 
 /**
  * Wrapper for an Element.
  * @see https://www.w3.org/TR/dom/#element
- * @extends xjs.Node
  */
-xjs.Element = class extends xjs.Node {
+export default class xjs_Element extends xjs_Node {
   /**
-   * @summary Construct a new xjs.Element object.
-   * @param {Element} node the node to wrap
+   * @summary Construct a new xjs_Element object.
+   * @param node the node to wrap
    */
-  constructor(node) {
+  constructor(node: Element) {
     super(node)
   }
   /**
    * @summary This wrapper’s node.
-   * @type {Element}
    */
-  get node() { return super.node }
+  get node(): dev_Element { return <dev_Element>super.node }
 
 
   /**
    * @summary This element’s tag name in lowercase.
-   * @type {string}
+   * @see https://www.w3.org/TR/dom/#dom-element-tagname
    */
-  get tagName() { return this.node.tagName.toLowerCase() }
+  get tagName(): string { return this.node.tagName.toLowerCase() }
 
   /**
-   * @summary {@link Element#innerHTML}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * @param   {string=} markup the html to set
-   * @returns {(xjs.Element|string)} `this` if setting; the innerHTML if getting
+   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
+   * @param   markup the html to set
+   * @returns `this` if setting; the innerHTML if getting
    */
-  innerHTML(markup) {
+  innerHTML(markup?: string): (this|string) {
     if (arguments.length) {
-      this.node.innerHTML = markup
+      this.node.innerHTML = <string>markup
       return this
-    } else return this.node.innerHTML
+    } else return <string>this.node.innerHTML
   }
 
   /**
-   * @summary {@link Element#outerHTML}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
    * @todo TODO: setter is not defined yet; only use this method as a getter.
-   * @param   {string=} markup the html to set
-   * @returns {(xjs.Element|string)} `this` if setting; the outerHTML if getting
+   * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML
+   * @param   markup the html to set
+   * @returns `this` if setting; the outerHTML if getting
    */
-  outerHTML(markup) {
+  outerHTML(markup?: string): (this|string) {
     if (arguments.length) {
+      throw new Error('feature not supported yet')
       return this
-    } else return this.node.outerHTML
+    } else return <string>this.node.outerHTML
   }
 
   /**
@@ -76,12 +93,13 @@ xjs.Element = class extends xjs.Node {
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * @todo TODO xjs.ParentNode#prepend
-   * @param   {...?(Node|xjs.Node|string)} contents the contents to prepend
-   * @returns {xjs.Element} `this`
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
+   * @param   contents the contents to prepend
+   * @returns `this`
    */
-  prepend(...contents) {
+  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.prepend(...contents.map((c) =>
-      (c instanceof xjs.Node) ? c.node :
+      (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
     ))
     return this
@@ -108,12 +126,13 @@ xjs.Element = class extends xjs.Node {
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * @todo TODO xjs.ParentNode#append
-   * @param   {...?(Node|xjs.Node|string)} contents the contents to append
-   * @returns {xjs.Element} `this`
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
+   * @param   contents the contents to append
+   * @returns `this`
    */
-  append(...contents) {
+  append(...contents: (xjs_Node|Node|string|null)[]): this {
     this.node.append(...contents.map((c) =>
-      (c instanceof xjs.Node) ? c.node :
+      (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
     ))
     return this
@@ -121,27 +140,9 @@ xjs.Element = class extends xjs.Node {
 
 
   /**
-   * @summary A function passed to {@link xjs.Element#attr}.
-   * @description It must take zero arguments and return a single primitive value.
-   * Any `this` context in the function will almost always point to this `xjs.Element` object.
-   * @callback xjs.Element~ValueCallback
-   * @returns {(string|number|boolean)} the attribute value to set
-   */
-  /**
-   * @summary A type to provide as a value argument for setting/removing an attribute.
-   * @description
-   * - If it is a string, number, or boolean, then the attribute value will be set to
-   *   that value, stringified (number and boolean converted to a string).
-   * - If it is a function (of type {@link xjs.Element~ValueCallback}), it will be called
-   *   in the context of this object (the `xjs.Element` instance),
-   *   and the return value---which must be a string, number, or boolean---will be set as the attribute value.
-   * - If it is `null`, the attribute is removed.
-   * @typedef {?(string|number|boolean|xjs.Element~ValueCallback)} xjs.Element~ValueArg
-   */
-  /**
    * @summary Set or get attributes of this element.
    * @description
-   * If the key given is a string, and the value is a non-null {@link xjs.Element~ValueArg} type,
+   * If the key given is a string, and the value is a non-null {@link ValueArg} type,
    * then the attribute will be set (or modified) with the result of the value.
    *
    * If the key is a string and the value is `null,`
@@ -153,7 +154,7 @@ xjs.Element = class extends xjs.Node {
    * If no such attribute exists, then `null` is returned.
    *
    * If an object is provided as the key, then no argument may be provided as the value.
-   * The object must have values of the {@link xjs.Element~ValueArg} type;
+   * The object must have values of the {@link ValueArg} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * attributes. You may use this method with a single object argument to set and/or remove
    * multiple attributes (using `null` to remove).
@@ -191,35 +192,34 @@ xjs.Element = class extends xjs.Node {
    * this.attr({})   // do nothing; return `this`
    * this.attr(null) // do nothing; return `this`
    *
-   * @param   {(string|?Object<xjs.Element~ValueArg>)=} attr the name of the attribute to set or get (nonempty string), or an object with {@link xjs.Element~ValueArg} type values
-   * @param   {xjs.Element~ValueArg=} value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|?string)} `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
-   * @throws  {TypeError} if the given attribute is not a string or nullable object
+   * @param   attr the name of the attribute to set or get (nonempty string), or an object with {@link ValueArg} type values
+   * @param   value the value to assign to the attribute, or `null` to remove it, or `undefined` (or not provided) to get it
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting an attribute, else the value of the attribute specified (or `null` if that attribute hasn’t been set)
    */
-  attr(attr = '', value, this_arg = this) {
+  attr(attr: ({ [index: string]: ValueArg }|string|null) = '', value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
       case 'null': break;
       case 'string':
-        if (attr.trim() === '') break;
+        if ((<string>attr).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.attr(attr, value.call(this_arg));
-          case 'null'     : this.node.removeAttribute(attr); break;
-          case 'undefined': return this.node.getAttribute(attr);
-          default         : this.node.setAttribute(attr, value); break; // string, boolean, number, infinite, NaN
+          case 'function' : return this.attr(attr, (<Function>value).call(this_arg));
+          case 'null'     : this.node.removeAttribute(<string>attr); break;
+          case 'undefined': return this.node.getAttribute(<string>attr);
+          default         : this.node.setAttribute(<string>attr, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in attr) this.attr(i, attr[i]); break;
-      default      : throw new TypeError('Provided attribute must be a string or (nullable) object.')
+      case 'object': for (let i in <object>attr) this.attr(i, (<{ [index: string]: ValueArg }>attr)[i]); break;
+      default: break;
     }
     return this
   }
 
   /**
-   * @summary {@link Element#id}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/id|Element#id}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * This method also takes arguments usable in {@link xjs.Element#attr}.
+   * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example
    * this.id('section1') // set the [id] attribute (string)
    * this.id(42)         // set the [id] attribute (number)  (the value will be `"42"`)
@@ -229,22 +229,22 @@ xjs.Element = class extends xjs.Node {
    * this.id(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [id] attribute using a function in another given context
    * this.id(null)       // remove the [id] attribute
    * this.id()           // get the value of [id] (or `null` if it had not been set)
-   * @param   {?xjs.Element~ValueArg=} value the value to set for the `id` attribute
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|?string)} `this` if setting; the ID if getting (or `null` if it hasn’t been set)
+   * @param   value the value to set for the `id` attribute
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting; the ID if getting (or `null` if it hasn’t been set)
    */
-  id(value, this_arg = this) {
+  id(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.id = value
+      if (xjs.Object.typeOf(value) === 'string') this.node.id = <string>value
       else this.attr('id', value, this_arg)
       return this
     } else return this.node.id
   }
 
   /**
-   * @summary {@link Element#className}, but returns this object when done (if setting).
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/className|Element#className}, but returns this object when done (if setting).
    * @description This method exists simply for chaining.
-   * This method also takes arguments usable in {@link xjs.Element#attr}.
+   * This method also takes arguments usable in {@link xjs_Element#attr}.
    * @example
    * this.class('o-Object c-Component') // set the [class] attribute (string)
    * this.class(42)                     // set the [class] attribute (number)  (the value will be `"42"`)
@@ -254,13 +254,13 @@ xjs.Element = class extends xjs.Node {
    * this.class(function () { return this.tagName }, { tagName: 'custom-name' }) // set the [class] attribute using a function in another given context
    * this.class(null)                   // remove the [class] attribute
    * this.class()                       // return the value of [class] (or `null` if it had not been set)
-   * @param   {?xjs.Element~ValueArg=} value the value to set for the `class` attribute
-   * @param   {*=} this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
-   * @returns {(xjs.Element|string)} `this` if setting; the class if getting (or `null` if it hasn’t been set)
+   * @param   value the value to set for the `class` attribute
+   * @param   this_arg optionally pass in another object to use as `this` inside the given function; only applicable if `value` is a function
+   * @returns `this` if setting; the class if getting (or `null` if it hasn’t been set)
    */
-  class(value, this_arg = this) {
+  class(value?: (ValueArg|null), this_arg: any = this): (this|string|null) {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.className = value
+      if (xjs.Object.typeOf(value) === 'string') this.node.className = <string>value
       else this.attr('class', value, this_arg)
       return this
     } else return this.node.className
@@ -274,15 +274,15 @@ xjs.Element = class extends xjs.Node {
    * this.addClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.addClass('')                                 // do nothing; return `this`
    * this.addClass()                                   // do nothing; return `this`
-   * @param   {...string=} tokens the classname(s) to add
-   * @returns {xjs.Element} `this`
+   * @param   tokens the classname(s) to add
+   * @returns `this`
    */
-  addClass(...tokens) {
-    tokens.forEach(function (token) {
-      token.split(' ').forEach(function (t) {
+  addClass(...tokens: string[]): this {
+    tokens.forEach((token) => {
+      token.split(' ').forEach((t) => {
         if (t.trim() !== '') this.node.classList.add(t)
-      }, this)
-    }, this)
+      })
+    })
     return this
   }
 
@@ -294,15 +294,16 @@ xjs.Element = class extends xjs.Node {
    * this.removeClass('o-Object c-Component', 'h-Helper') // spaces are allowed; they will just be split
    * this.removeClass('')                                 // do nothing; return `this`
    * this.removeClass()                                   // do nothing; return `this`
-   * @param   {...string} tokens classname(s) to remove
-   * @returns {xjs.Element} `this`
+   * @param   tokens classname(s) to remove
+   * @returns `this`
    */
-  removeClass(...tokens) {
-    tokens.forEach(function (token) {
-      token.split(' ').forEach(function (t) {
+  removeClass(...tokens: string[]): this {
+    tokens.forEach((token) => {
+      token.split(' ').forEach((t) => {
         if (t.trim() !== '') this.node.classList.remove(t)
-      }, this)
-    }, this)
+      })
+    })
+    return this
   }
 
   /**
@@ -311,14 +312,12 @@ xjs.Element = class extends xjs.Node {
    * let element = jsdom.JSDOM.fragment(`<i class="glyphicons glphicons-{{ icon }}"></i>`).querySelector('i')
    * new xjs.Element(element).replaceClass('{{ icon }}', 'mobile')
    * element.outerHTML // <a class="glyphicons glphicons-mobile"></a>
-   * @param   {string} old_string the segment of this element’s `[class]` attribute value to remove
-   * @param   {string} new_string the string with which to replace the removed segment
-   * @returns {xjs.Element} `this`
+   * @param   old_ the segment of this element’s `[class]` attribute value to remove
+   * @param   new_ the string with which to replace the removed segment
+   * @returns `this`
    */
-  replaceClassString(old_string, new_string) {
-    this.node.className = this.node.className.replace(old_string, new_string)
+  replaceClassString(old_: string, new_: string): this {
+    this.node.className = this.node.className.replace(old_, new_)
     return this
   }
 }
-
-module.exports = xjs.Element
