@@ -70,7 +70,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     const {Node} = new jsdom.JSDOM().window
     // TODO make an enum for node types
     // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
-    const switch_: { [index: string]: (node: Node) => (string|null) } = {
+    const switch_: { [index: string]: (node: Node) => string|null } = {
       [Node.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
       [Node.TEXT_NODE]             : (text: Text            ) => text.data            ,
       [Node.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
@@ -215,7 +215,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
-        const switch_: { [index: string]: () => (DocumentFragment|null) } = {
+        const switch_: { [index: string]: () => DocumentFragment|null } = {
           'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
           'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
           default() { return null },
@@ -238,7 +238,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
-        const switch_: { [index: string]: () => Promise<(DocumentFragment|null)> } = {
+        const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
           'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
           'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
           async default() { return null },

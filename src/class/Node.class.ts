@@ -22,16 +22,24 @@ export default class xjs_Node {
 
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}, but returns this object when done (if setting).
+   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}.
+   * @see https://www.w3.org/TR/dom/#dom-node-textcontent
+   * @returns the `textContent` of this node
+   */
+  textContent(): string|null;
+  /**
+   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}, and returns this object when done.
    * @description This method exists simply for chaining.
    * @param   text the content to set
-   * @returns `this` if setting; the textContent if getting
+   * @returns `this`
    */
-  textContent(text?: string): (this|string) {
+  textContent(text: string): this;
+  textContent(text?: any): any {
     if (arguments.length) {
-      this.node.textContent = <string>text
+      this.node.textContent = text
       return this
-    } else return <string>this.node.textContent
+    }
+    return this.node.textContent
   }
 
   /**
