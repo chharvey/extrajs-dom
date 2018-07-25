@@ -61,27 +61,6 @@ export default class xjs_DocumentFragment extends xjs_Node {
    */
   get node(): dev_DocumentFragment { return <dev_DocumentFragment>super.node }
 
-
-  /**
-   * @summary Get the "innerHTML" of this document fragment.
-   * @returns a concatenation of all the `outerHTML` and/or data of the fragment’s node children
-   */
-  innerHTML(): string {
-    const {Node} = new jsdom.JSDOM().window
-    // TODO make an enum for node types
-    // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
-    const switch_: { [index: string]: (node: Node) => string|null } = {
-      [Node.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
-      [Node.TEXT_NODE]             : (text: Text            ) => text.data            ,
-      [Node.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
-      [Node.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
-      default(node: Node) { return null },
-    }
-    return [...this.node.childNodes].map((node) =>
-      (switch_[node.nodeType] || switch_.default).call(null, node)
-    ).join('')
-  }
-
   /**
    * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
    * @description This method exists simply for chaining.
@@ -148,6 +127,25 @@ export default class xjs_DocumentFragment extends xjs_Node {
     return this
   }
 
+  /**
+   * @summary Get the "innerHTML" of this document fragment.
+   * @returns a concatenation of all the `outerHTML` and/or data of the fragment’s node children
+   */
+  innerHTML(): string {
+    const {Node} = new jsdom.JSDOM().window
+    // TODO make an enum for node types
+    // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+    const switch_: { [index: string]: (node: Node) => string|null } = {
+      [Node.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
+      [Node.TEXT_NODE]             : (text: Text            ) => text.data            ,
+      [Node.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
+      [Node.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
+      default(node: Node) { return null },
+    }
+    return [...this.node.childNodes].map((node) =>
+      (switch_[node.nodeType] || switch_.default).call(null, node)
+    ).join('')
+  }
 
   /**
    * @summary Replace all `link[rel="import"][data-import]` elements with contents from their documents.

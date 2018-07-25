@@ -154,7 +154,6 @@ export default class xjs_Element extends xjs_Node {
     return this
   }
 
-
   /**
    * @summary Get and set attributes of this element.
    * @description

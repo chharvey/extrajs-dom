@@ -48,6 +48,72 @@ export default class xjs_Document extends xjs_Node {
 
 
   /**
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.Document(new Document())
+   *   .prepend(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).node.querySelector('body').innerHTML
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#prepend
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
+   * @param   contents the contents to prepend
+   * @returns `this`
+   */
+  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
+    this.node.prepend(...contents.map((c) =>
+      (c instanceof xjs_Node) ? c.node :
+      (c === null) ? '' : c
+    ))
+    return this
+  }
+
+  /**
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
+   *   .append(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).node.querySelector('body').innerHTML
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#append
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
+   * @param   contents the contents to append
+   * @returns `this`
+   */
+  append(...contents: (xjs_Node|Node|string|null)[]): this {
+    this.node.append(...contents.map((c) =>
+      (c instanceof xjs_Node) ? c.node :
+      (c === null) ? '' : c
+    ))
+    return this
+  }
+
+  /**
    * @summary Replace all `link[rel="import"][data-import]` elements with contents from their documents.
    * @description
    * This method finds all `link[rel="import"][data-import]`s in this document,
