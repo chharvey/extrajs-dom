@@ -1,7 +1,9 @@
 import {dev_Document, dev_HTMLLinkElement} from '../dev.d'
 import xjs_Node from './Node.class'
 
+const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const jsdom = require('jsdom')
 
@@ -10,6 +12,28 @@ const jsdom = require('jsdom')
  * @see https://www.w3.org/TR/dom/#document
  */
 export default class xjs_Document extends xjs_Node {
+  /**
+   * @summary Read an HTML file and return a document with its contents.
+   * @description The Document object will be wrapped in an `xjs.Document` object.
+   * To access the actual element, call {@link xjs_Document#node}.
+   * @param   filepath the path to the file
+   * @returns the document, wrapped
+   */
+  static async fromFile(filepath: string): Promise<xjs_Document> {
+    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+  }
+  /**
+   * @summary Synchronous version of {@link xjs_Document.fromFile}.
+   * @param   filepath the path to the file
+   * @returns the document, wrapped
+   */
+  static fromFileSync(filepath: string): xjs_Document {
+    let data: string = fs.readFileSync(filepath, 'utf8')
+    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+  }
+
+
   /**
    * @summary Construct a new xjs_Document object.
    * @param node the node to wrap
