@@ -150,9 +150,9 @@ export default class xjs_DocumentFragment extends xjs_Node {
 
 
   /**
-   * @summary Replace all `link[rel="import"][data-import]` elements with contents from their documents.
+   * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
    * @description
-   * This method finds all `link[rel="import"][data-import]`s in this document fragment,
+   * This method finds all `link[rel~="import"][data-import]`s in this document fragment,
    * and then replaces those links with another `DocumentFragment` holding some contents.
    * These contents depend on the value set for `data-import`:
    *
@@ -214,7 +214,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
+      this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
         const switch_: { [index: string]: () => DocumentFragment|null } = {
           'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
           'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
@@ -237,7 +237,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
+      return Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
         const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
           'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
           'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
