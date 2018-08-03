@@ -114,6 +114,22 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
+   * @summary Get the "innerHTML" of this document.
+   * @description This method should be used only if this document is an HTML Document,
+   * has doctype `html`, and whose root element is the `<html>` element (an instance of `HTMLHtmlElement`).
+   *
+   * You should only use this method if you do not have access to the original DOM object that this Document belongs to.
+   * Otherwise, you should use `dom.serialize()`.
+   * @returns a string serialization of this HTML Document
+   * @throws {ReferenceError} if this document does not contain an `<html>` element
+   */
+  innerHTML(): string {
+    let root: Element|null = this.node.querySelector('html')
+    if (root === null) throw new ReferenceError('No <html> element found.')
+    return new jsdom.JSDOM('<!doctype html>' + root.outerHTML).serialize()
+  }
+
+  /**
    * @summary Replace all `link[rel="import"][data-import]` elements with contents from their documents.
    * @description
    * This method finds all `link[rel="import"][data-import]`s in this document,
