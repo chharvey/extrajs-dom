@@ -136,11 +136,11 @@ export default class xjs_DocumentFragment extends xjs_Node {
     // TODO make an enum for node types
     // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
     const switch_: { [index: string]: (node: Node) => string|null } = {
-      [Node.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
-      [Node.TEXT_NODE]             : (text: Text            ) => text.data            ,
-      [Node.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
-      [Node.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
-      default(node: Node) { return null },
+      [Node.ELEMENT_NODE]          : (el  ) => (<Element>el).outerHTML,
+      [Node.TEXT_NODE]             : (text) => (<Text>text).data,
+      [Node.COMMENT_NODE]          : (comm) => `<!--${(<Comment>comm).data}-->`,
+      [Node.DOCUMENT_FRAGMENT_NODE]: (frag) => new xjs_DocumentFragment(<DocumentFragment>frag).innerHTML(),
+      default(node) { return null },
     }
     return [...this.node.childNodes].map((node) =>
       (switch_[node.nodeType] || switch_.default).call(null, node)
@@ -212,16 +212,16 @@ export default class xjs_DocumentFragment extends xjs_Node {
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
+      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
         const switch_: { [index: string]: () => DocumentFragment|null } = {
-          'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, link.href)).node,
-          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, link.href)).content(),
+          'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, (<dev_HTMLLinkElement>link).href)).node,
+          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, (<dev_HTMLLinkElement>link).href)).content(),
           default() { return null },
         }
-        let imported = (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
+        let imported = (switch_[<string>(<dev_HTMLLinkElement>link).getAttribute('data-import')] || switch_.default).call(this)
         if (imported) {
-          link.after(imported)
-          link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
+          ;(<dev_HTMLLinkElement>link).after(imported)
+          ;(<dev_HTMLLinkElement>link).remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       })
     }
@@ -235,16 +235,16 @@ export default class xjs_DocumentFragment extends xjs_Node {
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
+      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
         const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
-          'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, link.href))).node,
-          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, link.href))).content(),
+          'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, (<dev_HTMLLinkElement>link).href))).node,
+          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, (<dev_HTMLLinkElement>link).href))).content(),
           async default() { return null },
         }
-        let imported = await (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
+        let imported = await (switch_[<string>(<dev_HTMLLinkElement>link).getAttribute('data-import')] || switch_.default).call(this)
         if (imported) {
-          link.after(imported)
-          link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
+          ;(<dev_HTMLLinkElement>link).after(imported)
+          ;(<dev_HTMLLinkElement>link).remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))
     } else return Promise.all([])
