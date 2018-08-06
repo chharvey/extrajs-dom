@@ -78,7 +78,7 @@ export default class xjs_Node {
     // xjs_Node.nodeType[3] = 'TEXT_NODE'
     // xjs_Node.nodeType[1] = 'ELEMENT_NODE'
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
-      if (child.nodeType === 3 && (<string>child.textContent).trim() === '') child.remove()
+      if (child.nodeType === 3 && (child.textContent as string).trim() === '') child.remove()
       else if (child.nodeType === 1) new xjs_Node(child).trimInner()
     })
     return this

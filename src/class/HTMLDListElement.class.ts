@@ -16,5 +16,5 @@ export default class xjs_HTMLDListElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLDListElement { return <dev_HTMLDListElement>super.node }
+  get node(): dev_HTMLDListElement { return super.node as dev_HTMLDListElement }
 }

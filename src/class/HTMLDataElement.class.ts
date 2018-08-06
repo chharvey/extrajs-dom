@@ -17,7 +17,7 @@ export default class xjs_HTMLDataElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLDataElement { return <dev_HTMLDataElement>super.node }
+  get node(): dev_HTMLDataElement { return super.node as dev_HTMLDataElement }
 
   /**
    * @summary Reflect the `value` content attribute.

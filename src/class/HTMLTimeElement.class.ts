@@ -17,7 +17,7 @@ export default class xjs_HTMLTimeElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLTimeElement { return <dev_HTMLTimeElement>super.node }
+  get node(): dev_HTMLTimeElement { return super.node as dev_HTMLTimeElement }
 
   /**
    * @summary Reflect the `datetime` content attribute.

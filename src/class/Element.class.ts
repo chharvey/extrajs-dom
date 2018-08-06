@@ -37,7 +37,7 @@ export default class xjs_Element extends xjs_Node {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_Element { return <dev_Element>super.node }
+  get node(): dev_Element { return super.node as dev_Element }
 
 
   /**
@@ -260,15 +260,15 @@ export default class xjs_Element extends xjs_Node {
     switch (xjs.Object.typeOf(attr)) {
       case 'null': break;
       case 'string':
-        if ((<string>attr).trim() === '') break;
+        if ((attr as string).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.attr(attr, (<ValueFunction>value).call(this_arg));
-          case 'null'     : this.node.removeAttribute(<string>attr); break;
-          case 'undefined': return this.node.getAttribute(<string>attr);
-          default         : this.node.setAttribute(<string>attr, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
+          case 'function' : return this.attr(attr as string, (value as ValueFunction).call(this_arg));
+          case 'null'     : this.node.removeAttribute(attr as string); break;
+          case 'undefined': return this.node.getAttribute(attr as string);
+          default         : this.node.setAttribute(attr as string, (value as string|number|boolean).toString()); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <object>attr) this.attr(i, (<{ [index: string]: ValueType }>attr)[i]); break;
+      case 'object': for (let i in attr as object) this.attr(i, (attr as { [index: string]: ValueType })[i]); break;
       default: break;
     }
     return this
@@ -308,7 +308,7 @@ export default class xjs_Element extends xjs_Node {
   id(value: ValueFunction, this_arg?: any): this;
   id(value?: any, this_arg: any = this): any {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.id = <string>value
+      if (xjs.Object.typeOf(value) === 'string') this.node.id = value
       else this.attr('id', value, this_arg)
       return this
     } else return this.node.id

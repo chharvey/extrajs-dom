@@ -17,7 +17,7 @@ import xjs_HTMLElement from './HTMLElement.class'
  * @param   data the data to fill the template upon rendering
  * @param   options additional rendering options
  */
-export type RenderingFunction = (frag: DocumentFragment, data: any, opts?: object) => void
+export type RenderingFunction = (this: any, frag: DocumentFragment, data: any, opts?: object) => void
 
 /**
  * Wrapper for HTML `template` element.
@@ -69,7 +69,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLTemplateElement { return <dev_HTMLTemplateElement>super.node }
+  get node(): dev_HTMLTemplateElement { return super.node as dev_HTMLTemplateElement }
 
   /**
    * @summary Return the `<template>` element’s template contents.
@@ -100,8 +100,8 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @returns the rendered output
    */
   render(data?: any, this_arg: any = null, options = {}): DocumentFragment {
-    let frag = this.content().cloneNode(true)
+    let frag = this.content().cloneNode(true) as DocumentFragment // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
     this._renderer.call(this_arg, frag, data, options)
-    return <DocumentFragment>frag // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
+    return frag
   }
 }

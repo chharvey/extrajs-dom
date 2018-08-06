@@ -19,7 +19,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLTableSectionElement { return <dev_HTMLTableSectionElement>super.node }
+  get node(): dev_HTMLTableSectionElement { return super.node as dev_HTMLTableSectionElement }
 
   /**
    * @summary Populate this list with items containing data.
