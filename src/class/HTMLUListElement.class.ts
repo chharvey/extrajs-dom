@@ -104,13 +104,15 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * @param   renderer a typical rendering function
    * @param   this_arg provide a `this` context to the rendering function
    * @param   options additional rendering options for all items
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
+   * @todo WARNING: in the next breaking release (v5), the order of params will be: `renderer`, `dataset`, `options`, `this_arg`
    * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
    * @returns `this`
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
   populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, this_arg: any = this, options = {}): this {
+    console.warn('Notice: Starting in extrajs-dom^5, the param order of `xjs.HTMLUListElement#populate` will be `renderer, dataset, options, this_arg`.')
+    console.warn('Notice: Starting in extrajs-dom^5, param `renderer` of `xjs.HTMLUListElement#populate` will be required.')
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <ul> does not have a <template> descendant.')
