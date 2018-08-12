@@ -116,7 +116,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(...dataset.map((data) => component.render(data, options, this_arg)))
+    let component = new xjs_HTMLTemplateElement(template)
+    return this.append(...dataset.map((data) => component.render(renderer, data, options, this_arg)))
   }
 }

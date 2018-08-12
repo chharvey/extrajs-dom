@@ -56,16 +56,11 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary The rendering function belonging to this wrapper.
-   */
-  private _renderer: RenderingFunction
-  /**
    * @summary Construct a new xjs_HTMLTemplateElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLTemplateElement) {
     super(node)
-    this._renderer = (f,d,o) => {}
   }
   /**
    * @summary This wrapper’s node.
@@ -81,18 +76,6 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
     return this.node.content
   }
 
-
-  /**
-   * @summary Set this template’s rendering function.
-   * @deprecated
-   * @param   renderer modifies the template by filling it in with data
-   * @returns `this`
-   */
-  setRenderer(renderer: RenderingFunction): this {
-    console.warn('Notice: `xjs.HTMLTemplateElement#setRenderer` is deprecated. Instead, pass the rendering function into `#render`.')
-    this._renderer = renderer
-    return this
-  }
 
   /**
    * @summary Render this template with some data.
