@@ -16,5 +16,5 @@ export default class xjs_HTMLLIElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLLIElement { return <dev_HTMLLIElement>super.node }
+  get node(): dev_HTMLLIElement { return super.node as dev_HTMLLIElement }
 }

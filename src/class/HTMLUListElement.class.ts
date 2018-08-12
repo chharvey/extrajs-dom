@@ -61,7 +61,7 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLUListElement { return <dev_HTMLUListElement>super.node }
+  get node(): dev_HTMLUListElement { return super.node as dev_HTMLUListElement }
 
   /**
    * @summary Populate this list with items containing data.

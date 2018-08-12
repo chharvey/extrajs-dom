@@ -19,7 +19,7 @@ export default class xjs_HTMLTableRowElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLTableRowElement { return <dev_HTMLTableRowElement>super.node }
+  get node(): dev_HTMLTableRowElement { return super.node as dev_HTMLTableRowElement }
 
   /**
    * @summary Populate this list with items containing data.

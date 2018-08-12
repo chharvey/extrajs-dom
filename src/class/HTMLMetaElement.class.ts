@@ -17,7 +17,7 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLMetaElement { return <dev_HTMLMetaElement>super.node }
+  get node(): dev_HTMLMetaElement { return super.node as dev_HTMLMetaElement }
 
   /**
    * @summary Reflect the `name` content attribute.

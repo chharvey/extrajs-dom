@@ -18,7 +18,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLAnchorElement { return <dev_HTMLAnchorElement>super.node }
+  get node(): dev_HTMLAnchorElement { return super.node as dev_HTMLAnchorElement }
 
   /**
    * @summary Reflect the `href` content attribute.

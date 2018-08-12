@@ -20,7 +20,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   /**
    * @summary This wrapper’s node.
    */
-  get node(): dev_HTMLElement { return <dev_HTMLElement>super.node }
+  get node(): dev_HTMLElement { return super.node as dev_HTMLElement }
 
   /**
    * @summary Reflect the `title` content attribute.
@@ -232,19 +232,19 @@ export default class xjs_HTMLElement extends xjs_Element {
     switch (xjs.Object.typeOf(prop)) {
       case 'null': break;
       case 'string':
-        if ((<string>prop).trim() === '') break;
+        if ((prop as string).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.style(prop, (<ValueFunction>value).call(this_arg));
-          case 'undefined': return this.node.style.getPropertyValue(<string>prop) || null;
+          case 'function' : return this.style(prop as string, (value as ValueFunction).call(this_arg));
+          case 'undefined': return this.node.style.getPropertyValue(prop as string) || null;
           default         :
             switch (value) {
               case ''  :
-              case null: this.node.style.removeProperty(<string>prop); break;
-              default  : this.node.style.setProperty(<string>prop, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
+              case null: this.node.style.removeProperty(prop as string); break;
+              default  : this.node.style.setProperty(prop as string, (value as string|number|boolean).toString()); break; // string, number, boolean, infinite, NaN
             }
         }
         break;
-      case 'object': for (let i in <object>prop) this.style(i, (<{ [index: string]: ValueType }>prop)[i]); break;
+      case 'object': for (let i in prop as object) this.style(i, (prop as { [index: string]: ValueType })[i]); break;
       default: break;
     }
     return this
@@ -357,15 +357,15 @@ export default class xjs_HTMLElement extends xjs_Element {
     switch (xjs.Object.typeOf(data_attr)) {
       case 'null': break;
       case 'string':
-        if ((<string>data_attr).trim() === '') break;
+        if ((data_attr as string).trim() === '') break;
         switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.data(data_attr, (<ValueFunction>value).call(this_arg));
-          case 'null'     : delete this.node.dataset[<string>data_attr]; break;
-          case 'undefined': let returned: string|undefined = this.node.dataset[<string>data_attr]; return (xjs.Object.typeOf(returned) === 'string') ? <string>returned : null;
-          default         : this.node.dataset[<string>data_attr] = (<(string|number|boolean)>value).toString(); break; // string, number, boolean, infinite, NaN
+          case 'function' : return this.data(data_attr as string, (value as ValueFunction).call(this_arg));
+          case 'null'     : delete this.node.dataset[data_attr as string]; break;
+          case 'undefined': let returned: string|undefined = this.node.dataset[data_attr as string]; return (xjs.Object.typeOf(returned) === 'string') ? returned as string : null;
+          default         : this.node.dataset[data_attr as string] = (value as string|number|boolean).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <object>data_attr) this.data(i, (<{ [index: string]: ValueType }>data_attr)[i]); break;
+      case 'object': for (let i in data_attr as object) this.data(i, (data_attr as { [index: string]: ValueType })[i]); break;
       default: break;
     }
     return this
