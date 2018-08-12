@@ -26,7 +26,7 @@
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
     "extrajs": "^0.11.0",
-    "jsdom": "^11.6.2"
+    "jsdom": "^11.12.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
