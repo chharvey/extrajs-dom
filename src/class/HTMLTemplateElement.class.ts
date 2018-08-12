@@ -17,8 +17,7 @@ import xjs_HTMLElement from './HTMLElement.class'
  * @param   data the data to fill the template upon rendering
  * @param   options additional rendering options
  */
-export type RenderingFunction = (this: any, frag: DocumentFragment, data: any, opts?: object) => void
-export type RenderingFunctionV3<T> = (this: any, frag: DocumentFragment, data: T, opts?: object) => void
+export type RenderingFunction<T> = (this: any, frag: DocumentFragment, data: T, opts?: object) => void
 
 /**
  * Wrapper for HTML `template` element.
@@ -85,7 +84,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @param   this_arg a `this` context, if any, in which `renderer` is called
    * @returns the rendered output
    */
-  render<T>(renderer: RenderingFunctionV3<T>, data: T, options: object = {}, this_arg: any = this): DocumentFragment {
+  render<T>(renderer: RenderingFunction<T>, data: T, options: object = {}, this_arg: any = this): DocumentFragment {
     let frag = this.content().cloneNode(true) as DocumentFragment // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
     renderer.call(this_arg, frag, data, options)
     return frag
