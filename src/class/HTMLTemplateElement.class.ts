@@ -100,6 +100,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @returns the rendered output
    */
   render(data?: any, this_arg: any = null, options = {}): DocumentFragment {
+    console.warn('Notice: Starting in extrajs-dom^5, the param order of `xjs.HTMLTemplateElement#render` will be `data, options, this_arg`.')
     let frag = this.content().cloneNode(true) as DocumentFragment // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
     this._renderer.call(this_arg, frag, data, options)
     return frag
