@@ -39,7 +39,7 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  name(val: ValueFunction, this_arg?: any): this;
+  name(val: ValueFunction, this_arg?: unknown): this;
   name(val?: any, this_arg: any = this): any {
     return this.attr('name', val, this_arg)
   }
@@ -60,7 +60,7 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  content(val: ValueFunction, this_arg?: any): this;
+  content(val: ValueFunction, this_arg?: unknown): this;
   content(val?: any, this_arg: any = this): any {
     return this.attr('content', val, this_arg)
   }

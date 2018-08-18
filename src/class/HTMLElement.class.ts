@@ -38,7 +38,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  title(val: ValueFunction, this_arg?: any): this;
+  title(val: ValueFunction, this_arg?: unknown): this;
   title(val?: any, this_arg: any = this): any {
     return this.attr('title', val, this_arg)
   }
@@ -59,7 +59,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  lang(val: ValueFunction, this_arg?: any): this;
+  lang(val: ValueFunction, this_arg?: unknown): this;
   lang(val?: any, this_arg: any = this): any {
     return this.attr('lang', val, this_arg)
   }
@@ -80,7 +80,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  dir(val: ValueFunction, this_arg?: any): this;
+  dir(val: ValueFunction, this_arg?: unknown): this;
   dir(val?: any, this_arg: any = this): any {
     return this.attr('dir', val, this_arg)
   }
@@ -101,7 +101,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  hidden(val: ValueFunction, this_arg?: any): this;
+  hidden(val: ValueFunction, this_arg?: unknown): this;
   hidden(val?: any, this_arg: any = this): any {
     return this.attr('hidden', val, this_arg)
   }
@@ -122,7 +122,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  tabIndex(val: ValueFunction, this_arg?: any): this;
+  tabIndex(val: ValueFunction, this_arg?: unknown): this;
   tabIndex(val?: any, this_arg: any = this): any {
     return this.attr('tabindex', val, this_arg)
   }
@@ -200,7 +200,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  style(prop: string, value: ValueFunction, this_arg?: any): this;
+  style(prop: string, value: ValueFunction, this_arg?: unknown): this;
   /**
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object must have values of the {@link ValueType} type;
@@ -326,7 +326,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  data(data_attr: string, value: ValueFunction, this_arg?: any): this;
+  data(data_attr: string, value: ValueFunction, this_arg?: unknown): this;
   /**
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object’s keys must be in **camelCase** format, as if each key were passed separately.

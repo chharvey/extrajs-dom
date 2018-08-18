@@ -35,7 +35,7 @@ export default class xjs_HTMLDataElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  value(val: ValueFunction, this_arg?: any): this;
+  value(val: ValueFunction, this_arg?: unknown): this;
   value(val?: any, this_arg: any = this): any {
     return this.attr('value', val, this_arg)
   }
