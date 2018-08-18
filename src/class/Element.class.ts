@@ -174,15 +174,15 @@ export default class xjs_Element extends xjs_Node {
    * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
    * If no such attribute exists, then `null` is returned.
    *
-   * If the key is `''`, this method does nothing and returns `this`.
+   * If the key is `''`, this method throws an error.
    *
    * @example
-   * this.attr('itemtype')           // get the value of the attribute (or `null` if it had not been set)
-   * this.attr('')   // do nothing; return `this`
+   * this.attr('itemtype') // get the value of the attribute (or `null` if it had not been set)
+   * this.attr('')         // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @param   attr the name of the attribute to get (nonempty string)
    * @returns the value of the attribute specified (or `null` if that attribute hasn’t been set)
+   * @throws  {RangeError} if the empty string is passed as the attribute name
    */
   attr(attr: string): string|null;
   /**
@@ -211,11 +211,12 @@ export default class xjs_Element extends xjs_Node {
    * this.attr('data-block', true)   // set an attribute (boolean) (the value will be `"true"`)
    * this.attr('itemscope', '')      // set a boolean attribute
    * this.attr('itemprop', null)     // remove an attribute
+   * this.attr('', 42)               // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @param   attr the name of the attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the attribute name
    */
   attr(attr: string, value: ValueType): this;
   /**
@@ -227,12 +228,13 @@ export default class xjs_Element extends xjs_Node {
    * @example
    * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
    * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
+   * this.attr('', function () {})                                             // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @param   attr the name of the attribute to set (nonempty string)
    * @param   value the function to call when assigning a value to the attribute
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the attribute name
    */
   attr(attr: string, value: ValueFunction, this_arg?: any): this;
   /**
@@ -265,7 +267,7 @@ export default class xjs_Element extends xjs_Node {
     switch (xjs.Object.typeOf(attr)) {
       case 'null': break;
       case 'string':
-        if ((<string>attr).trim() === '') break;
+        if ((<string>attr).trim() === '') throw new RangeError('Attribute name cannot be empty string.');
         switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.attr(attr, (<ValueFunction>value).call(this_arg));
           case 'null'     : this.node.removeAttribute(<string>attr); break;
