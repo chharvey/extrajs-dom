@@ -1,5 +1,5 @@
 import {dev_HTMLElement} from '../dev.d'
-import xjs_Element, {ValueType,ValueObject,ValueFunction} from './Element.class'
+import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
 
 const xjs = {
   Object: require('extrajs').Object,
