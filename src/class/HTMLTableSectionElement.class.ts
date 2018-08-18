@@ -68,7 +68,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
    */
-  populate<T>(renderer: RenderingFunction<T>, dataset: T[], options: object = {}, this_arg: any = this): this {
+  populate<T, U extends Object>(renderer: RenderingFunction<T, U>, dataset: T[], options: U = ({} as U), this_arg: any = this): this {
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
