@@ -132,14 +132,11 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @returns a concatenation of all the `outerHTML` and/or data of the fragment’s node children
    */
   innerHTML(): string {
-    const {Node} = new jsdom.JSDOM().window
-    // TODO make an enum for node types
-    // NB:LINK https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
     const switch_: { [index: string]: (node: Node) => string|null } = {
-      [Node.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
-      [Node.TEXT_NODE]             : (text: Text            ) => text.data            ,
-      [Node.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
-      [Node.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
+      [xjs_Node.NodeType.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML         ,
+      [xjs_Node.NodeType.TEXT_NODE]             : (text: Text            ) => text.data            ,
+      [xjs_Node.NodeType.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
+      [xjs_Node.NodeType.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
       default(node: Node) { return null },
     }
     return [...this.node.childNodes].map((node) =>
