@@ -14,6 +14,11 @@ const xjs = {
  */
 export type ValueType = string|number|boolean|null
 /**
+ * @summary An object passed to {@link xjs_Element#attr} to manipulate many attributes at once.
+ * @description An object with string indices and {@link ValueType} values.
+ */
+export type ValueObject = { [index: string]: ValueType }
+/**
  * @summary A type of function passed to {@link xjs_Element#attr} to manipulate this element’s attributes.
  * @description
  * This function type must take zero arguments and return a single primitive value: a string, number, or boolean.
@@ -254,7 +259,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   attr an object with {@link ValueType} type values
    * @returns `this`
    */
-  attr(attr: { [index: string]: ValueType }|null): this;
+  attr(attr: ValueObject|null): this;
   attr(attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(attr)) {
@@ -268,7 +273,7 @@ export default class xjs_Element extends xjs_Node {
           default         : this.node.setAttribute(<string>attr, (<(string|number|boolean)>value).toString()); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <object>attr) this.attr(i, (<{ [index: string]: ValueType }>attr)[i]); break;
+      case 'object': for (let i in attr as ValueObject) this.attr(i, (attr as ValueObject)[i]); break;
       default: break;
     }
     return this

@@ -1,5 +1,5 @@
 import {dev_HTMLElement} from '../dev.d'
-import xjs_Element, {ValueType,ValueFunction} from './Element.class'
+import xjs_Element, {ValueType,ValueObject,ValueFunction} from './Element.class'
 
 const xjs = {
   Object: require('extrajs').Object,
@@ -226,7 +226,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   prop an object with {@link ValueType} type values
    * @returns `this`
    */
-  style(prop: { [index: string]: ValueType }|null): this;
+  style(prop: ValueObject|null): this;
   style(prop: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(prop)) {
@@ -244,7 +244,7 @@ export default class xjs_HTMLElement extends xjs_Element {
             }
         }
         break;
-      case 'object': for (let i in <object>prop) this.style(i, (<{ [index: string]: ValueType }>prop)[i]); break;
+      case 'object': for (let i in prop as ValueObject) this.style(i, (prop as ValueObject)[i]); break;
       default: break;
     }
     return this
@@ -351,7 +351,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   data_attr an object with {@link ValueType} type values
    * @returns `this`
    */
-  data(data_attr: { [index: string]: ValueType }|null): this;
+  data(data_attr: ValueObject|null): this;
   data(data_attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(data_attr)) {
@@ -365,7 +365,7 @@ export default class xjs_HTMLElement extends xjs_Element {
           default         : this.node.dataset[<string>data_attr] = (<(string|number|boolean)>value).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <object>data_attr) this.data(i, (<{ [index: string]: ValueType }>data_attr)[i]); break;
+      case 'object': for (let i in data_attr as ValueObject) this.data(i, (data_attr as ValueObject)[i]); break;
       default: break;
     }
     return this
