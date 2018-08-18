@@ -70,7 +70,7 @@ export default class xjs_HTMLTableRowElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if this `<tr>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<td>`.
    */
-  populate<T, U extends Object>(renderer: RenderingFunction<T, U>, dataset: T[], options: U = ({} as U), this_arg: any = this): this {
+  populate<T, U extends Object>(renderer: RenderingFunction<T, U>, dataset: T[], options: U = ({} as U), this_arg: unknown = this): this {
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <tr> does not have a <template> descendant.')
@@ -78,7 +78,7 @@ export default class xjs_HTMLTableRowElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('td')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <td>.')
     }
-    let component = new xjs_HTMLTemplateElement(template)
+    let component: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(template)
     return this.append(...dataset.map((data) => component.render(renderer, data, options, this_arg)))
   }
 }

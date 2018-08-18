@@ -36,7 +36,7 @@ export default class xjs_HTMLTimeElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  dateTime(val: ValueFunction, this_arg?: any): this;
+  dateTime(val: ValueFunction, this_arg?: unknown): this;
   dateTime(val?: any, this_arg: any = this): any {
     return this.attr('datetime', (val instanceof Date) ? val.toISOString() : val, this_arg)
   }

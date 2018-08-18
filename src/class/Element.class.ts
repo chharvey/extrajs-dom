@@ -20,7 +20,10 @@ export type ValueType = string|number|boolean|null
  * Any `this` context in the function will almost always point to this `xjs.Element` object (but can be overridden).
  * @returns the value used as the attribute value to set
  */
-export type ValueFunction = (this: any) => string|number|boolean
+export interface ValueFunction extends Function {
+  (this: unknown): string|number|boolean;
+  call(this_arg: unknown): string|number|boolean;
+}
 
 /**
  * Wrapper for an Element.
@@ -229,7 +232,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  attr(attr: string, value: ValueFunction, this_arg?: any): this;
+  attr(attr: string, value: ValueFunction, this_arg?: unknown): this;
   /**
    * @summary Set or remove attributes of this element.
    * @description
@@ -305,7 +308,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  id(value: ValueFunction, this_arg?: any): this;
+  id(value: ValueFunction, this_arg?: unknown): this;
   id(value?: any, this_arg: any = this): any {
     if (arguments.length) {
       if (xjs.Object.typeOf(value) === 'string') this.node.id = value
@@ -345,7 +348,7 @@ export default class xjs_Element extends xjs_Node {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  class(value: ValueFunction, this_arg?: any): this;
+  class(value: ValueFunction, this_arg?: unknown): this;
   class(value?: any, this_arg: any = this): any {
     if (arguments.length) {
       if (xjs.Object.typeOf(value) === 'string') this.node.className = value

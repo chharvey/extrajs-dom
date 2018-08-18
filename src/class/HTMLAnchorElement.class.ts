@@ -36,7 +36,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  href(val: ValueFunction, this_arg?: any): this;
+  href(val: ValueFunction, this_arg?: unknown): this;
   href(val?: any, this_arg: any = this): any {
     return this.attr('href', val, this_arg)
   }
@@ -57,7 +57,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  target(val: ValueFunction, this_arg?: any): this;
+  target(val: ValueFunction, this_arg?: unknown): this;
   target(val?: any, this_arg: any = this): any {
     return this.attr('target', val, this_arg)
   }
@@ -78,7 +78,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  download(val: ValueFunction, this_arg?: any): this;
+  download(val: ValueFunction, this_arg?: unknown): this;
   download(val?: any, this_arg: any = this): any {
     return this.attr('download', val, this_arg)
   }
@@ -99,7 +99,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  rel(val: ValueFunction, this_arg?: any): this;
+  rel(val: ValueFunction, this_arg?: unknown): this;
   rel(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
@@ -120,7 +120,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  rev(val: ValueFunction, this_arg?: any): this;
+  rev(val: ValueFunction, this_arg?: unknown): this;
   rev(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
@@ -141,7 +141,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  hreflang(val: ValueFunction, this_arg?: any): this;
+  hreflang(val: ValueFunction, this_arg?: unknown): this;
   hreflang(val?: any, this_arg: any = this): any {
     return this.attr('hreflang', val, this_arg)
   }
@@ -162,7 +162,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  type(val: ValueFunction, this_arg?: any): this;
+  type(val: ValueFunction, this_arg?: unknown): this;
   type(val?: any, this_arg: any = this): any {
     return this.attr('type', val, this_arg)
   }
