@@ -1,4 +1,4 @@
-import {dev_DocumentFragment, dev_HTMLLinkElement} from '../dev.d'
+import {dev_DocumentFragment, dev_HTMLLinkElement, Content} from '../dev.d'
 import xjs_Node from './Node.class'
 
 const fs = require('fs')
@@ -86,7 +86,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   contents the contents to prepend
    * @returns `this`
    */
-  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
+  prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -119,7 +119,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   contents the contents to append
    * @returns `this`
    */
-  append(...contents: (xjs_Node|Node|string|null)[]): this {
+  append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c

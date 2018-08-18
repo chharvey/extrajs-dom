@@ -1,3 +1,6 @@
+import xjs_Node from './class/Node.class'
+
+
 // <https://github.com/Microsoft/TypeScript/issues/21150>
 
 declare interface dev_ParentNode {
@@ -30,6 +33,8 @@ declare interface dev_HTMLDataElement         extends HTMLDataElement        , d
 declare interface dev_HTMLTimeElement         extends HTMLTimeElement        , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLTemplateElement     extends HTMLTemplateElement    , dev_ParentNode, dev_ChildNode {}
 
+type Content = xjs_Node|Node|string|null
+
 export {
   dev_Document,
   dev_DocumentFragment,
@@ -48,4 +53,6 @@ export {
   dev_HTMLDataElement,
   dev_HTMLTimeElement,
   dev_HTMLTemplateElement,
+
+  Content,
 }
