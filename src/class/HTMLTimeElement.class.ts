@@ -1,5 +1,5 @@
 import {dev_HTMLTimeElement} from '../dev.d'
-import {ValueType,ValueFunction} from './Element.class'
+import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
 /**

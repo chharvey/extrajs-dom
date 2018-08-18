@@ -1,5 +1,4 @@
 import {dev_HTMLOListElement} from '../dev.d'
-import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 

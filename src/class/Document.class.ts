@@ -1,4 +1,4 @@
-import {dev_Document, dev_HTMLLinkElement} from '../dev.d'
+import {dev_Document, dev_HTMLLinkElement, Content} from '../dev.d'
 import xjs_Node from './Node.class'
 
 const fs = require('fs')
@@ -72,7 +72,7 @@ export default class xjs_Document extends xjs_Node {
    * @param   contents the contents to prepend
    * @returns `this`
    */
-  prepend(...contents: (xjs_Node|Node|string|null)[]): this {
+  prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -105,7 +105,7 @@ export default class xjs_Document extends xjs_Node {
    * @param   contents the contents to append
    * @returns `this`
    */
-  append(...contents: (xjs_Node|Node|string|null)[]): this {
+  append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
       (c === null) ? '' : c
@@ -130,9 +130,9 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary Replace all `link[rel="import"][data-import]` elements with contents from their documents.
+   * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
    * @description
-   * This method finds all `link[rel="import"][data-import]`s in this document,
+   * This method finds all `link[rel~="import"][data-import]`s in this document,
    * and then replaces those links with a `DocumentFragment` holding some contents.
    * These contents depend on the value set for `data-import`:
    *
@@ -176,15 +176,15 @@ export default class xjs_Document extends xjs_Node {
    * // This call will work as intended.
    * this.importLinks(__dirname)
    *
-   * @param   relativepath should always be `__dirname` when called
+   * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    * @returns `this`
    */
-  importLinks(relativepath: string): this {
+  importLinks(dirpath: string): this {
     const xjs_DocumentFragment    = require('./DocumentFragment.class').default
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      this.node.querySelectorAll('link[rel="import"][data-import]').forEach((link) => {
+      this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
         const switch_: { [index: string]: () => DocumentFragment|null } = {
           'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, (link as HTMLLinkElement).href)).node,
           'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, (link as HTMLLinkElement).href)).content(),
@@ -201,14 +201,14 @@ export default class xjs_Document extends xjs_Node {
   }
   /**
    * @summary Asynchronous version of {@link xjs_Document#importLinks}.
-   * @param   relativepath should always be `__dirname` when called
+   * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
-  async importLinksAsync(relativepath: string): Promise<void[]> {
+  async importLinksAsync(dirpath: string): Promise<void[]> {
     const xjs_DocumentFragment    = require('./DocumentFragment.class').default
     const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      return Promise.all([...this.node.querySelectorAll('link[rel="import"][data-import]')].map(async (link) => {
+      return Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
         const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
           'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, (link as HTMLLinkElement).href))).node,
           'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, (link as HTMLLinkElement).href))).content(),

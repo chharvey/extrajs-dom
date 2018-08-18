@@ -1,6 +1,6 @@
 {
   "name": "extrajs-dom",
-  "version": "4.4.0-beta.1",
+  "version": "4.6.0-beta.1",
   "description": "Javascript extensions to DOM.",
   "main": "index.js",
   "scripts": {
@@ -26,11 +26,10 @@
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
     "extrajs": "^0.11.0",
-    "jsdom": "^11.6.2"
+    "jsdom": "^11.12.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-jsdoc3": "^2.0.0",
     "gulp-typedoc": "^2.2.0",
     "gulp-typescript": "^5.0.0-alpha.3",
     "typedoc": "^0.11.1",

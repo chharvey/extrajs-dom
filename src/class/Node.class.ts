@@ -1,8 +1,30 @@
 /**
+ * @summary Represents the type of node.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Node
+ */
+enum NodeType {
+  ELEMENT_NODE                =  1,
+  ATTRIBUTE_NODE              =  2, // XXX:DEPRECATED
+  TEXT_NODE                   =  3,
+  CDATA_SECTION_NODE          =  4, // XXX:DEPRECATED
+  ENTITY_REFERENCE_NODE       =  5, // XXX:DEPRECATED
+  ENTITY_NODE                 =  6, // XXX:DEPRECATED
+  PROCESSING_INSTRUCTION_NODE =  7,
+  COMMENT_NODE                =  8,
+  DOCUMENT_NODE               =  9,
+  DOCUMENT_TYPE_NODE          = 10,
+  DOCUMENT_FRAGMENT_NODE      = 11,
+  NOTATION_NODE               = 12, // XXX:DEPRECATED
+}
+
+/**
  * Wrapper for a Node.
  * @see https://www.w3.org/TR/dom/#node
  */
 export default class xjs_Node {
+  static NodeType = NodeType
+
+
   /**
    * @summary The wrapped DOM Node.
    */
@@ -74,12 +96,9 @@ export default class xjs_Node {
    * @returns `this`
    */
   trimInner(): this {
-    // TODO make an enum for node types
-    // xjs_Node.nodeType[3] = 'TEXT_NODE'
-    // xjs_Node.nodeType[1] = 'ELEMENT_NODE'
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
-      if (child.nodeType === 3 && (child.textContent as string).trim() === '') child.remove()
-      else if (child.nodeType === 1) new xjs_Node(child).trimInner()
+      if (child.nodeType === xjs_Node.NodeType.TEXT_NODE && (child.textContent as string).trim() === '') child.remove()
+      else if (child.nodeType === xjs_Node.NodeType.ELEMENT_NODE) new xjs_Node(child).trimInner()
     })
     return this
   }
