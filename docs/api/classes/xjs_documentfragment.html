@@ -140,7 +140,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L49">DocumentFragment.class.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L49">DocumentFragment.class.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -179,7 +179,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L62">DocumentFragment.class.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L62">DocumentFragment.class.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,7 +206,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L143">DocumentFragment.class.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L143">DocumentFragment.class.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,7 +267,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/Node.class.ts#L91">Node.class.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L91">Node.class.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +293,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/Node.class.ts#L52">Node.class.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L52">Node.class.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -343,22 +343,22 @@
 					<a name="importlinks" class="tsd-anchor"></a>
 					<h3>import<wbr>Links</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">import<wbr>Links<span class="tsd-signature-symbol">(</span>relativepath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">import<wbr>Links<span class="tsd-signature-symbol">(</span>dirpath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L213">DocumentFragment.class.ts:213</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L213">DocumentFragment.class.ts:213</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<dl class="tsd-comment-tags">
 									<dt>summary</dt>
-									<dd><p>Replace all <code>link[rel=&quot;import&quot;][data-import]</code> elements with contents from their documents.</p>
+									<dd><p>Replace all <code>link[rel~=&quot;import&quot;][data-import]</code> elements with contents from their documents.</p>
 									</dd>
 									<dt>description</dt>
-									<dd><p>This method finds all <code>link[rel=&quot;import&quot;][data-import]</code>s in this document fragment,
+									<dd><p>This method finds all <code>link[rel~=&quot;import&quot;][data-import]</code>s in this document fragment,
 											and then replaces those links with another <code>DocumentFragment</code> holding some contents.
 										These contents depend on the value set for <code>data-import</code>:</p>
 										<ul>
@@ -411,9 +411,9 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>relativepath: <span class="tsd-signature-type">string</span></h5>
+									<h5>dirpath: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>should always be <code>__dirname</code> when called</p>
+										<p>the absolute path to the directory of the template file containing the <code>link</code> element</p>
 									</div>
 								</li>
 							</ul>
@@ -426,13 +426,13 @@
 					<a name="importlinksasync" class="tsd-anchor"></a>
 					<h3>import<wbr>Links<wbr>Async</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">import<wbr>Links<wbr>Async<span class="tsd-signature-symbol">(</span>relativepath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">import<wbr>Links<wbr>Async<span class="tsd-signature-symbol">(</span>dirpath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L236">DocumentFragment.class.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L236">DocumentFragment.class.ts:236</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -445,9 +445,9 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>relativepath: <span class="tsd-signature-type">string</span></h5>
+									<h5>dirpath: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>should always be <code>__dirname</code> when called</p>
+										<p>the absolute path to the directory of the template file containing the <code>link</code> element</p>
 									</div>
 								</li>
 							</ul>
@@ -465,7 +465,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L69">DocumentFragment.class.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L69">DocumentFragment.class.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -490,7 +490,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L110">DocumentFragment.class.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L110">DocumentFragment.class.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -552,7 +552,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/Node.class.ts#L29">Node.class.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L29">Node.class.ts:29</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,7 +575,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/Node.class.ts#L36">Node.class.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L36">Node.class.ts:36</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -613,7 +613,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/Node.class.ts#L76">Node.class.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L76">Node.class.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -650,7 +650,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L26">DocumentFragment.class.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L26">DocumentFragment.class.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -691,7 +691,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L37">DocumentFragment.class.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L37">DocumentFragment.class.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -729,7 +729,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/caa7dc6/src/class/DocumentFragment.class.ts#L46">DocumentFragment.class.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L46">DocumentFragment.class.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
