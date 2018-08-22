@@ -1,9 +1,6 @@
+import {Object as xjs_Object} from 'extrajs'
 import {dev_Element, Content} from '../dev.d'
 import xjs_Node from './Node.class'
-
-const xjs = {
-  Object: require('extrajs').Object,
-}
 
 /**
  * @summary A type to provide as a value argument for setting/removing an attribute.
@@ -267,11 +264,11 @@ export default class xjs_Element extends xjs_Node {
   attr(attr: ValueObject|null): this;
   attr(attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(attr)) {
+    switch (xjs_Object.typeOf(attr)) {
       case 'null': break;
       case 'string':
         if ((attr as string).trim() === '') throw new RangeError('Attribute name cannot be empty string.');
-        switch (xjs.Object.typeOf(value)) {
+        switch (xjs_Object.typeOf(value)) {
           case 'function' : return this.attr(attr as string, (value as ValueFunction).call(this_arg));
           case 'null'     : this.node.removeAttribute(attr as string); break;
           case 'undefined': return this.node.getAttribute(attr as string);
@@ -318,7 +315,7 @@ export default class xjs_Element extends xjs_Node {
   id(value: ValueFunction, this_arg?: unknown): this;
   id(value?: any, this_arg: any = this): any {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.id = value
+      if (xjs_Object.typeOf(value) === 'string') this.node.id = value
       else this.attr('id', value, this_arg)
       return this
     } else return this.node.id
@@ -358,7 +355,7 @@ export default class xjs_Element extends xjs_Node {
   class(value: ValueFunction, this_arg?: unknown): this;
   class(value?: any, this_arg: any = this): any {
     if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.className = value
+      if (xjs_Object.typeOf(value) === 'string') this.node.className = value
       else this.attr('class', value, this_arg)
       return this
     } else return this.node.className
