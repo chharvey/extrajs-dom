@@ -211,8 +211,8 @@ export default class xjs_DocumentFragment extends xjs_Node {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
         const switch_: { [index: string]: () => DocumentFragment|null } = {
-          'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(relativepath, (link as HTMLLinkElement).href)).node,
-          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(relativepath, (link as HTMLLinkElement).href)).content(),
+          'document': () => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, (link as HTMLLinkElement).href)).node,
+          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, (link as HTMLLinkElement).href)).content(),
           default() { return null },
         }
         let imported = (switch_[link.getAttribute('data-import') as string] || switch_.default).call(this)
@@ -234,8 +234,8 @@ export default class xjs_DocumentFragment extends xjs_Node {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
       return Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
         const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
-          'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(relativepath, (link as HTMLLinkElement).href))).node,
-          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(relativepath, (link as HTMLLinkElement).href))).content(),
+          'document': async () => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, (link as HTMLLinkElement).href))).node,
+          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, (link as HTMLLinkElement).href))).content(),
           async default() { return null },
         }
         let imported = await (switch_[link.getAttribute('data-import') as string] || switch_.default).call(this)
