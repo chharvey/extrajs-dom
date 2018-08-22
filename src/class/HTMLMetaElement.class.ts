@@ -26,15 +26,11 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
    */
   name(): string|null;
   /**
-   * @summary Reflect the `name` content attribute.
-   * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
    * @param   val the value to set, or `null` to remove
    * @returns `this`
    */
   name(val: ValueType): this;
   /**
-   * @summary Reflect the `name` content attribute.
-   * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
    * @param   val the function to call when setting the value
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
