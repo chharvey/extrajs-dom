@@ -1,7 +1,9 @@
-import {dev_Document, dev_HTMLLinkElement} from '../dev.d'
+import {dev_Document, dev_HTMLLinkElement, Content} from '../dev.d'
 import xjs_Node from './Node.class'
 
+const fs = require('fs')
 const path = require('path')
+const util = require('util')
 
 const jsdom = require('jsdom')
 
@@ -10,6 +12,28 @@ const jsdom = require('jsdom')
  * @see https://www.w3.org/TR/dom/#document
  */
 export default class xjs_Document extends xjs_Node {
+  /**
+   * @summary Read an HTML file and return a document with its contents.
+   * @description The Document object will be wrapped in an `xjs.Document` object.
+   * To access the actual element, call {@link xjs_Document#node}.
+   * @param   filepath the path to the file
+   * @returns the document, wrapped
+   */
+  static async fromFile(filepath: string): Promise<xjs_Document> {
+    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
+    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+  }
+  /**
+   * @summary Synchronous version of {@link xjs_Document.fromFile}.
+   * @param   filepath the path to the file
+   * @returns the document, wrapped
+   */
+  static fromFileSync(filepath: string): xjs_Document {
+    let data: string = fs.readFileSync(filepath, 'utf8')
+    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+  }
+
+
   /**
    * @summary Construct a new xjs_Document object.
    * @param node the node to wrap
@@ -22,6 +46,88 @@ export default class xjs_Document extends xjs_Node {
    */
   get node(): dev_Document { return <dev_Document>super.node }
 
+
+  /**
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.Document(new Document())
+   *   .prepend(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).node.querySelector('body').innerHTML
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#prepend
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
+   * @param   contents the contents to prepend
+   * @returns `this`
+   */
+  prepend(...contents: Content[]): this {
+    this.node.prepend(...contents.map((c) =>
+      (c instanceof xjs_Node) ? c.node :
+      (c === null) ? '' : c
+    ))
+    return this
+  }
+
+  /**
+   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   * @description This method exists simply for chaining.
+   * @example
+   * let strong = document.createElement('strong')
+   * strong.textContent = 'hello'
+   * let em = document.createElement('em')
+   * let mark = document.createElement('mark')
+   *
+   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
+   *   .append(...[
+   *     strong,                                       // DOM Node
+   *     ` to the `,                                   // string
+   *     new Comment(`great`),                         // DOM Node
+   *     `<small>big</small> `,                        // string with HTML
+   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
+   *     null,                                         // null
+   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
+   *   ]).node.querySelector('body').innerHTML
+   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * @todo TODO xjs.ParentNode#append
+   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
+   * @param   contents the contents to append
+   * @returns `this`
+   */
+  append(...contents: Content[]): this {
+    this.node.append(...contents.map((c) =>
+      (c instanceof xjs_Node) ? c.node :
+      (c === null) ? '' : c
+    ))
+    return this
+  }
+
+  /**
+   * @summary Get the "innerHTML" of this document.
+   * @description This method should be used only if this document is an HTML Document,
+   * has doctype `html`, and whose root element is the `<html>` element (an instance of `HTMLHtmlElement`).
+   *
+   * You should only use this method if you do not have access to the original DOM object that this Document belongs to.
+   * Otherwise, you should use `dom.serialize()`.
+   * @returns a string serialization of this HTML Document
+   * @throws {ReferenceError} if this document does not contain an `<html>` element
+   */
+  innerHTML(): string {
+    let root: Element|null = this.node.querySelector('html')
+    if (root === null) throw new ReferenceError('No <html> element found.')
+    return new jsdom.JSDOM('<!doctype html>' + root.outerHTML).serialize()
+  }
 
   /**
    * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.

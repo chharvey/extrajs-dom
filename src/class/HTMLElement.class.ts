@@ -1,5 +1,5 @@
 import {dev_HTMLElement} from '../dev.d'
-import xjs_Element, {ValueType,ValueFunction} from './Element.class'
+import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
 
 const xjs = {
   Object: require('extrajs').Object,
@@ -147,16 +147,16 @@ export default class xjs_HTMLElement extends xjs_Element {
    * (Note that css properties default to the `unset` value---either `inherit` or `initial`,
    * depending on whether the property is inherited or not.)
    *
-   * If the key is `''`, this method does nothing and returns `this`.
+   * If the key is `''`, this method throws an error.
    *
    * @example
-   * this.style('text-align')             // get the value of the `text-align` property (or `null` if it had not been set)
-   * this.style('')   // do nothing; return `this`
+   * this.style('text-align') // get the value of the `text-align` property (or `null` if it had not been set)
+   * this.style('')           // throws, since `''` is not a property
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to get (nonempty string)
    * @returns the value of the property specified (or `null` if that property hasn’t been set)
+   * @throws  {RangeError} if the empty string is passed as the property name
    */
   style(prop: string): string|null;
   /**
@@ -177,12 +177,13 @@ export default class xjs_HTMLElement extends xjs_Element {
    * this.style('font-weight', 'bold')    // set the `font-weight` property
    * this.style('font-style', null)       // remove the `font-style` property
    * this.style('font-style', '')         // remove the `font-style` property // *note that this syntax differs from the typical syntax shown by xjs.Element#attr
+   * this.attr('', 42)                    // throws, since `''` is not a property
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to set (nonempty string)
    * @param   value the value to assign to the property, or `null` or `''` to remove it
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the property name
    */
   style(prop: string, value: ValueType): this;
   /**
@@ -192,13 +193,14 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @example
    * this.style('justify-content', function () { return this.data('jc') })                 // set the `justify-content` property using a function in this xjs.HTMLElement’s context
    * this.style('justify-content', function () { return this.jc }, { jc: 'space-around' }) // set the `justify-content` property using a function in another given context
+   * this.style('', function () {})                                                        // throws, since `''` is not a property
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to set (nonempty string)
    * @param   value the function to call when assigning a value to the property
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the property name
    */
   style(prop: string, value: ValueFunction, this_arg?: any): this;
   /**
@@ -226,13 +228,13 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   prop an object with {@link ValueType} type values
    * @returns `this`
    */
-  style(prop: { [index: string]: ValueType }|null): this;
+  style(prop: ValueObject|null): this;
   style(prop: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(prop)) {
       case 'null': break;
       case 'string':
-        if ((<string>prop).trim() === '') break;
+        if ((<string>prop).trim() === '') throw new RangeError('Property name cannot be empty string.');
         switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.style(prop, (<ValueFunction>value).call(this_arg));
           case 'undefined': return this.node.style.getPropertyValue(<string>prop) || null;
@@ -244,7 +246,7 @@ export default class xjs_HTMLElement extends xjs_Element {
             }
         }
         break;
-      case 'object': for (let i in <object>prop) this.style(i, (<{ [index: string]: ValueType }>prop)[i]); break;
+      case 'object': for (let i in prop as ValueObject) this.style(i, (prop as ValueObject)[i]); break;
       default: break;
     }
     return this
@@ -275,16 +277,16 @@ export default class xjs_HTMLElement extends xjs_Element {
    * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
    * If no such attribute exists, then `null` is returned.
    *
-   * If the key is `''`, this method does nothing and returns `this`.
+   * If the key is `''`, this method throws an error.
    *
    * @example
-   * this.data('instanceOf')         // get the value of the `[data-instance-of]` attribute (`null` if it had not been set)
-   * this.data('')   // do nothing; return `this`
+   * this.data('instanceOf') // get the value of the `[data-instance-of]` attribute (`null` if it had not been set)
+   * this.data('')           // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to get (nonempty string)
    * @returns the value of the attribute specified (or `null` if that attribute hasn’t been set)
+   * @throws  {RangeError} if the empty string is passed as the data-attribute name
    */
   data(data_attr: string): string|null;
   /**
@@ -303,12 +305,13 @@ export default class xjs_HTMLElement extends xjs_Element {
    * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute *(probably not intended)*
    * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
    * this.data('instanceOf', null)   // remove the `[data-instance-of]` attribute
+   * this.attr('', 42)               // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the data-attribute name
    */
   data(data_attr: string, value: ValueType): this;
   /**
@@ -318,13 +321,14 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @example
    * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
    * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using a function in another given context
+   * this.data('', function () {})                                        // throws, since `''` is not an attribute
    *
-   * @todo TODO handle case of empty string
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
    * @param   value the function to call when assigning a value to the attribute
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
+   * @throws  {RangeError} if the empty string is passed as the data-attribute name
    */
   data(data_attr: string, value: ValueFunction, this_arg?: any): this;
   /**
@@ -351,13 +355,13 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   data_attr an object with {@link ValueType} type values
    * @returns `this`
    */
-  data(data_attr: { [index: string]: ValueType }|null): this;
+  data(data_attr: ValueObject|null): this;
   data(data_attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
     switch (xjs.Object.typeOf(data_attr)) {
       case 'null': break;
       case 'string':
-        if ((<string>data_attr).trim() === '') break;
+        if ((<string>data_attr).trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.');
         switch (xjs.Object.typeOf(value)) {
           case 'function' : return this.data(data_attr, (<ValueFunction>value).call(this_arg));
           case 'null'     : delete this.node.dataset[<string>data_attr]; break;
@@ -365,7 +369,7 @@ export default class xjs_HTMLElement extends xjs_Element {
           default         : this.node.dataset[<string>data_attr] = (<(string|number|boolean)>value).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;
-      case 'object': for (let i in <object>data_attr) this.data(i, (<{ [index: string]: ValueType }>data_attr)[i]); break;
+      case 'object': for (let i in data_attr as ValueObject) this.data(i, (data_attr as ValueObject)[i]); break;
       default: break;
     }
     return this

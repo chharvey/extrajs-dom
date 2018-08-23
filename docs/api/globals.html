@@ -67,6 +67,12 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-is-not-exported"><a href="enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
@@ -80,6 +86,7 @@
 								<li class="tsd-kind-class"><a href="classes/xjs_htmllielement.html" class="tsd-kind-icon">xjs_<wbr>HTMLLIElement</a></li>
 								<li class="tsd-kind-class"><a href="classes/xjs_htmlmetaelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLMeta<wbr>Element</a></li>
 								<li class="tsd-kind-class"><a href="classes/xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a></li>
+								<li class="tsd-kind-class"><a href="classes/xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a></li>
 								<li class="tsd-kind-class"><a href="classes/xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a></li>
 								<li class="tsd-kind-class"><a href="classes/xjs_htmltablesectionelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Section<wbr>Element</a></li>
 								<li class="tsd-kind-class"><a href="classes/xjs_htmltemplateelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTemplate<wbr>Element</a></li>
@@ -93,6 +100,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias"><a href="globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a></li>
 							</ul>
 						</section>
@@ -122,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">Rendering<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/HTMLTemplateElement.class.ts#L20">HTMLTemplateElement.class.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/HTMLTemplateElement.class.ts#L20">HTMLTemplateElement.class.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -183,7 +191,7 @@
 					<div class="tsd-signature tsd-kind-icon">Value<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Element.class.ts#L23">Element.class.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L28">Element.class.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -228,12 +236,40 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="valueobject" class="tsd-anchor"></a>
+					<h3>Value<wbr>Object</h3>
+					<div class="tsd-signature tsd-kind-icon">Value<wbr>Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L20">Element.class.ts:20</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>summary</dt>
+							<dd><p>An object passed to {@link xjs_Element#attr} to manipulate many attributes at once.</p>
+							</dd>
+							<dt>description</dt>
+							<dd><p>An object with string indices and <a href="globals.html#valuetype">ValueType</a> values.</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>index: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="globals.html#valuetype" class="tsd-signature-type">ValueType</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="valuetype" class="tsd-anchor"></a>
 					<h3>Value<wbr>Type</h3>
 					<div class="tsd-signature tsd-kind-icon">Value<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Element.class.ts#L15">Element.class.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L15">Element.class.ts:15</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,7 +296,8 @@
 					<div class="tsd-signature tsd-kind-icon">fs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;fs&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L4">DocumentFragment.class.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Document.class.ts#L4">Document.class.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L4">DocumentFragment.class.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -270,8 +307,8 @@
 					<div class="tsd-signature tsd-kind-icon">jsdom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;jsdom&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Document.class.ts#L6">Document.class.ts:6</a></li>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L8">DocumentFragment.class.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Document.class.ts#L8">Document.class.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L8">DocumentFragment.class.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -281,10 +318,10 @@
 					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;path&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Document.class.ts#L4">Document.class.ts:4</a></li>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L5">DocumentFragment.class.ts:5</a></li>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/HTMLOListElement.class.ts#L6">HTMLOListElement.class.ts:6</a></li>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/HTMLUListElement.class.ts#L6">HTMLUListElement.class.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Document.class.ts#L5">Document.class.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L5">DocumentFragment.class.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/HTMLOListElement.class.ts#L5">HTMLOListElement.class.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/HTMLUListElement.class.ts#L5">HTMLUListElement.class.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -294,7 +331,8 @@
 					<div class="tsd-signature tsd-kind-icon">util<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;util&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L6">DocumentFragment.class.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Document.class.ts#L6">Document.class.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L6">DocumentFragment.class.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -307,8 +345,8 @@
 					<div class="tsd-signature tsd-kind-icon">xjs<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Element.class.ts#L4">Element.class.ts:4</a></li>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/HTMLElement.class.ts#L4">HTMLElement.class.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L4">Element.class.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/HTMLElement.class.ts#L4">HTMLElement.class.ts:4</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
@@ -317,8 +355,8 @@
 						<div class="tsd-signature tsd-kind-icon">Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&#x27;extrajs&#x27;).Object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Element.class.ts#L5">Element.class.ts:5</a></li>
-								<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/HTMLElement.class.ts#L5">HTMLElement.class.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L5">Element.class.ts:5</a></li>
+								<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/HTMLElement.class.ts#L5">HTMLElement.class.ts:5</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -335,6 +373,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-is-not-exported">
+						<a href="enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/xjs_document.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document</a>
 					</li>
@@ -366,6 +407,9 @@
 						<a href="classes/xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -388,6 +432,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>

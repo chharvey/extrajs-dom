@@ -101,6 +101,12 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="xjs_documentfragment.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section tsd-is-inherited">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="xjs_documentfragment.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
@@ -140,7 +146,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L49">DocumentFragment.class.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L49">DocumentFragment.class.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -166,6 +172,20 @@
 					</ul>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="nodetype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Node<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Node<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/nodetype.html" class="tsd-signature-type">NodeType</a><span class="tsd-signature-symbol"> =&nbsp;NodeType</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#nodetype">NodeType</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L25">Node.class.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
@@ -179,7 +199,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L62">DocumentFragment.class.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L62">DocumentFragment.class.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,13 +220,13 @@
 					<a name="append" class="tsd-anchor"></a>
 					<h3>append</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol"> | </span><a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L143">DocumentFragment.class.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L122">DocumentFragment.class.ts:122</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +265,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol"> | </span><a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the contents to append</p>
 									</div>
@@ -267,7 +287,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L91">Node.class.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L110">Node.class.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +313,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L52">Node.class.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L74">Node.class.ts:74</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -349,7 +369,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L213">DocumentFragment.class.ts:213</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L208">DocumentFragment.class.ts:208</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -432,7 +452,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L236">DocumentFragment.class.ts:236</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L231">DocumentFragment.class.ts:231</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -465,7 +485,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L69">DocumentFragment.class.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L134">DocumentFragment.class.ts:134</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -484,13 +504,13 @@
 					<a name="prepend" class="tsd-anchor"></a>
 					<h3>prepend</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">prepend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol"> | </span><a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L110">DocumentFragment.class.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L89">DocumentFragment.class.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,7 +549,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol"> | </span><a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the contents to prepend</p>
 									</div>
@@ -552,7 +572,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L29">Node.class.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L51">Node.class.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,7 +595,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L36">Node.class.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L58">Node.class.ts:58</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -613,7 +633,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/Node.class.ts#L76">Node.class.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L98">Node.class.ts:98</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -650,7 +670,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L26">DocumentFragment.class.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L26">DocumentFragment.class.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -691,7 +711,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L37">DocumentFragment.class.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L37">DocumentFragment.class.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -729,7 +749,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/fb812b3/src/class/DocumentFragment.class.ts#L46">DocumentFragment.class.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/DocumentFragment.class.ts#L46">DocumentFragment.class.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -765,6 +785,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-is-not-exported">
+						<a href="../enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="xjs_document.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document</a>
 					</li>
@@ -775,6 +798,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_documentfragment.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="xjs_documentfragment.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_documentfragment.html#node" class="tsd-kind-icon">node</a>
@@ -844,6 +870,9 @@
 						<a href="xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -866,6 +895,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
