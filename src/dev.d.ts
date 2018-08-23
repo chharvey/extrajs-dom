@@ -1,3 +1,6 @@
+import xjs_Node from './class/Node.class'
+
+
 // <https://github.com/Microsoft/TypeScript/issues/21150>
 
 declare interface dev_ParentNode {
@@ -25,10 +28,13 @@ declare interface dev_HTMLDListElement        extends HTMLDListElement       , d
 declare interface dev_HTMLLIElement           extends HTMLLIElement          , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLTableSectionElement extends HTMLTableSectionElement, dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLTableRowElement     extends HTMLTableRowElement    , dev_ParentNode, dev_ChildNode {}
+declare interface dev_HTMLTableCellElement    extends HTMLTableCellElement   , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLAnchorElement       extends HTMLAnchorElement      , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLDataElement         extends HTMLDataElement        , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLTimeElement         extends HTMLTimeElement        , dev_ParentNode, dev_ChildNode {}
 declare interface dev_HTMLTemplateElement     extends HTMLTemplateElement    , dev_ParentNode, dev_ChildNode {}
+
+type Content = xjs_Node|Node|string|null
 
 export {
   dev_Document,
@@ -44,8 +50,11 @@ export {
   dev_HTMLLIElement,
   dev_HTMLTableSectionElement,
   dev_HTMLTableRowElement,
+  dev_HTMLTableCellElement,
   dev_HTMLAnchorElement,
   dev_HTMLDataElement,
   dev_HTMLTimeElement,
   dev_HTMLTemplateElement,
+
+  Content,
 }
