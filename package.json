@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "prepublishOnly": "npm run build",
     "test": "gulp test"
   },
   "repository": {
@@ -25,14 +26,14 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
-    "extrajs": "^0.11.0",
-    "jsdom": "^11.12.0"
+    "extrajs": "^0.12.1",
+    "jsdom": "^12.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-typedoc": "^2.2.0",
     "gulp-typescript": "^5.0.0-alpha.3",
-    "typedoc": "^0.11.1",
+    "typedoc": "^0.12.0",
     "typescript": "^3.0.1"
   }
 }
