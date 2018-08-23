@@ -1,9 +1,6 @@
+import {Object as xjs_Object} from 'extrajs'
 import {dev_HTMLElement} from '../dev.d'
 import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
-
-const xjs = {
-  Object: require('extrajs').Object,
-}
 
 /**
  * Wrapper for an HTML element.
@@ -231,11 +228,11 @@ export default class xjs_HTMLElement extends xjs_Element {
   style(prop: ValueObject|null): this;
   style(prop: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(prop)) {
+    switch (xjs_Object.typeOf(prop)) {
       case 'null': break;
       case 'string':
         if ((prop as string).trim() === '') throw new RangeError('Property name cannot be empty string.');
-        switch (xjs.Object.typeOf(value)) {
+        switch (xjs_Object.typeOf(value)) {
           case 'function' : return this.style(prop as string, (value as ValueFunction).call(this_arg));
           case 'undefined': return this.node.style.getPropertyValue(prop as string) || null;
           default         :
@@ -358,14 +355,14 @@ export default class xjs_HTMLElement extends xjs_Element {
   data(data_attr: ValueObject|null): this;
   data(data_attr: any = '', value?: any, this_arg: any = this): any {
     // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(data_attr)) {
+    switch (xjs_Object.typeOf(data_attr)) {
       case 'null': break;
       case 'string':
         if ((data_attr as string).trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.');
-        switch (xjs.Object.typeOf(value)) {
+        switch (xjs_Object.typeOf(value)) {
           case 'function' : return this.data(data_attr as string, (value as ValueFunction).call(this_arg));
           case 'null'     : delete this.node.dataset[data_attr as string]; break;
-          case 'undefined': let returned: string|undefined = this.node.dataset[data_attr as string]; return (xjs.Object.typeOf(returned) === 'string') ? returned as string : null;
+          case 'undefined': let returned: string|undefined = this.node.dataset[data_attr as string]; return (xjs_Object.typeOf(returned) === 'string') ? returned as string : null;
           default         : this.node.dataset[data_attr as string] = (value as string|number|boolean).toString(); break; // string, number, boolean, infinite, NaN
         }
         break;
