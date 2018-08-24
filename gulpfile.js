@@ -8,22 +8,22 @@ const tsconfig      = require('./config/tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
 
 
-gulp.task('compile', async function () {
-  return gulp.src('./src/class/*.ts')
-    .pipe(typescript(tsconfig.compilerOptions))
-    .pipe(gulp.dest('./dist/class/'))
-})
-
-gulp.task('docs', async function () {
-  return gulp.src('./src/class/*.class.ts')
-    .pipe(typedoc(typedocconfig))
-})
-
-gulp.task('build', ['compile', 'docs'])
-
 gulp.task('test', function () {
   require('./test/DocumentFragment-importLinks.test.js');
   require('./test/HTMLOListElement-populate.test.js');
   require('./test/HTMLUListElement-populate.test.js');
   require('./test/HTMLTimeElement-dateTime.test.js');
 })
+
+gulp.task('docs', async function () {
+  return gulp.src('./src/**/*.ts')
+    .pipe(typedoc(typedocconfig))
+})
+
+gulp.task('dist', async function () {
+  return gulp.src('./src/class/*.ts')
+    .pipe(typescript(tsconfig.compilerOptions))
+    .pipe(gulp.dest('./dist/class/'))
+})
+
+gulp.task('build', ['test', 'docs', 'dist'])
