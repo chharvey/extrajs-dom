@@ -1,4 +1,5 @@
-import {dev_DocumentFragment, dev_HTMLLinkElement, Content} from '../dev.d'
+import {dev_DocumentFragment, dev_HTMLLinkElement} from '../dev.d'
+import {Content} from '../ambient.d'
 import xjs_Node from './Node.class'
 
 const fs = require('fs')
@@ -23,7 +24,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   contents the contents to concatenate
    * @returns the resulting output of concatenation
    */
-  static concat(...contents: (xjs_Node|Node|string|null)[]): string {
+  static concat(...contents: Content[]): string {
     return new xjs_DocumentFragment(jsdom.JSDOM.fragment('')).append(...contents).innerHTML()
   }
 

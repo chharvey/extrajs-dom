@@ -1,5 +1,6 @@
 import {Object as xjs_Object} from 'extrajs'
-import {dev_Element, Content} from '../dev.d'
+import {dev_Element} from '../dev.d'
+import {Content} from '../ambient.d'
 import xjs_Node from './Node.class'
 
 /**

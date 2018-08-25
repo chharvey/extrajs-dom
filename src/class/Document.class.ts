@@ -1,4 +1,5 @@
-import {dev_Document, dev_HTMLLinkElement, Content} from '../dev.d'
+import {dev_Document, dev_HTMLLinkElement} from '../dev.d'
+import {Content} from '../ambient.d'
 import xjs_Node from './Node.class'
 
 const fs = require('fs')
