@@ -1,5 +1,6 @@
-import {dev_HTMLDListElement} from '../dev.d'
+import {dev_HTMLDListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
+
 
 /**
  * Wrapper for HTML `dl` element.

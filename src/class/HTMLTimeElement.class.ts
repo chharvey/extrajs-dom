@@ -1,6 +1,7 @@
-import {dev_HTMLTimeElement} from '../dev.d'
+import {dev_HTMLTimeElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
+
 
 /**
  * Wrapper for HTML `time` element.

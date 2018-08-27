@@ -1,6 +1,7 @@
-import {dev_HTMLTemplateElement} from '../dev.d'
+import {dev_HTMLTemplateElement} from '../dev'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
+
 
 /**
  * @summary A rendering function.

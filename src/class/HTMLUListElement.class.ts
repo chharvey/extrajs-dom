@@ -1,8 +1,8 @@
-import {dev_HTMLUListElement} from '../dev.d'
+import * as path from 'path'
+
+import {dev_HTMLUListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
-
-const path = require('path')
 
 
 /**
@@ -35,7 +35,6 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * //   </template>
    * // </ul>
    * // ```
-   * @param   renderer a typical rendering function, used for rendering the list
    * @returns a template rendering a `<ul>` element
    */
   static async template(): Promise<xjs_HTMLTemplateElement> {

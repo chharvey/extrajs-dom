@@ -1,4 +1,4 @@
-import {dev_HTMLTableCellElement} from '../dev.d'
+import {dev_HTMLTableCellElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 
 

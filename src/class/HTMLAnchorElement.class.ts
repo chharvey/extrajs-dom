@@ -1,4 +1,4 @@
-import {dev_HTMLAnchorElement} from '../dev.d'
+import {dev_HTMLAnchorElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 

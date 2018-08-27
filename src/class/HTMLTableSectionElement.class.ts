@@ -1,4 +1,4 @@
-import {dev_HTMLTableSectionElement} from '../dev.d'
+import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 
