@@ -52,4 +52,12 @@ module.exports = Promise.all([
 		.then(() => test(`${x.data(    ).outerHTML()}`                                                    , '<span data-attr-two="42" data-attr-three="true"></span>'))
 		.then(() => test(`${x.data(null).outerHTML()}`                                                    , '<span data-attr-two="42" data-attr-three="true"></span>'))
 		.then(() => test(`${x.data({}  ).outerHTML()}`                                                    , '<span data-attr-two="42" data-attr-three="true"></span>'))
+		// fail to call `data()` with `''`
+		.then(() => test((() => {
+			try {
+				return x.attr('').outerHTML()
+			} catch (e) {
+				return e.name
+			}
+		})(), 'RangeError'))
 ]).then((arr) => true)

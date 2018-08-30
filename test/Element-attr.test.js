@@ -52,4 +52,12 @@ module.exports = Promise.all([
 		.then(() => test(`${x.attr(    ).outerHTML()}`                                              , '<span attr2="42" attr3="true"></span>'))
 		.then(() => test(`${x.attr(null).outerHTML()}`                                              , '<span attr2="42" attr3="true"></span>'))
 		.then(() => test(`${x.attr({}  ).outerHTML()}`                                              , '<span attr2="42" attr3="true"></span>'))
+		// fail to call `attr()` with `''`
+		.then(() => test((() => {
+			try {
+				return x.attr('').outerHTML()
+			} catch (e) {
+				return e.name
+			}
+		})(), 'RangeError'))
 ]).then((arr) => true)

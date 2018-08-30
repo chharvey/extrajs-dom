@@ -54,4 +54,12 @@ module.exports = Promise.all([
 		.then(() => test(`${x.style(    ).outerHTML()}`, '<span style="background: transparent; font-weight: 400; flex-wrap: true;"></span>'))
 		.then(() => test(`${x.style(null).outerHTML()}`, '<span style="background: transparent; font-weight: 400; flex-wrap: true;"></span>'))
 		.then(() => test(`${x.attr({}  ).outerHTML()}` , '<span style="background: transparent; font-weight: 400; flex-wrap: true;"></span>'))
+		// fail to call `style()` with `''`
+		.then(() => test((() => {
+			try {
+				return x.style('').outerHTML()
+			} catch (e) {
+				return e.name
+			}
+		})(), 'RangeError'))
 ]).then((arr) => true)
