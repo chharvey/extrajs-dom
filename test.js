@@ -1,3 +1,9 @@
+			// require('./test/DocumentFragment-importLinks.test.js'),
+			// require('./test/HTMLOListElement-populate.test.js'),
+			// require('./test/HTMLUListElement-populate.test.js'),
+			// require('./test/HTMLTimeElement-dateTime.test.js'),
+
+
 const Element = require('./index.js').Element
 const HTMLElement      = require('./index.js').HTMLElement
 const HTMLOListElement = require('./index.js').HTMLOListElement
@@ -34,62 +40,6 @@ function subclasses() {
   console.log(...[html, ol, ul, dl, li].map((e) => e.html()))
 }
 
-function element_attr() {
-  let x = new Element('span')
-  console.log(`new Element:\t`, x.html())
-  x = x.attr('attr1','val1')
-  console.log(`set attr1="val1":\t`, x.html())
-  let y = x.attr('attr1')
-  console.log(`get attr1:\t`, y)
-  x = x.attr('attr2','')
-  console.log(`set attr2="":\t`, x.html())
-  x = x.attr('attr2',null)
-  console.log(`remove attr2:\t`, x.html())
-  x = x.attr('attr3',function () { return this.attr('attr1') })
-  console.log(`set attr3 to value of attr1:\t`, x.html())
-  try {
-    x = x.attr()
-    console.log(`provide no args to #attr():\t`, x.html())
-  } catch (e) {
-    console.error(`failed to call #attr() with no args: ${e}`)
-  }
-  try {
-    x = x.attr(null)
-    console.log(`provide null to #attr():\t`, x.html())
-  } catch (e) {
-    console.error(`failed to call #attr(null): ${e}`)
-  }
-  x = x.attr({
-    attr1withobj: 'string',
-    attr2withobj: 42,
-    attr3withobj: true,
-    attr4withobj: function () { return `${this.name} is ${(!this.isVoid)?'not ':''}void` },
-    attr2: null,
-  })
-  console.log(`set/remove multiple attributes of multiple types:\t`, x.html())
-  x = x.attr({})
-  console.log(`pass empty object to #attr():\t`, x.html())
-  try {
-    let myvar; // undefined
-    x = x.attr({
-      undefinedattriute: myvar
-    })
-    console.log(`pass undefined as obj value to #attr():\t`, x.html())
-  } catch (e) {
-    console.error(`failed to pass undefined in object to #attr(): ${e}`)
-  }
-  try {
-    x = x.attr('trying-NaN',NaN)
-  } catch (e) {
-    console.error(`failed to pass NaN to #attr(): ${e}:\t`, x.html())
-  }
-  x = x.attr('ternary1', (true) ? 'true' : null)
-  console.log(`set attributes with ternary:\t`, x.html())
-  x = x.attr('ternary2', (false) ? 'true' : null)
-  console.log(`remove attributes with ternary:\t`, x.html())
-
-  console.log(`get all attriutes in object form:\t`, x.attributes)
-}
 
 function element_style() {
   let x = new Element('span')

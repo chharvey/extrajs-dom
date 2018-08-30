@@ -14,11 +14,15 @@ gulp.task('dist', async function () {
     .pipe(gulp.dest('./dist/class/'))
 })
 
-gulp.task('test', function () {
-  require('./test/DocumentFragment-importLinks.test.js');
-  require('./test/HTMLOListElement-populate.test.js');
-  require('./test/HTMLUListElement-populate.test.js');
-  require('./test/HTMLTimeElement-dateTime.test.js');
+gulp.task('test', async function () {
+	try {
+		await Promise.all([
+			require('./test/Element-attr.test.js'),
+		])
+		console.log('All tests ran successfully!')
+	} catch (e) {
+		console.error(e)
+	}
 })
 
 gulp.task('docs', async function () {
