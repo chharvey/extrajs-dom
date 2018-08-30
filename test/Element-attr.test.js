@@ -36,9 +36,9 @@ module.exports = Promise.all([
 		// fail to set an attribute using a disallowed value
 		.then(() => test((() => {
 			try {
-				return x.attr('attr2', Infinity).outerHTML() // FIXME
+				console.log(`Expected warning: "Key 'infinite' cannot be found. Using key 'default'…"`)
+				return x.attr('attr2', Infinity).outerHTML()
 			} catch (e) {
-				console.log(`Expected log warning: "Key 'infinite' cannot be found. Using key 'default'…"`)
 				return e.name
 			}
 		})(), 'ReferenceError'))

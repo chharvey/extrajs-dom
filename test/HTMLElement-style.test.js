@@ -34,9 +34,9 @@ module.exports = Promise.all([
 		// fail to set a property using a disallowed value
 		.then(() => test((() => {
 			try {
-				return x.style('order', NaN).outerHTML() // FIXME
+				console.log(`Expected warning: "Key 'NaN' cannot be found. Using key 'default'…"`)
+				return x.style('order', NaN).outerHTML()
 			} catch (e) {
-				console.log(`Expected log warning: "Key 'NaN' cannot be found. Using key 'default'…"`)
 				return e.name
 			}
 		})(), 'ReferenceError'))

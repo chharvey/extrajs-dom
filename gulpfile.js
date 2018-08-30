@@ -21,7 +21,7 @@ gulp.task('test', async function () {
 			require('./test/HTMLElement-style.test.js'),
 			require('./test/HTMLElement-data.test.js'),
 		])
-		console.log('All tests ran successfully!')
+		console.info('All tests ran successfully!')
 	} catch (e) {
 		console.error(e)
 	}
