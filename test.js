@@ -41,52 +41,6 @@ function subclasses() {
 }
 
 
-function element_style() {
-  let x = new Element('span')
-  let y = new Element('strong')
-  let z = new Element('em')
-  let w = new Element('small')
-
-  let str = 'background:none; font-weight:bold;'
-  let obj = {
-    background   : 'none',
-    'font-weight': 'bold',
-  }
-  let fn = function () {
-    return `content: ${this.name.slice(1)};`
-  }
-
-  console.log(x.style(str).html())
-  console.log(y.style(obj).html())
-  console.log(z.style(fn).html())
-  console.log(w.style(str).style(obj).style(fn).style(null).html())
-  console.log(z.styles)
-}
-
-function element_css() {
-  let x = new Element('span')
-  let y = new Element('strong')
-  let z = new Element('em')
-  let w = new Element('small')
-
-  let str = 'background:none; font-weight:bold;'
-  let obj = {
-    color       : 'blue',
-    'font-style': 'itlaic',
-  }
-  let fn = function () {
-    return this.name.slice(1)
-  }
-
-  console.log(x.style(str).styles)
-  console.log(x.css('opacity', .3).styles)
-  console.log(x.css('background',null).styles)
-  console.log(x.css('content',fn).styles)
-  console.log(x.css('font-weight'))
-  console.log(x.css(obj).styles)
-  console.log(x.css())
-}
-
 function element_data() {
   let x = new Element('span')
   try {
