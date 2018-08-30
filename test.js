@@ -40,51 +40,6 @@ function subclasses() {
   console.log(...[html, ol, ul, dl, li].map((e) => e.html()))
 }
 
-
-function element_data() {
-  let x = new Element('span')
-  try {
-    x = x.data('foo','bar')
-    console.log(`x.data('foo','bar'):\t`, x.html())
-  } catch (e) {
-    console.error(`failed to set #data('foo','bar'): ${e}`)
-  }
-  try {
-    let y = x.data('foo')
-    console.log(`x.data('foo'):\t`, y)
-  } catch (e) {
-    console.error(`failed to get #data('foo'): ${e}`)
-  }
-  try {
-    let u;
-    z = x.data('foo',u)
-    console.log(`x.data('foo',undefined):\t`, z)
-  } catch (e) {
-    console.error(`failed to set #data('foo',undefined): ${e}`)
-  }
-  try {
-    x = x.data('baz', function () { return this.data('foo') })
-    console.log(`x.data('baz', <function>):\t`, x.html())
-  } catch (e) {
-    console.error(`failed to set #data('baz',<function>): ${e}`)
-  }
-  try {
-    x = x.data('foo', null)
-    console.log(`x.data('foo', null):\t`, x.html())
-  } catch (e) {
-    console.error(`failed to remove with #data('foo',null): ${e}`)
-  }
-  try {
-    a = x.data()
-    console.log(`x.data():\t`, a)
-  } catch (e) {
-    console.error(`failed to call #data() with no args: ${e}`)
-  }
-  let s = new Element('span')
-  console.log(x.dataset)
-  console.log(s.dataset)
-}
-
 function element_addContent() {
   try {
     let x = new Element('div').addContent(null)

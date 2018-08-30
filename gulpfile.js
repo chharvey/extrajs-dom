@@ -19,6 +19,7 @@ gulp.task('test', async function () {
 		await Promise.all([
 			require('./test/Element-attr.test.js'),
 			require('./test/HTMLElement-style.test.js'),
+			require('./test/HTMLElement-data.test.js'),
 		])
 		console.log('All tests ran successfully!')
 	} catch (e) {
