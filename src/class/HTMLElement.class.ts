@@ -3,6 +3,7 @@ import * as xjs from 'extrajs'
 import {dev_HTMLElement} from '../dev'
 import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
 
+
 /**
  * Wrapper for an HTML element.
  * @see https://www.w3.org/TR/html52/dom.html#htmlelement
@@ -228,26 +229,25 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(prop: ValueObject|null): this;
   style(prop: any = '', value?: any, this_arg: any = this): any {
-    // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(prop)) {
-      case 'null': break;
-      case 'string':
-        if ((prop as string).trim() === '') throw new RangeError('Property name cannot be empty string.');
-        switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.style(prop as string, (value as ValueFunction).call(this_arg));
-          case 'undefined': return this.node.style.getPropertyValue(prop as string) || null;
-          default         :
-            switch (value) {
-              case ''  :
-              case null: this.node.style.removeProperty(prop as string); break;
-              default  : this.node.style.setProperty(prop as string, (value as string|number|boolean).toString()); break; // string, number, boolean, infinite, NaN
-            }
-        }
-        break;
-      case 'object': for (let i in prop as ValueObject) this.style(i, (prop as ValueObject)[i]); break;
-      default: break;
-    }
-    return this
+		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(prop), {
+			'object': (prp: ValueObject) => {
+				for (let i in prp) this.style(i, prp[i])
+				return this
+			},
+			'string': (prp: string) => {
+				if (prp.trim() === '') throw new RangeError('Property name cannot be empty string.')
+				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
+					'function' : (val: ValueFunction) => this.style(prp, val.call(this_arg)),
+					'string'   : (val: string)        => (val !== '') ? this.node.style.setProperty(prp, val           ) || this : this.style(prp, null),
+					'number'   : (val: number)        =>                this.node.style.setProperty(prp, val.toString()) || this,
+					'boolean'  : (val: boolean)       =>                this.node.style.setProperty(prp, val.toString()) || this,
+					'null'     : ()                   =>                this.node.style.removeProperty(prp).slice(0,0)   || this,
+					'undefined': ()                   =>                this.node.style.getPropertyValue(prp)            || null,
+				})(value)
+			},
+			'null'     : () => this,
+			'undefined': () => this,
+		})(prop)
   }
 
   /**
@@ -355,21 +355,27 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   data(data_attr: ValueObject|null): this;
   data(data_attr: any = '', value?: any, this_arg: any = this): any {
-    // REVIEW: object lookups too complicated here; using standard switches
-    switch (xjs.Object.typeOf(data_attr)) {
-      case 'null': break;
-      case 'string':
-        if ((data_attr as string).trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.');
-        switch (xjs.Object.typeOf(value)) {
-          case 'function' : return this.data(data_attr as string, (value as ValueFunction).call(this_arg));
-          case 'null'     : delete this.node.dataset[data_attr as string]; break;
-          case 'undefined': let returned: string|undefined = this.node.dataset[data_attr as string]; return (xjs.Object.typeOf(returned) === 'string') ? returned as string : null;
-          default         : this.node.dataset[data_attr as string] = (value as string|number|boolean).toString(); break; // string, number, boolean, infinite, NaN
-        }
-        break;
-      case 'object': for (let i in data_attr as ValueObject) this.data(i, (data_attr as ValueObject)[i]); break;
-      default: break;
-    }
-    return this
+		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(data_attr), {
+			'object': (atr: ValueObject) => {
+				for (let i in atr) this.data(i, atr[i])
+				return this
+			},
+			'string': (atr: string) => {
+				if (atr.trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.')
+				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
+					'function' : (val: ValueFunction) => this.data(atr, val.call(this_arg)),
+					'string'   : (val: string)        => { this.node.dataset[atr] = val           ; return this },
+					'number'   : (val: number)        => { this.node.dataset[atr] = val.toString(); return this },
+					'boolean'  : (val: boolean)       => { this.node.dataset[atr] = val.toString(); return this },
+					'null'     : ()                   => { delete this.node.dataset[atr]          ; return this },
+					'undefined': () => {
+						const returned: string|undefined = this.node.dataset[atr]
+						return (typeof returned === 'string') ? returned : null
+					},
+				})(value)
+			},
+			'null'     : () => this,
+			'undefined': () => this,
+		})(data_attr)
   }
 }
