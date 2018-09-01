@@ -228,7 +228,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @returns `this`
    */
   style(prop: ValueObject|null): this;
-  style(prop: any = '', value?: any, this_arg: any = this): any {
+  style(prop?: any, value?: any, this_arg: any = this): any {
 		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(prop), {
 			'object': (prp: ValueObject) => {
 				for (let i in prp) this.style(i, prp[i])
@@ -354,7 +354,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @returns `this`
    */
   data(data_attr: ValueObject|null): this;
-  data(data_attr: any = '', value?: any, this_arg: any = this): any {
+  data(data_attr?: any, value?: any, this_arg: any = this): any {
 		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(data_attr), {
 			'object': (atr: ValueObject) => {
 				for (let i in atr) this.data(i, atr[i])

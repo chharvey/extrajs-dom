@@ -265,7 +265,7 @@ export default class xjs_Element extends xjs_Node {
    * @returns `this`
    */
   attr(attr: ValueObject|null): this;
-  attr(attr: any = '', value?: any, this_arg: any = this): any {
+  attr(attr?: any, value?: any, this_arg: any = this): any {
 		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(attr), {
 			'object': (atr: ValueObject) => {
 				for (let i in atr) this.attr(i, atr[i])

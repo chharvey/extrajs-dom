@@ -8,11 +8,25 @@ const tsconfig      = require('./config/tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
 
 
-gulp.task('test', function () {
-  require('./test/DocumentFragment-importLinks.test.js');
-  require('./test/HTMLOListElement-populate.test.js');
-  require('./test/HTMLUListElement-populate.test.js');
-  require('./test/HTMLTimeElement-dateTime.test.js');
+gulp.task('dist', async function () {
+  return gulp.src('./src/class/*.ts')
+    .pipe(typescript(tsconfig.compilerOptions))
+    .pipe(gulp.dest('./dist/class/'))
+})
+
+gulp.task('test', async function () {
+	try {
+		await Promise.all([
+			require('./test/Document-importLinks.test.js'),
+			require('./test/DocumentFragment-importLinks.test.js'),
+			require('./test/Element-attr.test.js'),
+			require('./test/HTMLElement-style.test.js'),
+			require('./test/HTMLElement-data.test.js'),
+		])
+		console.info('All tests ran successfully!')
+	} catch (e) {
+		console.error(e)
+	}
 })
 
 gulp.task('docs', async function () {
@@ -20,10 +34,4 @@ gulp.task('docs', async function () {
     .pipe(typedoc(typedocconfig))
 })
 
-gulp.task('dist', async function () {
-  return gulp.src('./src/class/*.ts')
-    .pipe(typescript(tsconfig.compilerOptions))
-    .pipe(gulp.dest('./dist/class/'))
-})
-
-gulp.task('build', ['test', 'docs', 'dist'])
+gulp.task('build', ['dist', 'test', 'docs'])
