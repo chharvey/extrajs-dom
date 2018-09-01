@@ -58,11 +58,9 @@ export default class xjs_Node {
    */
   textContent(text: string): this;
   textContent(text?: any): any {
-    if (arguments.length) {
-      this.node.textContent = text
-      return this
-    }
-    return this.node.textContent
+		if (!arguments.length) return this.node.textContent
+		this.node.textContent = text
+		return this
   }
 
   /**

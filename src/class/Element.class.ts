@@ -70,11 +70,9 @@ export default class xjs_Element extends xjs_Node {
    */
   innerHTML(markup: string): this;
   innerHTML(markup?: any): any {
-    if (arguments.length) {
-      this.node.innerHTML = markup
-      return this
-    }
-    return this.node.innerHTML
+		if (!arguments.length) return this.node.innerHTML
+		this.node.innerHTML = markup
+		return this
   }
 
   /**
@@ -93,10 +91,8 @@ export default class xjs_Element extends xjs_Node {
    */
   outerHTML(markup: string): this;
   outerHTML(markup?: any): any {
-    if (arguments.length) {
-      throw new Error('feature not supported yet')
-    }
-    return this.node.outerHTML
+		if (!arguments.length) return this.node.outerHTML
+		throw new Error('feature not supported yet')
   }
 
   /**
@@ -337,11 +333,10 @@ export default class xjs_Element extends xjs_Node {
    */
   id(value: ValueFunction, this_arg?: unknown): this;
   id(value?: any, this_arg: any = this): any {
-    if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.id = value
-      else this.attr('id', value, this_arg)
-      return this
-    } else return this.node.id
+		if (!arguments.length) return this.node.id
+		if (typeof value === 'string') this.node.id = value
+		else this.attr('id', value, this_arg)
+		return this
   }
 
   /**
@@ -383,11 +378,10 @@ export default class xjs_Element extends xjs_Node {
    */
   class(value: ValueFunction, this_arg?: unknown): this;
   class(value?: any, this_arg: any = this): any {
-    if (arguments.length) {
-      if (xjs.Object.typeOf(value) === 'string') this.node.className = value
-      else this.attr('class', value, this_arg)
-      return this
-    } else return this.node.className
+		if (!arguments.length) return this.node.className
+		if (typeof value === 'string') this.node.className = value
+		else this.attr('class', value, this_arg)
+		return this
   }
 
   /**
