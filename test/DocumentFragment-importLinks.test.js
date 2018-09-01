@@ -21,4 +21,8 @@ module.exports = Promise.all([
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
 		return console.log(x_fragment.importLinks(__dirname).innerHTML()) || ''
 	})(), ''),
+	test((() => {
+		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
+		return x_fragment.importLinksAsync(__dirname).then(() => console.log(x_fragment.innerHTML()) || '')
+	})(), ''),
 ]).then((arr) => true)
