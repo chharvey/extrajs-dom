@@ -11,8 +11,9 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
  */
 export default class xjs_HTMLOListElement extends xjs_HTMLElement {
   /**
-   * @summary Return a new `xjs.HTMLTemplateElement` object that renders a `<ol>` filled with `<li>`s.
-   * @example
+   * Return a new `xjs.HTMLTemplateElement` object that renders a `<ol>` filled with `<li>`s.
+   *
+   * ```js
    * const my_tpl = (await xjs.HTMLOListElement.template())
    *   .exe(function () {
    *     new xjs.HTMLUListElement(this.content().querySelector('ol')).addClass('o-List')
@@ -35,13 +36,14 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    * //   </template>
    * // </ol>
    * // ```
+   * ```
    * @returns a template rendering a `<ol>` element
    */
   static async template(): Promise<xjs_HTMLTemplateElement> {
     return xjs_HTMLTemplateElement.fromFile(path.join(__dirname, '../../src/tpl/x-htmlolistelement.tpl.html')) // relative to `dist`
   }
   /**
-   * @summary Synchronous version of {@link xjs_HTMLOListElement.template}.
+   * Synchronous version of {@link xjs_HTMLOListElement.template}.
    * @returns a template rendering a `<ol>` element
    */
   static templateSync(): xjs_HTMLTemplateElement {
@@ -50,20 +52,21 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary Construct a new xjs_HTMLOListElement object.
+   * Construct a new xjs_HTMLOListElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLOListElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLOListElement { return super.node as dev_HTMLOListElement }
 
   /**
-   * @summary Populate this list with items containing data.
-   * @description This method appends items to the end of this list.
+   * Populate this list with items containing data.
+   *
+   * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<ol>` element must have
    * a `<template>` child, which in turn has a single child that is an `<li>`.
@@ -72,7 +75,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
    * - This element may also already have any number of `<li>` children; they are not affected.
    *
-   * @example
+   * ```js
    * let {document} = new jsdom.JSDOM(`
    * <ol>
    *   <template>
@@ -97,6 +100,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    *  .populate(data, function (f, d, o) {
    *    // some code involving `this`
    *  }, other_context)
+   * ```
    *
    * @param   renderer a typical {@link RenderingFunction} to modify the template
    * @param   dataset the data to populate the list

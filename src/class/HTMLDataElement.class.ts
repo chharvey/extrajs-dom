@@ -9,19 +9,19 @@ import xjs_HTMLElement from './HTMLElement.class'
  */
 export default class xjs_HTMLDataElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLDataElement object.
+   * Construct a new xjs_HTMLDataElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLDataElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLDataElement { return super.node as dev_HTMLDataElement }
 
   /**
-   * @summary Reflect the `value` content attribute.
+   * Reflect the `value` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmldataelement-value
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */

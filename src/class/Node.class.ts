@@ -1,6 +1,6 @@
 /**
- * @summary Represents the type of node.
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Node
+ * Represents the type of node.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
  */
 enum NodeType {
   ELEMENT_NODE                =  1,
@@ -26,32 +26,33 @@ export default class xjs_Node {
 
 
   /**
-   * @summary The wrapped DOM Node.
+   * The wrapped DOM Node.
    */
   private readonly _NODE: Node
 
   /**
-   * @summary Construct a new xjs_Node object.
+   * Construct a new xjs_Node object.
    * @param node the node to wrap
    */
   constructor(node: Node) {
     this._NODE = node
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): Node { return this._NODE }
 
 
   /**
-   * @summary Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}.
+   * Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}.
    * @see https://www.w3.org/TR/dom/#dom-node-textcontent
    * @returns the `textContent` of this node
    */
   textContent(): string|null;
   /**
-   * @summary Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}, and returns this object when done.
-   * @description This method exists simply for chaining.
+   * Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent|Node#textContent}, and returns this object when done.
+   *
+   * This method exists simply for chaining.
    * @param   text the content to set
    * @returns `this`
    */
@@ -65,8 +66,9 @@ export default class xjs_Node {
   }
 
   /**
-   * @summary Execute a function acting on this node, and then return this node.
-   * @description Simplifies chaining when performing void tasks,
+   * Execute a function acting on this node, and then return this node.
+   *
+   * Simplifies chaining when performing void tasks,
    * especially tasks that have not been defined in this implementation.
    * @param   executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
    * @returns `this`
@@ -77,8 +79,9 @@ export default class xjs_Node {
   }
 
   /**
-   * @summary Remove all inner whitespace text nodes from this node, and return it.
-   * @example
+   * Remove all inner whitespace text nodes from this node, and return it.
+   *
+   * ```js
    * let snip = new HTMLElement(document.createElement('div')).addContent(`
    *   <h1>
    *     <em>Hello </em>
@@ -93,6 +96,8 @@ export default class xjs_Node {
    *   </h1>
    * `
    *   && snipTrimmed.node.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
+   * ```
+   *
    * @returns `this`
    */
   trimInner(): this {
@@ -104,7 +109,7 @@ export default class xjs_Node {
   }
 
   /**
-   * @summary Remove all child nodes from this node, and return it.
+   * Remove all child nodes from this node, and return it.
    * @returns `this`
    */
   empty(): this {

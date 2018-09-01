@@ -18,13 +18,15 @@ const jsdom = require('jsdom')
  */
 export default class xjs_DocumentFragment extends xjs_Node {
   /**
-   * @summary Concatenate multiple contents into text.
-   * @example
+   * Concatenate multiple contents into text.
+   *
+   * ```js
    * xjs.DocumentFragment.concat(
    *   new xjs.Element(document.createElement('strong')).append(`hello `),
    *   new xjs.Element(document.createElement('em'    )).append(`world`),
    *   new xjs.Element(document.createElement('mark'  )).append(`!`)
    * ) // '<strong>hello </strong><em>world</em><mark>!</mark>'
+   * ```
    * @param   contents the contents to concatenate
    * @returns the resulting output of concatenation
    */
@@ -33,9 +35,10 @@ export default class xjs_DocumentFragment extends xjs_Node {
   }
 
   /**
-   * @summary Read an HTML file and return a document fragment with its contents.
-   * @description The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
-   * To access the actual element, call {@link xjs_DocumentFragment#node}.
+   * Read an HTML file and return a document fragment with its contents.
+   *
+   * The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
+   * To access the actual element, call {@link xjs_DocumentFragment.node}.
    * @param   filepath the path to the file
    * @returns the fragment, wrapped
    */
@@ -44,7 +47,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     return new xjs_DocumentFragment(jsdom.JSDOM.fragment(data))
   }
   /**
-   * @summary Synchronous version of {@link xjs_DocumentFragment.fromFile}.
+   * Synchronous version of {@link xjs_DocumentFragment.fromFile}.
    * @param   filepath the path to the file
    * @returns the fragment, wrapped
    */
@@ -55,21 +58,23 @@ export default class xjs_DocumentFragment extends xjs_Node {
 
 
   /**
-   * @summary Construct a new xjs_DocumentFragment object.
+   * Construct a new xjs_DocumentFragment object.
    * @param node the node to wrap
    */
   constructor(node: DocumentFragment) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_DocumentFragment { return super.node as dev_DocumentFragment }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
@@ -86,6 +91,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#prepend
    * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
    * @param   contents the contents to prepend
@@ -100,9 +106,11 @@ export default class xjs_DocumentFragment extends xjs_Node {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
@@ -119,6 +127,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).innerHTML()
    * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#append
    * @see https://dom.spec.whatwg.org/#dom-parentnode-append
    * @param   contents the contents to append
@@ -133,7 +142,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
   }
 
   /**
-   * @summary Get the "innerHTML" of this document fragment.
+   * Get the "innerHTML" of this document fragment.
    * @returns a concatenation of all the `outerHTML` and/or data of the fragment’s node children
    */
   innerHTML(): string {
@@ -149,8 +158,8 @@ export default class xjs_DocumentFragment extends xjs_Node {
   }
 
   /**
-   * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
-   * @description
+   * Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
+   *
    * This method finds all `link[rel~="import"][data-import]`s in this document fragment,
    * and then replaces those links with another `DocumentFragment` holding some contents.
    * These contents depend on the value set for `data-import`:
@@ -176,7 +185,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * a `DocumentFragment` containing the entirety of `x-linked-doc.tpl.html`,
    * including both the `h1` along with the `template#sect-template`.
    *
-   * @example
+   * ```js
    * // x-linked-doc.tpl.html:
    * <h1>top-level hed</h1>
    * <template id="sect-template">
@@ -205,6 +214,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * // This call will work as intended.
    * let innerfrag = new xjs.DocumentFragment(this.node.querySelector('template').content)
    * innerfrag.importLinks(__dirname)
+   * ```
    *
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    * @returns `this`
@@ -228,7 +238,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
     return this
   }
   /**
-   * @summary Asynchronous version of {@link xjs_DocumentFragment#importLinks}.
+   * Asynchronous version of {@link xjs_DocumentFragment.importLinks}.
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
   async importLinksAsync(dirpath: string): Promise<void[]> {
