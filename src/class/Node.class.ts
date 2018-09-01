@@ -4,17 +4,17 @@
  */
 enum NodeType {
   ELEMENT_NODE                =  1,
-  ATTRIBUTE_NODE              =  2, // XXX:DEPRECATED
+  ATTRIBUTE_NODE              =  2, // XXX{DEPRECATED}
   TEXT_NODE                   =  3,
-  CDATA_SECTION_NODE          =  4, // XXX:DEPRECATED
-  ENTITY_REFERENCE_NODE       =  5, // XXX:DEPRECATED
-  ENTITY_NODE                 =  6, // XXX:DEPRECATED
+  CDATA_SECTION_NODE          =  4, // XXX{DEPRECATED}
+  ENTITY_REFERENCE_NODE       =  5, // XXX{DEPRECATED}
+  ENTITY_NODE                 =  6, // XXX{DEPRECATED}
   PROCESSING_INSTRUCTION_NODE =  7,
   COMMENT_NODE                =  8,
   DOCUMENT_NODE               =  9,
   DOCUMENT_TYPE_NODE          = 10,
   DOCUMENT_FRAGMENT_NODE      = 11,
-  NOTATION_NODE               = 12, // XXX:DEPRECATED
+  NOTATION_NODE               = 12, // XXX{DEPRECATED}
 }
 
 /**

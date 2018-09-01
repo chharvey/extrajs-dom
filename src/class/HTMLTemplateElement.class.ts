@@ -90,7 +90,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @returns the rendered output
    */
   render<T, U extends object>(renderer: RenderingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
-    let frag = this.content().cloneNode(true) as DocumentFragment // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
+    let frag = this.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
     renderer.call(this_arg, frag, data, options)
     return frag
   }
