@@ -10,19 +10,19 @@ import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.clas
  */
 export default class xjs_HTMLElement extends xjs_Element {
   /**
-   * @summary Construct a new xjs_HTMLElement object.
+   * Construct a new xjs_HTMLElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLElement { return super.node as dev_HTMLElement }
 
   /**
-   * @summary Reflect the `title` content attribute.
+   * Reflect the `title` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-title
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -43,7 +43,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary Reflect the `lang` content attribute.
+   * Reflect the `lang` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-lang
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -64,7 +64,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary Reflect the `dir` content attribute.
+   * Reflect the `dir` content attribute.
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dir
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -85,7 +85,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary Reflect the `hidden` content attribute.
+   * Reflect the `hidden` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-hidden
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -106,7 +106,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary Reflect the `tabindex` content attribute.
+   * Reflect the `tabindex` content attribute.
    * @see https://www.w3.org/TR/html52/editing.html#dom-htmlelement-tabindex
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -127,8 +127,9 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style|HTMLElement#style}, with extended functionality.
-   * @description This method manipulates an element’s associated {@link https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration|CSSStyleDeclaration} object.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style|HTMLElement#style}, with extended functionality.
+   *
+   * This method manipulates an element’s associated {@link https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration|CSSStyleDeclaration} object.
    *
    * If no argument is provided, this method does nothing and returns `this`.
    *
@@ -140,6 +141,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(): this;
   /**
+   * Get a style of this element.
+   *
    * If the key is a string and the value is not provided (or `undefined`),
    * then this method returns the string value of the CSS property identified by the key.
    * If no such property exists, then `null` is returned.
@@ -148,9 +151,10 @@ export default class xjs_HTMLElement extends xjs_Element {
    *
    * If the key is `''`, this method throws an error.
    *
-   * @example
+   * ```js
    * this.style('text-align') // get the value of the `text-align` property (or `null` if it had not been set)
    * this.style('')           // throws, since `''` is not a property
+   * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to get (nonempty string)
@@ -159,24 +163,26 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(prop: string): string|null;
   /**
-   * If the key is a string and the value is a non-null {@link ValueType} type,
-   * *except for the empty string `''`,*
+   * Set or remove a style of this element.
+   *
+   * If the key is a string and the value is a non-null *or non-empty string* {@link ValueType} type,
    * then the CSS property will be set (or modified) with the result of the given value.
    *
-   * If the key is a string and the value is `null` or the empty string `''`,
+   * If the key is a string and the value is `null` *or `''`*,
    * then the CSS property identified by the key is removed from this element.
    *
-   * @example
-   * this.style('background', 'red')      // set the `background` property (string) (the value will be `red`)
-   * this.style('opacity', 0.5)           // set the `opacity` property (number)
-   * this.style('content', false)         // set the `content` property (boolean)
-   * this.style('content', '\'truthy\'')  // set the `content` property (quoted string, must be escaped) (the value will be `'truthy'`)
-   * this.style('content', '"truthy"')    // or you could use double-quotes
-   * this.style('content', `'truthy'`)    // or you could use a template literal
-   * this.style('font-weight', 'bold')    // set the `font-weight` property
-   * this.style('font-style', null)       // remove the `font-style` property
-   * this.style('font-style', '')         // remove the `font-style` property // *note that this syntax differs from the typical syntax shown by xjs.Element#attr
-   * this.attr('', 42)                    // throws, since `''` is not a property
+   * ```js
+   * this.style('background', 'red')     // set the `background` property (string) (the value will be `red`)
+   * this.style('opacity', 0.5)          // set the `opacity` property (number)
+   * this.style('content', false)        // set the `content` property (boolean)
+   * this.style('content', '\'truthy\'') // set the `content` property (quoted string, must be escaped) (the value will be `'truthy'`)
+   * this.style('content', '"truthy"')   // or you could use double-quotes
+   * this.style('content', `'truthy'`)   // or you could use a template literal
+   * this.style('font-weight', 'bold')   // set the `font-weight` property
+   * this.style('font-style', null)      // remove the `font-style` property
+   * this.style('font-style', '')        // remove the `font-style` property // *note that this syntax differs from the typical syntax shown by xjs.Element#attr
+   * this.attr('', 42)                   // throws, since `''` is not a property
+   * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to set (nonempty string)
@@ -186,13 +192,16 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(prop: string, value: ValueType): this;
   /**
+   * Set or remove a style of this element, using a function.
+   *
    * If the key is a string and the value is a {@link ValueFunction} type,
    * then the CSS property will be set (or modified) with the result of the given function.
    *
-   * @example
+   * ```js
    * this.style('justify-content', function () { return this.data('jc') })                 // set the `justify-content` property using a function in this xjs.HTMLElement’s context
    * this.style('justify-content', function () { return this.jc }, { jc: 'space-around' }) // set the `justify-content` property using a function in another given context
    * this.style('', function () {})                                                        // throws, since `''` is not a property
+   * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to set (nonempty string)
@@ -203,25 +212,28 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(prop: string, value: ValueFunction, this_arg?: unknown): this;
   /**
+   * Set or remove a style of this element, using an object.
+   *
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object must have values of the {@link ValueType} type;
    * thus for each key-value pair in the object, this method assigns corresponding
    * CSS properties. You may use this method with a single object argument to set and/or remove
-   * multiple properties (using `null` to remove).
+   * multiple properties (using `null` *or `''`* to remove).
    *
    * If the key is `{}` or `null`, this method does nothing and returns `this`.
    *
-   * @example
-   * this.style({                         // set/remove multiple properties all at once
+   * ```js
+   * this.style({            // set/remove multiple properties all at once
    *   background  : 'red',
    *   margin      : '1rem',
    *   opacity     : 0.5,
-   *   content     : `''`, // sets the css `content: '';`
-   *   visibility  : null, // remove the `visibility` property
-   *   'text-align': '',   // remove the `text-align` property
+   *   content     : `''`,   // sets the css `content: '';`
+   *   visibility  : null,   // remove the `visibility` property
+   *   'text-align': '',     // remove the `text-align` property
    * })
    * this.style({})   // do nothing; return `this`
    * this.style(null) // do nothing; return `this`
+   * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop an object with {@link ValueType} type values
@@ -251,11 +263,11 @@ export default class xjs_HTMLElement extends xjs_Element {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset|HTMLElement#dataset}, with extended functionality.
-   * @description
-   * This method is similar to {@link xjs_Element#attr} in that it sets/gets attributes,
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset|HTMLElement#dataset}, with extended functionality.
+   *
+   * This method is similar to {@link xjs_Element.attr} in that it sets/gets attributes,
    * except that this method only sets/gets attributes starting with the `data-` prefix, and that
-   * the attribute names passed to this method differ from the those passed to {@link xjs_Element#attr}.
+   * the attribute names passed to this method differ from the those passed to {@link xjs_Element.attr}.
    *
    * If no argument is provided, this method does nothing and returns `this`.
    *
@@ -264,12 +276,14 @@ export default class xjs_HTMLElement extends xjs_Element {
    * {@link https://www.w3.org/TR/html52/dom.html#dom-domstringmap-__setter__-name-value-name|HTML 5.2 | DOMStringMap setter}.
    * Note that if you wish to use the HTML attribute syntax **kebab-case** format, as specified in
    * {@link https://www.w3.org/TR/html52/dom.html#embedding-custom-non-visible-data-with-the-data-attributes|HTML 5.2 | custom data attributes},
-   * you should use the {@link xjs_Element#attr} method instead, and pass `'data-has-js'` as the attribute name.
+   * you should use the {@link xjs_Element.attr} method instead, and pass `'data-has-js'` as the attribute name.
    *
    * @returns `this`
    */
   data(): this;
   /**
+   * Get a data- attribute of this element.
+   *
    * If the key is a string and the value is not provided (or `undefined`),
    * then this method returns the string value of the data- attribute identified by the key.
    * If the attribute exists but is a boolean attribute, the empty string `''` is returned.
@@ -277,9 +291,10 @@ export default class xjs_HTMLElement extends xjs_Element {
    *
    * If the key is `''`, this method throws an error.
    *
-   * @example
+   * ```js
    * this.data('instanceOf') // get the value of the `[data-instance-of]` attribute (`null` if it had not been set)
    * this.data('')           // throws, since `''` is not an attribute
+   * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to get (nonempty string)
@@ -288,13 +303,15 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   data(data_attr: string): string|null;
   /**
+   * Set or remove a data- attribute of this element.
+   *
    * If the key is a string and the value is a non-null {@link ValueType} type,
    * then the data- attribute will be set (or modified) with the result of the given value.
    *
    * If the key is a string and the value is `null,`
    * then the data- attribute identified by the key is removed from this element.
    *
-   * @example
+   * ```js
    * this.data('typeof', 'my type')  // set the `[data-typeof]` attribute (string)
    * this.data('typeof', 42)         // set the `[data-typeof]` attribute (number)  (the value will be `"42"`)
    * this.data('typeof', true)       // set the `[data-typeof]` attribute (boolean) (the value will be `"true"`)
@@ -304,6 +321,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
    * this.data('instanceOf', null)   // remove the `[data-instance-of]` attribute
    * this.attr('', 42)               // throws, since `''` is not an attribute
+   * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
@@ -313,13 +331,16 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   data(data_attr: string, value: ValueType): this;
   /**
+   * Set or remove a data- attribute of this element, using a function.
+   *
    * If the key is a string and the value is a {@link ValueFunction} type,
    * then the data- attribute will be set (or modified) with the result of the given function.
    *
-   * @example
+   * ```js
    * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
    * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using a function in another given context
    * this.data('', function () {})                                        // throws, since `''` is not an attribute
+   * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
@@ -330,6 +351,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   data(data_attr: string, value: ValueFunction, this_arg?: unknown): this;
   /**
+   * Set or remove a data- attribute of this element, using an object.
+   *
    * If an object is provided as the key, then no argument may be provided as the value.
    * The object’s keys must be in **camelCase** format, as if each key were passed separately.
    * The object must have values of the {@link ValueType} type;
@@ -339,8 +362,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    *
    * If the key is `{}` or `null`, this method does nothing and returns `this`.
    *
-   * @example
-   * this.data({                     // set/remove multiple `[data-*]` attributes all at once
+   * ```js
+   * this.data({         // set/remove multiple `[data-*]` attributes all at once
    *   prop  : 'name',
    *   scope : '',
    *   typeOf: 'Person',
@@ -348,6 +371,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * })
    * this.data({})   // do nothing; return `this`
    * this.data(null) // do nothing; return `this`
+   * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr an object with {@link ValueType} type values

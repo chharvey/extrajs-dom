@@ -9,19 +9,19 @@ import xjs_HTMLElement from './HTMLElement.class'
  */
 export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLAnchorElement object.
+   * Construct a new xjs_HTMLAnchorElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLAnchorElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLAnchorElement { return super.node as dev_HTMLAnchorElement }
 
   /**
-   * @summary Reflect the `href` content attribute.
+   * Reflect the `href` content attribute.
    * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -42,7 +42,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `target` content attribute.
+   * Reflect the `target` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -63,7 +63,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `download` content attribute.
+   * Reflect the `download` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-download
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -84,7 +84,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `rel` content attribute.
+   * Reflect the `rel` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -105,7 +105,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `rev` content attribute.
+   * Reflect the `rev` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -126,7 +126,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `hreflang` content attribute.
+   * Reflect the `hreflang` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -147,7 +147,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `type` content attribute.
+   * Reflect the `type` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */

@@ -11,8 +11,9 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
  */
 export default class xjs_HTMLUListElement extends xjs_HTMLElement {
   /**
-   * @summary Return a new `xjs.HTMLTemplateElement` object that renders a `<ul>` filled with `<li>`s.
-   * @example
+   * Return a new `xjs.HTMLTemplateElement` object that renders a `<ul>` filled with `<li>`s.
+   *
+   * ```js
    * const my_tpl = (await xjs.HTMLUListElement.template())
    *   .exe(function () {
    *     new xjs.HTMLUListElement(this.content().querySelector('ul')).addClass('o-List')
@@ -35,13 +36,14 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * //   </template>
    * // </ul>
    * // ```
+   * ```
    * @returns a template rendering a `<ul>` element
    */
   static async template(): Promise<xjs_HTMLTemplateElement> {
     return xjs_HTMLTemplateElement.fromFile(path.join(__dirname, '../../src/tpl/x-htmlulistelement.tpl.html')) // relative to `dist`
   }
   /**
-   * @summary Synchronous version of {@link xjs_HTMLUListElement.template}.
+   * Synchronous version of {@link xjs_HTMLUListElement.template}.
    * @returns a template rendering a `<ul>` element
    */
   static templateSync(): xjs_HTMLTemplateElement {
@@ -50,20 +52,21 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary Construct a new xjs_HTMLUListElement object.
+   * Construct a new xjs_HTMLUListElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLUListElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLUListElement { return super.node as dev_HTMLUListElement }
 
   /**
-   * @summary Populate this list with items containing data.
-   * @description This method appends items to the end of this list.
+   * Populate this list with items containing data.
+   *
+   * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<ul>` element must have
    * a `<template>` child, which in turn has a single child that is an `<li>`.
@@ -72,7 +75,7 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
    * - This element may also already have any number of `<li>` children; they are not affected.
    *
-   * @example
+   * ```js
    * let {document} = new jsdom.JSDOM(`
    * <ul>
    *   <template>
@@ -89,14 +92,15 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *   .populate(data, function (f, d, o) {
+   *   .populate(function (f, d, o) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
-   *   })
+   *   }, data)
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *  .populate(data, function (f, d, o) {
+   *  .populate(function (f, d, o) {
    *    // some code involving `this`
-   *  }, other_context)
+   *  }, data, {}, other_context)
+   * ```
    *
    * @param   renderer a typical {@link RenderingFunction} to modify the template
    * @param   dataset the data to populate the list

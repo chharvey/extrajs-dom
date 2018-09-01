@@ -9,19 +9,19 @@ import xjs_HTMLElement from './HTMLElement.class'
  */
 export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLMetaElement object.
+   * Construct a new xjs_HTMLMetaElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLMetaElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLMetaElement { return super.node as dev_HTMLMetaElement }
 
   /**
-   * @summary Reflect the `name` content attribute.
+   * Reflect the `name` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-name
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -42,7 +42,7 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
   }
 
   /**
-   * @summary Reflect the `content` content attribute.
+   * Reflect the `content` content attribute.
    * @see https://www.w3.org/TR/html52/document-metadata.html#dom-htmlmetaelement-content
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */

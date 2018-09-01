@@ -19,9 +19,10 @@ const jsdom = require('jsdom')
  */
 export default class xjs_Document extends xjs_Node {
   /**
-   * @summary Read an HTML file and return a document with its contents.
-   * @description The Document object will be wrapped in an `xjs.Document` object.
-   * To access the actual element, call {@link xjs_Document#node}.
+   * Read an HTML file and return a document with its contents.
+   *
+   * The Document object will be wrapped in an `xjs.Document` object.
+   * To access the actual element, call {@link xjs_Document.node}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
@@ -30,7 +31,7 @@ export default class xjs_Document extends xjs_Node {
     return new xjs_Document(new jsdom.JSDOM(data).window.document)
   }
   /**
-   * @summary Synchronous version of {@link xjs_Document.fromFile}.
+   * Synchronous version of {@link xjs_Document.fromFile}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
@@ -41,29 +42,30 @@ export default class xjs_Document extends xjs_Node {
 
 
   /**
-   * @summary Construct a new xjs_Document object.
+   * Construct a new xjs_Document object.
    * @param node the node to wrap
    */
   constructor(node: Document) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_Document { return super.node as dev_Document }
 
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.Document(new Document())
-   *   .prepend(...[
+   * this.prepend(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -72,7 +74,8 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#prepend
    * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
    * @param   contents the contents to prepend
@@ -87,16 +90,17 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
-   *   .append(...[
+   * this.append(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -105,7 +109,8 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#append
    * @see https://dom.spec.whatwg.org/#dom-parentnode-append
    * @param   contents the contents to append
@@ -120,8 +125,9 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary Get the "innerHTML" of this document.
-   * @description This method should be used only if this document is an HTML Document,
+   * Get the "innerHTML" of this document.
+   *
+   * This method should be used only if this document is an HTML Document,
    * has doctype `html`, and whose root element is the `<html>` element (an instance of `HTMLHtmlElement`).
    *
    * You should only use this method if you do not have access to the original DOM object that this Document belongs to.
@@ -136,8 +142,8 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
-   * @description
+   * Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
+   *
    * This method finds all `link[rel~="import"][data-import]`s in this document,
    * and then replaces those links with a `DocumentFragment` holding some contents.
    * These contents depend on the value set for `data-import`:
@@ -163,7 +169,7 @@ export default class xjs_Document extends xjs_Node {
    * a `DocumentFragment` containing the entirety of `x-linked-doc.tpl.html`,
    * including both the `h1` along with the `template#sect-template`.
    *
-   * @example
+   * ```js
    * // x-linked-doc.tpl.html:
    * <h1>top-level hed</h1>
    * <template id="sect-template">
@@ -181,6 +187,7 @@ export default class xjs_Document extends xjs_Node {
    *
    * // This call will work as intended.
    * this.importLinks(__dirname)
+   * ```
    *
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    * @returns `this`
@@ -203,7 +210,7 @@ export default class xjs_Document extends xjs_Node {
     return this
   }
   /**
-   * @summary Asynchronous version of {@link xjs_Document#importLinks}.
+   * Asynchronous version of {@link xjs_Document.importLinks}.
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
   async importLinksAsync(dirpath: string): Promise<void[]> {

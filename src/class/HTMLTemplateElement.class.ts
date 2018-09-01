@@ -4,14 +4,14 @@ import xjs_HTMLElement from './HTMLElement.class'
 
 
 /**
- * @summary A rendering function.
- * @description
+ * A rendering function.
+ *
  * This function takes a document fragment and data, and may modify the fragment using the data.
  * Additionally it may use any rendering options passed.
  * It *should not* have a `this` context, and it *should not* have a return value.
  *
  * If this function does have a `this` context, a `this_arg` may be passed to
- * {@link xjs_HTMLTemplateElement#render}.
+ * {@link xjs_HTMLTemplateElement.render}.
  * Any return value of the function does nothing.
  *
  * @param   frag the template content with which to render
@@ -29,9 +29,10 @@ export interface RenderingFunction<T, U extends object> extends Function {
  */
 export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
   /**
-   * @summary Read an HTML file and return the first `<template>` element found while walking the DOM tree.
-   * @description The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
-   * To access the actual element, call {@link xjs_HTMLTemplateElement#node}.
+   * Read an HTML file and return the first `<template>` element found while walking the DOM tree.
+   *
+   * The `<template>` element will be wrapped in an `xjs.HTMLTemplate` object.
+   * To access the actual element, call {@link xjs_HTMLTemplateElement.node}.
    * @param   filepath the path to the file
    * @returns the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
@@ -44,7 +45,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
     return new xjs_HTMLTemplateElement(elem)
   }
   /**
-   * @summary Synchronous version of {@link xjs_HTMLTemplateElement.fromFile}.
+   * Synchronous version of {@link xjs_HTMLTemplateElement.fromFile}.
    * @param   filepath the path to the file
    * @returns the first found `<template>` descendant, wrapped
    * @throws  {ReferenceError} if there is no `<template>` descendant
@@ -59,19 +60,19 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary Construct a new xjs_HTMLTemplateElement object.
+   * Construct a new xjs_HTMLTemplateElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLTemplateElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLTemplateElement { return super.node as dev_HTMLTemplateElement }
 
   /**
-   * @summary Return the `<template>` element’s template contents.
+   * Return the `<template>` element’s template contents.
    * @see https://www.w3.org/TR/html52/semantics-scripting.html#dom-htmltemplateelement-content
    * @returns this element’s template contents
    */
@@ -81,7 +82,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary Render this template with some data.
+   * Render this template with some data.
    * @param   renderer modifies the template by filling it in with data
    * @param   data the data to fill
    * @param   options additional rendering options
@@ -89,7 +90,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @returns the rendered output
    */
   render<T, U extends object>(renderer: RenderingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
-    let frag = this.content().cloneNode(true) as DocumentFragment // COMBAK .cloneNode() returns type `Node` but should return type `this` <https://github.com/Microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L10294>
+    let frag = this.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
     renderer.call(this_arg, frag, data, options)
     return frag
   }

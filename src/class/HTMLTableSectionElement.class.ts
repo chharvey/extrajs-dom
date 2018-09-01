@@ -9,20 +9,21 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
  */
 export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLTableSectionElement object.
+   * Construct a new xjs_HTMLTableSectionElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLTableSectionElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
   get node(): dev_HTMLTableSectionElement { return super.node as dev_HTMLTableSectionElement }
 
   /**
-   * @summary Populate this list with items containing data.
-   * @description This method appends items to the end of this list.
+   * Populate this list with items containing data.
+   *
+   * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<thead/tfoot/tbody>` element must have
    * a `<template>` child, which in turn has a single child that is an `<tr>`.
@@ -31,7 +32,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
    * - This element may also already have any number of `<tr>` children; they are not affected.
    *
-   * @example
+   * ```js
    * let {document} = new jsdom.JSDOM(`
    * <table>
    *   <tbody>
@@ -50,14 +51,15 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
-   *   .populate(data, function (f, d, o) {
+   *   .populate(function (f, d, o) {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
-   *   })
+   *   }, data)
    * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
-   *  .populate(data, function (f, d, o) {
+   *  .populate(function (f, d, o) {
    *    // some code involving `this`
-   *  }, other_context)
+   *  }, data, {}, other_context)
+   * ```
    *
    * @param   renderer a typical {@link RenderingFunction} to modify the template
    * @param   dataset the data to populate the list
