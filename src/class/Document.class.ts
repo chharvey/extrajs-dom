@@ -187,7 +187,7 @@ export default class xjs_Document extends xjs_Node {
    */
   importLinks(dirpath: string): this {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
-      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
+      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
 				let imported = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') as string, {
 					'document': (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node,

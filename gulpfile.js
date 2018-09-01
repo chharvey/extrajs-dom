@@ -17,6 +17,8 @@ gulp.task('dist', async function () {
 gulp.task('test', async function () {
 	try {
 		await Promise.all([
+			require('./test/Document-importLinks.test.js'),
+			require('./test/DocumentFragment-importLinks.test.js'),
 			require('./test/Element-attr.test.js'),
 			require('./test/HTMLElement-style.test.js'),
 			require('./test/HTMLElement-data.test.js'),
