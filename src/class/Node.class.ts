@@ -82,20 +82,21 @@ export default class xjs_Node {
    * Remove all inner whitespace text nodes from this node, and return it.
    *
    * ```js
-   * let snip = new HTMLElement(document.createElement('div')).addContent(`
-   *   <h1>
-   *     <em>Hello </em>
-   *     <b>Worl d</b>
-   *   </h1>
-   * `)
-   * let snipTrimmed = new xjs.Node(snip).trimInner()
-   * return snip.node.innerHTML === `
+   * let div = document.createElement('div')
+   * div.innerHTML = `
    *   <h1>
    *     <em>Hello </em>
    *     <b>Worl d</b>
    *   </h1>
    * `
-   *   && snipTrimmed.node.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
+   * let trimmed_div = new xjs.Node(div).trimInner().node
+   * return div.innerHTML === `
+   *   <h1>
+   *     <em>Hello </em>
+   *     <b>Worl d</b>
+   *   </h1>
+   * `
+   *   && trimmed_div.innerHTML = `<h1><em>Hello </em><b>Worl d</b></h1>`
    * ```
    *
    * @returns `this`

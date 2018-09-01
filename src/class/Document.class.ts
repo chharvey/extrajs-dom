@@ -65,8 +65,7 @@ export default class xjs_Document extends xjs_Node {
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.Document(new Document())
-   *   .prepend(...[
+   * this.prepend(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -75,7 +74,7 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * ```
    * @todo TODO xjs.ParentNode#prepend
    * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
@@ -101,8 +100,7 @@ export default class xjs_Document extends xjs_Node {
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
-   *   .append(...[
+   * this.append(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -111,7 +109,7 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
    * ```
    * @todo TODO xjs.ParentNode#append
    * @see https://dom.spec.whatwg.org/#dom-parentnode-append

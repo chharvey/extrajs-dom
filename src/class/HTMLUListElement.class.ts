@@ -92,14 +92,14 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *   .populate(data, function (f, d, o) {
+   *   .populate(function (f, d, o) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
-   *   })
+   *   }, data)
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *  .populate(data, function (f, d, o) {
+   *  .populate(function (f, d, o) {
    *    // some code involving `this`
-   *  }, other_context)
+   *  }, data, {}, other_context)
    * ```
    *
    * @param   renderer a typical {@link RenderingFunction} to modify the template
