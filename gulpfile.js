@@ -21,7 +21,6 @@ gulp.task('test-out', async function () {
 })
 
 gulp.task('test-run', async function () {
-	try {
 		await Promise.all([
 			require('./test/out/Document-importLinks.test.js')        .default,
 			require('./test/out/DocumentFragment-importLinks.test.js').default,
@@ -32,9 +31,6 @@ gulp.task('test-run', async function () {
 			require('./test/out/HTMLTemplateElement-render.test.js')  .default,
 		])
 		console.info('All tests ran successfully!')
-	} catch (e) {
-		console.error(e)
-	}
 })
 
 gulp.task('test', ['test-out', 'test-run'])
