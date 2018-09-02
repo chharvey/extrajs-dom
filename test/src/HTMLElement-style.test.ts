@@ -1,4 +1,5 @@
 import * as xjs from '../../index'
+import {ValueFunction} from '../../src/class/Element.class'
 import test from './test'
 
 const jsdom = require('jsdom')
@@ -30,6 +31,10 @@ export default Promise.all([
 		// set a property using a function
 		.then(() => test(`${x.style('content', function () { return this.tagName }).outerHTML()}`       , '<span style="content: span;"></span>'))
 		.then(() => test(`${x.style('content', function () { return `'${this.tagName}'` }).outerHTML()}`, '<span style="content: \'span\';"></span>'))
+		.then(() => test((() => {
+			let valueFn: ValueFunction = function (this: xjs.HTMLElement) { return null }
+			return `${x.style('content', valueFn).outerHTML()}`
+		})(), '<span style=""></span>'))
 		// call `style()` with an object
 		.then(() => test(`${x.style({
 			content: null,

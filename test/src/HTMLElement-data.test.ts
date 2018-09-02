@@ -1,4 +1,5 @@
 import * as xjs from '../../index'
+import {ValueFunction} from '../../src/class/Element.class'
 import test from './test'
 
 const jsdom = require('jsdom')
@@ -31,7 +32,10 @@ export default Promise.all([
 		})(), 'ReferenceError'))
 		// set an attribute using a function
 		.then(() => test(`${x.data('attrThree', function () { return this.data('attrOne') }).outerHTML()}`, '<span data-attr-one="val1" data-attr-two="null" data-attr-three="val1"></span>'))
-		.then(() => test(`${x.data('attrThree')}`                                                         , 'val1'))
+		.then(() => test((() => {
+			let valueFn: ValueFunction = function (this: xjs.HTMLElement) { return this.data('attrTwo') }
+			return `${x.data('attrThree', valueFn).outerHTML()}`
+		})(), '<span data-attr-one="val1" data-attr-two="null" data-attr-three="null"></span>'))
 		// call `data()` with an object
 		.then(() => test(`${x.data({ attrOne: 'string', attrTwo: 42, attrThree: true }).outerHTML()}`     , '<span data-attr-one="string" data-attr-two="42" data-attr-three="true"></span>'))
 		.then(() => test(`${x.data({ attrOne: null }).outerHTML()}`                                       , '<span data-attr-two="42" data-attr-three="true"></span>'))
