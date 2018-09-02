@@ -24,11 +24,11 @@ export type ValueObject = { [index: string]: ValueType }
  *
  * This function type must take zero arguments and return a single primitive value: a string, number, or boolean.
  * Any `this` context in the function will almost always point to this `xjs.Element` object (but can be overridden).
- * @returns the value used as the attribute value to set
+ * @returns the value used as the attribute value to set, or `null` to remove
  */
 export interface ValueFunction extends Function {
-  (this: unknown): string|number|boolean;
-  call(this_arg: unknown): string|number|boolean;
+  (this: any): ValueType;
+  call(this_arg: any): ValueType;
 }
 
 /**

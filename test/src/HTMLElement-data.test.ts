@@ -1,12 +1,13 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import {ValueFunction} from '../../src/class/Element.class'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.HTMLElement(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
 
-module.exports = Promise.all([
+export default Promise.all([
 	test(x.outerHTML(), '<span></span>')
 		// set an attribute to a string
 		.then(() => test(`${x.data('attrOne', 'val1').outerHTML()}`, '<span data-attr-one="val1"></span>'))
@@ -23,15 +24,18 @@ module.exports = Promise.all([
 		// fail to set an attribute using a disallowed value
 		.then(() => test((() => {
 			try {
-				console.log(`Expected warning: "Key 'array' cannot be found. Using key 'default'…"`)
-				return x.attr('attr2', []).outerHTML()
+				console.log(`Expected warning: "Key 'NaN' cannot be found. Using key 'default'…"`)
+				return x.attr('attr2', NaN).outerHTML()
 			} catch (e) {
 				return e.name
 			}
 		})(), 'ReferenceError'))
 		// set an attribute using a function
 		.then(() => test(`${x.data('attrThree', function () { return this.data('attrOne') }).outerHTML()}`, '<span data-attr-one="val1" data-attr-two="null" data-attr-three="val1"></span>'))
-		.then(() => test(`${x.data('attrThree')}`                                                         , 'val1'))
+		.then(() => test((() => {
+			let valueFn: ValueFunction = function (this: xjs.HTMLElement) { return this.data('attrTwo') }
+			return `${x.data('attrThree', valueFn).outerHTML()}`
+		})(), '<span data-attr-one="val1" data-attr-two="null" data-attr-three="null"></span>'))
 		// call `data()` with an object
 		.then(() => test(`${x.data({ attrOne: 'string', attrTwo: 42, attrThree: true }).outerHTML()}`     , '<span data-attr-one="string" data-attr-two="42" data-attr-three="true"></span>'))
 		.then(() => test(`${x.data({ attrOne: null }).outerHTML()}`                                       , '<span data-attr-two="42" data-attr-three="true"></span>'))
@@ -42,9 +46,9 @@ module.exports = Promise.all([
 		// fail to call `data()` with `''`
 		.then(() => test((() => {
 			try {
-				return x.attr('').outerHTML()
+				return x.data('')
 			} catch (e) {
 				return e.name
 			}
 		})(), 'RangeError'))
-]).then((arr) => true)
+])

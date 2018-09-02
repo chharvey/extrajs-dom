@@ -1,12 +1,13 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import {ValueFunction} from '../../src/class/Element.class'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.HTMLElement(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
 
-module.exports = Promise.all([
+export default Promise.all([
 	test(x.outerHTML(), '<span></span>')
 		// set a property to a string
 		.then(() => test(`${x.style('background', 'none').outerHTML()}` , '<span style="background: none;"></span>'))
@@ -30,6 +31,10 @@ module.exports = Promise.all([
 		// set a property using a function
 		.then(() => test(`${x.style('content', function () { return this.tagName }).outerHTML()}`       , '<span style="content: span;"></span>'))
 		.then(() => test(`${x.style('content', function () { return `'${this.tagName}'` }).outerHTML()}`, '<span style="content: \'span\';"></span>'))
+		.then(() => test((() => {
+			let valueFn: ValueFunction = function (this: xjs.HTMLElement) { return null }
+			return `${x.style('content', valueFn).outerHTML()}`
+		})(), '<span style=""></span>'))
 		// call `style()` with an object
 		.then(() => test(`${x.style({
 			content: null,
@@ -44,9 +49,9 @@ module.exports = Promise.all([
 		// fail to call `style()` with `''`
 		.then(() => test((() => {
 			try {
-				return x.style('').outerHTML()
+				return x.style('')
 			} catch (e) {
 				return e.name
 			}
 		})(), 'RangeError'))
-]).then((arr) => true)
+])

@@ -1,12 +1,13 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import {ValueFunction} from '../../src/class/Element.class'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.Element(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
 
-module.exports = Promise.all([
+export default Promise.all([
 	test(x.outerHTML(), '<span></span>')
 		// set an attribute to a string
 		.then(() => test(`${x.attr('attr1', 'val1').outerHTML()}`, '<span attr1="val1"></span>'))
@@ -31,7 +32,10 @@ module.exports = Promise.all([
 		})(), 'ReferenceError'))
 		// set an attribute using a function
 		.then(() => test(`${x.attr('attr3', function () { return this.attr('attr1') }).outerHTML()}`, '<span attr1="val1" attr2="null" attr3="val1"></span>'))
-		.then(() => test(`${x.attr('attr3')}`                                                       , 'val1'))
+		.then(() => test((() => {
+			let valueFn: ValueFunction = function (this: xjs.Element) { return this.attr('attr2') }
+			return `${x.attr('attr3', valueFn).outerHTML()}`
+		})(), '<span attr1="val1" attr2="null" attr3="null"></span>'))
 		// call `attr()` with an object
 		.then(() => test(`${x.attr({ attr1: 'string', attr2: 42, attr3: true }).outerHTML()}`       , '<span attr1="string" attr2="42" attr3="true"></span>'))
 		.then(() => test(`${x.attr({ attr1: null }).outerHTML()}`                                   , '<span attr2="42" attr3="true"></span>'))
@@ -42,9 +46,9 @@ module.exports = Promise.all([
 		// fail to call `attr()` with `''`
 		.then(() => test((() => {
 			try {
-				return x.attr('').outerHTML()
+				return x.attr('')
 			} catch (e) {
 				return e.name
 			}
 		})(), 'RangeError'))
-]).then((arr) => true)
+])
