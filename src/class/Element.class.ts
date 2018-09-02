@@ -433,12 +433,15 @@ export default class xjs_Element extends xjs_Node {
   /**
    * Replace a segment of this element’s class string with a new string segment.
    *
+   * Note: this is not the same as replacing one class *token* for another.
+   * For that, use `this.node.classList.replace(old_, new_)`.
+   *
    * ```js
    * let element = jsdom.JSDOM.fragment(`<i class="glyphicons glphicons-{{ icon }}"></i>`).querySelector('i')
-   * new xjs.Element(element).replaceClass('{{ icon }}', 'mobile')
-   * element.outerHTML // <a class="glyphicons glphicons-mobile"></a>
+   * new xjs.Element(element).replaceClassString('{{ icon }}', 'mobile')
+   * element.outerHTML // <i class="glyphicons glphicons-mobile"></i>
    * ```
-   * @param   old_ the segment of this element’s `[class]` attribute value to remove
+   * @param   old_ the segment of this element’s `[class]` attribute value to remove; might not be a complete token
    * @param   new_ the string with which to replace the removed segment
    * @returns `this`
    */
