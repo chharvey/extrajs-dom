@@ -1,7 +1,7 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.Document(new jsdom.JSDOM(`
@@ -9,19 +9,12 @@ let x = new xjs.Document(new jsdom.JSDOM(`
 <html lang="en">
 	<head><title>test</title></head>
 	<body>
-		<ul>
-			<template>
-				<li>
-					<link id="link1" rel="import" data-import="template" href="./x-test.tpl.html"/>
-				</li>
-			</template>
-		</ul>
-		<link id="link2" rel="import" data-import="document" href="./x-test.tpl.html"/>
+		<link id="link2" rel="import" data-import="document" href="../src/x-test.tpl.html"/>
 	</body>
 </html>
 `).window.document)
 
-module.exports = Promise.all([
+export default Promise.all([
 	test((() => {
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
 		return console.log(x.importLinks(__dirname).innerHTML()) || ''
@@ -30,4 +23,4 @@ module.exports = Promise.all([
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
 		return x.importLinksAsync(__dirname).then(() => console.log(x.innerHTML()) || '')
 	})(), ''),
-]).then((arr) => true)
+])

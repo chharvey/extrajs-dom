@@ -23,11 +23,11 @@ gulp.task('test-out', async function () {
 gulp.task('test-run', async function () {
 	try {
 		await Promise.all([
-			require('./test/out/Document-importLinks.test.js'),
-			require('./test/out/DocumentFragment-importLinks.test.js'),
-			require('./test/out/Element-attr.test.js'),
-			require('./test/out/HTMLElement-style.test.js'),
-			require('./test/out/HTMLElement-data.test.js'),
+			require('./test/out/Document-importLinks.test.js')        .default,
+			require('./test/out/DocumentFragment-importLinks.test.js').default,
+			require('./test/out/Element-attr.test.js')                .default,
+			require('./test/out/HTMLElement-style.test.js')           .default,
+			require('./test/out/HTMLElement-data.test.js')            .default,
 		])
 		console.info('All tests ran successfully!')
 	} catch (e) {

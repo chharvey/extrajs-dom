@@ -1,12 +1,12 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.HTMLElement(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
 
-module.exports = Promise.all([
+export default Promise.all([
 	test(x.outerHTML(), '<span></span>')
 		// set a property to a string
 		.then(() => test(`${x.style('background', 'none').outerHTML()}` , '<span style="background: none;"></span>'))
@@ -44,9 +44,9 @@ module.exports = Promise.all([
 		// fail to call `style()` with `''`
 		.then(() => test((() => {
 			try {
-				return x.style('').outerHTML()
+				return x.style('')
 			} catch (e) {
 				return e.name
 			}
 		})(), 'RangeError'))
-]).then((arr) => true)
+])

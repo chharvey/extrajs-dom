@@ -1,12 +1,12 @@
-const jsdom = require('jsdom')
+import * as xjs from '../../index'
+import test from './test'
 
-const xjs = require('../index.js')
-const test = require('../lib/test.js')
+const jsdom = require('jsdom')
 
 
 let x = new xjs.Element(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
 
-module.exports = Promise.all([
+export default Promise.all([
 	test(x.outerHTML(), '<span></span>')
 		// set an attribute to a string
 		.then(() => test(`${x.attr('attr1', 'val1').outerHTML()}`, '<span attr1="val1"></span>'))
@@ -42,9 +42,9 @@ module.exports = Promise.all([
 		// fail to call `attr()` with `''`
 		.then(() => test((() => {
 			try {
-				return x.attr('').outerHTML()
+				return x.attr('')
 			} catch (e) {
 				return e.name
 			}
 		})(), 'RangeError'))
-]).then((arr) => true)
+])
