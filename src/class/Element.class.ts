@@ -26,8 +26,8 @@ export type ValueObject = { [index: string]: ValueType }
  * @returns the value used as the attribute value to set
  */
 export interface ValueFunction extends Function {
-  (this: unknown): string|number|boolean;
-  call(this_arg: unknown): string|number|boolean;
+  (this: any): string|number|boolean;
+  call(this_arg: any): string|number|boolean;
 }
 
 /**

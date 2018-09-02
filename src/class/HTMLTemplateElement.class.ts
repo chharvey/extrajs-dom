@@ -19,8 +19,8 @@ import xjs_HTMLElement from './HTMLElement.class'
  * @param   options additional rendering options
  */
 export interface RenderingFunction<T, U extends object> extends Function {
-  (this: unknown, frag: DocumentFragment, data: T, opts: U): void;
-  call(this_arg: unknown, frag: DocumentFragment, data: T, opts: U): void;
+  (this: any, frag: DocumentFragment, data: T, opts: U): void;
+  call(this_arg: any, frag: DocumentFragment, data: T, opts: U): void;
 }
 
 /**
