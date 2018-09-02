@@ -14,20 +14,28 @@ gulp.task('dist', async function () {
     .pipe(gulp.dest('./dist/class/'))
 })
 
-gulp.task('test', async function () {
+gulp.task('test-out', async function () {
+	return gulp.src('./test/src/{,*.}test.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./test/out/'))
+})
+
+gulp.task('test-run', async function () {
 	try {
 		await Promise.all([
-			require('./test/Document-importLinks.test.js'),
-			require('./test/DocumentFragment-importLinks.test.js'),
-			require('./test/Element-attr.test.js'),
-			require('./test/HTMLElement-style.test.js'),
-			require('./test/HTMLElement-data.test.js'),
+			require('./test/out/Document-importLinks.test.js'),
+			require('./test/out/DocumentFragment-importLinks.test.js'),
+			require('./test/out/Element-attr.test.js'),
+			require('./test/out/HTMLElement-style.test.js'),
+			require('./test/out/HTMLElement-data.test.js'),
 		])
 		console.info('All tests ran successfully!')
 	} catch (e) {
 		console.error(e)
 	}
 })
+
+gulp.task('test', ['test-out', 'test-run'])
 
 gulp.task('docs', async function () {
   return gulp.src('./src/**/*.ts')

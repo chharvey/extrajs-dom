@@ -4,7 +4,7 @@ const xjs = require('../index.js')
 const test = require('../lib/test.js')
 
 
-const x_fragment = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
+let x = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
 <template>
 	<ul>
 		<template id="tpl-list">
@@ -19,10 +19,10 @@ const x_fragment = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
 module.exports = Promise.all([
 	test((() => {
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
-		return console.log(x_fragment.importLinks(__dirname).innerHTML()) || ''
+		return console.log(x.importLinks(__dirname).innerHTML()) || ''
 	})(), ''),
 	test((() => {
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
-		return x_fragment.importLinksAsync(__dirname).then(() => console.log(x_fragment.innerHTML()) || '')
+		return x.importLinksAsync(__dirname).then(() => console.log(x.innerHTML()) || '')
 	})(), ''),
 ]).then((arr) => true)
