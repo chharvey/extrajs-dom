@@ -2,6 +2,8 @@ import * as fs   from 'fs'
 import * as path from 'path'
 import * as util from 'util'
 
+import * as jsdom from 'jsdom'
+
 import * as xjs from 'extrajs'
 
 import {dev_Document, dev_HTMLLinkElement} from '../dev'
@@ -9,8 +11,6 @@ import {Content} from '../ambient'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
-
-const jsdom = require('jsdom')
 
 
 /**
@@ -193,7 +193,7 @@ export default class xjs_Document extends xjs_Node {
    * @returns `this`
    */
   importLinks(dirpath: string): this {
-    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
+    if (!('import' in (jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') as HTMLLinkElement))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
 				let imported = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') as string, {
@@ -214,7 +214,7 @@ export default class xjs_Document extends xjs_Node {
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
   async importLinksAsync(dirpath: string): Promise<void[]> {
-    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
+    if (!('import' in (jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') as HTMLLinkElement))) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       return Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
 				let imported = await xjs.Object.switch<Promise<DocumentFragment|null>>(link.getAttribute('data-import') as string, {

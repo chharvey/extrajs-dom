@@ -1,10 +1,10 @@
+import * as jsdom from 'jsdom'
+
 import * as xjs from '../../index'
 import test from './test'
 
-const jsdom = require('jsdom')
 
-
-let x = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
+let x: xjs.DocumentFragment = new xjs.DocumentFragment(((jsdom.JSDOM.fragment(`
 <template>
 	<ul>
 		<template id="tpl-list">
@@ -14,7 +14,7 @@ let x = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
 		</template>
 	</ul>
 </template>
-`).querySelector('template').content.querySelector('template#tpl-list').content)
+`).querySelector('template') as HTMLTemplateElement).content.querySelector('template#tpl-list') as HTMLTemplateElement).content)
 
 export default Promise.all([
 	test((() => {

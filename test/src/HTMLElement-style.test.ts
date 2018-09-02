@@ -1,11 +1,11 @@
+import * as jsdom from 'jsdom'
+
 import * as xjs from '../../index'
 import {ValueFunction} from '../../src/class/Element.class'
 import test from './test'
 
-const jsdom = require('jsdom')
 
-
-let x = new xjs.HTMLElement(jsdom.JSDOM.fragment('<span></span>').querySelector('*'))
+let x: xjs.HTMLElement = new xjs.HTMLElement(jsdom.JSDOM.fragment('<span></span>').querySelector('*') as HTMLSpanElement)
 
 export default Promise.all([
 	test(x.outerHTML(), '<span></span>')

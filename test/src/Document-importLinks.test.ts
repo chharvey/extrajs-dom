@@ -1,10 +1,10 @@
+import * as jsdom from 'jsdom'
+
 import * as xjs from '../../index'
 import test from './test'
 
-const jsdom = require('jsdom')
 
-
-let x = new xjs.Document(new jsdom.JSDOM(`
+let x: xjs.Document = new xjs.Document(new jsdom.JSDOM(`
 <!doctype html>
 <html lang="en">
 	<head><title>test</title></head>
