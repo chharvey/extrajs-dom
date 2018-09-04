@@ -4,7 +4,7 @@ import * as xjs from '../../index'
 import test from './test'
 
 
-let x: xjs.DocumentFragment = new xjs.DocumentFragment(((jsdom.JSDOM.fragment(`
+let x: xjs.DocumentFragment = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
 <template>
 	<ul>
 		<template id="tpl-list">
@@ -14,7 +14,7 @@ let x: xjs.DocumentFragment = new xjs.DocumentFragment(((jsdom.JSDOM.fragment(`
 		</template>
 	</ul>
 </template>
-`).querySelector('template') as HTMLTemplateElement).content.querySelector('template#tpl-list') as HTMLTemplateElement).content)
+`).querySelector('template') !.content.querySelector('template') !.content)
 
 export default Promise.all([
 	test((() => {

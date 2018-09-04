@@ -101,7 +101,7 @@ export default class xjs_Node {
    */
   trimInner(): this {
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
-      if (child.nodeType === xjs_Node.NodeType.TEXT_NODE && (child.textContent as string).trim() === '') child.remove()
+      if (child.nodeType === xjs_Node.NodeType.TEXT_NODE && child.textContent !.trim() === '') child.remove()
       else if (child.nodeType === xjs_Node.NodeType.ELEMENT_NODE) new xjs_Node(child).trimInner()
     })
     return this

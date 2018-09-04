@@ -5,7 +5,7 @@ import {ValueFunction} from '../../src/class/Element.class'
 import test from './test'
 
 
-let x: xjs.Element = new xjs.Element(jsdom.JSDOM.fragment('<span></span>').querySelector('*') as HTMLSpanElement)
+let x: xjs.Element = new xjs.Element(jsdom.JSDOM.fragment('<span></span>').querySelector('span') !)
 
 export default Promise.all([
 	test(x.outerHTML(), '<span></span>')

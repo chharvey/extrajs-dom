@@ -3,16 +3,15 @@ import * as jsdom from 'jsdom'
 import * as xjs from '../../index'
 import test from './test'
 
-
 let x: xjs.HTMLOListElement = new xjs.HTMLOListElement(jsdom.JSDOM.fragment(`
-<ol class="list">
+<ol>
 	<template>
 		<li class="list-item">
 			<a class="list-link" href="{{ url }}" itemprop="significantLink">{{ text }}</a>
 		</li>
 	</template>
 </ol>
-`).querySelector('ol.list') as HTMLOListElement)
+`).querySelector('ol') !)
 
 let data = [
 	{ "url": "#0", "text": "Career Connections" },
