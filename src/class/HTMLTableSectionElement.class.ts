@@ -1,6 +1,7 @@
 import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
-import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
+import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
+import {ProcessingFunction} from './_Component.class'
 
 
 /**
@@ -63,15 +64,15 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    *
    * @param   <T> the type of the data to fill
    * @param   <U> the type of the `options` object
-   * @param   renderer a typical {@link RenderingFunction} to modify the template
+   * @param   processor a typical {@link ProcessingFunction} to modify the template
    * @param   dataset the data to populate the list
-   * @param   options additional rendering options for all items
-   * @param   this_arg provide a `this` context to the rendering function
+   * @param   options additional processing options for all items
+   * @param   this_arg provide a `this` context to the processing function
    * @returns `this`
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
    */
-  populate<T, U extends object>(renderer: RenderingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+  populate<T, U extends object>(processor: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
     let el: HTMLTemplateElement|null = this.node.querySelector('template')
     if (el === null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
@@ -80,6 +81,6 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
     let template: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(el)
-    return this.append(...dataset.map((data) => template.render(renderer, data, options, this_arg)))
+    return this.append(...dataset.map((data) => template.render(processor, data, options, this_arg)))
   }
 }

@@ -1,24 +1,11 @@
 import {dev_HTMLTemplateElement} from '../dev'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
+import {ProcessingFunction} from './_Component.class'
 
 
 /**
- * A rendering function.
- *
- * This function takes a document fragment and data, and may modify the fragment using the data.
- * Additionally it may use any rendering options passed.
- * It *should not* have a `this` context, and it *should not* have a return value.
- *
- * If this function does have a `this` context, a `this_arg` may be passed to
- * {@link xjs_HTMLTemplateElement.render}.
- * Any return value of the function does nothing.
- *
- * @param   <T> the type of the `data` parameter
- * @param   <U> the type of the `options` object parameter
- * @param   frag the template content with which to render
- * @param   data the data to fill the template upon rendering
- * @param   options additional rendering options
+ * @deprecated XXX{DEPRECATED} : use {@link ProcessingFunction} instead.
  */
 export interface RenderingFunction<T, U extends object> extends Function {
   (this: any, frag: DocumentFragment, data: T, opts: U): void;
@@ -93,7 +80,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @param   this_arg a `this` context, if any, in which `renderer` is called
    * @returns the rendered output
    */
-  render<T, U extends object>(renderer: RenderingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
+  render<T, U extends object>(renderer: ProcessingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
     let frag = this.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
     renderer.call(this_arg, frag, data, options)
     return frag
