@@ -14,6 +14,8 @@ import xjs_HTMLElement from './HTMLElement.class'
  * {@link xjs_HTMLTemplateElement.render}.
  * Any return value of the function does nothing.
  *
+ * @param   <T> the type of the `data` parameter
+ * @param   <U> the type of the `options` object parameter
  * @param   frag the template content with which to render
  * @param   data the data to fill the template upon rendering
  * @param   options additional rendering options
@@ -83,6 +85,8 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
 
   /**
    * Render this template with some data.
+   * @param   <T> the type of the data to fill
+   * @param   <U> the type of the `options` object
    * @param   renderer modifies the template by filling it in with data
    * @param   data the data to fill
    * @param   options additional rendering options
