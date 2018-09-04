@@ -25,14 +25,14 @@ export default Promise.all([
 		frag.querySelector('slot[name="put-text-here"]') !.textContent = this.id
 	}, 'hello world', {}, { id: 'dlrow olleh' })).trimInner().innerHTML(), '<slot name="put-text-here">dlrow olleh</slot>'),
 	test((() => {
-		let processor: ProcessingFunction<string, {blank: boolean}> = function renderingFn(frag, _data, opts) {
+		let processor: ProcessingFunction<string, {blank: boolean}> = function (frag, _data, opts) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
 		}
-		return new xjs.DocumentFragment(x.render(processor,'hello world', { blank: false }, {id:0})).trimInner().innerHTML()
+		return new xjs.DocumentFragment(new xjs.Component(x, processor).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML()
 	})(), '<slot name="put-text-here">0</slot>'),
-	test(new xjs.DocumentFragment(x.render(
-		function processor(this: {id:string}, frag: DocumentFragment, _data: string, opts: {blank: boolean}) {
+	test(new xjs.DocumentFragment(new xjs.Component(x,
+		function (this: {id:string}, frag: DocumentFragment, _data: string, opts: {blank: boolean}) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
-		},
-	'hello world', { blank: false }, {id:0})).trimInner().innerHTML(), '<slot name="put-text-here">0</slot>'),
+		}
+	).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML(), '<slot name="put-text-here">0</slot>'),
 ])

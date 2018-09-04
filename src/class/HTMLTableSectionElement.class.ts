@@ -1,7 +1,7 @@
 import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
-import {ProcessingFunction} from './_Component.class'
+import Component, {ProcessingFunction} from './_Component.class'
 
 
 /**
@@ -80,7 +80,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
     if (el.content.children.length !== 1 || !el.content.children[0].matches('tr')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
-    let template: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(el)
-    return this.append(...dataset.map((data) => template.render(processor, data, options, this_arg)))
+    let component: Component<T, U> = new Component(new xjs_HTMLTemplateElement(el), processor)
+    return this.append(...dataset.map((data) => component.process(data, options, this_arg)))
   }
 }

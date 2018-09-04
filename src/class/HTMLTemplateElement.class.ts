@@ -1,7 +1,7 @@
 import {dev_HTMLTemplateElement} from '../dev'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
-import {ProcessingFunction} from './_Component.class'
+import Component, {ProcessingFunction} from './_Component.class'
 
 
 /**
@@ -71,18 +71,9 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
 
 
   /**
-   * Render this template with some data.
-   * @param   <T> the type of the data to fill
-   * @param   <U> the type of the `options` object
-   * @param   renderer modifies the template by filling it in with data
-   * @param   data the data to fill
-   * @param   options additional rendering options
-   * @param   this_arg a `this` context, if any, in which `renderer` is called
-   * @returns the rendered output
+   * @deprecated XXX{DEPRECATED} : use {@link Component.process} instead.
    */
   render<T, U extends object>(renderer: ProcessingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
-    let frag = this.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
-    renderer.call(this_arg, frag, data, options)
-    return frag
+    return new Component<T, U>(this, renderer).process(data, options, this_arg)
   }
 }

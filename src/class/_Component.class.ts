@@ -8,7 +8,7 @@ import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
  * It *should not* have a `this` context, and it *should not* have a return value.
  *
  * If this function does have a `this` context, a `this_arg` may be passed to
- * {@link xjs_HTMLTemplateElement.render}.
+ * {@link Component.process}.
  * Any return value of the function does nothing.
  *
  * @param   <T> the type of the `data` parameter
@@ -56,6 +56,8 @@ export default class Component<T, U extends object> {
 	 * @returns the processed output
 	 */
 	process(data: T, options: U = ({} as U), this_arg: unknown = null): DocumentFragment {
-		return this._TEMPLATE.render(this._PROCESSOR, data, options, this_arg)
+		let frag = this._TEMPLATE.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
+		this._PROCESSOR.call(this_arg, frag, data, options)
+		return frag
 	}
 }
