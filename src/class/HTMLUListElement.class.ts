@@ -112,15 +112,15 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate<T, U extends object>(renderer: RenderingFunction<T, U>, dataset: T[], options: U = ({} as U), this_arg: unknown = this): this {
-    let template: HTMLTemplateElement|null = this.node.querySelector('template')
-    if (template === null) {
+  populate<T, U extends object>(renderer: RenderingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+    let el: HTMLTemplateElement|null = this.node.querySelector('template')
+    if (el === null) {
       throw new ReferenceError('This <ul> does not have a <template> descendant.')
     }
-    if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
+    if (el.content.children.length !== 1 || !el.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let component: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(template)
-    return this.append(...dataset.map((data) => component.render(renderer, data, options, this_arg)))
+    let template: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(el)
+    return this.append(...dataset.map((data) => template.render(renderer, data, options, this_arg)))
   }
 }
