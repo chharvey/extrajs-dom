@@ -16,4 +16,6 @@ module.exports = {
   HTMLDataElement         : require('./dist/class/HTMLDataElement.class.js').default,
   HTMLTimeElement         : require('./dist/class/HTMLTimeElement.class.js').default,
   HTMLTemplateElement     : require('./dist/class/HTMLTemplateElement.class.js').default,
+
+  Component : require('./dist/class/_Component.class.js').default,
 }
