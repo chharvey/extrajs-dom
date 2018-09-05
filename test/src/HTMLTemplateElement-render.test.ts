@@ -1,7 +1,8 @@
 import * as jsdom from 'jsdom'
 
+import {Processor, ProcessingFunction} from 'template-processor'
+
 import * as xjs from '../../index'
-import {ProcessingFunction} from '../../src/class/_Component.class'
 import test from './test'
 
 
@@ -28,9 +29,9 @@ export default Promise.all([
 		let processor: ProcessingFunction<string, {blank: boolean}> = function (frag, _data, opts) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
 		}
-		return new xjs.DocumentFragment(new xjs.Component(x.node, processor).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML()
+		return new xjs.DocumentFragment(new Processor(x.node, processor).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML()
 	})(), '<slot name="put-text-here">0</slot>'),
-	test(new xjs.DocumentFragment(new xjs.Component(x.node,
+	test(new xjs.DocumentFragment(new Processor(x.node,
 		function (this: {id:string}, frag: DocumentFragment, _data: string, opts: {blank: boolean}) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
 		}

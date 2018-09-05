@@ -1,6 +1,7 @@
+import {Processor, ProcessingFunction} from 'template-processor'
+
 import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
-import Component, {ProcessingFunction} from './_Component.class'
 
 
 /**
@@ -79,7 +80,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('tr')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
-    let component: Component<T, U> = new Component(template, processor)
+    let component: Processor<T, U> = new Processor(template, processor)
     return this.append(...dataset.map((data) => component.process(data, options, this_arg)))
   }
 }

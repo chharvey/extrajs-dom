@@ -18,5 +18,3 @@ export { default as HTMLAnchorElement       } from './src/class/HTMLAnchorElemen
 export { default as HTMLDataElement         } from './src/class/HTMLDataElement.class'
 export { default as HTMLTimeElement         } from './src/class/HTMLTimeElement.class'
 export { default as HTMLTemplateElement     } from './src/class/HTMLTemplateElement.class'
-
-export { default as Component } from './src/class/_Component.class'

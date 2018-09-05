@@ -1,9 +1,10 @@
 import * as path from 'path'
 
+import {Processor, ProcessingFunction} from 'template-processor'
+
 import {dev_HTMLOListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
-import Component, {ProcessingFunction} from './_Component.class'
 
 
 /**
@@ -121,7 +122,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let component: Component<T, U> = new Component(template, processor)
+    let component: Processor<T, U> = new Processor(template, processor)
     return this.append(...dataset.map((data) => component.process(data, options, this_arg)))
   }
 }
