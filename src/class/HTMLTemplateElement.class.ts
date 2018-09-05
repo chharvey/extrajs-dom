@@ -74,6 +74,6 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    * @deprecated XXX{DEPRECATED} : use {@link Component.process} instead.
    */
   render<T, U extends object>(renderer: ProcessingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
-    return new Component<T, U>(this, renderer).process(data, options, this_arg)
+    return new Component<T, U>(this.node, renderer).process(data, options, this_arg)
   }
 }

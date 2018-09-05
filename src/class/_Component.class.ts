@@ -1,5 +1,3 @@
-import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
-
 /**
  * A processing function specifies how to transform a template into markup.
  *
@@ -30,7 +28,7 @@ export default class Component<T, U extends object> {
 	/**
 	 * This object’s template, which is to be processed.
 	 */
-	private readonly _TEMPLATE: xjs_HTMLTemplateElement;
+	private readonly _TEMPLATE: HTMLTemplateElement;
 	/**
 	 * This object’s processing function, which processed the template.
 	 */
@@ -41,7 +39,7 @@ export default class Component<T, U extends object> {
 	 * @param template  the template to process
 	 * @param processor the processing function to use
 	 */
-	constructor(template: xjs_HTMLTemplateElement, processor: ProcessingFunction<T, U>) {
+	constructor(template: HTMLTemplateElement, processor: ProcessingFunction<T, U>) {
 		this._TEMPLATE  = template
 		this._PROCESSOR = processor
 	}
@@ -56,7 +54,7 @@ export default class Component<T, U extends object> {
 	 * @returns the processed output
 	 */
 	process(data: T, options: U = ({} as U), this_arg: unknown = null): DocumentFragment {
-		let frag = this._TEMPLATE.content().cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
+		let frag = this._TEMPLATE.content.cloneNode(true) as DocumentFragment // NB{LINK} https://dom.spec.whatwg.org/#dom-node-clonenode
 		this._PROCESSOR.call(this_arg, frag, data, options)
 		return frag
 	}
