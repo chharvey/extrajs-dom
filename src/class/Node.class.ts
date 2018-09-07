@@ -68,10 +68,10 @@ export default class xjs_Node {
    *
    * Simplifies chaining when performing void tasks,
    * especially tasks that have not been defined in this implementation.
-   * @param   executable any function that takes 0 arguments and returns `undefined` (or does not have a return statement)
+   * @param   executable the function to call in the context of `this`
    * @returns `this`
    */
-  exe(executable: (this: xjs_Node) => void): this {
+  exe(executable: (this: any) => void): this {
     executable.call(this)
     return this
   }

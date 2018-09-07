@@ -14,6 +14,7 @@ export { default as HTMLDListElement        } from './src/class/HTMLDListElement
 export { default as HTMLLIElement           } from './src/class/HTMLLIElement.class'
 export { default as HTMLTableSectionElement } from './src/class/HTMLTableSectionElement.class'
 export { default as HTMLTableRowElement     } from './src/class/HTMLTableRowElement.class'
+export { default as HTMLTableCellElement    } from './src/class/HTMLTableCellElement.class'
 export { default as HTMLAnchorElement       } from './src/class/HTMLAnchorElement.class'
 export { default as HTMLDataElement         } from './src/class/HTMLDataElement.class'
 export { default as HTMLTimeElement         } from './src/class/HTMLTimeElement.class'
