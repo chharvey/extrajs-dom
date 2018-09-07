@@ -1,8 +1,10 @@
 import * as path from 'path'
 
+import {Processor, ProcessingFunction} from 'template-processor'
+
 import {dev_HTMLOListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
-import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
+import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
 
 /**
@@ -104,23 +106,23 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    *
    * @param   <T> the type of the data to fill
    * @param   <U> the type of the `options` object
-   * @param   renderer a typical {@link RenderingFunction} to modify the template
+   * @param   processor a typical {@link ProcessingFunction} to modify the template
    * @param   dataset the data to populate the list
-   * @param   options additional rendering options for all items
-   * @param   this_arg provide a `this` context to the rendering function
+   * @param   options additional processing options for all items
+   * @param   this_arg provide a `this` context to the processing function
    * @returns `this`
    * @throws  {ReferenceError} if this `<ol>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate<T, U extends object>(renderer: RenderingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
-    let el: HTMLTemplateElement|null = this.node.querySelector('template')
-    if (el === null) {
+  populate<T, U extends object>(processor: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+    let template: HTMLTemplateElement|null = this.node.querySelector('template')
+    if (template === null) {
       throw new ReferenceError('This <ol> does not have a <template> descendant.')
     }
-    if (el.content.children.length !== 1 || !el.content.children[0].matches('li')) {
+    if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let template: xjs_HTMLTemplateElement = new xjs_HTMLTemplateElement(el)
-    return this.append(...dataset.map((data) => template.render(renderer, data, options, this_arg)))
+    let component: Processor<T, U> = new Processor(template, processor)
+    return this.append(...dataset.map((data) => component.process(data, options, this_arg)))
   }
 }

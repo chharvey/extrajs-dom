@@ -1,7 +1,8 @@
 import * as jsdom from 'jsdom'
 
+import {Processor, ProcessingFunction} from 'template-processor'
+
 import * as xjs from '../../index'
-import {RenderingFunction} from '../../src/class/HTMLTemplateElement.class'
 import test from './test'
 
 
@@ -25,14 +26,14 @@ export default Promise.all([
 		frag.querySelector('slot[name="put-text-here"]') !.textContent = this.id
 	}, 'hello world', {}, { id: 'dlrow olleh' })).trimInner().innerHTML(), '<slot name="put-text-here">dlrow olleh</slot>'),
 	test((() => {
-		let renderingFn: RenderingFunction<string, {blank: boolean}> = function renderingFn(frag, _data, opts) {
+		let processor: ProcessingFunction<string, {blank: boolean}> = function (frag, _data, opts) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
 		}
-		return new xjs.DocumentFragment(x.render(renderingFn,'hello world', { blank: false }, {id:0})).trimInner().innerHTML()
+		return new xjs.DocumentFragment(new Processor(x.node, processor).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML()
 	})(), '<slot name="put-text-here">0</slot>'),
-	test(new xjs.DocumentFragment(x.render(
-		function renderingFn(this: {id:string}, frag: DocumentFragment, _data: string, opts: {blank: boolean}) {
+	test(new xjs.DocumentFragment(new Processor(x.node,
+		function (this: {id:string}, frag: DocumentFragment, _data: string, opts: {blank: boolean}) {
 			frag.querySelector('slot[name="put-text-here"]') !.textContent = (opts.blank) ? '' : this.id
-		},
-	'hello world', { blank: false }, {id:0})).trimInner().innerHTML(), '<slot name="put-text-here">0</slot>'),
+		}
+	).process('hello world', { blank: false }, {id:0})).trimInner().innerHTML(), '<slot name="put-text-here">0</slot>'),
 ])
