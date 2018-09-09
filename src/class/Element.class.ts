@@ -289,6 +289,7 @@ export default class xjs_Element extends xjs_Node {
 					'function' : (val: ValueFunction) => this     .attr           (atr, val.call(this_arg)),
 					'string'   : (val: string       ) => this.node.setAttribute   (atr, val               ) || this,
 					'number'   : (val: number       ) => this.node.setAttribute   (atr, val.toString()    ) || this,
+					'infinite' : (val: number       ) => this.node.setAttribute   (atr, val.toString()    ) || this,
 					'boolean'  : (val: boolean      ) => this.node.setAttribute   (atr, val.toString()    ) || this,
 					'null'     : (                  ) => this.node.removeAttribute(atr                    ) || this,
 					'undefined': (                  ) => this.node.getAttribute   (atr                    ),

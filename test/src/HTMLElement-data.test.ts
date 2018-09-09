@@ -21,15 +21,6 @@ export default Promise.all([
 		// set an attribute to the string `'null'`
 		.then(() => test(`${x.data('attrTwo', 'null').outerHTML()}`, '<span data-attr-one="val1" data-attr-two="null"></span>'))
 		.then(() => test(`${x.data('attrTwo')}`                    , 'null'))
-		// fail to set an attribute using a disallowed value
-		.then(() => test((() => {
-			try {
-				console.log(`Expected warning: "Key 'infinite' cannot be found. Using key 'default'…"`)
-				return x.attr('attr2', Infinity).outerHTML()
-			} catch (e) {
-				return e.name
-			}
-		})(), 'ReferenceError'))
 		// set an attribute using a function
 		.then(() => test(`${x.data('attrThree', function () { return this.data('attrOne') }).outerHTML()}`, '<span data-attr-one="val1" data-attr-two="null" data-attr-three="val1"></span>'))
 		.then(() => test((() => {

@@ -19,15 +19,6 @@ export default Promise.all([
 		// remove a property using `null`
 		.then(() => test(`${x.style('background', null).outerHTML()}`   , '<span style=""></span>'))
 		.then(() => test(`${x.style('background')}`                     , 'null'))
-		// fail to set a property using a disallowed value
-		.then(() => test((() => {
-			try {
-				console.log(`Expected warning: "Key 'infinite' cannot be found. Using key 'default'…"`)
-				return x.style('order', Infinity).outerHTML()
-			} catch (e) {
-				return e.name
-			}
-		})(), 'ReferenceError'))
 		// set a property using a function
 		.then(() => test(`${x.style('content', function () { return this.tagName }).outerHTML()}`       , '<span style="content: span;"></span>'))
 		.then(() => test(`${x.style('content', function () { return `'${this.tagName}'` }).outerHTML()}`, '<span style="content: \'span\';"></span>'))
