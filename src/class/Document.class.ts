@@ -55,7 +55,8 @@ export default class xjs_Document extends xjs_Node {
 
 
   /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
+   * but return this object when done.
    *
    * This method exists simply for chaining.
    *
@@ -90,7 +91,8 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
+   * but return this object when done.
    *
    * This method exists simply for chaining.
    *

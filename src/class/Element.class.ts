@@ -96,7 +96,8 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
+   * but return this object when done.
    *
    * This method exists simply for chaining.
    *
@@ -131,7 +132,8 @@ export default class xjs_Element extends xjs_Node {
   }
 
   /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
+   * but return this object when done.
    *
    * This method exists simply for chaining.
    *
@@ -164,6 +166,44 @@ export default class xjs_Element extends xjs_Node {
     ))
     return this
   }
+
+	/**
+	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before|ChildNode#before},
+	 * but return this object when done.
+	 *
+	 * This method exists simply for chaining.
+	 *
+	 * @todo TODO xjs.ChildNode#before
+	 * @see https://dom.spec.whatwg.org/#dom-childnode-before
+	 * @param   contents the contents to insert before this node
+	 * @returns `this`
+	 */
+	before(...contents: Content[]): this {
+		this.node.before(...contents.map((c) =>
+			(c instanceof xjs_Node) ? c.node :
+			(c === null) ? '' : c
+		))
+		return this
+	}
+
+	/**
+	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after|ChildNode#after},
+	 * but return this object when done.
+	 *
+	 * This method exists simply for chaining.
+	 *
+	 * @todo TODO xjs.ChildNode#after
+	 * @see https://dom.spec.whatwg.org/#dom-childnode-after
+	 * @param   contents the contents to insert after this node
+	 * @returns `this`
+	 */
+	after(...contents: Content[]): this {
+		this.node.after(...contents.map((c) =>
+			(c instanceof xjs_Node) ? c.node :
+			(c === null) ? '' : c
+		))
+		return this
+	}
 
   /**
    * Get and set attributes of this element.
