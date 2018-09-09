@@ -71,7 +71,7 @@ export default class xjs_Node {
    * @param   executable the function to call in the context of `this`
    * @returns `this`
    */
-  exe(executable: (this: any) => void): this {
+  exe(executable: (this: this) => void): this {
     executable.call(this)
     return this
   }
