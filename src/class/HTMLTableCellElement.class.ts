@@ -18,7 +18,7 @@ export default class xjs_HTMLTableCellElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLTableCellElement { return <dev_HTMLTableCellElement>super.node }
+  get node(): dev_HTMLTableCellElement { return super.node as dev_HTMLTableCellElement }
 
   /**
    * Reflect the `headers` content attribute.
@@ -42,6 +42,6 @@ export default class xjs_HTMLTableCellElement extends xjs_HTMLElement {
    */
   headers(val: ValueFunction, this_arg?: unknown): this;
   headers(val?: any, this_arg: any = this): any {
-    return this.attr('value', val, this_arg)
+    return this.attr('headers', val, this_arg)
   }
 }
