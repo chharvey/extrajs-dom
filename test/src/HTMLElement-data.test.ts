@@ -24,8 +24,8 @@ export default Promise.all([
 		// fail to set an attribute using a disallowed value
 		.then(() => test((() => {
 			try {
-				console.log(`Expected warning: "Key 'NaN' cannot be found. Using key 'default'…"`)
-				return x.attr('attr2', NaN).outerHTML()
+				console.log(`Expected warning: "Key 'infinite' cannot be found. Using key 'default'…"`)
+				return x.attr('attr2', Infinity).outerHTML()
 			} catch (e) {
 				return e.name
 			}
@@ -51,4 +51,12 @@ export default Promise.all([
 				return e.name
 			}
 		})(), 'RangeError'))
+		// fail to call `data()` with `NaN`
+		.then(() => test((() => {
+			try {
+				return x.data('foo', NaN).attr('foo') !
+			} catch (e) {
+				return `${e.name}: ${e.message}`
+			}
+		})(), 'RangeError: Unacceptable argument `NaN`.'))
 ])

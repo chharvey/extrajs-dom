@@ -189,7 +189,7 @@ export default class xjs_Element extends xjs_Node {
    *
    * @param   attr the name of the attribute to get (nonempty string)
    * @returns the value of the attribute specified (or `null` if that attribute hasn’t been set)
-   * @throws  {RangeError} if the empty string is passed as the attribute name
+   * @throws  {RangeError} if `''` is passed as the attribute name
    */
   attr(attr: string): string|null;
   /**
@@ -200,6 +200,8 @@ export default class xjs_Element extends xjs_Node {
    *
    * If the key is a string and the value is `null,`
    * then the attribute identified by the key is removed from this element.
+   *
+   * If the value is `NaN`, this method throws an error.
    *
    * Notes:
    * - If the attribute is a **boolean attribute** and is present (such as [`checked=""`]), provide the empty string `''` as the value.
@@ -219,12 +221,14 @@ export default class xjs_Element extends xjs_Node {
    * this.attr('itemscope', '')      // set a boolean attribute
    * this.attr('itemprop', null)     // remove an attribute
    * this.attr('', 42)               // throws, since `''` is not an attribute
+   * this.attr('data-nthchild', NaN) // throws, since `NaN` is not permitted
    * ```
    *
    * @param   attr the name of the attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the attribute name
+   * @throws  {Error} if `NaN` is passed as the attribute value
+   * @throws  {RangeError} if `''` is passed as the attribute name
    */
   attr(attr: string, value: ValueType): this;
   /**
@@ -236,14 +240,15 @@ export default class xjs_Element extends xjs_Node {
    * ```js
    * this.attr('data-id', function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
    * this.attr('data-id', function () { return this.id }, { id: 'custom-id' }) // set an attribute using a function in another given context
-   * this.attr('', function () {})                                             // throws, since `''` is not an attribute
+   * this.attr(''       , function () {})                                      // throws, since `''` is not an attribute
+   * this.attr('data-id', function () { return NaN })                          // throws, since `NaN` is not permitted
    * ```
    *
    * @param   attr the name of the attribute to set (nonempty string)
    * @param   value the function to call when assigning a value to the attribute
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the attribute name
+   * @throws  {RangeError} if `''` is passed as the attribute name
    */
   attr(attr: string, value: ValueFunction, this_arg?: unknown): this;
   /**
@@ -281,12 +286,13 @@ export default class xjs_Element extends xjs_Node {
 			'string': (atr: string) => {
 				if (atr.trim() === '') throw new RangeError('Attribute name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) => this.attr(atr, val.call(this_arg)),
-					'string'   : (val: string)        => this.node.setAttribute(atr, val           ) || this,
-					'number'   : (val: number)        => this.node.setAttribute(atr, val.toString()) || this,
-					'boolean'  : (val: boolean)       => this.node.setAttribute(atr, val.toString()) || this,
-					'null'     : ()                   => this.node.removeAttribute(atr) || this,
-					'undefined': ()                   => this.node.getAttribute(atr),
+					'function' : (val: ValueFunction) => this     .attr           (atr, val.call(this_arg)),
+					'string'   : (val: string       ) => this.node.setAttribute   (atr, val               ) || this,
+					'number'   : (val: number       ) => this.node.setAttribute   (atr, val.toString()    ) || this,
+					'boolean'  : (val: boolean      ) => this.node.setAttribute   (atr, val.toString()    ) || this,
+					'null'     : (                  ) => this.node.removeAttribute(atr                    ) || this,
+					'undefined': (                  ) => this.node.getAttribute   (atr                    ),
+					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},
 			'null'     : () => this,

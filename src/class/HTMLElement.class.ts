@@ -159,7 +159,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to get (nonempty string)
    * @returns the value of the property specified (or `null` if that property hasn’t been set)
-   * @throws  {RangeError} if the empty string is passed as the property name
+   * @throws  {RangeError} if `''` is passed as the property name
    */
   style(prop: string): string|null;
   /**
@@ -170,6 +170,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    *
    * If the key is a string and the value is `null` *or `''`*,
    * then the CSS property identified by the key is removed from this element.
+   *
+   * If the value is `NaN`, this method throws an error.
    *
    * ```js
    * this.style('background', 'red')     // set the `background` property (string) (the value will be `red`)
@@ -182,13 +184,15 @@ export default class xjs_HTMLElement extends xjs_Element {
    * this.style('font-style', null)      // remove the `font-style` property
    * this.style('font-style', '')        // remove the `font-style` property // *note that this syntax differs from the typical syntax shown by xjs.Element#attr
    * this.attr('', 42)                   // throws, since `''` is not a property
+   * this.style('opacity', NaN)          // throws, since `NaN` is not permitted
    * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
    * @param   prop the name of the css property to set (nonempty string)
    * @param   value the value to assign to the property, or `null` or `''` to remove it
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the property name
+   * @throws  {Error} if `NaN` is passed as the property value
+   * @throws  {RangeError} if `''` is passed as the property name
    */
   style(prop: string, value: ValueType): this;
   /**
@@ -200,7 +204,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    * ```js
    * this.style('justify-content', function () { return this.data('jc') })                 // set the `justify-content` property using a function in this xjs.HTMLElement’s context
    * this.style('justify-content', function () { return this.jc }, { jc: 'space-around' }) // set the `justify-content` property using a function in another given context
-   * this.style('', function () {})                                                        // throws, since `''` is not a property
+   * this.style(''               , function () {})                                         // throws, since `''` is not a property
+   * this.style('justify-content', function () { return NaN })                             // throws, since `NaN` is not permitted
    * ```
    *
    * @see https://www.w3.org/TR/cssom-1/#dom-elementcssinlinestyle-style
@@ -208,7 +213,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   value the function to call when assigning a value to the property
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the property name
+   * @throws  {RangeError} if `''` is passed as the property name
    */
   style(prop: string, value: ValueFunction, this_arg?: unknown): this;
   /**
@@ -250,11 +255,12 @@ export default class xjs_HTMLElement extends xjs_Element {
 				if (prp.trim() === '') throw new RangeError('Property name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
 					'function' : (val: ValueFunction) => this.style(prp, val.call(this_arg)),
-					'string'   : (val: string)        => (val !== '') ? this.node.style.setProperty(prp, val           ) || this : this.style(prp, null),
-					'number'   : (val: number)        =>                this.node.style.setProperty(prp, val.toString()) || this,
-					'boolean'  : (val: boolean)       =>                this.node.style.setProperty(prp, val.toString()) || this,
-					'null'     : ()                   =>                this.node.style.removeProperty(prp).slice(0,0)   || this,
-					'undefined': ()                   =>                this.node.style.getPropertyValue(prp)            || null,
+					'string'   : (val: string       ) => (val !== '') ? this.node.style.setProperty     (prp, val           )       || this : this.style(prp, null),
+					'number'   : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString())       || this,
+					'boolean'  : (val: boolean      ) =>                this.node.style.setProperty     (prp, val.toString())       || this,
+					'null'     : (                  ) =>                this.node.style.removeProperty  (prp                ) && '' || this,
+					'undefined': (                  ) =>                this.node.style.getPropertyValue(prp                )       || null,
+					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},
 			'null'     : () => this,
@@ -299,7 +305,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to get (nonempty string)
    * @returns the value of the attribute specified (or `null` if that attribute hasn’t been set)
-   * @throws  {RangeError} if the empty string is passed as the data-attribute name
+   * @throws  {RangeError} if `''` is passed as the data-attribute name
    */
   data(data_attr: string): string|null;
   /**
@@ -311,6 +317,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    * If the key is a string and the value is `null,`
    * then the data- attribute identified by the key is removed from this element.
    *
+   * If the value is `NaN`, this method throws an error.
+   *
    * ```js
    * this.data('typeof', 'my type')  // set the `[data-typeof]` attribute (string)
    * this.data('typeof', 42)         // set the `[data-typeof]` attribute (number)  (the value will be `"42"`)
@@ -320,14 +328,16 @@ export default class xjs_HTMLElement extends xjs_Element {
    * this.data('ID', 'my-id')        // set the `[data--i-d]` attribute *(probably not intended)*
    * this.data('typeOf', '')         // set the `[data-type-of]` attribute to the empty string: `[data-type-of=""]`
    * this.data('instanceOf', null)   // remove the `[data-instance-of]` attribute
-   * this.attr('', 42)               // throws, since `''` is not an attribute
+   * this.data('', 42)               // throws, since `''` is not an attribute
+   * this.data('typeof', NaN)        // throws, since `NaN` is not permitted
    * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the data-attribute name
+   * @throws  {Error} if `NaN` is passed as the data-attribute value
+   * @throws  {RangeError} if `''` is passed as the data-attribute name
    */
   data(data_attr: string, value: ValueType): this;
   /**
@@ -339,7 +349,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    * ```js
    * this.data('id', function () { return this.id() })                    // set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context
    * this.data('id', function () { return this.id }, { id: 'custom-id' }) // set the `[data-id]` attribute using a function in another given context
-   * this.data('', function () {})                                        // throws, since `''` is not an attribute
+   * this.data(''  , function () {})                                      // throws, since `''` is not an attribute
+   * this.data('id', function () { return NaN })                          // throws, since `NaN` is not permitted
    * ```
    *
    * @see https://www.w3.org/TR/html52/dom.html#dom-htmlelement-dataset
@@ -347,7 +358,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   value the function to call when assigning a value to the attribute
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
-   * @throws  {RangeError} if the empty string is passed as the data-attribute name
+   * @throws  {RangeError} if `''` is passed as the data-attribute name
    */
   data(data_attr: string, value: ValueFunction, this_arg?: unknown): this;
   /**
@@ -388,10 +399,11 @@ export default class xjs_HTMLElement extends xjs_Element {
 				if (atr.trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
 					'function' : (val: ValueFunction) => this.data(atr, val.call(this_arg)),
-					'string'   : (val: string)        => { this.node.dataset[atr] = val           ; return this },
-					'number'   : (val: number)        => { this.node.dataset[atr] = val.toString(); return this },
-					'boolean'  : (val: boolean)       => { this.node.dataset[atr] = val.toString(); return this },
-					'null'     : ()                   => { delete this.node.dataset[atr]          ; return this },
+					'string'   : (val: string       ) => {        this.node.dataset[atr] = val           ; return this },
+					'number'   : (val: number       ) => {        this.node.dataset[atr] = val.toString(); return this },
+					'boolean'  : (val: boolean      ) => {        this.node.dataset[atr] = val.toString(); return this },
+					'null'     : (                  ) => { delete this.node.dataset[atr]                 ; return this },
+					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 					'undefined': () => {
 						const returned: string|undefined = this.node.dataset[atr]
 						return (typeof returned === 'string') ? returned : null
