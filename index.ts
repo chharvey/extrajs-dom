@@ -18,4 +18,5 @@ export { default as HTMLTableCellElement    } from './src/class/HTMLTableCellEle
 export { default as HTMLAnchorElement       } from './src/class/HTMLAnchorElement.class'
 export { default as HTMLDataElement         } from './src/class/HTMLDataElement.class'
 export { default as HTMLTimeElement         } from './src/class/HTMLTimeElement.class'
+export { default as HTMLImageElement        } from './src/class/HTMLImageElement.class'
 export { default as HTMLTemplateElement     } from './src/class/HTMLTemplateElement.class'

@@ -29,4 +29,5 @@ export type dev_HTMLTableCellElement    = HTMLTableCellElement    & dev_ParentNo
 export type dev_HTMLAnchorElement       = HTMLAnchorElement       & dev_ParentNode & dev_ChildNode
 export type dev_HTMLDataElement         = HTMLDataElement         & dev_ParentNode & dev_ChildNode
 export type dev_HTMLTimeElement         = HTMLTimeElement         & dev_ParentNode & dev_ChildNode
+export type dev_HTMLImageElement        = HTMLImageElement        & dev_ParentNode & dev_ChildNode
 export type dev_HTMLTemplateElement     = HTMLTemplateElement     & dev_ParentNode & dev_ChildNode
