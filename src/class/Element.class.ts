@@ -267,8 +267,8 @@ export default class xjs_Element extends xjs_Node {
    * @param   attr the name of the attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
-   * @throws  {Error} if `NaN` is passed as the attribute value
    * @throws  {RangeError} if `''` is passed as the attribute name
+   * @throws  {Error} if `NaN` is passed as the attribute value
    */
   attr(attr: string, value: ValueType): this;
   /**

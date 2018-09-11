@@ -191,8 +191,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   prop the name of the css property to set (nonempty string)
    * @param   value the value to assign to the property, or `null` or `''` to remove it
    * @returns `this`
-   * @throws  {Error} if `NaN` is passed as the property value
    * @throws  {RangeError} if `''` is passed as the property name
+   * @throws  {Error} if `NaN` is passed as the property value
    */
   style(prop: string, value: ValueType): this;
   /**
@@ -254,13 +254,13 @@ export default class xjs_HTMLElement extends xjs_Element {
 			'string': (prp: string) => {
 				if (prp.trim() === '') throw new RangeError('Property name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) => this.style(prp, val.call(this_arg)),
-					'string'   : (val: string       ) => (val !== '') ? this.node.style.setProperty     (prp, val           )       || this : this.style(prp, null),
-					'number'   : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString())       || this,
-					'infinite' : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString())       || this,
-					'boolean'  : (val: boolean      ) =>                this.node.style.setProperty     (prp, val.toString())       || this,
-					'null'     : (                  ) =>                this.node.style.removeProperty  (prp                ) && '' || this,
-					'undefined': (                  ) =>                this.node.style.getPropertyValue(prp                )       || null,
+					'function' : (val: ValueFunction) =>                this           .style           (prp, val.call(this_arg)),
+					'string'   : (val: string       ) => (val !== '') ? this.node.style.setProperty     (prp, val               )       || this : this.style(prp, null),
+					'number'   : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
+					'infinite' : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
+					'boolean'  : (val: boolean      ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
+					'null'     : (                  ) =>                this.node.style.removeProperty  (prp                    ) && '' || this,
+					'undefined': (                  ) =>                this.node.style.getPropertyValue(prp                    )       || null,
 					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},
@@ -337,8 +337,8 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   data_attr the suffix of the `[data-*]` attribute to set (nonempty string)
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
-   * @throws  {Error} if `NaN` is passed as the data-attribute value
    * @throws  {RangeError} if `''` is passed as the data-attribute name
+   * @throws  {Error} if `NaN` is passed as the data-attribute value
    */
   data(data_attr: string, value: ValueType): this;
   /**
