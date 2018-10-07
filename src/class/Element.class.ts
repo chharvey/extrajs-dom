@@ -326,13 +326,13 @@ export default class xjs_Element extends xjs_Node {
 			'string': (atr: string) => {
 				if (atr.trim() === '') throw new RangeError('Attribute name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) => this     .attr           (atr, val.call(this_arg)),
-					'string'   : (val: string       ) => this.node.setAttribute   (atr, val               ) || this,
-					'number'   : (val: number       ) => this.node.setAttribute   (atr, val.toString()    ) || this,
-					'infinite' : (val: number       ) => this.node.setAttribute   (atr, val.toString()    ) || this,
-					'boolean'  : (val: boolean      ) => this.node.setAttribute   (atr, val.toString()    ) || this,
-					'null'     : (                  ) => this.node.removeAttribute(atr                    ) || this,
-					'undefined': (                  ) => this.node.getAttribute   (atr                    ),
+					'function' : (val: ValueFunction) =>  this     .attr           (atr, val.call(this_arg)),
+					'string'   : (val: string       ) => (this.node.setAttribute   (atr, val               ), this),
+					'number'   : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
+					'infinite' : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
+					'boolean'  : (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this),
+					'null'     : (                  ) => (this.node.removeAttribute(atr                    ), this),
+					'undefined': (                  ) =>  this.node.getAttribute   (atr                    ),
 					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},

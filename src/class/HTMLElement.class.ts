@@ -254,13 +254,13 @@ export default class xjs_HTMLElement extends xjs_Element {
 			'string': (prp: string) => {
 				if (prp.trim() === '') throw new RangeError('Property name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) =>                this           .style           (prp, val.call(this_arg)),
-					'string'   : (val: string       ) => (val !== '') ? this.node.style.setProperty     (prp, val               )       || this : this.style(prp, null),
-					'number'   : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
-					'infinite' : (val: number       ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
-					'boolean'  : (val: boolean      ) =>                this.node.style.setProperty     (prp, val.toString()    )       || this,
-					'null'     : (                  ) =>                this.node.style.removeProperty  (prp                    ) && '' || this,
-					'undefined': (                  ) =>                this.node.style.getPropertyValue(prp                    )       || null,
+					'function' : (val: ValueFunction) =>                 this           .style           (prp, val.call(this_arg)),
+					'string'   : (val: string       ) => (val !== '') ? (this.node.style.setProperty     (prp, val               )      , this) : this.style(prp, null),
+					'number'   : (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
+					'infinite' : (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
+					'boolean'  : (val: boolean      ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
+					'null'     : (                  ) =>                (this.node.style.removeProperty  (prp                    ) && '', this),
+					'undefined': (                  ) =>                (this.node.style.getPropertyValue(prp                    )      , null),
 					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},
@@ -400,11 +400,11 @@ export default class xjs_HTMLElement extends xjs_Element {
 				if (atr.trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.')
 				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
 					'function' : (val: ValueFunction) => this.data(atr, val.call(this_arg)),
-					'string'   : (val: string       ) => {        this.node.dataset[atr] = val           ; return this },
-					'number'   : (val: number       ) => {        this.node.dataset[atr] = val.toString(); return this },
-					'infinite' : (val: number       ) => {        this.node.dataset[atr] = val.toString(); return this },
-					'boolean'  : (val: boolean      ) => {        this.node.dataset[atr] = val.toString(); return this },
-					'null'     : (                  ) => { delete this.node.dataset[atr]                 ; return this },
+					'string'   : (val: string       ) => (       this.node.dataset[atr] = val           , this),
+					'number'   : (val: number       ) => (       this.node.dataset[atr] = val.toString(), this),
+					'infinite' : (val: number       ) => (       this.node.dataset[atr] = val.toString(), this),
+					'boolean'  : (val: boolean      ) => (       this.node.dataset[atr] = val.toString(), this),
+					'null'     : (                  ) => (delete this.node.dataset[atr]                 , this),
 					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 					'undefined': () => {
 						const returned: string|undefined = this.node.dataset[atr]

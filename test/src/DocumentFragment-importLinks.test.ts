@@ -19,7 +19,7 @@ let x: xjs.DocumentFragment = new xjs.DocumentFragment(jsdom.JSDOM.fragment(`
 export default Promise.all([
 	test((() => {
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
-		return console.log(x.importLinks(__dirname).innerHTML()) || ''
+		return (console.log(x.importLinks(__dirname).innerHTML()), '')
 	})(), ''),
 	test((() => {
 		console.log(`Expected possible warning: "\`HTMLLinkElement#import\` is not yet supported. Replacing \`<link>\`s with their imported contents…"`)
