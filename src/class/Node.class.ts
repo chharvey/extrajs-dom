@@ -76,6 +76,20 @@ export default class xjs_Node {
     return this
   }
 
+	/**
+	 * Execute a function based on a condition.
+	 *
+	 * Given a condition, execute one function upon passing, or execute another upon failure.
+	 * Note that this function is not asynchronous, and does not accept asynchronous arguments.
+	 * @param   condition the condition to evaluate; will be converted to boolean
+	 * @param   onResolve the executable to call (in the context of `this`) if the condition is truthy
+	 * @param   onReject  the executable to call (in the context of `this`) if the condition is falsy
+	 * @returns `this`
+	 */
+	ifElse(condition: any, onResolve: (this: this) => void, onReject: (this: this) => void = () => {}): this {
+		return this.exe((!!condition) ? onResolve : onReject)
+	}
+
   /**
    * Remove all inner whitespace text nodes from this node, and return it.
    *
