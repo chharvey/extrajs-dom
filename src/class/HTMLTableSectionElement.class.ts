@@ -64,7 +64,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    *
    * @param   <T> the type of the data to fill
    * @param   <U> the type of the `options` object
-   * @param   processor a typical {@link ProcessingFunction} to modify the template
+   * @param   instructions a typical {@link ProcessingFunction} to modify the template
    * @param   dataset the data to populate the list
    * @param   options additional processing options for all items
    * @param   this_arg provide a `this` context to the processing function
@@ -72,7 +72,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
    */
-  populate<T, U extends object>(processor: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+  populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
@@ -80,7 +80,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('tr')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
-    let component: Processor<T, U> = new Processor(template, processor)
-    return this.append(...dataset.map((data) => component.process(data, options, this_arg)))
+    let processor: Processor<T, U> = new Processor(template, instructions)
+    return this.append(...dataset.map((data) => processor.process(data, options, this_arg)))
   }
 }
