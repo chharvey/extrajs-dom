@@ -17,7 +17,7 @@ export default Promise.all([
 		.then(() => test(x.attr('attr2') !                  , ''))
 		// remove an attribute
 		.then(() => test(x.attr('attr2', null).outerHTML()  , '<span attr1="val1"></span>'))
-		.then(() => test(x.attr('attr2') !                  , 'null'))
+		.then(() => test(`${x.attr('attr2')}`               , 'null'))
 		// set an attribute to the string `'null'`
 		.then(() => test(x.attr('attr2', 'null').outerHTML(), '<span attr1="val1" attr2="null"></span>'))
 		.then(() => test(x.attr('attr2') !                  , 'null'))

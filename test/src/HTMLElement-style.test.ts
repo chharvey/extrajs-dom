@@ -15,10 +15,10 @@ export default Promise.all([
 		.then(() => test(x.style('font-weight', 'bold').outerHTML(), '<span style="background: none; font-weight: bold;"></span>'))
 		// remove a property using `''`
 		.then(() => test(x.style('font-weight', '').outerHTML()    , '<span style="background: none;"></span>'))
-		.then(() => test(x.style('font-weight') !                  , 'null'))
+		.then(() => test(`${x.style('font-weight')}`               , 'null'))
 		// remove a property using `null`
 		.then(() => test(x.style('background', null).outerHTML()   , '<span style=""></span>'))
-		.then(() => test(x.style('background') !                   , 'null'))
+		.then(() => test(`${x.style('background')}`                , 'null'))
 		// set a property using a function
 		.then(() => test(x.style('content', function () { return this.tagName }).outerHTML()       , '<span style="content: span;"></span>'))
 		.then(() => test(x.style('content', function () { return `'${this.tagName}'` }).outerHTML(), '<span style="content: \'span\';"></span>'))

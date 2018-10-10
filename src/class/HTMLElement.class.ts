@@ -260,7 +260,7 @@ export default class xjs_HTMLElement extends xjs_Element {
 					'infinite' : (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
 					'boolean'  : (val: boolean      ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
 					'null'     : (                  ) =>                (this.node.style.removeProperty  (prp                    ) && '', this),
-					'undefined': (                  ) =>                (this.node.style.getPropertyValue(prp                    )      , null),
+					'undefined': (                  ) =>                (this.node.style.getPropertyValue(prp                    ) ||     null),
 					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
 				})(value)
 			},
