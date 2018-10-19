@@ -21,8 +21,8 @@ let data = [
 ]
 
 export default Promise.all([
-	test(console.log(x.populate(function (frag: DocumentFragment, data: {url:string,text:string}, _opts: unknown) {
+	test((console.log(x.populate<{ url: string; text: string }, object>(function (frag, data, _opts) {
 		;(frag.querySelector('.list-link') as HTMLAnchorElement).href        = data.url
 		;(frag.querySelector('.list-link') as HTMLLIElement    ).textContent = data.text
-	}, data).outerHTML()) || '', ''),
+	}, data, {}).outerHTML()), ''), ''),
 ])
