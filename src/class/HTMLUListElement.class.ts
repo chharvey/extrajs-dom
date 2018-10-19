@@ -21,12 +21,12 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    *     new xjs.HTMLUListElement(this.content().querySelector('ul')).addClass('o-List')
    *     new xjs.HTMLLIElement(this.content().querySelector('template').content.querySelector('li')).addClass('o-List__Item')
    *   })
-   *   .setRenderer(function (frag, data, opts) {
-   *     new xjs.HTMLUListElement(frag.querySelector('ul')).populate(data, function (f, d, o) {
+   * const my_processor = new Processor(my_tpl.node, function (frag, data, opts) {
+   *     new xjs.HTMLUListElement(frag.querySelector('ul')).populate(function (f, d, o) {
    *       f.querySelector('li').append(d)
-   *     }, null, opts)
+   *     }, data, opts)
    *   })
-   * my_tpl.render([1,2,3,4,5]) // returns:
+   * my_processor.process([1,2,3,4,5]) // returns:
    * // ```html
    * // <ul class="o-List">
    * //   <template>
