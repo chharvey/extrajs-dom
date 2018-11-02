@@ -6,7 +6,6 @@ import * as jsdom from 'jsdom'
 
 import * as xjs from 'extrajs'
 
-import {dev_DocumentFragment, dev_HTMLLinkElement} from '../dev'
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
@@ -67,7 +66,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_DocumentFragment { return super.node as dev_DocumentFragment }
+  get node(): DocumentFragment { return super.node as DocumentFragment }
 
   /**
    * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
@@ -230,7 +229,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
 					'default' : () => null,
 				})(link)
         if (imported) {
-          (link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       })
@@ -252,7 +251,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
 					'default' : async () => null,
 				})(link)
         if (imported) {
-          (link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))

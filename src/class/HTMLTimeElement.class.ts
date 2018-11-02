@@ -1,4 +1,3 @@
-import {dev_HTMLTimeElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLTimeElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLTimeElement { return super.node as dev_HTMLTimeElement }
+  get node(): HTMLTimeElement { return super.node as HTMLTimeElement }
 
   /**
    * Reflect the `datetime` content attribute.

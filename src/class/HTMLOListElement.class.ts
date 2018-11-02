@@ -2,7 +2,6 @@ import * as path from 'path'
 
 import {Processor, ProcessingFunction} from 'template-processor'
 
-import {dev_HTMLOListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
@@ -63,7 +62,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLOListElement { return super.node as dev_HTMLOListElement }
+  get node(): HTMLOListElement { return super.node as HTMLOListElement }
 
   /**
    * Populate this list with items containing data.

@@ -1,4 +1,3 @@
-import {dev_HTMLLIElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 
 
@@ -17,5 +16,5 @@ export default class xjs_HTMLLIElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLLIElement { return super.node as dev_HTMLLIElement }
+  get node(): HTMLLIElement { return super.node as HTMLLIElement }
 }

@@ -1,6 +1,5 @@
 import {Processor, ProcessingFunction} from 'template-processor'
 
-import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 
 
@@ -19,7 +18,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLTableSectionElement { return super.node as dev_HTMLTableSectionElement }
+  get node(): HTMLTableSectionElement { return super.node as HTMLTableSectionElement }
 
   /**
    * Populate this list with items containing data.

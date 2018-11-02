@@ -1,6 +1,5 @@
 import {Processor, ProcessingFunction} from 'template-processor'
 
-import {dev_HTMLTemplateElement} from '../dev'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -59,7 +58,7 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLTemplateElement { return super.node as dev_HTMLTemplateElement }
+  get node(): HTMLTemplateElement { return super.node as HTMLTemplateElement }
 
   /**
    * Return the `<template>` element’s template contents.

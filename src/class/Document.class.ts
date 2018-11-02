@@ -6,7 +6,6 @@ import * as jsdom from 'jsdom'
 
 import * as xjs from 'extrajs'
 
-import {dev_Document, dev_HTMLLinkElement} from '../dev'
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
@@ -51,7 +50,7 @@ export default class xjs_Document extends xjs_Node {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_Document { return super.node as dev_Document }
+  get node(): Document { return super.node as Document }
 
 
   /**
@@ -204,7 +203,7 @@ export default class xjs_Document extends xjs_Node {
 					'default' : () => null,
 				})(link)
         if (imported) {
-          (link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       })
@@ -225,7 +224,7 @@ export default class xjs_Document extends xjs_Node {
 					'default' : async () => null,
 				})(link)
         if (imported) {
-          (link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))

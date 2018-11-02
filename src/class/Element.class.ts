@@ -1,6 +1,5 @@
 import * as xjs from 'extrajs'
 
-import {dev_Element} from '../dev'
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
 
@@ -46,7 +45,7 @@ export default class xjs_Element extends xjs_Node {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_Element { return super.node as dev_Element }
+  get node(): Element { return super.node as Element }
 
 
   /**
