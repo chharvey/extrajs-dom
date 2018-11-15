@@ -68,6 +68,7 @@ export default class xjs_Node {
    *
    * Simplifies chaining when performing void tasks,
    * especially tasks that have not been defined in this implementation.
+   * Note that this function is not asynchronous, and does not accept asynchronous arguments.
    * @param   executable the function to call in the context of `this`
    * @returns `this`
    */
