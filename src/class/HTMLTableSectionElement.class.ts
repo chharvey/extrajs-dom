@@ -26,7 +26,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<thead/tfoot/tbody>` element must have
-   * a `<template>` child, which in turn has a single child that is an `<tr>`.
+   * a `<template>` child, which in turn has a single child that is a `<tr>`.
    *
    * Notes:
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
