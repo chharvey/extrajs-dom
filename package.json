@@ -33,7 +33,7 @@
     "template-processor": "^1.0.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-typedoc": "^2.2.1",
     "gulp-typescript": "^5.0.0-alpha.3",
     "typedoc": "^0.13.0",
