@@ -47,7 +47,7 @@ export default Promise.all([
 			try {
 				return x.attr('foo', NaN).attr('foo') !
 			} catch (e) {
-				return `${e.name}: ${e.message}`
+				return e.name
 			}
-		})(), 'RangeError: Unacceptable argument `NaN`.'))
+		})(), 'NaNError'))
 ])

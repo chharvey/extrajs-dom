@@ -50,7 +50,7 @@ export default Promise.all([
 			try {
 				return x.style('order', NaN).style('order') !
 			} catch (e) {
-				return `${e.name}: ${e.message}`
+				return e.name
 			}
-		})(), 'RangeError: Unacceptable argument `NaN`.'))
+		})(), 'NaNError'))
 ])
