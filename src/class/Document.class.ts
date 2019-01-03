@@ -7,6 +7,7 @@ import * as jsdom from 'jsdom'
 import * as xjs from 'extrajs'
 
 import {Content} from '../ambient'
+import xjs_ParentNode from '../iface/ParentNode.iface'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
@@ -16,7 +17,7 @@ import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
  * Wrapper for a Document.
  * @see https://www.w3.org/TR/dom/#document
  */
-export default class xjs_Document extends xjs_Node {
+export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
   /**
    * Read an HTML file and return a document with its contents.
    *
@@ -53,34 +54,7 @@ export default class xjs_Document extends xjs_Node {
   get node(): Document { return super.node as Document }
 
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.prepend(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).node.querySelector('body').innerHTML
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#prepend
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
-   * @param   contents the contents to prepend
-   * @returns `this`
-   */
+	/** @implements */
   prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -89,34 +63,7 @@ export default class xjs_Document extends xjs_Node {
     return this
   }
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.append(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).node.querySelector('body').innerHTML
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#append
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
-   * @param   contents the contents to append
-   * @returns `this`
-   */
+	/** @implements */
   append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :

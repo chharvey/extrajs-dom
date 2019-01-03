@@ -17,4 +17,6 @@ module.exports = {
   HTMLTimeElement         : require('./dist/class/HTMLTimeElement.class.js').default,
   HTMLImageElement        : require('./dist/class/HTMLImageElement.class.js').default,
   HTMLTemplateElement     : require('./dist/class/HTMLTemplateElement.class.js').default,
+
+	ParentNode : require('./dist/iface/ParentNode.iface.js').default,
 }
