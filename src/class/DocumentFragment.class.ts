@@ -9,6 +9,7 @@ import * as xjs from 'extrajs'
 import {Content} from '../ambient'
 import xjs_ParentNode from '../iface/ParentNode.iface'
 import xjs_Node from './Node.class'
+import xjs_Element from './Element.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
 
@@ -86,6 +87,17 @@ export default class xjs_DocumentFragment extends xjs_Node implements xjs_Parent
     ))
     return this
   }
+
+	/** @implements */
+	querySelector(selector: string): xjs_Element|null {
+		let el: Element|null = this.node.querySelector(selector)
+		return (el === null) ? null : new xjs_Element(el)
+	}
+
+	/** @implements */
+	querySelectorAll(selector: string): xjs_Element[] {
+		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
+	}
 
   /**
    * Get the "innerHTML" of this document fragment.

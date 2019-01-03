@@ -1,4 +1,5 @@
 import { Content } from '../ambient.d'
+import xjs_Element from '../class/Element.class'
 
 
 /**
@@ -63,4 +64,20 @@ export default interface xjs_ParentNode {
 	 * @returns `this`
 	 */
 	append(...contents: Content[]): this;
+
+	/**
+	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelector|ParentNode#querySelector},
+	 * but return the wrapped element.
+	 * @param   selector the selector of the element to match
+	 * @returns the wrapped element, or `null` if there is no match
+	 */
+	querySelector(selector: string): xjs_Element|null|ParentNode;
+
+	/**
+	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/querySelectorAll|ParentNode#querySelectorAll},
+	 * but return an array of wrapped elements.
+	 * @param   selector the selector of the element(s) to match
+	 * @returns a (possibly empty) array of wrapped elements
+	 */
+	querySelectorAll(selector: string): xjs_Element[];
 }

@@ -113,6 +113,17 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
     return this
   }
 
+	/** @implements */
+	querySelector(selector: string): xjs_Element|null {
+		let el: Element|null = this.node.querySelector(selector)
+		return (el === null) ? null : new xjs_Element(el)
+	}
+
+	/** @implements */
+	querySelectorAll(selector: string): xjs_Element[] {
+		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
+	}
+
 	/**
 	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before|ChildNode#before},
 	 * but return this object when done.

@@ -10,6 +10,7 @@ import {Content} from '../ambient'
 import xjs_ParentNode from '../iface/ParentNode.iface'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
+import xjs_Element from './Element.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
 
@@ -71,6 +72,17 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
     ))
     return this
   }
+
+	/** @implements */
+	querySelector(selector: string): xjs_Element|null {
+		let el: Element|null = this.node.querySelector(selector)
+		return (el === null) ? null : new xjs_Element(el)
+	}
+
+	/** @implements */
+	querySelectorAll(selector: string): xjs_Element[] {
+		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
+	}
 
   /**
    * Get the "innerHTML" of this document.
