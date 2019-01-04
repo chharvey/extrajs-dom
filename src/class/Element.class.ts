@@ -1,3 +1,5 @@
+import * as jsdom from 'jsdom'
+
 import * as xjs from 'extrajs'
 
 import {Content} from '../ambient'
@@ -495,4 +497,22 @@ export default class xjs_Element extends xjs_Node {
     this.node.className = this.node.className.replace(old_, new_)
     return this
   }
+
+	/**
+	 * Transfer this element’s children and attributes to a new element,
+	 * then replace this element in the DOM with that new element.
+	 *
+	 * Essentially changes the tag name of this element.
+	 * @param   name the name of the new element to create
+	 * @returns the newly created element, containing this element’s children and attributes
+	 */
+	transferReplace(name: string): xjs_Element {
+		let replacement: xjs_Element = new xjs_Element(jsdom.JSDOM.fragment(`<${name}>`).querySelector(name) !)
+			.append(...this.node.childNodes)
+		;[...this.node.attributes].forEach((attr) => {
+			replacement.node.attributes.setNamedItem(this.node.attributes.removeNamedItem(attr.name))
+		})
+		this.after(replacement).node.remove()
+		return replacement
+	}
 }
