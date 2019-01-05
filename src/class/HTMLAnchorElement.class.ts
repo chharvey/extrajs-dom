@@ -1,4 +1,4 @@
-import {dev_HTMLAnchorElement} from '../dev.d'
+import {dev_HTMLAnchorElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -9,19 +9,19 @@ import xjs_HTMLElement from './HTMLElement.class'
  */
 export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLAnchorElement object.
+   * Construct a new xjs_HTMLAnchorElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLAnchorElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
-  get node(): dev_HTMLAnchorElement { return <dev_HTMLAnchorElement>super.node }
+  get node(): dev_HTMLAnchorElement { return super.node as dev_HTMLAnchorElement }
 
   /**
-   * @summary Reflect the `href` content attribute.
+   * Reflect the `href` content attribute.
    * @see https://www.w3.org/TR/html52/links.html#dom-htmlhyperlinkelementutils-href
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -36,13 +36,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  href(val: ValueFunction, this_arg?: any): this;
+  href(val: ValueFunction, this_arg?: unknown): this;
   href(val?: any, this_arg: any = this): any {
     return this.attr('href', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `target` content attribute.
+   * Reflect the `target` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-target
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -57,13 +57,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  target(val: ValueFunction, this_arg?: any): this;
+  target(val: ValueFunction, this_arg?: unknown): this;
   target(val?: any, this_arg: any = this): any {
     return this.attr('target', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `download` content attribute.
+   * Reflect the `download` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-download
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -78,13 +78,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  download(val: ValueFunction, this_arg?: any): this;
+  download(val: ValueFunction, this_arg?: unknown): this;
   download(val?: any, this_arg: any = this): any {
     return this.attr('download', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `rel` content attribute.
+   * Reflect the `rel` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rel
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -99,13 +99,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  rel(val: ValueFunction, this_arg?: any): this;
+  rel(val: ValueFunction, this_arg?: unknown): this;
   rel(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `rev` content attribute.
+   * Reflect the `rev` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-rev
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -120,13 +120,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  rev(val: ValueFunction, this_arg?: any): this;
+  rev(val: ValueFunction, this_arg?: unknown): this;
   rev(val?: any, this_arg: any = this): any {
     return this.attr('rel', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `hreflang` content attribute.
+   * Reflect the `hreflang` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-hreflang
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -141,13 +141,13 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  hreflang(val: ValueFunction, this_arg?: any): this;
+  hreflang(val: ValueFunction, this_arg?: unknown): this;
   hreflang(val?: any, this_arg: any = this): any {
     return this.attr('hreflang', val, this_arg)
   }
 
   /**
-   * @summary Reflect the `type` content attribute.
+   * Reflect the `type` content attribute.
    * @see https://www.w3.org/TR/html52/textlevel-semantics.html#dom-htmlanchorelement-type
    * @returns the value of the attribute, or `null` if it hasn’t been set
    */
@@ -162,7 +162,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
    * @param   this_arg optionally pass in another object to use as `this` inside the given function
    * @returns `this`
    */
-  type(val: ValueFunction, this_arg?: any): this;
+  type(val: ValueFunction, this_arg?: unknown): this;
   type(val?: any, this_arg: any = this): any {
     return this.attr('type', val, this_arg)
   }

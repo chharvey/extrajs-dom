@@ -1,10 +1,11 @@
 {
   "name": "extrajs-dom",
-  "version": "4.6.0",
+  "version": "5.0.0",
   "description": "Javascript extensions to DOM.",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "prepublishOnly": "npm run build",
     "test": "gulp test"
   },
   "repository": {
@@ -25,14 +26,17 @@
   },
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
-    "extrajs": "^0.11.0",
-    "jsdom": "^11.12.0"
+    "@types/jsdom": "^12.2.0",
+    "@types/node": "^10.12.0",
+    "extrajs": "^0.17.0",
+    "jsdom": "^12.0.0",
+    "template-processor": "^1.0.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-typedoc": "^2.2.0",
+    "gulp-typedoc": "^2.2.1",
     "gulp-typescript": "^5.0.0-alpha.3",
-    "typedoc": "^0.11.1",
-    "typescript": "^2.9.2"
+    "typedoc": "^0.13.0",
+    "typescript": "3.0.3"
   }
 }

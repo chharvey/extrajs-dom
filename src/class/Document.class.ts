@@ -1,11 +1,17 @@
-import {dev_Document, dev_HTMLLinkElement, Content} from '../dev.d'
+import * as fs   from 'fs'
+import * as path from 'path'
+import * as util from 'util'
+
+import * as jsdom from 'jsdom'
+
+import * as xjs from 'extrajs'
+
+import {dev_Document, dev_HTMLLinkElement} from '../dev'
+import {Content} from '../ambient'
 import xjs_Node from './Node.class'
+import xjs_DocumentFragment from './DocumentFragment.class'
+import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
-
-const jsdom = require('jsdom')
 
 /**
  * Wrapper for a Document.
@@ -13,9 +19,10 @@ const jsdom = require('jsdom')
  */
 export default class xjs_Document extends xjs_Node {
   /**
-   * @summary Read an HTML file and return a document with its contents.
-   * @description The Document object will be wrapped in an `xjs.Document` object.
-   * To access the actual element, call {@link xjs_Document#node}.
+   * Read an HTML file and return a document with its contents.
+   *
+   * The Document object will be wrapped in an `xjs.Document` object.
+   * To access the actual element, call {@link xjs_Document.node}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
@@ -24,7 +31,7 @@ export default class xjs_Document extends xjs_Node {
     return new xjs_Document(new jsdom.JSDOM(data).window.document)
   }
   /**
-   * @summary Synchronous version of {@link xjs_Document.fromFile}.
+   * Synchronous version of {@link xjs_Document.fromFile}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
@@ -35,29 +42,31 @@ export default class xjs_Document extends xjs_Node {
 
 
   /**
-   * @summary Construct a new xjs_Document object.
+   * Construct a new xjs_Document object.
    * @param node the node to wrap
    */
   constructor(node: Document) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
-  get node(): dev_Document { return <dev_Document>super.node }
+  get node(): dev_Document { return super.node as dev_Document }
 
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
+   * but return this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.Document(new Document())
-   *   .prepend(...[
+   * this.prepend(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -66,7 +75,8 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#prepend
    * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
    * @param   contents the contents to prepend
@@ -81,16 +91,18 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append}, but returns this object when done.
-   * @description This method exists simply for chaining.
-   * @example
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
+   * but return this object when done.
+   *
+   * This method exists simply for chaining.
+   *
+   * ```js
    * let strong = document.createElement('strong')
    * strong.textContent = 'hello'
    * let em = document.createElement('em')
    * let mark = document.createElement('mark')
    *
-   * let snippet = new xjs.DocumentFragment(new DocumentFragment())
-   *   .append(...[
+   * this.append(...[
    *     strong,                                       // DOM Node
    *     ` to the `,                                   // string
    *     new Comment(`great`),                         // DOM Node
@@ -99,7 +111,8 @@ export default class xjs_Document extends xjs_Node {
    *     null,                                         // null
    *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
    *   ]).node.querySelector('body').innerHTML
-   * return snippet === `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
+   * ```
    * @todo TODO xjs.ParentNode#append
    * @see https://dom.spec.whatwg.org/#dom-parentnode-append
    * @param   contents the contents to append
@@ -114,8 +127,9 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary Get the "innerHTML" of this document.
-   * @description This method should be used only if this document is an HTML Document,
+   * Get the "innerHTML" of this document.
+   *
+   * This method should be used only if this document is an HTML Document,
    * has doctype `html`, and whose root element is the `<html>` element (an instance of `HTMLHtmlElement`).
    *
    * You should only use this method if you do not have access to the original DOM object that this Document belongs to.
@@ -130,8 +144,8 @@ export default class xjs_Document extends xjs_Node {
   }
 
   /**
-   * @summary Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
-   * @description
+   * Replace all `link[rel~="import"][data-import]` elements with contents from their documents.
+   *
    * This method finds all `link[rel~="import"][data-import]`s in this document,
    * and then replaces those links with a `DocumentFragment` holding some contents.
    * These contents depend on the value set for `data-import`:
@@ -157,7 +171,7 @@ export default class xjs_Document extends xjs_Node {
    * a `DocumentFragment` containing the entirety of `x-linked-doc.tpl.html`,
    * including both the `h1` along with the `template#sect-template`.
    *
-   * @example
+   * ```js
    * // x-linked-doc.tpl.html:
    * <h1>top-level hed</h1>
    * <template id="sect-template">
@@ -175,24 +189,22 @@ export default class xjs_Document extends xjs_Node {
    *
    * // This call will work as intended.
    * this.importLinks(__dirname)
+   * ```
    *
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    * @returns `this`
    */
   importLinks(dirpath: string): this {
-    const xjs_DocumentFragment    = require('./DocumentFragment.class').default
-    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
-    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
-      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link: dev_HTMLLinkElement) => {
-        const switch_: { [index: string]: () => DocumentFragment|null } = {
-          'document': () => xjs_DocumentFragment   .fromFileSync(path.join(dirpath, link.href)).node,
-          'template': () => xjs_HTMLTemplateElement.fromFileSync(path.join(dirpath, link.href)).content(),
-          default() { return null },
-        }
-        let imported = (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
+    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
+      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
+      this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
+				let imported: DocumentFragment|null = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') !, {
+					'document': (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node,
+					'template': (lnk: HTMLLinkElement) => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, lnk.href)).content(),
+					'default' : () => null,
+				})(link)
         if (imported) {
-          link.after(imported)
+          (link as dev_HTMLLinkElement).after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       })
@@ -200,26 +212,24 @@ export default class xjs_Document extends xjs_Node {
     return this
   }
   /**
-   * @summary Asynchronous version of {@link xjs_Document#importLinks}.
+   * Asynchronous version of {@link xjs_Document.importLinks}.
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
-  async importLinksAsync(dirpath: string): Promise<void[]> {
-    const xjs_DocumentFragment    = require('./DocumentFragment.class').default
-    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class').default
-    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link'))) {
-      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents.')
-      return Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link: dev_HTMLLinkElement) => {
-        const switch_: { [index: string]: () => Promise<DocumentFragment|null> } = {
-          'document': async () => (await xjs_DocumentFragment   .fromFile(path.join(dirpath, link.href))).node,
-          'template': async () => (await xjs_HTMLTemplateElement.fromFile(path.join(dirpath, link.href))).content(),
-          async default() { return null },
-        }
-        let imported = await (switch_[<string>link.getAttribute('data-import')] || switch_.default).call(this)
+  async importLinksAsync(dirpath: string): Promise<this> {
+    if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
+      console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
+      await Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
+				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment|null>>(link.getAttribute('data-import') !, {
+					'document': async (lnk: HTMLLinkElement) => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, lnk.href))).node,
+					'template': async (lnk: HTMLLinkElement) => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, lnk.href))).content(),
+					'default' : async () => null,
+				})(link)
         if (imported) {
-          link.after(imported)
+          ;(link as dev_HTMLLinkElement).after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))
-    } else return Promise.all([])
+    }
+		return this
   }
 }
