@@ -1,6 +1,7 @@
-import {dev_HTMLTableSectionElement} from '../dev.d'
+import {Processor, ProcessingFunction} from 'template-processor'
+
+import {dev_HTMLTableSectionElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
-import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
 
 
 /**
@@ -9,20 +10,21 @@ import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.
  */
 export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
   /**
-   * @summary Construct a new xjs_HTMLTableSectionElement object.
+   * Construct a new xjs_HTMLTableSectionElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLTableSectionElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
-  get node(): dev_HTMLTableSectionElement { return <dev_HTMLTableSectionElement>super.node }
+  get node(): dev_HTMLTableSectionElement { return super.node as dev_HTMLTableSectionElement }
 
   /**
-   * @summary Populate this list with items containing data.
-   * @description This method appends items to the end of this list.
+   * Populate this list with items containing data.
+   *
+   * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<thead/tfoot/tbody>` element must have
    * a `<template>` child, which in turn has a single child that is an `<tr>`.
@@ -31,7 +33,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
    * - This element may also already have any number of `<tr>` children; they are not affected.
    *
-   * @example
+   * ```js
    * let {document} = new jsdom.JSDOM(`
    * <table>
    *   <tbody>
@@ -50,26 +52,27 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
-   *   .populate(data, function (f, d, o) {
+   *   .populate(function (f, d, o) {
    *     f.querySelectorAll('td')[0].textContent = d.url
    *     f.querySelectorAll('td')[1].textContent = d.text
-   *   })
+   *   }, data)
    * new xjs_HTMLTableSectionElement(document.querySelector('tbody'))
-   *  .populate(data, function (f, d, o) {
+   *  .populate(function (f, d, o) {
    *    // some code involving `this`
-   *  }, other_context)
+   *  }, data, {}, other_context)
+   * ```
    *
-   * @param   dataset any array of things
-   * @param   renderer a typical rendering function
-   * @param   this_arg provide a `this` context to the rendering function
-   * @param   options additional rendering options for all items
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
-   * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
+   * @param   <T> the type of the data to fill
+   * @param   <U> the type of the `options` object
+   * @param   instructions a typical {@link ProcessingFunction} to modify the template
+   * @param   dataset the data to populate the list
+   * @param   options additional processing options for all items
+   * @param   this_arg provide a `this` context to the processing function
    * @returns `this`
    * @throws  {ReferenceError} if this `<thead/tfoot/tbody>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<tr>`.
    */
-  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, this_arg: any = this, options = {}): this {
+  populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <thead/tfoot/tbody> does not have a <template> descendant.')
@@ -77,7 +80,7 @@ export default class xjs_HTMLTableSectionElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('tr')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be a <tr>.')
     }
-    let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
+    let processor: Processor<T, U> = new Processor(template, instructions)
+    return this.append(...dataset.map((data) => processor.process(data, options, this_arg)))
   }
 }

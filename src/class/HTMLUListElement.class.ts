@@ -1,8 +1,10 @@
-import {dev_HTMLUListElement} from '../dev.d'
-import xjs_HTMLElement from './HTMLElement.class'
-import xjs_HTMLTemplateElement, {RenderingFunction} from './HTMLTemplateElement.class'
+import * as path from 'path'
 
-const path = require('path')
+import {Processor, ProcessingFunction} from 'template-processor'
+
+import {dev_HTMLUListElement} from '../dev'
+import xjs_HTMLElement from './HTMLElement.class'
+import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
 
 /**
@@ -11,19 +13,20 @@ const path = require('path')
  */
 export default class xjs_HTMLUListElement extends xjs_HTMLElement {
   /**
-   * @summary Return a new `xjs.HTMLTemplateElement` object that renders a `<ul>` filled with `<li>`s.
-   * @example
+   * Return a new `xjs.HTMLTemplateElement` object that renders a `<ul>` filled with `<li>`s.
+   *
+   * ```js
    * const my_tpl = (await xjs.HTMLUListElement.template())
    *   .exe(function () {
    *     new xjs.HTMLUListElement(this.content().querySelector('ul')).addClass('o-List')
    *     new xjs.HTMLLIElement(this.content().querySelector('template').content.querySelector('li')).addClass('o-List__Item')
    *   })
-   *   .setRenderer(function (frag, data, opts) {
-   *     new xjs.HTMLUListElement(frag.querySelector('ul')).populate(data, function (f, d, o) {
+   * const my_processor = new Processor(my_tpl.node, function (frag, data, opts) {
+   *     new xjs.HTMLUListElement(frag.querySelector('ul')).populate(function (f, d, o) {
    *       f.querySelector('li').append(d)
-   *     }, null, opts)
+   *     }, data, opts)
    *   })
-   * my_tpl.render([1,2,3,4,5]) // returns:
+   * my_processor.process([1,2,3,4,5]) // returns:
    * // ```html
    * // <ul class="o-List">
    * //   <template>
@@ -35,14 +38,14 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * //   </template>
    * // </ul>
    * // ```
-   * @param   renderer a typical rendering function, used for rendering the list
+   * ```
    * @returns a template rendering a `<ul>` element
    */
   static async template(): Promise<xjs_HTMLTemplateElement> {
     return xjs_HTMLTemplateElement.fromFile(path.join(__dirname, '../../src/tpl/x-htmlulistelement.tpl.html')) // relative to `dist`
   }
   /**
-   * @summary Synchronous version of {@link xjs_HTMLUListElement.template}.
+   * Synchronous version of {@link xjs_HTMLUListElement.template}.
    * @returns a template rendering a `<ul>` element
    */
   static templateSync(): xjs_HTMLTemplateElement {
@@ -51,20 +54,21 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
 
 
   /**
-   * @summary Construct a new xjs_HTMLUListElement object.
+   * Construct a new xjs_HTMLUListElement object.
    * @param node the node to wrap
    */
   constructor(node: HTMLUListElement) {
     super(node)
   }
   /**
-   * @summary This wrapper’s node.
+   * This wrapper’s node.
    */
-  get node(): dev_HTMLUListElement { return <dev_HTMLUListElement>super.node }
+  get node(): dev_HTMLUListElement { return super.node as dev_HTMLUListElement }
 
   /**
-   * @summary Populate this list with items containing data.
-   * @description This method appends items to the end of this list.
+   * Populate this list with items containing data.
+   *
+   * This method appends items to the end of this list.
    * The items are the result of rendering the given data.
    * In order to determine how the data is rendered, this `<ul>` element must have
    * a `<template>` child, which in turn has a single child that is an `<li>`.
@@ -73,7 +77,7 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    * - This element may contain multiple `<template>` children, but this method uses only the first one.
    * - This element may also already have any number of `<li>` children; they are not affected.
    *
-   * @example
+   * ```js
    * let {document} = new jsdom.JSDOM(`
    * <ul>
    *   <template>
@@ -90,26 +94,27 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
    *   { "url": "#3", "text": "Code of Ethics" }
    * ]
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *   .populate(data, function (f, d, o) {
+   *   .populate(function (f, d, o) {
    *     f.querySelector('a').href        = d.url
    *     f.querySelector('a').textContent = d.text
-   *   })
+   *   }, data)
    * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *  .populate(data, function (f, d, o) {
+   *  .populate(function (f, d, o) {
    *    // some code involving `this`
-   *  }, other_context)
+   *  }, data, {}, other_context)
+   * ```
    *
-   * @param   dataset any array of things
-   * @param   renderer a typical rendering function
-   * @param   this_arg provide a `this` context to the rendering function
-   * @param   options additional rendering options for all items
-   * @todo WARNING: in the next breaking release (v5), the order of params will be: `dataset`, `renderer`, `options`, `this_arg`
-   * @todo WARNING: in the next breaking release (v5), param `renderer` will be required
+   * @param   <T> the type of the data to fill
+   * @param   <U> the type of the `options` object
+   * @param   instructions a typical {@link ProcessingFunction} to modify the template
+   * @param   dataset the data to populate the list
+   * @param   options additional processing options for all items
+   * @param   this_arg provide a `this` context to the processing function
    * @returns `this`
    * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
    *                           or if that `<template>` does not contain exactly 1 `<li>`.
    */
-  populate(dataset: any[], renderer: RenderingFunction = (f,d,o) => {}, this_arg: any = this, options = {}): this {
+  populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
     let template: HTMLTemplateElement|null = this.node.querySelector('template')
     if (template === null) {
       throw new ReferenceError('This <ul> does not have a <template> descendant.')
@@ -117,7 +122,7 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
     if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
       throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
     }
-    let component = new xjs_HTMLTemplateElement(template).setRenderer(renderer)
-    return this.append(...dataset.map((data) => component.render(data, this_arg, options))) // TODO: in the next breaking release, fix order of params
+    let processor: Processor<T, U> = new Processor(template, instructions)
+    return this.append(...dataset.map((data) => processor.process(data, options, this_arg)))
   }
 }

@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -64,22 +62,15 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="extrajs-dom">extrajs-dom</h1>
+				<h1 id="extrajs-dom"><a href="https://chharvey.github.io/extrajs-dom/docs/api/">extrajs-dom</a></h1>
 				<p>Javascript extensions to DOM.</p>
 				<p>DOM code is kinda spaghetti-like.
 				Use this package to streamline your code and keep the control flow sensible.</p>
 				<h2 id="install">Install</h2>
-				<pre><code class="lang-bash">$ npm install extrajs-dom
-</code></pre>
-				<h2 id="get-the-docs">Get the Docs</h2>
-				<pre><code class="lang-bash">$ <span class="hljs-built_in">cd</span> ./node_modules/extrajs-dom/
-$ npm install
-$ npm run build
-$ open ./docs/api/index.html
-</code></pre>
+				<pre><code class="language-bash">$ npm install extrajs-dom</code></pre>
 				<h2 id="example">Example</h2>
 				<p>traditional DOM methods:</p>
-				<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createMyLink</span>(<span class="hljs-params">url, text</span>) </span>{
+				<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createMyLink</span>(<span class="hljs-params">url, text</span>) </span>{
   <span class="hljs-keyword">let</span> link = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>)
   link.classList.add(<span class="hljs-string">'my-link'</span>)
   link.setAttribute(<span class="hljs-string">'itemprop'</span>, <span class="hljs-string">'url'</span>)
@@ -89,10 +80,9 @@ $ open ./docs/api/index.html
   link.href = url
   link.textContent = text
   <span class="hljs-keyword">return</span> link
-}
-</code></pre>
+}</code></pre>
 				<p>extrajs-dom methods:</p>
-				<pre><code class="lang-js"><span class="hljs-keyword">const</span> xjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'extrajs-dom'</span>)
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> xjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'extrajs-dom'</span>)
 <span class="hljs-keyword">const</span> createMyLink = <span class="hljs-function">(<span class="hljs-params">url, text</span>) =&gt;</span>
   <span class="hljs-keyword">new</span> xjs.HTMLAnchorElement(<span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>))
     .addClass(<span class="hljs-string">'my-link'</span>)
@@ -104,21 +94,18 @@ $ open ./docs/api/index.html
     .rel(<span class="hljs-string">'author'</span>)
     .href(url)
     .textContent(text)
-    .node <span class="hljs-comment">// returns the modified Node (originally passed to constructor)</span>
-</code></pre>
+    .node <span class="hljs-comment">// returns the modified Node (originally passed to constructor)</span></code></pre>
 				<h2 id="features">Features</h2>
 				<ul>
 					<li>Method chaining</li>
 					<li><code>xjs.Node#empty()</code> removes all children</li>
 					<li><code>xjs.Node#trimInner()</code> removes all empty and whitespace-only Text node descendants</li>
 					<li><code>xjs.Node#exe()</code> executes a custom function for any unsupported features you might need</li>
-					<li><code>xjs.Element#attr()</code> sets/removes multiple attributes in one step</li>
-					<li><code>xjs.Element#attr()</code> and all other <strong>attribute reflectors</strong> (e.g. <code>#href()</code>) may take a function argument</li>
-					<li><code>xjs.Element#replaceClassString()</code> replaces string fragments in the <code>[class]</code> attribute</li>
-					<li><code>xjs.DocumentFragment#innerHTML()</code> does what you would expect</li>
-					<li>Render components with <code>xjs.HTMLTemplateElement</code>
-					(see <a href="https://github.com/chharvey/extrajs-view/wiki/Create-a-component-with-extrajs-dom-and-jsdom">“Create a component with extrajs-dom and jsdom”</a> for details)</li>
-					<li>Populate <code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tr&gt;</code> as lists of data <em>(coming in v4.1)</em></li>
+					<li><code>xjs.Node#ifElse()</code> executes a custom function based on a condition</li>
+					<li><code>xjs.Element#attr()</code> sets/removes multiple attributes in one step; taking object and function arguments</li>
+					<li><code>xjs.Element#{addClass,removeClass,replaceClassString}()</code> for better <code>[class]</code> attribute manipulation</li>
+					<li><code>xjs.{Document,DocumentFragment}#innerHTML()</code> does what you would expect</li>
+					<li>Populate <code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tr&gt;</code> as lists of data</li>
 				</ul>
 			</div>
 		</div>
@@ -157,6 +144,9 @@ $ open ./docs/api/index.html
 						<a href="classes/xjs_htmlelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLElement</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/xjs_htmlimageelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLImage<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/xjs_htmllielement.html" class="tsd-kind-icon">xjs_<wbr>HTMLLIElement</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -186,11 +176,20 @@ $ open ./docs/api/index.html
 					<li class=" tsd-kind-class">
 						<a href="classes/xjs_node.html" class="tsd-kind-icon">xjs_<wbr><wbr>Node</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/renderingfunction.html" class="tsd-kind-icon">Rendering<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/valuefunction.html" class="tsd-kind-icon">Value<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/dev_childnode.html" class="tsd-kind-icon">dev_<wbr><wbr>Child<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-not-exported">
+						<a href="interfaces/dev_parentnode.html" class="tsd-kind-icon">dev_<wbr><wbr>Parent<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
+						<a href="globals.html#content" class="tsd-kind-icon">Content</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
@@ -198,20 +197,59 @@ $ open ./docs/api/index.html
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#fs" class="tsd-kind-icon">fs</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_document" class="tsd-kind-icon">dev_<wbr><wbr>Document</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#jsdom" class="tsd-kind-icon">jsdom</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_documentfragment" class="tsd-kind-icon">dev_<wbr><wbr>Document<wbr>Fragment</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#path" class="tsd-kind-icon">path</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_element" class="tsd-kind-icon">dev_<wbr><wbr>Element</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="globals.html#util" class="tsd-kind-icon">util</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlanchorelement" class="tsd-kind-icon">dev_<wbr>HTMLAnchor<wbr>Element</a>
 					</li>
-					<li class=" tsd-kind-object-literal tsd-is-not-exported">
-						<a href="globals.html#xjs" class="tsd-kind-icon">xjs</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmldlistelement" class="tsd-kind-icon">dev_<wbr>HTMLDList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmldataelement" class="tsd-kind-icon">dev_<wbr>HTMLData<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlelement" class="tsd-kind-icon">dev_<wbr>HTMLElement</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlimageelement" class="tsd-kind-icon">dev_<wbr>HTMLImage<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmllielement" class="tsd-kind-icon">dev_<wbr>HTMLLIElement</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmllinkelement" class="tsd-kind-icon">dev_<wbr>HTMLLink<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlmetaelement" class="tsd-kind-icon">dev_<wbr>HTMLMeta<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlolistelement" class="tsd-kind-icon">dev_<wbr>HTMLOList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmltablecellelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmltablerowelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmltablesectionelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Section<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmltemplateelement" class="tsd-kind-icon">dev_<wbr>HTMLTemplate<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmltimeelement" class="tsd-kind-icon">dev_<wbr>HTMLTime<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#dev_htmlulistelement" class="tsd-kind-icon">dev_<wbr>HTMLUList<wbr>Element</a>
 					</li>
 				</ul>
 			</nav>

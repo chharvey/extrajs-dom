@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -123,12 +121,15 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#addclass" class="tsd-kind-icon">add<wbr>Class</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#after" class="tsd-kind-icon">after</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#append" class="tsd-kind-icon">append</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#attr" class="tsd-kind-icon">attr</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#before" class="tsd-kind-icon">before</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#class" class="tsd-kind-icon">class</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_element.html#empty" class="tsd-kind-icon">empty</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_element.html#exe" class="tsd-kind-icon">exe</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_element.html#ifelse" class="tsd-kind-icon">if<wbr>Else</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#innerhtml" class="tsd-kind-icon">innerHTML</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#outerhtml" class="tsd-kind-icon">outerHTML</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_element.html#prepend" class="tsd-kind-icon">prepend</a></li>
@@ -154,15 +155,13 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L34">Element.class.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L38">class/Element.class.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Construct a new xjs_Element object.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Construct a new xjs_Element object.</p>
+								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -189,7 +188,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#nodetype">NodeType</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L25">Node.class.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L25">class/Node.class.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -200,24 +199,22 @@
 					<a name="node" class="tsd-anchor"></a>
 					<h3>node</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">dev_Element</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#dev_element" class="tsd-signature-type">dev_Element</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L45">Element.class.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L49">class/Element.class.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>This wrapper’s node.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>This wrapper’s node.</p>
+								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">dev_Element</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#dev_element" class="tsd-signature-type">dev_Element</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -231,14 +228,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L52">Element.class.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L56">class/Element.class.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>This element’s tag name in lowercase.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>This element’s tag name in lowercase.</p>
-									</dd>
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/dom/#dom-element-tagname">https://www.w3.org/TR/dom/#dom-element-tagname</a></p>
 									</dd>
@@ -261,24 +258,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L375">Element.class.ts:375</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L448">class/Element.class.ts:448</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Append one or more tokens to this element’s <code>[class]</code> attribute.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>Argument(s) can also be space-separated tokens.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.addClass(&#39;o-Object&#39;, &#39;c-Component&#39;)          // add token(s) to the [class] attribute
-											this.addClass(&#39;o-Object c-Component&#39;, &#39;h-Helper&#39;) // spaces are allowed; they will just be split
-											this.addClass(&#39;&#39;)                                 // do nothing; return <code>this</code>
-										this.addClass()                                   // do nothing; return <code>this</code></p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Append one or more tokens to this element’s <code>[class]</code> attribute.</p>
+								</div>
+								<p>Argument(s) can also be space-separated tokens.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.addClass(<span class="hljs-string">'o-Object'</span>, <span class="hljs-string">'c-Component'</span>)          <span class="hljs-comment">// add token(s) to the [class] attribute</span>
+<span class="hljs-keyword">this</span>.addClass(<span class="hljs-string">'o-Object c-Component'</span>, <span class="hljs-string">'h-Helper'</span>) <span class="hljs-comment">// spaces are allowed; they will just be split</span>
+<span class="hljs-keyword">this</span>.addClass(<span class="hljs-string">''</span>)                                 <span class="hljs-comment">// do nothing; return `this`</span>
+<span class="hljs-keyword">this</span>.addClass()                                   <span class="hljs-comment">// do nothing; return `this`</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -295,43 +286,82 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="append" class="tsd-anchor"></a>
-					<h3>append</h3>
+					<a name="after" class="tsd-anchor"></a>
+					<h3>after</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">after<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L154">Element.class.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L200">class/Element.class.ts:200</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/after" class="external">ChildNode#after</a>,
+									but return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append" class="external">ParentNode#append</a>, but returns this object when done.</p>
+									<dt>todo</dt>
+									<dd><p>TODO xjs.ChildNode#after</p>
 									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.</p>
+									<dt>see</dt>
+									<dd><p><a href="https://dom.spec.whatwg.org/#dom-childnode-after">https://dom.spec.whatwg.org/#dom-childnode-after</a></p>
 									</dd>
-									<dt>example</dt>
-									<dd><p>let strong = document.createElement(&#39;strong&#39;)
-											strong.textContent = &#39;hello&#39;
-											let em = document.createElement(&#39;em&#39;)
-										let mark = document.createElement(&#39;mark&#39;)</p>
-										<p>let snippet = new xjs.Element(document.createElement(&#39;div&#39;))
-											.append(...[
-											strong,                                       // DOM Node
-											<code>to the</code>,                                   // string
-											new Comment(<code>great</code>),                         // DOM Node
-											<code>&lt;small&gt;big&lt;/small&gt;</code>,                        // string with HTML
-											new xjs.Element(em).addContent(<code>world</code>).node, // DOM Node (unwrapped)
-											null,                                         // null
-											new xjs.Element(mark).addContent(<code>!</code>),        // wrapped DOM Node
-											]).innerHTML()
-										return snippet === <code>&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;</code></p>
-									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the contents to insert after this node</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="append" class="tsd-anchor"></a>
+					<h3>append</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">append<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L162">class/Element.class.ts:162</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append" class="external">ParentNode#append</a>,
+									but return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
+strong.textContent = <span class="hljs-string">'hello'</span>
+<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
+<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
+
+<span class="hljs-keyword">this</span>.append(...[
+    strong,                                       <span class="hljs-comment">// DOM Node</span>
+    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
+    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
+    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
+    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
+    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
+    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
+  ]).innerHTML()
+<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
+								<dl class="tsd-comment-tags">
 									<dt>todo</dt>
 									<dd><p>TODO xjs.ParentNode#append</p>
 									</dd>
@@ -343,7 +373,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the contents to append</p>
 									</div>
@@ -361,25 +391,21 @@
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><a href="../globals.html#valueobject" class="tsd-signature-type">ValueObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L168">Element.class.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L214">class/Element.class.ts:214</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get and set attributes of this element.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>If no argument is provided, this method does nothing and returns <code>this</code>.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Get and set attributes of this element.</p>
+								</div>
+								<p>If no argument is provided, this method does nothing and returns <code>this</code>.</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 							<p><code>this</code></p>
@@ -387,27 +413,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L187">Element.class.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L234">class/Element.class.ts:234</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get an attribute of this element.</p>
+								</div>
+								<p>If the key is a string and the value is not provided (or <code>undefined</code>),
+									then this method returns the string value of the attribute identified by the key.
+									If the attribute exists but is a boolean attribute, the empty string <code>&#39;&#39;</code> is returned.
+								If no such attribute exists, then <code>null</code> is returned.</p>
+								<p>If the key is <code>&#39;&#39;</code>, this method throws an error.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'itemtype'</span>) <span class="hljs-comment">// get the value of the attribute (or `null` if it had not been set)</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">''</span>)         <span class="hljs-comment">// throws, since `''` is not an attribute</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get an attribute of this element.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>If the key is a string and the value is not provided (or <code>undefined</code>),
-											then this method returns the string value of the attribute identified by the key.
-											If the attribute exists but is a boolean attribute, the empty string <code>&#39;&#39;</code> is returned.
-										If no such attribute exists, then <code>null</code> is returned.</p>
-										<p>If the key is <code>&#39;&#39;</code>, this method throws an error.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.attr(&#39;itemtype&#39;) // get the value of the attribute (or <code>null</code> if it had not been set)
-										this.attr(&#39;&#39;)         // throws, since <code>&#39;&#39;</code> is not an attribute</p>
-									</dd>
 									<dt>throws</dt>
-									<dd><p>{RangeError} if the empty string is passed as the attribute name</p>
+									<dd><p>{RangeError} if <code>&#39;&#39;</code> is passed as the attribute name</p>
 									</dd>
 								</dl>
 							</div>
@@ -429,39 +451,38 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L221">Element.class.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L273">class/Element.class.ts:273</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set or remove an attribute of this element.</p>
+								</div>
+								<p>If the key given is a string, and the value is a non-null <a href="../globals.html#valuetype">ValueType</a> type,
+								then the attribute will be set (or modified) with the result of the value.</p>
+								<p>If the key is a string and the value is <code>null,</code>
+								then the attribute identified by the key is removed from this element.</p>
+								<p>If the value is <code>NaN</code>, this method throws an error.</p>
+								<p>Notes:</p>
+								<ul>
+									<li>If the attribute is a <strong>boolean attribute</strong> and is present (such as [<code>checked=&quot;&quot;</code>]), provide the empty string <code>&#39;&#39;</code> as the value.</li>
+									<li>Since this method returns <code>this</code>, it can be chained, e.g.,<pre><code class="language-js">my_elem.attr(<span class="hljs-string">'itemscope'</span>, <span class="hljs-string">''</span>).attr(<span class="hljs-string">'itemtype'</span>,<span class="hljs-string">'Thing'</span>).attr(<span class="hljs-string">'itemprop'</span>, <span class="hljs-literal">null</span>)</code></pre>
+										However, it may be simpler to use an object argument:<pre><code class="language-js">my_elem.attr({ <span class="hljs-attr">itemscope</span>:<span class="hljs-string">''</span>, <span class="hljs-attr">itemtype</span>:<span class="hljs-string">'Thing'</span>, <span class="hljs-attr">itemprop</span>:<span class="hljs-literal">null</span> })</code></pre>
+									</li>
+								</ul>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'itemtype'</span>, <span class="hljs-string">'Person'</span>) <span class="hljs-comment">// set an attribute (string)</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-nthchild'</span>, <span class="hljs-number">3</span>)   <span class="hljs-comment">// set an attribute (number)  (the value will be `"3"`)</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-block'</span>, <span class="hljs-literal">true</span>)   <span class="hljs-comment">// set an attribute (boolean) (the value will be `"true"`)</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'itemscope'</span>, <span class="hljs-string">''</span>)      <span class="hljs-comment">// set a boolean attribute</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'itemprop'</span>, <span class="hljs-literal">null</span>)     <span class="hljs-comment">// remove an attribute</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">''</span>, <span class="hljs-number">42</span>)               <span class="hljs-comment">// throws, since `''` is not an attribute</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-nthchild'</span>, <span class="hljs-literal">NaN</span>) <span class="hljs-comment">// throws, since `NaN` is not permitted</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set or remove an attribute of this element.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>If the key given is a string, and the value is a non-null <a href="../globals.html#valuetype">ValueType</a> type,
-										then the attribute will be set (or modified) with the result of the value.</p>
-										<p>If the key is a string and the value is <code>null,</code>
-										then the attribute identified by the key is removed from this element.</p>
-										<p>Notes:</p>
-										<ul>
-											<li>If the attribute is a <strong>boolean attribute</strong> and is present (such as [<code>checked=&quot;&quot;</code>]), provide the empty string <code>&#39;&#39;</code> as the value.</li>
-											<li>Since this method returns <code>this</code>, it can be chained, e.g.,<pre><code class="lang-js">my_elem.attr(<span class="hljs-string">'itemscope'</span>, <span class="hljs-string">''</span>).attr(<span class="hljs-string">'itemtype'</span>,<span class="hljs-string">'Thing'</span>).attr(<span class="hljs-string">'itemprop'</span>, <span class="hljs-literal">null</span>)
-</code></pre>
-												However, it may be simpler to use an object argument:<pre><code class="lang-js">my_elem.attr({ <span class="hljs-attr">itemscope</span>:<span class="hljs-string">''</span>, <span class="hljs-attr">itemtype</span>:<span class="hljs-string">'Thing'</span>, <span class="hljs-attr">itemprop</span>:<span class="hljs-literal">null</span> })
-</code></pre>
-											</li>
-										</ul>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.attr(&#39;itemtype&#39;, &#39;Person&#39;) // set an attribute (string)
-											this.attr(&#39;data-nthchild&#39;, 3)   // set an attribute (number)  (the value will be <code>&quot;3&quot;</code>)
-											this.attr(&#39;data-block&#39;, true)   // set an attribute (boolean) (the value will be <code>&quot;true&quot;</code>)
-											this.attr(&#39;itemscope&#39;, &#39;&#39;)      // set a boolean attribute
-											this.attr(&#39;itemprop&#39;, null)     // remove an attribute
-										this.attr(&#39;&#39;, 42)               // throws, since <code>&#39;&#39;</code> is not an attribute</p>
+									<dt>throws</dt>
+									<dd><p>{RangeError} if <code>&#39;&#39;</code> is passed as the attribute name</p>
 									</dd>
 									<dt>throws</dt>
-									<dd><p>{RangeError} if the empty string is passed as the attribute name</p>
+									<dd><p>{Error} if <code>NaN</code> is passed as the attribute value</p>
 									</dd>
 								</dl>
 							</div>
@@ -486,25 +507,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L239">Element.class.ts:239</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L293">class/Element.class.ts:293</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set or remove an attribute of this element, using a function.</p>
+								</div>
+								<p>If the key given is a string, and the value is a <a href="../interfaces/valuefunction.html">ValueFunction</a> type,
+								then the attribute will be set (or modified) with the result of the given function.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id() })                    <span class="hljs-comment">// set an attribute using a function in this xjs.Element’s context</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id }, { <span class="hljs-attr">id</span>: <span class="hljs-string">'custom-id'</span> }) <span class="hljs-comment">// set an attribute using a function in another given context</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">''</span>       , <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})                                      <span class="hljs-comment">// throws, since `''` is not an attribute</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-literal">NaN</span> })                          <span class="hljs-comment">// throws, since `NaN` is not permitted</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set or remove an attribute of this element, using a function.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>If the key given is a string, and the value is a <a href="../globals.html#valuefunction">ValueFunction</a> type,
-										then the attribute will be set (or modified) with the result of the given function.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.attr(&#39;data-id&#39;, function () { return this.id() })                    // set an attribute using a function in this xjs.Element’s context
-											this.attr(&#39;data-id&#39;, function () { return this.id }, { id: &#39;custom-id&#39; }) // set an attribute using a function in another given context
-										this.attr(&#39;&#39;, function () {})                                             // throws, since <code>&#39;&#39;</code> is not an attribute</p>
-									</dd>
 									<dt>throws</dt>
-									<dd><p>{RangeError} if the empty string is passed as the attribute name</p>
+									<dd><p>{RangeError} if <code>&#39;&#39;</code> is passed as the attribute name</p>
 									</dd>
 								</dl>
 							</div>
@@ -517,13 +535,13 @@
 									</div>
 								</li>
 								<li>
-									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionally pass in another object to use as <code>this</code> inside the given function</p>
 									</div>
@@ -535,33 +553,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L264">Element.class.ts:264</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L319">class/Element.class.ts:319</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set or remove attributes of this element.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>If an object is provided as the key, then no argument may be provided as the value.
-											The object must have values of the <a href="../globals.html#valuetype">ValueType</a> type;
-											thus for each key-value pair in the object, this method assigns corresponding
-											attributes. You may use this method with a single object argument to set and/or remove
-										multiple attributes (using <code>null</code> to remove).</p>
-										<p>If the key is <code>{}</code> or <code>null</code>, this method does nothing and returns <code>this</code>.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.attr({                     // set/remove multiple attributes all at once
-											itemprop : &#39;name&#39;,
-											itemscope: &#39;&#39;,
-											itemtype : &#39;Person&#39;,
-											&#39;data-id&#39;: null,
-											})
-											this.attr({})   // do nothing; return <code>this</code>
-										this.attr(null) // do nothing; return <code>this</code></p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set or remove attributes of this element, using an object.</p>
+								</div>
+								<p>If an object is provided as the key, then no argument may be provided as the value.
+									The object must have values of the <a href="../globals.html#valuetype">ValueType</a> type;
+									thus for each key-value pair in the object, this method assigns corresponding
+									attributes. You may use this method with a single object argument to set and/or remove
+								multiple attributes (using <code>null</code> to remove).</p>
+								<p>If the key is <code>{}</code> or <code>null</code>, this method does nothing and returns <code>this</code>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.attr({            <span class="hljs-comment">// set/remove multiple attributes all at once</span>
+  itemprop : <span class="hljs-string">'name'</span>,
+  <span class="hljs-attr">itemscope</span>: <span class="hljs-string">''</span>,
+  <span class="hljs-attr">itemtype</span> : <span class="hljs-string">'Person'</span>,
+  <span class="hljs-string">'data-id'</span>: <span class="hljs-literal">null</span>,
+})
+<span class="hljs-keyword">this</span>.attr({})   <span class="hljs-comment">// do nothing; return `this`</span>
+<span class="hljs-keyword">this</span>.attr(<span class="hljs-literal">null</span>) <span class="hljs-comment">// do nothing; return `this`</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -578,25 +590,67 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="class" class="tsd-anchor"></a>
-					<h3>class</h3>
+					<a name="before" class="tsd-anchor"></a>
+					<h3>before</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">before<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L329">Element.class.ts:329</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L181">class/Element.class.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before" class="external">ChildNode#before</a>,
+									but return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>.</p>
+									<dt>todo</dt>
+									<dd><p>TODO xjs.ChildNode#before</p>
 									</dd>
+									<dt>see</dt>
+									<dd><p><a href="https://dom.spec.whatwg.org/#dom-childnode-before">https://dom.spec.whatwg.org/#dom-childnode-before</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the contents to insert before this node</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="class" class="tsd-anchor"></a>
+					<h3>class</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L394">class/Element.class.ts:394</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/dom/#dom-element-classname">https://www.w3.org/TR/dom/#dom-element-classname</a></p>
 									</dd>
@@ -611,26 +665,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L343">Element.class.ts:343</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L411">class/Element.class.ts:411</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>, and return this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.
-										This method also takes arguments usable in {@link xjs_Element#attr}.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.class(&#39;o-Object c-Component&#39;) // set the [class] attribute (string)
-											this.class(42)                     // set the [class] attribute (number)  (the value will be <code>&quot;42&quot;</code>)
-											this.class(false)                  // set the [class] attribute (boolean) (the value will be <code>&quot;false&quot;</code>)
-											this.class(&#39;&#39;)                     // set the [class] attribute to the empty string: <code>[class=&quot;&quot;]</code>
-										this.class(null)                   // remove the [class] attribute</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>, and return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.
+								This method also takes arguments usable in <a href="xjs_element.html#attr">xjs_Element.attr</a>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.class(<span class="hljs-string">'o-Object c-Component'</span>) <span class="hljs-comment">// set the [class] attribute (string)</span>
+<span class="hljs-keyword">this</span>.class(<span class="hljs-number">42</span>)                     <span class="hljs-comment">// set the [class] attribute (number)  (the value will be `"42"`)</span>
+<span class="hljs-keyword">this</span>.class(<span class="hljs-literal">false</span>)                  <span class="hljs-comment">// set the [class] attribute (boolean) (the value will be `"false"`)</span>
+<span class="hljs-keyword">this</span>.class(<span class="hljs-string">''</span>)                     <span class="hljs-comment">// set the [class] attribute to the empty string: `[class=""]`</span>
+<span class="hljs-keyword">this</span>.class(<span class="hljs-literal">null</span>)                   <span class="hljs-comment">// remove the [class] attribute</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -647,34 +695,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L355">Element.class.ts:355</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L426">class/Element.class.ts:426</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>, and return this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.
-										This method also takes arguments usable in {@link xjs_Element#attr}.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.class(function () { return this.tagName })                             // set the [class] attribute using a function in this xjs.Element’s context
-										this.class(function () { return this.tagName }, { tagName: &#39;custom-name&#39; }) // set the [class] attribute using a function in another given context</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" class="external">Element#className</a>, and return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.
+								This method also takes arguments usable in <a href="xjs_element.html#attr">xjs_Element.attr</a>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.class(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tagName })                             <span class="hljs-comment">// set the [class] attribute using a function in this xjs.Element’s context</span>
+<span class="hljs-keyword">this</span>.class(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tagName }, { <span class="hljs-attr">tagName</span>: <span class="hljs-string">'custom-name'</span> }) <span class="hljs-comment">// set the [class] attribute using a function in another given context</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionally pass in another object to use as <code>this</code> inside the given function</p>
 									</div>
@@ -696,15 +738,13 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L110">Node.class.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L129">class/Node.class.ts:129</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Remove all child nodes from this node, and return it.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Remove all child nodes from this node, and return it.</p>
+								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 							<p><code>this</code></p>
@@ -722,38 +762,35 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L74">Node.class.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Execute a function acting on this node, and then return this node.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>Simplifies chaining when performing void tasks,
-										especially tasks that have not been defined in this implementation.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Execute a function acting on this node, and then return this node.</p>
+								</div>
+								<p>Simplifies chaining when performing void tasks,
+									especially tasks that have not been defined in this implementation.
+								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>executable: <span class="tsd-signature-type">function</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>any function that takes 0 arguments and returns <code>undefined</code> (or does not have a return statement)</p>
+										<p>the function to call in the context of <code>this</code></p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>this: <a href="xjs_node.html" class="tsd-signature-type">xjs_Node</a></h5>
+															<h5>this: <span class="tsd-signature-type">this</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -774,20 +811,20 @@
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L289">Element.class.ts:289</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L349">class/Element.class.ts:349</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>.</p>
-									</dd>
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/dom/#dom-element-id">https://www.w3.org/TR/dom/#dom-element-id</a></p>
 									</dd>
@@ -802,26 +839,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L303">Element.class.ts:303</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L366">class/Element.class.ts:366</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>, and return this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.
-										This method also takes arguments usable in {@link xjs_Element#attr}.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.id(&#39;section1&#39;) // set the [id] attribute (string)
-											this.id(42)         // set the [id] attribute (number)  (the value will be <code>&quot;42&quot;</code>)
-											this.id(false)      // set the [id] attribute (boolean) (the value will be <code>&quot;false&quot;</code>)
-											this.id(&#39;&#39;)         // set the [id] attribute to the empty string: <code>[id=&quot;&quot;]</code>
-										this.id(null)       // remove the [id] attribute</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>, and return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.
+								This method also takes arguments usable in <a href="xjs_element.html#attr">xjs_Element.attr</a>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.id(<span class="hljs-string">'section1'</span>) <span class="hljs-comment">// set the [id] attribute (string)</span>
+<span class="hljs-keyword">this</span>.id(<span class="hljs-number">42</span>)         <span class="hljs-comment">// set the [id] attribute (number)  (the value will be `"42"`)</span>
+<span class="hljs-keyword">this</span>.id(<span class="hljs-literal">false</span>)      <span class="hljs-comment">// set the [id] attribute (boolean) (the value will be `"false"`)</span>
+<span class="hljs-keyword">this</span>.id(<span class="hljs-string">''</span>)         <span class="hljs-comment">// set the [id] attribute to the empty string: `[id=""]`</span>
+<span class="hljs-keyword">this</span>.id(<span class="hljs-literal">null</span>)       <span class="hljs-comment">// remove the [id] attribute</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -838,37 +869,114 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L315">Element.class.ts:315</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L381">class/Element.class.ts:381</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>, and return this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.
-										This method also takes arguments usable in {@link xjs_Element#attr}.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.id(function () { return this.tagName })                             // set the [id] attribute using a function in this xjs.Element’s context
-										this.id(function () { return this.tagName }, { tagName: &#39;custom-name&#39; }) // set the [id] attribute using a function in another given context</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id" class="external">Element#id</a>, and return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.
+								This method also takes arguments usable in <a href="xjs_element.html#attr">xjs_Element.attr</a>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.id(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tagName })                             <span class="hljs-comment">// set the [id] attribute using a function in this xjs.Element’s context</span>
+<span class="hljs-keyword">this</span>.id(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tagName }, { <span class="hljs-attr">tagName</span>: <span class="hljs-string">'custom-name'</span> }) <span class="hljs-comment">// set the [id] attribute using a function in another given context</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> this_arg: <span class="tsd-signature-type">unknown</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>optionally pass in another object to use as <code>this</code> inside the given function</p>
 									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="ifelse" class="tsd-anchor"></a>
+					<h3>if<wbr>Else</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">if<wbr>Else<span class="tsd-signature-symbol">(</span>condition<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, onResolve<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, onReject<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#ifelse">ifElse</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Execute a function based on a condition.</p>
+								</div>
+								<p>Given a condition, execute one function upon passing, or execute another upon failure.
+								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>condition: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the condition to evaluate; will be converted to boolean</p>
+									</div>
+								</li>
+								<li>
+									<h5>onResolve: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the executable to call (in the context of <code>this</code>) if the condition is truthy</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>this: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> onReject: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;() &#x3D;&gt; {}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the executable to call (in the context of <code>this</code>) if the condition is falsy</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>this: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -887,14 +995,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L59">Element.class.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L63">class/Element.class.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>.</p>
-									</dd>
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML">https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML</a></p>
 									</dd>
@@ -906,18 +1014,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L66">Element.class.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L71">class/Element.class.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>, and returns this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>, and returns this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -944,14 +1048,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L80">Element.class.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L83">class/Element.class.ts:83</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML" class="external">Element#outerHTML</a>.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML" class="external">Element#outerHTML</a>.</p>
-									</dd>
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML">https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML</a></p>
 									</dd>
@@ -963,17 +1067,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L88">Element.class.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L92">class/Element.class.ts:92</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML" class="external">Element#outerHTML</a>, and returns this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML" class="external">Element#outerHTML</a>, and returns this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.</p>
-									</dd>
 									<dt>todo</dt>
 									<dd><p>TODO: setter is not defined yet; only use this method as a getter.</p>
 									</dd>
@@ -997,40 +1099,37 @@
 					<a name="prepend" class="tsd-anchor"></a>
 					<h3>prepend</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">prepend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>contents<span class="tsd-signature-symbol">: </span><a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L121">Element.class.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L126">class/Element.class.ts:126</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend" class="external">ParentNode#prepend</a>,
+									but return this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
+strong.textContent = <span class="hljs-string">'hello'</span>
+<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
+<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
+
+<span class="hljs-keyword">this</span>.prepend(...[
+    strong,                                       <span class="hljs-comment">// DOM Node</span>
+    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
+    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
+    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
+    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
+    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
+    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
+  ]).innerHTML()
+<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend" class="external">ParentNode#prepend</a>, but returns this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>let strong = document.createElement(&#39;strong&#39;)
-											strong.textContent = &#39;hello&#39;
-											let em = document.createElement(&#39;em&#39;)
-										let mark = document.createElement(&#39;mark&#39;)</p>
-										<p>let snippet = new xjs.Element(document.createElement(&#39;div&#39;))
-											.prepend(...[
-											strong,                                       // DOM Node
-											<code>to the</code>,                                   // string
-											new Comment(<code>great</code>),                         // DOM Node
-											<code>&lt;small&gt;big&lt;/small&gt;</code>,                        // string with HTML
-											new xjs.Element(em).addContent(<code>world</code>).node, // DOM Node (unwrapped)
-											null,                                         // null
-											new xjs.Element(mark).addContent(<code>!</code>),        // wrapped DOM Node
-											]).innerHTML()
-										return snippet === <code>&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;</code></p>
-									</dd>
 									<dt>todo</dt>
 									<dd><p>TODO xjs.ParentNode#prepend</p>
 									</dd>
@@ -1042,7 +1141,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <span class="tsd-signature-type">Content</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the contents to prepend</p>
 									</div>
@@ -1063,24 +1162,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L395">Element.class.ts:395</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L471">class/Element.class.ts:471</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Remove one or more tokens from this element’s <code>[class]</code> attribute.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>Argument(s) can also be space-separated tokens.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>this.removeClass(&#39;o-Object&#39;, &#39;c-Component&#39;)          // remove token(s) from the [class] attribute
-											this.removeClass(&#39;o-Object c-Component&#39;, &#39;h-Helper&#39;) // spaces are allowed; they will just be split
-											this.removeClass(&#39;&#39;)                                 // do nothing; return <code>this</code>
-										this.removeClass()                                   // do nothing; return <code>this</code></p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Remove one or more tokens from this element’s <code>[class]</code> attribute.</p>
+								</div>
+								<p>Argument(s) can also be space-separated tokens.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">this</span>.removeClass(<span class="hljs-string">'o-Object'</span>, <span class="hljs-string">'c-Component'</span>)          <span class="hljs-comment">// remove token(s) from the [class] attribute</span>
+<span class="hljs-keyword">this</span>.removeClass(<span class="hljs-string">'o-Object c-Component'</span>, <span class="hljs-string">'h-Helper'</span>) <span class="hljs-comment">// spaces are allowed; they will just be split</span>
+<span class="hljs-keyword">this</span>.removeClass(<span class="hljs-string">''</span>)                                 <span class="hljs-comment">// do nothing; return `this`</span>
+<span class="hljs-keyword">this</span>.removeClass()                                   <span class="hljs-comment">// do nothing; return `this`</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -1106,27 +1199,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Element.class.ts#L414">Element.class.ts:414</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L495">class/Element.class.ts:495</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Replace a segment of this element’s class string with a new string segment.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>let element = jsdom.JSDOM.fragment(<code>&lt;i class=&quot;glyphicons glphicons-{{ icon }}&quot;&gt;&lt;/i&gt;</code>).querySelector(&#39;i&#39;)
-											new xjs.Element(element).replaceClass(&#39;{{ icon }}&#39;, &#39;mobile&#39;)
-										element.outerHTML // <a class="glyphicons glphicons-mobile"></a></p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Replace a segment of this element’s class string with a new string segment.</p>
+								</div>
+								<p>Note: this is not the same as replacing one class <em>token</em> for another.
+								For that, use <code>this.node.classList.replace(old_, new_)</code>.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">let</span> element = jsdom.JSDOM.fragment(<span class="hljs-string">`&lt;i class="glyphicons glphicons-{{ icon }}"&gt;&lt;/i&gt;`</span>).querySelector(<span class="hljs-string">'i'</span>)
+<span class="hljs-keyword">new</span> xjs.Element(element).replaceClassString(<span class="hljs-string">'{{ icon }}'</span>, <span class="hljs-string">'mobile'</span>)
+element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicons-mobile"&gt;&lt;/i&gt;</span></code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>old_: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the segment of this element’s <code>[class]</code> attribute value to remove</p>
+										<p>the segment of this element’s <code>[class]</code> attribute value to remove; might not be a complete token</p>
 									</div>
 								</li>
 								<li>
@@ -1153,14 +1244,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L51">Node.class.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent" class="external">Node#textContent</a>.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Get <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent" class="external">Node#textContent</a>.</p>
-									</dd>
 									<dt>see</dt>
 									<dd><p><a href="https://www.w3.org/TR/dom/#dom-node-textcontent">https://www.w3.org/TR/dom/#dom-node-textcontent</a></p>
 									</dd>
@@ -1176,18 +1267,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L58">Node.class.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent" class="external">Node#textContent</a>, and returns this object when done.</p>
-									</dd>
-									<dt>description</dt>
-									<dd><p>This method exists simply for chaining.</p>
-									</dd>
-								</dl>
+								<div class="lead">
+									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent" class="external">Node#textContent</a>, and returns this object when done.</p>
+								</div>
+								<p>This method exists simply for chaining.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -1214,27 +1301,28 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/85bc59c/src/class/Node.class.ts#L98">Node.class.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>summary</dt>
-									<dd><p>Remove all inner whitespace text nodes from this node, and return it.</p>
-									</dd>
-									<dt>example</dt>
-									<dd><p>let snip = new HTMLElement(document.createElement(&#39;div&#39;)).addContent(<code>&lt;h1&gt;
+								<div class="lead">
+									<p>Remove all inner whitespace text nodes from this node, and return it.</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">let</span> div = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>)
+div.innerHTML = <span class="hljs-string">`
+  &lt;h1&gt;
     &lt;em&gt;Hello &lt;/em&gt;
     &lt;b&gt;Worl d&lt;/b&gt;
-  &lt;/h1&gt;</code>)
-											let snipTrimmed = new xjs.Node(snip).trimInner()
-											return snip.node.innerHTML === <code>&lt;h1&gt;
+  &lt;/h1&gt;
+`</span>
+<span class="hljs-keyword">let</span> trimmed_div = <span class="hljs-keyword">new</span> xjs.Node(div).trimInner().node
+<span class="hljs-keyword">return</span> div.innerHTML === <span class="hljs-string">`
+  &lt;h1&gt;
     &lt;em&gt;Hello &lt;/em&gt;
     &lt;b&gt;Worl d&lt;/b&gt;
-  &lt;/h1&gt;</code>
-										&amp;&amp; snipTrimmed.node.innerHTML = <code>&lt;h1&gt;&lt;em&gt;Hello &lt;/em&gt;&lt;b&gt;Worl d&lt;/b&gt;&lt;/h1&gt;</code></p>
-									</dd>
-								</dl>
+  &lt;/h1&gt;
+`</span>
+  &amp;&amp; trimmed_div.innerHTML = <span class="hljs-string">`&lt;h1&gt;&lt;em&gt;Hello &lt;/em&gt;&lt;b&gt;Worl d&lt;/b&gt;&lt;/h1&gt;`</span></code></pre>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 							<p><code>this</code></p>
@@ -1253,15 +1341,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-is-not-exported">
-						<a href="../enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_document.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_documentfragment.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document<wbr>Fragment</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -1283,10 +1362,16 @@
 								<a href="xjs_element.html#addclass" class="tsd-kind-icon">add<wbr>Class</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="xjs_element.html#after" class="tsd-kind-icon">after</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_element.html#append" class="tsd-kind-icon">append</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_element.html#attr" class="tsd-kind-icon">attr</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="xjs_element.html#before" class="tsd-kind-icon">before</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_element.html#class" class="tsd-kind-icon">class</a>
@@ -1299,6 +1384,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_element.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="xjs_element.html#ifelse" class="tsd-kind-icon">if<wbr>Else</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_element.html#innerhtml" class="tsd-kind-icon">innerHTML</a>
@@ -1325,75 +1413,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmlanchorelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLAnchor<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmldlistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLDList<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmldataelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLData<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmlelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLElement</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmllielement.html" class="tsd-kind-icon">xjs_<wbr>HTMLLIElement</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmlmetaelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLMeta<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmltablesectionelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Section<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmltemplateelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTemplate<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmltimeelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTime<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_htmlulistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLUList<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="xjs_node.html" class="tsd-kind-icon">xjs_<wbr><wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#fs" class="tsd-kind-icon">fs</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#jsdom" class="tsd-kind-icon">jsdom</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#path" class="tsd-kind-icon">path</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-is-not-exported">
-						<a href="../globals.html#util" class="tsd-kind-icon">util</a>
-					</li>
-					<li class=" tsd-kind-object-literal tsd-is-not-exported">
-						<a href="../globals.html#xjs" class="tsd-kind-icon">xjs</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

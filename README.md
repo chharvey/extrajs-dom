@@ -1,4 +1,4 @@
-# extrajs-dom
+# [extrajs-dom](https://chharvey.github.io/extrajs-dom/docs/api/)
 Javascript extensions to DOM.
 
 DOM code is kinda spaghetti-like.
@@ -8,15 +8,6 @@ Use this package to streamline your code and keep the control flow sensible.
 
 ```bash
 $ npm install extrajs-dom
-```
-
-## Get the Docs
-
-```bash
-$ cd ./node_modules/extrajs-dom/
-$ npm install
-$ npm run build
-$ open ./docs/api/index.html
 ```
 
 ## Example
@@ -58,10 +49,8 @@ const createMyLink = (url, text) =>
 - `xjs.Node#empty()` removes all children
 - `xjs.Node#trimInner()` removes all empty and whitespace-only Text node descendants
 - `xjs.Node#exe()` executes a custom function for any unsupported features you might need
-- `xjs.Element#attr()` sets/removes multiple attributes in one step
-- `xjs.Element#attr()` and all other **attribute reflectors** (e.g. `#href()`) may take a function argument
-- `xjs.Element#replaceClassString()` replaces string fragments in the `[class]` attribute
-- `xjs.DocumentFragment#innerHTML()` does what you would expect
-- Render components with `xjs.HTMLTemplateElement`
-  (see [“Create a component with extrajs-dom and jsdom”](https://github.com/chharvey/extrajs-view/wiki/Create-a-component-with-extrajs-dom-and-jsdom) for details)
-- Populate `<ol>`, `<ul>`, `<tbody>`, and `<tr>` as lists of data *(coming in v4.1)*
+- `xjs.Node#ifElse()` executes a custom function based on a condition
+- `xjs.Element#attr()` sets/removes multiple attributes in one step; taking object and function arguments
+- `xjs.Element#{addClass,removeClass,replaceClassString}()` for better `[class]` attribute manipulation
+- `xjs.{Document,DocumentFragment}#innerHTML()` does what you would expect
+- Populate `<ol>`, `<ul>`, `<tbody>`, and `<tr>` as lists of data
