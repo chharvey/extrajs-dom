@@ -7,10 +7,7 @@ import xjs_HTMLElement from './HTMLElement.class'
 /**
  * @deprecated XXX{DEPRECATED} : use {@link ProcessingFunction} instead.
  */
-export interface RenderingFunction<T, U extends object> extends Function {
-  (this: any, frag: DocumentFragment, data: T, opts: U): void;
-  call(this_arg: any, frag: DocumentFragment, data: T, opts: U): void;
-}
+export type RenderingFunction<T, U extends object> = (this: any, frag: DocumentFragment, data: T, opts: U) => void
 
 /**
  * Wrapper for HTML `template` element.

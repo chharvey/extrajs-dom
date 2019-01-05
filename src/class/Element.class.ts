@@ -25,10 +25,7 @@ export type ValueObject = { [index: string]: ValueType }
  * Any `this` context in the function will almost always point to this `xjs.Element` object (but can be overridden).
  * @returns the value used as the attribute value to set, or `null` to remove
  */
-export interface ValueFunction extends Function {
-  (this: any): ValueType;
-  call(this_arg: any): ValueType;
-}
+export type ValueFunction = (this: any) => ValueType
 
 /**
  * Wrapper for an Element.
