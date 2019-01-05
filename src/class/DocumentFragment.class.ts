@@ -8,7 +8,7 @@ import * as xjs from 'extrajs'
 
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
-import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
+import xjs_HTMLTemplateElement_import from './HTMLTemplateElement.class'
 
 
 /**
@@ -219,7 +219,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @returns `this`
    */
   importLinks(dirpath: string): this {
-    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class.js').default // NB relative to dist
+		const xjs_HTMLTemplateElement: typeof xjs_HTMLTemplateElement_import = require('./HTMLTemplateElement.class.js').default // NB relative to dist
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
@@ -241,7 +241,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @param   dirpath the absolute path to the directory of the template file containing the `link` element
    */
   async importLinksAsync(dirpath: string): Promise<this> {
-    const xjs_HTMLTemplateElement = require('./HTMLTemplateElement.class.js').default // NB relative to dist
+		const xjs_HTMLTemplateElement: typeof xjs_HTMLTemplateElement_import = require('./HTMLTemplateElement.class.js').default // NB relative to dist
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       await Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
