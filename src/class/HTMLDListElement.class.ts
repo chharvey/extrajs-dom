@@ -68,7 +68,7 @@ export default class xjs_HTMLDListElement extends xjs_HTMLElement {
 	 * @param   options      additional processing options for all items
 	 * @param   this_arg     the `this` context, if any, in which the instructions is called
 	 * @returns `this`
-	 * @throws  {ReferenceError} if this `<dl>` does not contain a `<template>`,
+	 * @throws  {TypeError} if this `<dl>` does not contain a `<template>`,
 	 *                           or if that `<template>` does not contain 1+ `<dt>` followed by 1+ `<dd>`.
 	 */
 	populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
@@ -77,13 +77,13 @@ export default class xjs_HTMLDListElement extends xjs_HTMLElement {
 			throw new ReferenceError('This <dl> does not have a <template> descendant.')
 		}
 		if (template.content.children.length < 1) {
-			throw new ReferenceError('The <template> must contain at least 1 element.')
+			throw new TypeError('The <template> must contain at least 1 element.')
+		}
+		if (template.content.querySelector('dt') === null || template.content.querySelector('dd') === null) {
+			throw new TypeError(`The <template> must contain at least 1 <dt> and at least 1 <dd>.`)
 		}
 		if ([...template.content.querySelectorAll('*')].some((el) => !el.matches('dt, dd'))) {
 			throw new TypeError(`The <template> must only contain <dt> or <dd> elements.`)
-		}
-		if (template.content.querySelector('dt') === null || template.content.querySelector('dd') === null) {
-			throw new ReferenceError(`The <template> must contain at least 1 <dt> and at least 1 <dd>.`)
 		}
 		if ([...template.content.children].indexOf(template.content.querySelector('dt:last-of-type') !) >= [...template.content.children].indexOf(template.content.querySelector('dd:first-of-type') !)) {
 			throw new TypeError(`All <dd> elements must follow all <dt> elements inside the <template>.`)
