@@ -7,7 +7,7 @@ import * as jsdom from 'jsdom'
 import * as xjs from 'extrajs'
 
 import {Content} from '../ambient'
-import xjs_Node from './Node.class'
+import xjs_Node, { NodeType } from './Node.class'
 import xjs_HTMLTemplateElement_import from './HTMLTemplateElement.class'
 
 
@@ -146,12 +146,12 @@ export default class xjs_DocumentFragment extends xjs_Node {
    */
   innerHTML(): string {
     return [...this.node.childNodes].map((node) =>
-			xjs.Object.switch<string|null>(`${node.nodeType}`, {
-				[xjs_Node.NodeType.ELEMENT_NODE]          : (el  : Element)          => el.outerHTML,
-				[xjs_Node.NodeType.TEXT_NODE]             : (text: Text)             => text.data,
-				[xjs_Node.NodeType.COMMENT_NODE]          : (comm: Comment)          => `<!--${comm.data}-->`,
-				[xjs_Node.NodeType.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
-				'default': () => null,
+			xjs.Object.switch<string>(`${node.nodeType}`, {
+				[NodeType.ELEMENT_NODE]          : (el  : Element         ) => el.outerHTML,
+				[NodeType.TEXT_NODE]             : (text: Text            ) => text.data,
+				[NodeType.COMMENT_NODE]          : (comm: Comment         ) => `<!--${comm.data}-->`,
+				[NodeType.DOCUMENT_FRAGMENT_NODE]: (frag: DocumentFragment) => new xjs_DocumentFragment(frag).innerHTML(),
+				default: () => '',
 			})(node)
     ).join('')
   }
