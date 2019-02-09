@@ -1,4 +1,4 @@
-import {Processor, ProcessingFunction} from 'template-processor'
+import { Processor, ProcessingFunction } from 'template-processor'
 
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
