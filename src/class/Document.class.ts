@@ -200,7 +200,7 @@ export default class xjs_Document extends xjs_Node {
 				let imported: DocumentFragment|null = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') !, {
 					'document': (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node,
 					'template': (lnk: HTMLLinkElement) => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, lnk.href)).content(),
-					'default' : () => null,
+					default: () => null,
 				})(link)
         if (imported) {
           link.after(imported)
@@ -218,10 +218,10 @@ export default class xjs_Document extends xjs_Node {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       await Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
-				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment|null>>(link.getAttribute('data-import') !, {
+				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment>|null>(link.getAttribute('data-import') !, {
 					'document': async (lnk: HTMLLinkElement) => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, lnk.href))).node,
 					'template': async (lnk: HTMLLinkElement) => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, lnk.href))).content(),
-					'default' : async () => null,
+					default: () => null,
 				})(link)
         if (imported) {
           link.after(imported)
