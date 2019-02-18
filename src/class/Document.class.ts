@@ -17,17 +17,28 @@ import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
  * @see https://www.w3.org/TR/dom/#document
  */
 export default class xjs_Document extends xjs_Node {
+	/**
+	 * Read an HTML string and return a document with its contents.
+	 *
+	 * The Document object will be wrapped in an `xjs.Document` object.
+	 * To access the actual document, call {@link xjs_Document#node}.
+	 * @param   str a string of markup
+	 * @returns the document, wrapped
+	 */
+	static fromString(str: string): xjs_Document {
+		return new xjs_Document(new jsdom.JSDOM(str).window.document)
+	}
+
   /**
    * Read an HTML file and return a document with its contents.
    *
    * The Document object will be wrapped in an `xjs.Document` object.
-   * To access the actual element, call {@link xjs_Document.node}.
+   * To access the actual document, call {@link xjs_Document#node}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
   static async fromFile(filepath: string): Promise<xjs_Document> {
-    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
-    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+		return xjs_Document.fromString(await util.promisify(fs.readFile)(filepath, 'utf8'))
   }
   /**
    * Synchronous version of {@link xjs_Document.fromFile}.
@@ -35,8 +46,7 @@ export default class xjs_Document extends xjs_Node {
    * @returns the document, wrapped
    */
   static fromFileSync(filepath: string): xjs_Document {
-    let data: string = fs.readFileSync(filepath, 'utf8')
-    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+		return xjs_Document.fromString(fs.readFileSync(filepath, 'utf8'))
   }
 
 

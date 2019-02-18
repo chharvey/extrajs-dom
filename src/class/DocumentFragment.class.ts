@@ -33,17 +33,28 @@ export default class xjs_DocumentFragment extends xjs_Node {
     return new xjs_DocumentFragment(jsdom.JSDOM.fragment('')).append(...contents).innerHTML()
   }
 
+	/**
+	 * Read an HTML string and return a document fragment with its contents.
+	 *
+	 * The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
+	 * To access the actual fragment, call {@link xjs_DocumentFragment#node}.
+	 * @param   str a string of markup
+	 * @returns the fragment, wrapped
+	 */
+	static fromString(str: string): xjs_DocumentFragment {
+		return new xjs_DocumentFragment(jsdom.JSDOM.fragment(str))
+	}
+
   /**
    * Read an HTML file and return a document fragment with its contents.
    *
    * The DocumentFragment object will be wrapped in an `xjs.DocumentFragment` object.
-   * To access the actual element, call {@link xjs_DocumentFragment.node}.
+   * To access the actual fragment, call {@link xjs_DocumentFragment#node}.
    * @param   filepath the path to the file
    * @returns the fragment, wrapped
    */
   static async fromFile(filepath: string): Promise<xjs_DocumentFragment> {
-    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
-    return new xjs_DocumentFragment(jsdom.JSDOM.fragment(data))
+		return xjs_DocumentFragment.fromString(await util.promisify(fs.readFile)(filepath, 'utf8'))
   }
   /**
    * Synchronous version of {@link xjs_DocumentFragment.fromFile}.
@@ -51,8 +62,7 @@ export default class xjs_DocumentFragment extends xjs_Node {
    * @returns the fragment, wrapped
    */
   static fromFileSync(filepath: string): xjs_DocumentFragment {
-    let data: string = fs.readFileSync(filepath, 'utf8')
-    return new xjs_DocumentFragment(jsdom.JSDOM.fragment(data))
+		return xjs_DocumentFragment.fromString(fs.readFileSync(filepath, 'utf8'))
   }
 
 
