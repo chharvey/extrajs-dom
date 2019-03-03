@@ -65,7 +65,7 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
   get node(): Document { return super.node as Document }
 
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
   prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -74,7 +74,7 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
     return this
   }
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
   append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -83,13 +83,13 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
     return this
   }
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
 	querySelector(selector: string): xjs_Element|null {
 		let el: Element|null = this.node.querySelector(selector)
 		return (el === null) ? null : new xjs_Element(el)
 	}
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
 	querySelectorAll(selector: string): xjs_Element[] {
 		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
 	}

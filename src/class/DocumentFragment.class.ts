@@ -80,7 +80,7 @@ export default class xjs_DocumentFragment extends xjs_Node implements xjs_Parent
    */
   get node(): DocumentFragment { return super.node as DocumentFragment }
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
   prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -89,7 +89,7 @@ export default class xjs_DocumentFragment extends xjs_Node implements xjs_Parent
     return this
   }
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
   append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -98,13 +98,13 @@ export default class xjs_DocumentFragment extends xjs_Node implements xjs_Parent
     return this
   }
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
 	querySelector(selector: string): xjs_Element|null {
 		let el: Element|null = this.node.querySelector(selector)
 		return (el === null) ? null : new xjs_Element(el)
 	}
 
-	/** @implements */
+	/** @implements xjs_ParentNode */
 	querySelectorAll(selector: string): xjs_Element[] {
 		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
 	}
