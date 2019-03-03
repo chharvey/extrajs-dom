@@ -59,6 +59,9 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    */
   innerHTML(): string;
   /**
+	 * @deprecated WARNING DEPRECATED - setting the `innerHTML` of an element is a security risk.
+	 * If setting plain text, use `textContent` instead; if adding HTML, use other DOM manipulation methods such as `append`.
+	 *
    * Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, and returns this object when done.
    *
    * This method exists simply for chaining.
@@ -67,6 +70,7 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    */
   innerHTML(markup: string): this;
   innerHTML(markup?: any): any {
+		console.warn(`WARNING: Setting \`innerHTML\` is a security risk. Use \`.textContent\` or \`.append\` instead.`)
 		if (!arguments.length) return this.node.innerHTML
 		this.node.innerHTML = markup
 		return this
