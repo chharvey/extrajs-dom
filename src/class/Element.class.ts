@@ -57,44 +57,18 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
    * @returns the `innerHTML` of this element
    */
-  innerHTML(): string;
-  /**
-	 * @deprecated WARNING DEPRECATED - setting the `innerHTML` of an element is a security risk.
-	 * If setting plain text, use `textContent` instead; if adding HTML, use other DOM manipulation methods such as `append`.
-	 *
-   * Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML|Element#innerHTML}, and returns this object when done.
-   *
-   * This method exists simply for chaining.
-   * @param   markup the html to set
-   * @returns `this`
-   */
-  innerHTML(markup: string): this;
-  innerHTML(markup?: any): any {
-		console.warn(`WARNING: Setting \`innerHTML\` is a security risk. Use \`.textContent\` or \`.append\` instead.`)
-		if (!arguments.length) return this.node.innerHTML
-		this.node.innerHTML = markup
-		return this
-  }
+	innerHTML(): string {
+		return this.node.innerHTML
+	}
 
   /**
    * Get {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}.
    * @see https://www.w3.org/TR/DOM-Parsing/#widl-Element-outerHTML
    * @returns the `outerHTML` of this element
    */
-  outerHTML(): string;
-  /**
-   * Set {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML|Element#outerHTML}, and returns this object when done.
-   *
-   * This method exists simply for chaining.
-   * @todo TODO: setter is not defined yet; only use this method as a getter.
-   * @param   markup the html to set
-   * @returns `this`
-   */
-  outerHTML(markup: string): this;
-  outerHTML(markup?: any): any {
-		if (!arguments.length) return this.node.outerHTML
-		throw new Error('feature not supported yet')
-  }
+	outerHTML(): string {
+		return this.node.outerHTML
+	}
 
 	/** @implements xjs_ParentNode */
   prepend(...contents: Content[]): this {
