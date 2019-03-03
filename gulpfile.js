@@ -9,9 +9,9 @@ const typedocconfig = require('./config/typedoc.json')
 
 
 function dist() {
-  return gulp.src('./src/class/*.ts')
-    .pipe(typescript(tsconfig.compilerOptions))
-    .pipe(gulp.dest('./dist/class/'))
+	return gulp.src('./src/**/*.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./dist/'))
 }
 
 function test_out() {

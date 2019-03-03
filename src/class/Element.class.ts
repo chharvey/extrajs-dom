@@ -2,6 +2,7 @@ import * as xjs from 'extrajs'
 
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
+import xjs_ParentNode from '../iface/ParentNode.iface'
 
 
 /**
@@ -31,7 +32,7 @@ export type ValueFunction = (this: any) => ValueType
  * Wrapper for an Element.
  * @see https://www.w3.org/TR/dom/#element
  */
-export default class xjs_Element extends xjs_Node {
+export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
   /**
    * Construct a new xjs_Element object.
    * @param node the node to wrap
@@ -91,34 +92,7 @@ export default class xjs_Element extends xjs_Node {
 		throw new Error('feature not supported yet')
   }
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.prepend(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).innerHTML()
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#prepend
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
-   * @param   contents the contents to prepend
-   * @returns `this`
-   */
+	/** @implements */
   prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -127,34 +101,7 @@ export default class xjs_Element extends xjs_Node {
     return this
   }
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.append(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).innerHTML()
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#append
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
-   * @param   contents the contents to append
-   * @returns `this`
-   */
+	/** @implements */
   append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -162,6 +109,17 @@ export default class xjs_Element extends xjs_Node {
     ))
     return this
   }
+
+	/** @implements */
+	querySelector(selector: string): xjs_Element|null {
+		let el: Element|null = this.node.querySelector(selector)
+		return (el === null) ? null : new xjs_Element(el)
+	}
+
+	/** @implements */
+	querySelectorAll(selector: string): xjs_Element[] {
+		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
+	}
 
 	/**
 	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/before|ChildNode#before},

@@ -20,3 +20,5 @@ export { default as HTMLTemplateElement     } from './src/class/HTMLTemplateElem
 export { default as HTMLTimeElement         } from './src/class/HTMLTimeElement.class'
 export { default as HTMLUListElement        } from './src/class/HTMLUListElement.class'
 export { default as Node                    } from './src/class/Node.class'
+
+export { default as ParentNode } from './src/iface/ParentNode.iface'
