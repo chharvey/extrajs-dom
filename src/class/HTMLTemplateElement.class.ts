@@ -8,11 +8,6 @@ import xjs_HTMLElement from './HTMLElement.class'
 
 
 /**
- * @deprecated XXX{DEPRECATED} : use {@link ProcessingFunction} instead.
- */
-export type RenderingFunction<T, U extends object> = (this: any, frag: DocumentFragment, data: T, opts: U) => void
-
-/**
  * Wrapper for HTML `template` element.
  * @see https://www.w3.org/TR/html52/semantics-scripting.html#htmltemplateelement
  */
