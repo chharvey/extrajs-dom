@@ -1,8 +1,6 @@
 import * as fs from 'fs'
 import * as util from 'util'
 
-import { Processor, ProcessingFunction } from 'template-processor'
-
 import xjs_DocumentFragment from './DocumentFragment.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -81,13 +79,5 @@ export default class xjs_HTMLTemplateElement extends xjs_HTMLElement {
    */
   content(): DocumentFragment {
     return this.node.content
-  }
-
-
-  /**
-   * @deprecated XXX{DEPRECATED} : use {@link Processor.process} instead.
-   */
-  render<T, U extends object>(renderer: ProcessingFunction<T, U>, data: T, options: U = ({} as U), this_arg: unknown = this): DocumentFragment {
-    return new Processor<T, U>(this.node, renderer).process(data, options, this_arg)
   }
 }
