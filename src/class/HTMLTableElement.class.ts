@@ -87,7 +87,7 @@ export default class xjs_HTMLTableElement extends xjs_HTMLElement {
 	 * @param   this_arg     the `this` context, if any, in which the instructions is called
 	 * @returns `this`
 	 */
-	populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+	populate<T, U extends object>(instructions: ProcessingFunction<DocumentFragment, T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
 		Processor.populateList(this.node, instructions, dataset, options, this_arg)
 		return this
 	}
