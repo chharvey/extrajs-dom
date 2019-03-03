@@ -27,8 +27,8 @@
   "homepage": "https://github.com/chharvey/extrajs-dom#readme",
   "dependencies": {
     "@types/jsdom": "^12.2.0",
-    "@types/node": "^10.12.0",
-    "extrajs": "^0.17.0",
+    "@types/node": "^11.9.5",
+    "extrajs": "^0.18.1",
     "jsdom": "^12.0.0",
     "template-processor": "^1.2.0-beta.0"
   },
@@ -37,6 +37,6 @@
     "gulp-typedoc": "^2.2.1",
     "gulp-typescript": "^5.0.0-alpha.3",
     "typedoc": "^0.14.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.3.3"
   }
 }
