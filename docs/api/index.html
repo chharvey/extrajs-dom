@@ -104,7 +104,7 @@
 					<li><code>xjs.Node#ifElse()</code> executes a custom function based on a condition</li>
 					<li><code>xjs.Element#attr()</code> sets/removes multiple attributes in one step; taking object and function arguments</li>
 					<li><code>xjs.Element#{addClass,removeClass,replaceClassString}()</code> for better <code>[class]</code> attribute manipulation</li>
-					<li><code>xjs.{Document,DocumentFragment}#innerHTML()</code> does what you would expect</li>
+					<li><code>xjs.{Document,DocumentFragment}#innerHTML()</code> gets what you would expect</li>
 					<li>Populate <code>&lt;ol&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tr&gt;</code> as lists of data</li>
 				</ul>
 			</div>
@@ -119,7 +119,7 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-is-not-exported">
+					<li class=" tsd-kind-enum">
 						<a href="enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -159,6 +159,9 @@
 						<a href="classes/xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/xjs_htmltableelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -176,80 +179,23 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/xjs_node.html" class="tsd-kind-icon">xjs_<wbr><wbr>Node</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/renderingfunction.html" class="tsd-kind-icon">Rendering<wbr>Function</a>
-					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/valuefunction.html" class="tsd-kind-icon">Value<wbr>Function</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="interfaces/dev_childnode.html" class="tsd-kind-icon">dev_<wbr><wbr>Child<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="interfaces/dev_parentnode.html" class="tsd-kind-icon">dev_<wbr><wbr>Parent<wbr>Node</a>
+						<a href="interfaces/xjs_parentnode.html" class="tsd-kind-icon">xjs_<wbr><wbr>Parent<wbr>Node</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#content" class="tsd-kind-icon">Content</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_document" class="tsd-kind-icon">dev_<wbr><wbr>Document</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_documentfragment" class="tsd-kind-icon">dev_<wbr><wbr>Document<wbr>Fragment</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_element" class="tsd-kind-icon">dev_<wbr><wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlanchorelement" class="tsd-kind-icon">dev_<wbr>HTMLAnchor<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmldlistelement" class="tsd-kind-icon">dev_<wbr>HTMLDList<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmldataelement" class="tsd-kind-icon">dev_<wbr>HTMLData<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlelement" class="tsd-kind-icon">dev_<wbr>HTMLElement</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlimageelement" class="tsd-kind-icon">dev_<wbr>HTMLImage<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmllielement" class="tsd-kind-icon">dev_<wbr>HTMLLIElement</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmllinkelement" class="tsd-kind-icon">dev_<wbr>HTMLLink<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlmetaelement" class="tsd-kind-icon">dev_<wbr>HTMLMeta<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlolistelement" class="tsd-kind-icon">dev_<wbr>HTMLOList<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmltablecellelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmltablerowelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmltablesectionelement" class="tsd-kind-icon">dev_<wbr>HTMLTable<wbr>Section<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmltemplateelement" class="tsd-kind-icon">dev_<wbr>HTMLTemplate<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmltimeelement" class="tsd-kind-icon">dev_<wbr>HTMLTime<wbr>Element</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#dev_htmlulistelement" class="tsd-kind-icon">dev_<wbr>HTMLUList<wbr>Element</a>
 					</li>
 				</ul>
 			</nav>

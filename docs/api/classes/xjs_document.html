@@ -89,6 +89,12 @@
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/xjs_parentnode.html" class="tsd-signature-type">xjs_ParentNode</a></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -97,12 +103,6 @@
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="xjs_document.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-inherited">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="xjs_document.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -122,10 +122,13 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#importlinksasync" class="tsd-kind-icon">import<wbr>Links<wbr>Async</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#innerhtml" class="tsd-kind-icon">innerHTML</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#prepend" class="tsd-kind-icon">prepend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#textcontent" class="tsd-kind-icon">text<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#triminner" class="tsd-kind-icon">trim<wbr>Inner</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="xjs_document.html#fromfile" class="tsd-kind-icon">from<wbr>File</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="xjs_document.html#fromfilesync" class="tsd-kind-icon">from<wbr>File<wbr>Sync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="xjs_document.html#fromstring" class="tsd-kind-icon">from<wbr>String</a></li>
 							</ul>
 						</section>
 					</div>
@@ -144,7 +147,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L41">class/Document.class.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L52">class/Document.class.ts:52</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,34 +171,20 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="nodetype" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> Node<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">Node<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/nodetype.html" class="tsd-signature-type">NodeType</a><span class="tsd-signature-symbol"> =&nbsp;NodeType</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#nodetype">NodeType</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L25">class/Node.class.ts:25</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 					<a name="node" class="tsd-anchor"></a>
 					<h3>node</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#dev_document" class="tsd-signature-type">dev_Document</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Document</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L54">class/Document.class.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L65">class/Document.class.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -203,7 +192,7 @@
 									<p>This wrapper’s node.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#dev_document" class="tsd-signature-type">dev_Document</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Document</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -219,37 +208,15 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#append">append</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L121">class/Document.class.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L78">class/Document.class.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append" class="external">ParentNode#append</a>,
-									but return this object when done.</p>
-								</div>
-								<p>This method exists simply for chaining.</p>
-								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
-strong.textContent = <span class="hljs-string">'hello'</span>
-<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
-<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
-
-<span class="hljs-keyword">this</span>.append(...[
-    strong,                                       <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
-    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
-    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
-    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
-    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
-  ]).node.querySelector(<span class="hljs-string">'body'</span>).innerHTML
-<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>todo</dt>
-									<dd><p>TODO xjs.ParentNode#append</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://dom.spec.whatwg.org/#dom-parentnode-append">https://dom.spec.whatwg.org/#dom-parentnode-append</a></p>
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
 									</dd>
 								</dl>
 							</div>
@@ -257,13 +224,9 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the contents to append</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-							<p><code>this</code></p>
 						</li>
 					</ul>
 				</section>
@@ -278,7 +241,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L129">class/Node.class.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L132">class/Node.class.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -302,7 +265,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -356,7 +319,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#ifelse">ifElse</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -438,7 +401,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L197">class/Document.class.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L165">class/Document.class.ts:165</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -509,7 +472,7 @@ this.importLinks(__dirname)</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L218">class/Document.class.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L186">class/Document.class.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -540,7 +503,7 @@ this.importLinks(__dirname)</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L140">class/Document.class.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L108">class/Document.class.ts:108</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -571,37 +534,15 @@ this.importLinks(__dirname)</code></pre>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#prepend">prepend</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L85">class/Document.class.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L69">class/Document.class.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend" class="external">ParentNode#prepend</a>,
-									but return this object when done.</p>
-								</div>
-								<p>This method exists simply for chaining.</p>
-								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
-strong.textContent = <span class="hljs-string">'hello'</span>
-<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
-<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
-
-<span class="hljs-keyword">this</span>.prepend(...[
-    strong,                                       <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
-    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
-    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
-    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
-    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
-  ]).node.querySelector(<span class="hljs-string">'body'</span>).innerHTML
-<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>todo</dt>
-									<dd><p>TODO xjs.ParentNode#prepend</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://dom.spec.whatwg.org/#dom-parentnode-prepend">https://dom.spec.whatwg.org/#dom-parentnode-prepend</a></p>
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
 									</dd>
 								</dl>
 							</div>
@@ -609,13 +550,74 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the contents to prepend</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="queryselector" class="tsd-anchor"></a>
+					<h3>query<wbr>Selector</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Selector<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselector">querySelector</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L87">class/Document.class.ts:87</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="queryselectorall" class="tsd-anchor"></a>
+					<h3>query<wbr>Selector<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Selector<wbr>All<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselectorall">querySelectorAll</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L93">class/Document.class.ts:93</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -631,7 +633,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -654,7 +656,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -688,7 +690,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -726,7 +728,7 @@ div.innerHTML = <span class="hljs-string">`
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L29">class/Document.class.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L42">class/Document.class.ts:42</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -734,7 +736,7 @@ div.innerHTML = <span class="hljs-string">`
 									<p>Read an HTML file and return a document with its contents.</p>
 								</div>
 								<p>The Document object will be wrapped in an <code>xjs.Document</code> object.
-								To access the actual element, call <a href="xjs_document.html#node">xjs_Document.node</a>.</p>
+								To access the actual document, call {@link xjs_Document#node}.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -760,7 +762,7 @@ div.innerHTML = <span class="hljs-string">`
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Document.class.ts#L38">class/Document.class.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L50">class/Document.class.ts:50</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -782,6 +784,40 @@ div.innerHTML = <span class="hljs-string">`
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="fromstring" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>String<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xjs_document.html" class="tsd-signature-type">xjs_Document</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L30">class/Document.class.ts:30</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Read an HTML string and return a document with its contents.</p>
+								</div>
+								<p>The Document object will be wrapped in an <code>xjs.Document</code> object.
+								To access the actual document, call {@link xjs_Document#node}.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>str: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>a string of markup</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="xjs_document.html" class="tsd-signature-type">xjs_Document</a></h4>
+							<p>the document, wrapped</p>
+						</li>
+					</ul>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -794,6 +830,9 @@ div.innerHTML = <span class="hljs-string">`
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -801,9 +840,6 @@ div.innerHTML = <span class="hljs-string">`
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_document.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="xjs_document.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_document.html#node" class="tsd-kind-icon">node</a>
@@ -832,6 +868,12 @@ div.innerHTML = <span class="hljs-string">`
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_document.html#prepend" class="tsd-kind-icon">prepend</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="xjs_document.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="xjs_document.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="xjs_document.html#textcontent" class="tsd-kind-icon">text<wbr>Content</a>
 							</li>
@@ -844,10 +886,85 @@ div.innerHTML = <span class="hljs-string">`
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="xjs_document.html#fromfilesync" class="tsd-kind-icon">from<wbr>File<wbr>Sync</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="xjs_document.html#fromstring" class="tsd-kind-icon">from<wbr>String</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="xjs_documentfragment.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document<wbr>Fragment</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_element.html" class="tsd-kind-icon">xjs_<wbr><wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlanchorelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLAnchor<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmldlistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLDList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmldataelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLData<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLElement</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlimageelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLImage<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmllielement.html" class="tsd-kind-icon">xjs_<wbr>HTMLLIElement</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlmetaelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLMeta<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltableelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablesectionelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Section<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltemplateelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTemplate<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltimeelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTime<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlulistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLUList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_node.html" class="tsd-kind-icon">xjs_<wbr><wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/xjs_parentnode.html" class="tsd-kind-icon">xjs_<wbr><wbr>Parent<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#content" class="tsd-kind-icon">Content</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

@@ -1,6 +1,5 @@
 import * as xjs from 'extrajs'
 
-import {dev_HTMLElement} from '../dev'
 import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
 
 
@@ -19,7 +18,7 @@ export default class xjs_HTMLElement extends xjs_Element {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLElement { return super.node as dev_HTMLElement }
+  get node(): HTMLElement { return super.node as HTMLElement }
 
   /**
    * Reflect the `title` content attribute.

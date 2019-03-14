@@ -52,5 +52,5 @@ const createMyLink = (url, text) =>
 - `xjs.Node#ifElse()` executes a custom function based on a condition
 - `xjs.Element#attr()` sets/removes multiple attributes in one step; taking object and function arguments
 - `xjs.Element#{addClass,removeClass,replaceClassString}()` for better `[class]` attribute manipulation
-- `xjs.{Document,DocumentFragment}#innerHTML()` does what you would expect
+- `xjs.{Document,DocumentFragment}#innerHTML()` gets what you would expect
 - Populate `<ol>`, `<ul>`, `<tbody>`, and `<tr>` as lists of data

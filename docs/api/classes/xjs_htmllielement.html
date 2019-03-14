@@ -89,6 +89,12 @@
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/xjs_parentnode.html" class="tsd-signature-type">xjs_ParentNode</a></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -97,12 +103,6 @@
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="xjs_htmllielement.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-inherited">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="xjs_htmllielement.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -132,6 +132,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#lang" class="tsd-kind-icon">lang</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#outerhtml" class="tsd-kind-icon">outerHTML</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#prepend" class="tsd-kind-icon">prepend</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#removeclass" class="tsd-kind-icon">remove<wbr>Class</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#replaceclassstring" class="tsd-kind-icon">replace<wbr>Class<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_htmllielement.html#style" class="tsd-kind-icon">style</a></li>
@@ -157,7 +159,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLLIElement.class.ts#L9">class/HTMLLIElement.class.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLLIElement.class.ts#L8">class/HTMLLIElement.class.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -181,34 +183,20 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="nodetype" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> Node<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">Node<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/nodetype.html" class="tsd-signature-type">NodeType</a><span class="tsd-signature-symbol"> =&nbsp;NodeType</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#nodetype">NodeType</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L25">class/Node.class.ts:25</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 					<a name="node" class="tsd-anchor"></a>
 					<h3>node</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#dev_htmllielement" class="tsd-signature-type">dev_HTMLLIElement</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> node<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLLIElement</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLLIElement.class.ts#L20">class/HTMLLIElement.class.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLLIElement.class.ts#L19">class/HTMLLIElement.class.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +204,7 @@
 									<p>This wrapper’s node.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#dev_htmllielement" class="tsd-signature-type">dev_HTMLLIElement</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLLIElement</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -231,7 +219,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#tagname">tagName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L56">class/Element.class.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L53">class/Element.class.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -262,7 +250,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#addclass">addClass</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L448">class/Element.class.ts:448</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L406">class/Element.class.ts:406</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +288,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#after">after</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L200">class/Element.class.ts:200</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L158">class/Element.class.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -341,38 +329,16 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#append">append</a></p>
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#append">append</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L162">class/Element.class.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L109">class/Element.class.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append" class="external">ParentNode#append</a>,
-									but return this object when done.</p>
-								</div>
-								<p>This method exists simply for chaining.</p>
-								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
-strong.textContent = <span class="hljs-string">'hello'</span>
-<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
-<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
-
-<span class="hljs-keyword">this</span>.append(...[
-    strong,                                       <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
-    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
-    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
-    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
-    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
-  ]).innerHTML()
-<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>todo</dt>
-									<dd><p>TODO xjs.ParentNode#append</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://dom.spec.whatwg.org/#dom-parentnode-append">https://dom.spec.whatwg.org/#dom-parentnode-append</a></p>
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
 									</dd>
 								</dl>
 							</div>
@@ -380,13 +346,9 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the contents to append</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-							<p><code>this</code></p>
 						</li>
 					</ul>
 				</section>
@@ -397,7 +359,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">attr<span class="tsd-signature-symbol">(</span>attr<span class="tsd-signature-symbol">: </span><a href="../globals.html#valueobject" class="tsd-signature-type">ValueObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -405,7 +367,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#attr">attr</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L214">class/Element.class.ts:214</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L172">class/Element.class.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -421,7 +383,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#attr">attr</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L234">class/Element.class.ts:234</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L192">class/Element.class.ts:192</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -460,7 +422,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#attr">attr</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L273">class/Element.class.ts:273</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L231">class/Element.class.ts:231</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -517,14 +479,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#attr">attr</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L293">class/Element.class.ts:293</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L251">class/Element.class.ts:251</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Set or remove an attribute of this element, using a function.</p>
 								</div>
-								<p>If the key given is a string, and the value is a <a href="../interfaces/valuefunction.html">ValueFunction</a> type,
+								<p>If the key given is a string, and the value is a <a href="../globals.html#valuefunction">ValueFunction</a> type,
 								then the attribute will be set (or modified) with the result of the given function.</p>
 								<pre><code class="language-js"><span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id() })                    <span class="hljs-comment">// set an attribute using a function in this xjs.Element’s context</span>
 <span class="hljs-keyword">this</span>.attr(<span class="hljs-string">'data-id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id }, { <span class="hljs-attr">id</span>: <span class="hljs-string">'custom-id'</span> }) <span class="hljs-comment">// set an attribute using a function in another given context</span>
@@ -545,7 +507,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 									</div>
 								</li>
 								<li>
-									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
@@ -564,7 +526,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#attr">attr</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L319">class/Element.class.ts:319</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L277">class/Element.class.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -611,7 +573,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#before">before</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L181">class/Element.class.ts:181</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L139">class/Element.class.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -649,14 +611,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">class<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#class">class</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L394">class/Element.class.ts:394</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L352">class/Element.class.ts:352</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -679,7 +641,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#class">class</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L411">class/Element.class.ts:411</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L369">class/Element.class.ts:369</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -710,7 +672,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#class">class</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L426">class/Element.class.ts:426</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L384">class/Element.class.ts:384</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -725,7 +687,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
@@ -749,7 +711,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data_attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data_attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data_attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data_attr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data_attr<span class="tsd-signature-symbol">: </span><a href="../globals.html#valueobject" class="tsd-signature-type">ValueObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -757,7 +719,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#data">data</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L290">class/HTMLElement.class.ts:290</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L289">class/HTMLElement.class.ts:289</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -782,7 +744,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#data">data</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L311">class/HTMLElement.class.ts:311</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L310">class/HTMLElement.class.ts:310</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -824,7 +786,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#data">data</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L343">class/HTMLElement.class.ts:343</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L342">class/HTMLElement.class.ts:342</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -880,14 +842,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#data">data</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L364">class/HTMLElement.class.ts:364</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L363">class/HTMLElement.class.ts:363</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Set or remove a data- attribute of this element, using a function.</p>
 								</div>
-								<p>If the key is a string and the value is a <a href="../interfaces/valuefunction.html">ValueFunction</a> type,
+								<p>If the key is a string and the value is a <a href="../globals.html#valuefunction">ValueFunction</a> type,
 								then the data- attribute will be set (or modified) with the result of the given function.</p>
 								<pre><code class="language-js"><span class="hljs-keyword">this</span>.data(<span class="hljs-string">'id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id() })                    <span class="hljs-comment">// set the `[data-id]` attribute using a function in this xjs.HTMLElement’s context</span>
 <span class="hljs-keyword">this</span>.data(<span class="hljs-string">'id'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.id }, { <span class="hljs-attr">id</span>: <span class="hljs-string">'custom-id'</span> }) <span class="hljs-comment">// set the `[data-id]` attribute using a function in another given context</span>
@@ -911,7 +873,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 									</div>
 								</li>
 								<li>
-									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
@@ -930,7 +892,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#data">data</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L392">class/HTMLElement.class.ts:392</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L391">class/HTMLElement.class.ts:391</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -978,14 +940,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#dir">dir</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L71">class/HTMLElement.class.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L70">class/HTMLElement.class.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1008,7 +970,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#dir">dir</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L76">class/HTMLElement.class.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L75">class/HTMLElement.class.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1029,7 +991,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#dir">dir</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L82">class/HTMLElement.class.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L81">class/HTMLElement.class.ts:81</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1037,7 +999,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>val: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>val: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when setting the value</p>
 									</div>
@@ -1065,7 +1027,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L129">class/Node.class.ts:129</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L132">class/Node.class.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1089,7 +1051,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1138,14 +1100,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">hidden<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">hidden<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">hidden<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">hidden<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#hidden">hidden</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L92">class/HTMLElement.class.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L91">class/HTMLElement.class.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1168,7 +1130,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#hidden">hidden</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L97">class/HTMLElement.class.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L96">class/HTMLElement.class.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1189,7 +1151,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#hidden">hidden</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L103">class/HTMLElement.class.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L102">class/HTMLElement.class.ts:102</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1197,7 +1159,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>val: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>val: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when setting the value</p>
 									</div>
@@ -1220,14 +1182,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#id">id</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L349">class/Element.class.ts:349</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L307">class/Element.class.ts:307</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1250,7 +1212,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#id">id</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L366">class/Element.class.ts:366</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L324">class/Element.class.ts:324</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1281,7 +1243,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#id">id</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L381">class/Element.class.ts:381</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L339">class/Element.class.ts:339</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1296,7 +1258,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the attribute</p>
 									</div>
@@ -1324,7 +1286,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#ifelse">ifElse</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1408,7 +1370,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#innerhtml">innerHTML</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L63">class/Element.class.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L60">class/Element.class.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1428,14 +1390,18 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#innerhtml">innerHTML</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L71">class/Element.class.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L71">class/Element.class.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>, and returns this object when done.</p>
-								</div>
-								<p>This method exists simply for chaining.</p>
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd><p>WARNING DEPRECATED - setting the <code>innerHTML</code> of an element is a security risk.
+										If setting plain text, use <code>textContent</code> instead; if adding HTML, use other DOM manipulation methods such as <code>append</code>.</p>
+										<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" class="external">Element#innerHTML</a>, and returns this object when done.</p>
+										<p>This method exists simply for chaining.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -1457,14 +1423,14 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">lang<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">lang<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">lang<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">lang<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#lang">lang</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L50">class/HTMLElement.class.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L49">class/HTMLElement.class.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1487,7 +1453,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#lang">lang</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L55">class/HTMLElement.class.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L54">class/HTMLElement.class.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1508,7 +1474,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#lang">lang</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L61">class/HTMLElement.class.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L60">class/HTMLElement.class.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1516,7 +1482,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>val: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>val: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when setting the value</p>
 									</div>
@@ -1545,7 +1511,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#outerhtml">outerHTML</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L83">class/Element.class.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L84">class/Element.class.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1565,7 +1531,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#outerhtml">outerHTML</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L92">class/Element.class.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L93">class/Element.class.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1602,38 +1568,16 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#prepend">prepend</a></p>
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#prepend">prepend</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L126">class/Element.class.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L100">class/Element.class.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend" class="external">ParentNode#prepend</a>,
-									but return this object when done.</p>
-								</div>
-								<p>This method exists simply for chaining.</p>
-								<pre><code class="language-js"><span class="hljs-keyword">let</span> strong = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'strong'</span>)
-strong.textContent = <span class="hljs-string">'hello'</span>
-<span class="hljs-keyword">let</span> em = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'em'</span>)
-<span class="hljs-keyword">let</span> mark = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'mark'</span>)
-
-<span class="hljs-keyword">this</span>.prepend(...[
-    strong,                                       <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">` to the `</span>,                                   <span class="hljs-comment">// string</span>
-    <span class="hljs-keyword">new</span> Comment(<span class="hljs-string">`great`</span>),                         <span class="hljs-comment">// DOM Node</span>
-    <span class="hljs-string">`&lt;small&gt;big&lt;/small&gt; `</span>,                        <span class="hljs-comment">// string with HTML</span>
-    <span class="hljs-keyword">new</span> xjs.Element(em).addContent(<span class="hljs-string">`world`</span>).node, <span class="hljs-comment">// DOM Node (unwrapped)</span>
-    <span class="hljs-literal">null</span>,                                         <span class="hljs-comment">// null</span>
-    <span class="hljs-keyword">new</span> xjs.Element(mark).addContent(<span class="hljs-string">`!`</span>),        <span class="hljs-comment">// wrapped DOM Node</span>
-  ]).innerHTML()
-<span class="hljs-comment">// `&lt;strong&gt;hello&lt;/strong&gt; to the &lt;!--great--&gt;&lt;small&gt;big&lt;/small&gt; &lt;em&gt;world&lt;/em&gt;&lt;mark&gt;!&lt;/mark&gt;`</span></code></pre>
 								<dl class="tsd-comment-tags">
-									<dt>todo</dt>
-									<dd><p>TODO xjs.ParentNode#prepend</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://dom.spec.whatwg.org/#dom-parentnode-prepend">https://dom.spec.whatwg.org/#dom-parentnode-prepend</a></p>
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
 									</dd>
 								</dl>
 							</div>
@@ -1641,13 +1585,76 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>contents: <a href="../globals.html#content" class="tsd-signature-type">Content</a><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the contents to prepend</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="queryselector" class="tsd-anchor"></a>
+					<h3>query<wbr>Selector</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Selector<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselector">querySelector</a></p>
+								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#queryselector">querySelector</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L118">class/Element.class.ts:118</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="queryselectorall" class="tsd-anchor"></a>
+					<h3>query<wbr>Selector<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>Selector<wbr>All<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselectorall">querySelectorAll</a></p>
+								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#queryselectorall">querySelectorAll</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L124">class/Element.class.ts:124</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>implements</dt>
+									<dd><p>xjs_ParentNode</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="xjs_element.html" class="tsd-signature-type">xjs_Element</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1662,7 +1669,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#removeclass">removeClass</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L471">class/Element.class.ts:471</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L429">class/Element.class.ts:429</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1700,7 +1707,7 @@ strong.textContent = <span class="hljs-string">'hello'</span>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_element.html">xjs_Element</a>.<a href="xjs_element.html#replaceclassstring">replaceClassString</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Element.class.ts#L495">class/Element.class.ts:495</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Element.class.ts#L453">class/Element.class.ts:453</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1740,7 +1747,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">style<span class="tsd-signature-symbol">(</span>prop<span class="tsd-signature-symbol">: </span><a href="../globals.html#valueobject" class="tsd-signature-type">ValueObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -1748,7 +1755,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#style">style</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L142">class/HTMLElement.class.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L141">class/HTMLElement.class.ts:141</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1768,7 +1775,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#style">style</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L164">class/HTMLElement.class.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L163">class/HTMLElement.class.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1811,7 +1818,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#style">style</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L197">class/HTMLElement.class.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L196">class/HTMLElement.class.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1868,14 +1875,14 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#style">style</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L218">class/HTMLElement.class.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L217">class/HTMLElement.class.ts:217</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Set or remove a style of this element, using a function.</p>
 								</div>
-								<p>If the key is a string and the value is a <a href="../interfaces/valuefunction.html">ValueFunction</a> type,
+								<p>If the key is a string and the value is a <a href="../globals.html#valuefunction">ValueFunction</a> type,
 								then the CSS property will be set (or modified) with the result of the given function.</p>
 								<pre><code class="language-js"><span class="hljs-keyword">this</span>.style(<span class="hljs-string">'justify-content'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data(<span class="hljs-string">'jc'</span>) })                 <span class="hljs-comment">// set the `justify-content` property using a function in this xjs.HTMLElement’s context</span>
 <span class="hljs-keyword">this</span>.style(<span class="hljs-string">'justify-content'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.jc }, { <span class="hljs-attr">jc</span>: <span class="hljs-string">'space-around'</span> }) <span class="hljs-comment">// set the `justify-content` property using a function in another given context</span>
@@ -1899,7 +1906,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 									</div>
 								</li>
 								<li>
-									<h5>value: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>value: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when assigning a value to the property</p>
 									</div>
@@ -1918,7 +1925,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#style">style</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L247">class/HTMLElement.class.ts:247</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L246">class/HTMLElement.class.ts:246</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1967,14 +1974,14 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">tab<wbr>Index<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">tab<wbr>Index<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">tab<wbr>Index<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">tab<wbr>Index<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#tabindex">tabIndex</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L113">class/HTMLElement.class.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L112">class/HTMLElement.class.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1997,7 +2004,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#tabindex">tabIndex</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L118">class/HTMLElement.class.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L117">class/HTMLElement.class.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2018,7 +2025,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#tabindex">tabIndex</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L124">class/HTMLElement.class.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L123">class/HTMLElement.class.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2026,7 +2033,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>val: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>val: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when setting the value</p>
 									</div>
@@ -2055,7 +2062,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2078,7 +2085,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2107,14 +2114,14 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 						<li class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuetype" class="tsd-signature-type">ValueType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a>, this_arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#title">title</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L29">class/HTMLElement.class.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L28">class/HTMLElement.class.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2137,7 +2144,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#title">title</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L34">class/HTMLElement.class.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L33">class/HTMLElement.class.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2158,7 +2165,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_htmlelement.html">xjs_HTMLElement</a>.<a href="xjs_htmlelement.html#title">title</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/HTMLElement.class.ts#L40">class/HTMLElement.class.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/HTMLElement.class.ts#L39">class/HTMLElement.class.ts:39</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2166,7 +2173,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>val: <a href="../interfaces/valuefunction.html" class="tsd-signature-type">ValueFunction</a></h5>
+									<h5>val: <a href="../globals.html#valuefunction" class="tsd-signature-type">ValueFunction</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>the function to call when setting the value</p>
 									</div>
@@ -2194,7 +2201,7 @@ element.outerHTML <span class="hljs-comment">// &lt;i class="glyphicons glphicon
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/9049ce5/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2234,6 +2241,33 @@ div.innerHTML = <span class="hljs-string">`
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/nodetype.html" class="tsd-kind-icon">Node<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_document.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_documentfragment.html" class="tsd-kind-icon">xjs_<wbr><wbr>Document<wbr>Fragment</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_element.html" class="tsd-kind-icon">xjs_<wbr><wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlanchorelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLAnchor<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmldlistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLDList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmldataelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLData<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLElement</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlimageelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLImage<wbr>Element</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -2241,9 +2275,6 @@ div.innerHTML = <span class="hljs-string">`
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_htmllielement.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="xjs_htmllielement.html#nodetype" class="tsd-kind-icon">Node<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
 								<a href="xjs_htmllielement.html#node" class="tsd-kind-icon">node</a>
@@ -2303,6 +2334,12 @@ div.innerHTML = <span class="hljs-string">`
 								<a href="xjs_htmllielement.html#prepend" class="tsd-kind-icon">prepend</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="xjs_htmllielement.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="xjs_htmllielement.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="xjs_htmllielement.html#removeclass" class="tsd-kind-icon">remove<wbr>Class</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -2327,6 +2364,54 @@ div.innerHTML = <span class="hljs-string">`
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlmetaelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLMeta<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlolistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLOList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablecellelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Cell<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltableelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablerowelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Row<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltablesectionelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTable<wbr>Section<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltemplateelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTemplate<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmltimeelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLTime<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_htmlulistelement.html" class="tsd-kind-icon">xjs_<wbr>HTMLUList<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="xjs_node.html" class="tsd-kind-icon">xjs_<wbr><wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/xjs_parentnode.html" class="tsd-kind-icon">xjs_<wbr><wbr>Parent<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#content" class="tsd-kind-icon">Content</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="../globals.html#renderingfunction" class="tsd-kind-icon">Rendering<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valuefunction" class="tsd-kind-icon">Value<wbr>Function</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valueobject" class="tsd-kind-icon">Value<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#valuetype" class="tsd-kind-icon">Value<wbr>Type</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
