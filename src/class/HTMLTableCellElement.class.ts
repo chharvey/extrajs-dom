@@ -1,4 +1,3 @@
-import {dev_HTMLTableCellElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLTableCellElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLTableCellElement { return super.node as dev_HTMLTableCellElement }
+  get node(): HTMLTableCellElement { return super.node as HTMLTableCellElement }
 
   /**
    * Reflect the `headers` content attribute.

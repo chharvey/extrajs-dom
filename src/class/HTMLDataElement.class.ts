@@ -1,4 +1,3 @@
-import {dev_HTMLDataElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLDataElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLDataElement { return super.node as dev_HTMLDataElement }
+  get node(): HTMLDataElement { return super.node as HTMLDataElement }
 
   /**
    * Reflect the `value` content attribute.

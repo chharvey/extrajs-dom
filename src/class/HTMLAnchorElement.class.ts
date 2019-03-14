@@ -1,4 +1,3 @@
-import {dev_HTMLAnchorElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLAnchorElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLAnchorElement { return super.node as dev_HTMLAnchorElement }
+  get node(): HTMLAnchorElement { return super.node as HTMLAnchorElement }
 
   /**
    * Reflect the `href` content attribute.

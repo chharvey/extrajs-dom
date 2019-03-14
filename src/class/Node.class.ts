@@ -1,8 +1,11 @@
+import * as xjs from 'extrajs'
+
+
 /**
  * Represents the type of node.
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+ * @see https://www.w3.org/TR/dom/#dom-node-nodetype
  */
-enum NodeType {
+export enum NodeType {
   ELEMENT_NODE                =  1,
   ATTRIBUTE_NODE              =  2, // XXX{DEPRECATED}
   TEXT_NODE                   =  3,
@@ -22,9 +25,6 @@ enum NodeType {
  * @see https://www.w3.org/TR/dom/#node
  */
 export default class xjs_Node {
-  static NodeType = NodeType
-
-
   /**
    * The wrapped DOM Node.
    */
@@ -116,8 +116,11 @@ export default class xjs_Node {
    */
   trimInner(): this {
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
-      if (child.nodeType === xjs_Node.NodeType.TEXT_NODE && child.textContent !.trim() === '') child.remove()
-      else if (child.nodeType === xjs_Node.NodeType.ELEMENT_NODE) new xjs_Node(child).trimInner()
+			xjs.Object.switch<void>(`${child.nodeType}`, {
+				[NodeType.ELEMENT_NODE]: () => { new xjs_Node(child).trimInner() },
+				[NodeType.TEXT_NODE   ]: () => { if (child.textContent !.trim() === '') child.remove() },
+				default: () => {},
+			})()
     })
     return this
   }

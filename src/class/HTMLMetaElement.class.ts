@@ -1,4 +1,3 @@
-import {dev_HTMLMetaElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLMetaElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLMetaElement { return super.node as dev_HTMLMetaElement }
+  get node(): HTMLMetaElement { return super.node as HTMLMetaElement }
 
   /**
    * Reflect the `name` content attribute.

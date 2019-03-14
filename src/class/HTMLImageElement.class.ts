@@ -1,4 +1,3 @@
-import {dev_HTMLImageElement} from '../dev'
 import {ValueType, ValueFunction} from './Element.class'
 import xjs_HTMLElement from './HTMLElement.class'
 
@@ -18,7 +17,7 @@ export default class xjs_HTMLImageElement extends xjs_HTMLElement {
 	/**
 	 * This wrapper’s node.
 	 */
-	get node(): dev_HTMLImageElement { return super.node as dev_HTMLImageElement}
+	get node(): HTMLImageElement { return super.node as HTMLImageElement}
 
 	/**
 	 * Reflect the `src` content attribute.

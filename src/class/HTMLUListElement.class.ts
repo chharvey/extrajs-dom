@@ -1,8 +1,7 @@
 import * as path from 'path'
 
-import {Processor, ProcessingFunction} from 'template-processor'
+import { Processor, ProcessingFunction } from 'template-processor'
 
-import {dev_HTMLUListElement} from '../dev'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
@@ -63,66 +62,22 @@ export default class xjs_HTMLUListElement extends xjs_HTMLElement {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_HTMLUListElement { return super.node as dev_HTMLUListElement }
+  get node(): HTMLUListElement { return super.node as HTMLUListElement }
 
-  /**
-   * Populate this list with items containing data.
-   *
-   * This method appends items to the end of this list.
-   * The items are the result of rendering the given data.
-   * In order to determine how the data is rendered, this `<ul>` element must have
-   * a `<template>` child, which in turn has a single child that is an `<li>`.
-   *
-   * Notes:
-   * - This element may contain multiple `<template>` children, but this method uses only the first one.
-   * - This element may also already have any number of `<li>` children; they are not affected.
-   *
-   * ```js
-   * let {document} = new jsdom.JSDOM(`
-   * <ul>
-   *   <template>
-   *     <li>
-   *       <a href="{{ url }}">{{ text }}</a>
-   *     </li>
-   *   </template>
-   * </ul>
-   * `).window
-   * let data = [
-   *   { "url": "#0", "text": "Career Connections" },
-   *   { "url": "#1", "text": "Getting Licensed & Certified" },
-   *   { "url": "#2", "text": "Career resources" },
-   *   { "url": "#3", "text": "Code of Ethics" }
-   * ]
-   * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *   .populate(function (f, d, o) {
-   *     f.querySelector('a').href        = d.url
-   *     f.querySelector('a').textContent = d.text
-   *   }, data)
-   * new xjs_HTMLUListElement(document.querySelector('ul'))
-   *  .populate(function (f, d, o) {
-   *    // some code involving `this`
-   *  }, data, {}, other_context)
-   * ```
-   *
-   * @param   <T> the type of the data to fill
-   * @param   <U> the type of the `options` object
-   * @param   instructions a typical {@link ProcessingFunction} to modify the template
-   * @param   dataset the data to populate the list
-   * @param   options additional processing options for all items
-   * @param   this_arg provide a `this` context to the processing function
-   * @returns `this`
-   * @throws  {ReferenceError} if this `<ul>` does not contain a `<template>`,
-   *                           or if that `<template>` does not contain exactly 1 `<li>`.
-   */
-  populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
-    let template: HTMLTemplateElement|null = this.node.querySelector('template')
-    if (template === null) {
-      throw new ReferenceError('This <ul> does not have a <template> descendant.')
-    }
-    if (template.content.children.length !== 1 || !template.content.children[0].matches('li')) {
-      throw new ReferenceError('The <template> must contain exactly 1 element, which must be an <li>.')
-    }
-    let processor: Processor<T, U> = new Processor(template, instructions)
-    return this.append(...dataset.map((data) => processor.process(data, options, this_arg)))
-  }
+	/**
+	 * Populate this list with items containing data.
+	 *
+	 * Call {@link Processor.populateList} on this list.
+	 * @param   <T>          the type of the data to fill
+	 * @param   <U>          the type of the `options` object
+	 * @param   instructions the processing function to use
+	 * @param   dataset      the data to populate this list
+	 * @param   options      additional processing options for all items
+	 * @param   this_arg     the `this` context, if any, in which the instructions is called
+	 * @returns `this`
+	 */
+	populate<T, U extends object>(instructions: ProcessingFunction<T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
+		Processor.populateList(this.node, instructions, dataset, options, this_arg)
+		return this
+	}
 }

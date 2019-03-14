@@ -6,10 +6,11 @@ import * as jsdom from 'jsdom'
 
 import * as xjs from 'extrajs'
 
-import {dev_Document, dev_HTMLLinkElement} from '../dev'
 import {Content} from '../ambient'
+import xjs_ParentNode from '../iface/ParentNode.iface'
 import xjs_Node from './Node.class'
 import xjs_DocumentFragment from './DocumentFragment.class'
+import xjs_Element from './Element.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
 
@@ -17,18 +18,29 @@ import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
  * Wrapper for a Document.
  * @see https://www.w3.org/TR/dom/#document
  */
-export default class xjs_Document extends xjs_Node {
+export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
+	/**
+	 * Read an HTML string and return a document with its contents.
+	 *
+	 * The Document object will be wrapped in an `xjs.Document` object.
+	 * To access the actual document, call {@link xjs_Document#node}.
+	 * @param   str a string of markup
+	 * @returns the document, wrapped
+	 */
+	static fromString(str: string): xjs_Document {
+		return new xjs_Document(new jsdom.JSDOM(str).window.document)
+	}
+
   /**
    * Read an HTML file and return a document with its contents.
    *
    * The Document object will be wrapped in an `xjs.Document` object.
-   * To access the actual element, call {@link xjs_Document.node}.
+   * To access the actual document, call {@link xjs_Document#node}.
    * @param   filepath the path to the file
    * @returns the document, wrapped
    */
   static async fromFile(filepath: string): Promise<xjs_Document> {
-    let data: string = await util.promisify(fs.readFile)(filepath, 'utf8')
-    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+		return xjs_Document.fromString(await util.promisify(fs.readFile)(filepath, 'utf8'))
   }
   /**
    * Synchronous version of {@link xjs_Document.fromFile}.
@@ -36,8 +48,7 @@ export default class xjs_Document extends xjs_Node {
    * @returns the document, wrapped
    */
   static fromFileSync(filepath: string): xjs_Document {
-    let data: string = fs.readFileSync(filepath, 'utf8')
-    return new xjs_Document(new jsdom.JSDOM(data).window.document)
+		return xjs_Document.fromString(fs.readFileSync(filepath, 'utf8'))
   }
 
 
@@ -51,37 +62,10 @@ export default class xjs_Document extends xjs_Node {
   /**
    * This wrapper’s node.
    */
-  get node(): dev_Document { return super.node as dev_Document }
+  get node(): Document { return super.node as Document }
 
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/prepend|ParentNode#prepend},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.prepend(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).node.querySelector('body').innerHTML
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#prepend
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-prepend
-   * @param   contents the contents to prepend
-   * @returns `this`
-   */
+	/** @implements xjs_ParentNode */
   prepend(...contents: Content[]): this {
     this.node.prepend(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -90,34 +74,7 @@ export default class xjs_Document extends xjs_Node {
     return this
   }
 
-  /**
-   * {@link https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append|ParentNode#append},
-   * but return this object when done.
-   *
-   * This method exists simply for chaining.
-   *
-   * ```js
-   * let strong = document.createElement('strong')
-   * strong.textContent = 'hello'
-   * let em = document.createElement('em')
-   * let mark = document.createElement('mark')
-   *
-   * this.append(...[
-   *     strong,                                       // DOM Node
-   *     ` to the `,                                   // string
-   *     new Comment(`great`),                         // DOM Node
-   *     `<small>big</small> `,                        // string with HTML
-   *     new xjs.Element(em).addContent(`world`).node, // DOM Node (unwrapped)
-   *     null,                                         // null
-   *     new xjs.Element(mark).addContent(`!`),        // wrapped DOM Node
-   *   ]).node.querySelector('body').innerHTML
-   * // `<strong>hello</strong> to the <!--great--><small>big</small> <em>world</em><mark>!</mark>`
-   * ```
-   * @todo TODO xjs.ParentNode#append
-   * @see https://dom.spec.whatwg.org/#dom-parentnode-append
-   * @param   contents the contents to append
-   * @returns `this`
-   */
+	/** @implements xjs_ParentNode */
   append(...contents: Content[]): this {
     this.node.append(...contents.map((c) =>
       (c instanceof xjs_Node) ? c.node :
@@ -125,6 +82,17 @@ export default class xjs_Document extends xjs_Node {
     ))
     return this
   }
+
+	/** @implements xjs_ParentNode */
+	querySelector(selector: string): xjs_Element|null {
+		let el: Element|null = this.node.querySelector(selector)
+		return (el === null) ? null : new xjs_Element(el)
+	}
+
+	/** @implements xjs_ParentNode */
+	querySelectorAll(selector: string): xjs_Element[] {
+		return [...this.node.querySelectorAll(selector)].map((el) => new xjs_Element(el))
+	}
 
   /**
    * Get the "innerHTML" of this document.
@@ -201,10 +169,10 @@ export default class xjs_Document extends xjs_Node {
 				let imported: DocumentFragment|null = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') !, {
 					'document': (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node,
 					'template': (lnk: HTMLLinkElement) => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, lnk.href)).content(),
-					'default' : () => null,
+					default: () => null,
 				})(link)
         if (imported) {
-          (link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       })
@@ -219,13 +187,13 @@ export default class xjs_Document extends xjs_Node {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       await Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
-				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment|null>>(link.getAttribute('data-import') !, {
+				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment>|null>(link.getAttribute('data-import') !, {
 					'document': async (lnk: HTMLLinkElement) => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, lnk.href))).node,
 					'template': async (lnk: HTMLLinkElement) => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, lnk.href))).content(),
-					'default' : async () => null,
+					default: () => null,
 				})(link)
         if (imported) {
-          ;(link as dev_HTMLLinkElement).after(imported)
+          link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
         }
       }))
