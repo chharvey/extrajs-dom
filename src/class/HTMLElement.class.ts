@@ -1,4 +1,5 @@
 import * as xjs from 'extrajs'
+import { NaNError } from 'extrajs'
 
 import xjs_Element, {ValueType, ValueObject, ValueFunction} from './Element.class'
 
@@ -191,7 +192,7 @@ export default class xjs_HTMLElement extends xjs_Element {
    * @param   value the value to assign to the property, or `null` or `''` to remove it
    * @returns `this`
    * @throws  {RangeError} if `''` is passed as the property name
-   * @throws  {Error} if `NaN` is passed as the property value
+   * @throws  {NaNError} if `NaN` is passed as the property value
    */
   style(prop: string, value: ValueType): this;
   /**
@@ -260,7 +261,7 @@ export default class xjs_HTMLElement extends xjs_Element {
 					'boolean'  : (val: boolean      ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
 					'null'     : (                  ) =>                (this.node.style.removeProperty  (prp                    ) && '', this),
 					'undefined': (                  ) =>                (this.node.style.getPropertyValue(prp                    ) ||     null),
-					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
+					'NaN'      : (                  ) => { throw new NaNError() },
 				})(value)
 			},
 			'null'     : () => this,
@@ -404,7 +405,7 @@ export default class xjs_HTMLElement extends xjs_Element {
 					'infinite' : (val: number       ) => (       this.node.dataset[atr] = val.toString(), this),
 					'boolean'  : (val: boolean      ) => (       this.node.dataset[atr] = val.toString(), this),
 					'null'     : (                  ) => (delete this.node.dataset[atr]                 , this),
-					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
+					'NaN'      : (                  ) => { throw new NaNError() },
 					'undefined': () => {
 						const returned: string|undefined = this.node.dataset[atr]
 						return (typeof returned === 'string') ? returned : null

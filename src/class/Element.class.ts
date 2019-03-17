@@ -1,4 +1,5 @@
 import * as xjs from 'extrajs'
+import { NaNError } from 'extrajs'
 
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
@@ -226,7 +227,7 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
    * @throws  {RangeError} if `''` is passed as the attribute name
-   * @throws  {Error} if `NaN` is passed as the attribute value
+   * @throws  {NaNError} if `NaN` is passed as the attribute value
    */
   attr(attr: string, value: ValueType): this;
   /**
@@ -291,7 +292,7 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
 					'boolean'  : (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this),
 					'null'     : (                  ) => (this.node.removeAttribute(atr                    ), this),
 					'undefined': (                  ) =>  this.node.getAttribute   (atr                    ),
-					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
+					'NaN'      : (                  ) => { throw new NaNError() },
 				})(value)
 			},
 			'null'     : () => this,
