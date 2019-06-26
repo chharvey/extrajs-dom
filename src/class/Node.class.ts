@@ -1,6 +1,3 @@
-import * as xjs from 'extrajs'
-
-
 /**
  * Represents the type of node.
  * @see https://www.w3.org/TR/dom/#dom-node-nodetype
@@ -116,11 +113,10 @@ export default class xjs_Node {
    */
   trimInner(): this {
     [...this.node.childNodes].forEach((child) => { // NB: `NodeList#forEach()` is live, so `.remove()` will not work as intended
-			xjs.Object.switch<void>(`${child.nodeType}`, {
-				[NodeType.ELEMENT_NODE]: () => { new xjs_Node(child).trimInner() },
-				[NodeType.TEXT_NODE   ]: () => { if (child.textContent !.trim() === '') child.remove() },
-				default: () => {},
-			})()
+			(new Map([
+				[NodeType.ELEMENT_NODE, () => { new xjs_Node(child).trimInner() }],
+				[NodeType.TEXT_NODE   , () => { if (child.textContent !.trim() === '') child.remove() }],
+			]).get(child.nodeType) || (() => {}))()
     })
     return this
   }

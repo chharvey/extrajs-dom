@@ -277,27 +277,27 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    */
   attr(attr: ValueObject|null): this;
   attr(attr?: any, value?: any, this_arg: any = this): any {
-		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(attr), {
-			'object': (atr: ValueObject) => {
+		return new Map<string, (atr: any) => this|string|null>([
+			['object', (atr: ValueObject) => {
 				for (let i in atr) this.attr(i, atr[i])
 				return this
-			},
-			'string': (atr: string) => {
+			}],
+			['string', (atr: string) => {
 				if (atr.trim() === '') throw new RangeError('Attribute name cannot be empty string.')
-				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) =>  this     .attr           (atr, val.call(this_arg)),
-					'string'   : (val: string       ) => (this.node.setAttribute   (atr, val               ), this),
-					'number'   : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'infinite' : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'boolean'  : (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'null'     : (                  ) => (this.node.removeAttribute(atr                    ), this),
-					'undefined': (                  ) =>  this.node.getAttribute   (atr                    ),
-					'NaN'      : (                  ) => { throw new NaNError() },
-				})(value)
-			},
-			'null'     : () => this,
-			'undefined': () => this,
-		})(attr)
+				return new Map<string, (val: any) => this|string|null>([
+					['function' , (val: ValueFunction) =>  this     .attr           (atr, val.call(this_arg))],
+					['string'   , (val: string       ) => (this.node.setAttribute   (atr, val               ), this)],
+					['number'   , (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['infinite' , (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['boolean'  , (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['null'     , (                  ) => (this.node.removeAttribute(atr                    ), this)],
+					['undefined', (                  ) =>  this.node.getAttribute   (atr                    )],
+					['NaN'      , (                  ) => { throw new NaNError() }],
+				]).get(xjs.Object.typeOf(value)) !(value)
+			}],
+			['null'     , () => this],
+			['undefined', () => this],
+		]).get(xjs.Object.typeOf(attr) !) !(attr)
   }
 
   /**
