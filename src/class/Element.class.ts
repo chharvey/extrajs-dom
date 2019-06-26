@@ -23,8 +23,11 @@ export type ValueObject = { [index: string]: ValueType }
 /**
  * A type of function passed to {@link xjs_Element.attr} to manipulate this element’s attributes.
  *
- * This function type must take zero arguments and return a single primitive value: a string, number, or boolean.
+ * This function type must take zero arguments and return a single primitive value: a string, number, boolean, or null.
+ * (If `null` is returned, the attribute is removed.)
+ *
  * Any `this` context in the function will almost always point to this `xjs.Element` object (but can be overridden).
+ *
  * @returns the value used as the attribute value to set, or `null` to remove
  */
 export type ValueFunction = (this: any) => ValueType
