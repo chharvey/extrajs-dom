@@ -28,7 +28,6 @@ async function test_run() {
 			require('./test/out/HTMLElement-style.test.js')           .default,
 			require('./test/out/HTMLElement-data.test.js')            .default,
 			require('./test/out/HTMLOListElement-populate.test.js')   .default,
-			require('./test/out/HTMLTemplateElement-render.test.js')  .default,
 		])
 		console.info('All tests ran successfully!')
 }
