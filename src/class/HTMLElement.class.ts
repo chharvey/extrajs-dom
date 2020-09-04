@@ -246,27 +246,27 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   style(prop: ValueObject|null): this;
   style(prop?: any, value?: any, this_arg: any = this): any {
-		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(prop), {
-			'object': (prp: ValueObject) => {
+		return new Map<string, (prp: any) => this|string|null>([
+			['object', (prp: ValueObject) => {
 				for (let i in prp) this.style(i, prp[i])
 				return this
-			},
-			'string': (prp: string) => {
+			}],
+			['string', (prp: string) => {
 				if (prp.trim() === '') throw new RangeError('Property name cannot be empty string.')
-				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) =>                 this           .style           (prp, val.call(this_arg)),
-					'string'   : (val: string       ) => (val !== '') ? (this.node.style.setProperty     (prp, val               )      , this) : this.style(prp, null),
-					'number'   : (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
-					'infinite' : (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
-					'boolean'  : (val: boolean      ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this),
-					'null'     : (                  ) =>                (this.node.style.removeProperty  (prp                    ) && '', this),
-					'undefined': (                  ) =>                (this.node.style.getPropertyValue(prp                    ) ||     null),
-					'NaN'      : (                  ) => { throw new NaNError() },
-				})(value)
-			},
-			'null'     : () => this,
-			'undefined': () => this,
-		})(prop)
+				return new Map<string, (val: any) => this|string|null>([
+					['function' , (val: ValueFunction) =>                 this           .style           (prp, val.call(this_arg))],
+					['string'   , (val: string       ) => (val !== '') ? (this.node.style.setProperty     (prp, val               )      , this) : this.style(prp, null)],
+					['number'   , (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this)],
+					['infinite' , (val: number       ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this)],
+					['boolean'  , (val: boolean      ) =>                (this.node.style.setProperty     (prp, val.toString()    )      , this)],
+					['null'     , (                  ) =>                (this.node.style.removeProperty  (prp                    ) && '', this)],
+					['undefined', (                  ) =>                (this.node.style.getPropertyValue(prp                    ) ||     null)],
+					['NaN'      , (                  ) => { throw new NaNError() }],
+				]).get(xjs.Object.typeOf(value)) !(value)
+			}],
+			['null'     , () => this],
+			['undefined', () => this],
+		]).get(xjs.Object.typeOf(prop) !) !(prop)
   }
 
   /**
@@ -391,29 +391,29 @@ export default class xjs_HTMLElement extends xjs_Element {
    */
   data(data_attr: ValueObject|null): this;
   data(data_attr?: any, value?: any, this_arg: any = this): any {
-		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(data_attr), {
-			'object': (atr: ValueObject) => {
+		return new Map<string, (atr: any) => this|string|null>([
+			['object', (atr: ValueObject) => {
 				for (let i in atr) this.data(i, atr[i])
 				return this
-			},
-			'string': (atr: string) => {
+			}],
+			['string', (atr: string) => {
 				if (atr.trim() === '') throw new RangeError('Data-Attribute name cannot be empty string.')
-				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) => this.data(atr, val.call(this_arg)),
-					'string'   : (val: string       ) => (       this.node.dataset[atr] = val           , this),
-					'number'   : (val: number       ) => (       this.node.dataset[atr] = val.toString(), this),
-					'infinite' : (val: number       ) => (       this.node.dataset[atr] = val.toString(), this),
-					'boolean'  : (val: boolean      ) => (       this.node.dataset[atr] = val.toString(), this),
-					'null'     : (                  ) => (delete this.node.dataset[atr]                 , this),
-					'NaN'      : (                  ) => { throw new NaNError() },
-					'undefined': () => {
+				return new Map<string, (val: any) => this|string|null>([
+					['function' , (val: ValueFunction) => this.data(atr, val.call(this_arg))],
+					['string'   , (val: string       ) => (       this.node.dataset[atr] = val           , this)],
+					['number'   , (val: number       ) => (       this.node.dataset[atr] = val.toString(), this)],
+					['infinite' , (val: number       ) => (       this.node.dataset[atr] = val.toString(), this)],
+					['boolean'  , (val: boolean      ) => (       this.node.dataset[atr] = val.toString(), this)],
+					['null'     , (                  ) => (delete this.node.dataset[atr]                 , this)],
+					['NaN'      , (                  ) => { throw new NaNError() }],
+					['undefined', () => {
 						const returned: string|undefined = this.node.dataset[atr]
 						return (typeof returned === 'string') ? returned : null
-					},
-				})(value)
-			},
-			'null'     : () => this,
-			'undefined': () => this,
-		})(data_attr)
+					}],
+				]).get(xjs.Object.typeOf(value)) !(value)
+			}],
+			['null'     , () => this],
+			['undefined', () => this],
+		]).get(xjs.Object.typeOf(data_attr) !) !(data_attr)
   }
 }
