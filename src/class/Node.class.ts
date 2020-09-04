@@ -61,6 +61,7 @@ export default class xjs_Node {
   }
 
   /**
+	* @deprecated DEPRECATED: Use `.run()` instead.
    * Execute a function acting on this node, and then return this node.
    *
    * Simplifies chaining when performing void tasks,
@@ -75,6 +76,21 @@ export default class xjs_Node {
   }
 
 	/**
+	 * Execute a callback acting on this node, and then return this node.
+	 *
+	 * Simplifies chaining when performing void tasks,
+	 * especially tasks that have not been defined in this implementation.
+	 * Note that this function is not asynchronous, and does not accept asynchronous arguments.
+	 * @param   callback the function to call, taking `this` as its only argument, and returning `void`
+	 * @returns `this`
+	 */
+	run(callback: (arg: this) => void): this {
+		callback(this)
+		return this
+	}
+
+	/**
+	* @deprecated DEPRECATED: Use `.select()` instead.
 	 * Execute a function based on a condition.
 	 *
 	 * Given a condition, execute one function upon passing, or execute another upon failure.
@@ -86,6 +102,20 @@ export default class xjs_Node {
 	 */
 	ifElse(condition: any, onResolve: (this: this) => void, onReject: (this: this) => void = () => {}): this {
 		return this.exe((!!condition) ? onResolve : onReject)
+	}
+
+	/**
+	 * Execute a function based on a condition.
+	 *
+	 * Given a condition, execute one function upon passing, or execute another upon failure.
+	 * Note that this function is not asynchronous, and does not accept asynchronous arguments.
+	 * @param   condition the condition to evaluate; will be converted to boolean
+	 * @param   onTrue    the callback to call (with `this` as its parameter) if the condition is truthy
+	 * @param   onFalse   the callback to call (with `this` as its parameter) if the condition is falsy
+	 * @returns `this`
+	 */
+	select(condition: unknown, onTrue: (arg: this) => void, onFalse: (arg: this) => void = () => {}): this {
+		return this.run((!!condition) ? onTrue : onFalse)
 	}
 
   /**
