@@ -17,6 +17,13 @@ export enum NodeType {
   NOTATION_NODE               = 12, // XXX{DEPRECATED}
 }
 
+
+/**
+ * An event listener added to a node.
+ */
+type Listener = EventListener | EventListenerObject | ((event: Event) => void);
+
+
 /**
  * Wrapper for a Node.
  * @see https://www.w3.org/TR/dom/#node
@@ -131,4 +138,24 @@ export default class xjs_Node {
     })
     return this
   }
+
+	/**
+	 * Add an event listener for the specified event type to this node.
+	 * @param   event_type - one of 'click', 'focus', 'blur', 'mouseenter', 'mouseleave', 'mousemove'
+	 * @param   listener   - the event listener or function to add to this node
+	 * @returns `this`
+	 */
+	private onEvent(event_type: string, listener: Listener): this {
+		this.node.addEventListener(event_type,
+			('handleEvent' in listener) ? listener.handleEvent : listener
+		)
+		return this
+	}
+
+	onClick      (listener: Listener): this { return this.onEvent('click',      listener) }
+	onFocus      (listener: Listener): this { return this.onEvent('focus',      listener) }
+	onBlur       (listener: Listener): this { return this.onEvent('blur',       listener) }
+	onMouseEnter (listener: Listener): this { return this.onEvent('mouseenter', listener) }
+	onMouseLeave (listener: Listener): this { return this.onEvent('mouseleave', listener) }
+	onMouseMove  (listener: Listener): this { return this.onEvent('mousemove',  listener) }
 }
