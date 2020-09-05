@@ -2,6 +2,7 @@ import * as path from 'path'
 
 import { Processor, ProcessingFunction } from 'template-processor'
 
+import xjs_Populable from '../iface/Populable.iface'
 import xjs_HTMLElement from './HTMLElement.class'
 import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
 
@@ -10,7 +11,7 @@ import xjs_HTMLTemplateElement from './HTMLTemplateElement.class'
  * Wrapper for HTML `ol` element.
  * @see https://www.w3.org/TR/html52/grouping-content.html#htmlolistelement
  */
-export default class xjs_HTMLOListElement extends xjs_HTMLElement {
+export default class xjs_HTMLOListElement extends xjs_HTMLElement implements xjs_Populable {
   /**
    * Return a new `xjs.HTMLTemplateElement` object that renders a `<ol>` filled with `<li>`s.
    *
@@ -64,17 +65,7 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    */
   get node(): HTMLOListElement { return super.node as HTMLOListElement }
 
-	/**
-	 * Populate this list with items containing data.
-	 *
-	 * Call {@link Processor.populateList} on this list.
-	 * @param   <T>          the type of the data to fill
-	 * @param   <U>          the type of the `options` object
-	 * @param   instructions the processing function to use
-	 * @param   dataset      the data to populate this list
-	 * @param   options      additional processing options for all items
-	 * @returns `this`
-	 */
+	/** @implements xjs_Populable */
 	populate<T, U extends object>(instructions: ProcessingFunction<DocumentFragment, T, U>, dataset: T[], options?: U): this {
 		Processor.populateList(this.node, instructions, dataset, options)
 		return this
