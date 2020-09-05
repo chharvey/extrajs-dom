@@ -36,7 +36,7 @@
     "gulp": "^4.0.0",
     "gulp-typedoc": "^2.2.1",
     "gulp-typescript": "^5.0.0-alpha.3",
-    "typedoc": "^0.14.0",
+    "typedoc": "^0.15.0",
     "typescript": "~3.4.0"
   }
 }
