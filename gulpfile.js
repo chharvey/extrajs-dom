@@ -5,7 +5,7 @@ const typescript = require('gulp-typescript')
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const tsconfig      = require('./tsconfig.json')
-const typedocconfig = require('./config/typedoc.json')
+const typedocconfig = tsconfig.typedocOptions
 
 
 function dist() {
@@ -28,7 +28,6 @@ async function test_run() {
 			require('./test/out/HTMLElement-style.test.js')           .default,
 			require('./test/out/HTMLElement-data.test.js')            .default,
 			require('./test/out/HTMLOListElement-populate.test.js')   .default,
-			require('./test/out/HTMLTemplateElement-render.test.js')  .default,
 		])
 		console.info('All tests ran successfully!')
 }

@@ -4,8 +4,6 @@ import * as util from 'util'
 
 import * as jsdom from 'jsdom'
 
-import * as xjs from 'extrajs'
-
 import {Content} from '../ambient'
 import xjs_ParentNode from '../iface/ParentNode.iface'
 import xjs_Node from './Node.class'
@@ -166,15 +164,15 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       this.node.querySelectorAll('link[rel~="import"][data-import]').forEach((link) => {
-				let imported: DocumentFragment|null = xjs.Object.switch<DocumentFragment|null>(link.getAttribute('data-import') !, {
-					'document': (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node,
-					'template': (lnk: HTMLLinkElement) => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, lnk.href)).content(),
-					default: () => null,
-				})(link)
-        if (imported) {
+				if (!['document', 'template'].includes(link.getAttribute('data-import') !)) {
+					throw new TypeError('Value of attribute `[data-import]` must be either `"document"` or `"template"`.')
+				}
+				const imported: DocumentFragment = new Map([
+					['document', (lnk: HTMLLinkElement) => xjs_DocumentFragment   .fromFileSync(path.resolve(dirpath, lnk.href)).node     ],
+					['template', (lnk: HTMLLinkElement) => xjs_HTMLTemplateElement.fromFileSync(path.resolve(dirpath, lnk.href)).content()],
+				]).get(link.getAttribute('data-import') !) !(link as HTMLLinkElement)
           link.after(imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
-        }
       })
     }
     return this
@@ -187,15 +185,15 @@ export default class xjs_Document extends xjs_Node implements xjs_ParentNode {
     if (!('import' in jsdom.JSDOM.fragment('<link rel="import" href="https://example.com/"/>').querySelector('link') !)) {
       console.warn('`HTMLLinkElement#import` is not yet supported. Replacing `<link>`s with their imported contents…')
       await Promise.all([...this.node.querySelectorAll('link[rel~="import"][data-import]')].map(async (link) => {
-				let imported: DocumentFragment|null = await xjs.Object.switch<Promise<DocumentFragment>|null>(link.getAttribute('data-import') !, {
-					'document': async (lnk: HTMLLinkElement) => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, lnk.href))).node,
-					'template': async (lnk: HTMLLinkElement) => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, lnk.href))).content(),
-					default: () => null,
-				})(link)
-        if (imported) {
-          link.after(imported)
+				if (!['document', 'template'].includes(link.getAttribute('data-import') !)) {
+					throw new TypeError('Value of attribute `[data-import]` must be either `"document"` or `"template"`.')
+				}
+				const imported: Promise<DocumentFragment> = new Map([
+					['document', async (lnk: HTMLLinkElement) => (await xjs_DocumentFragment   .fromFile(path.resolve(dirpath, lnk.href))).node],
+					['template', async (lnk: HTMLLinkElement) => (await xjs_HTMLTemplateElement.fromFile(path.resolve(dirpath, lnk.href))).content()],
+				]).get(link.getAttribute('data-import') !) !(link as HTMLLinkElement)
+				link.after(await imported)
           link.remove() // link.href = path.resolve('https://example.com/index.html', link.href) // TODO set the href relative to the current window.location.href
-        }
       }))
     }
 		return this

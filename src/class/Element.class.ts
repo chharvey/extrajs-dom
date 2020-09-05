@@ -1,4 +1,5 @@
 import * as xjs from 'extrajs'
+import { NaNError } from 'extrajs'
 
 import {Content} from '../ambient'
 import xjs_Node from './Node.class'
@@ -22,8 +23,11 @@ export type ValueObject = { [index: string]: ValueType }
 /**
  * A type of function passed to {@link xjs_Element.attr} to manipulate this element’s attributes.
  *
- * This function type must take zero arguments and return a single primitive value: a string, number, or boolean.
+ * This function type must take zero arguments and return a single primitive value: a string, number, boolean, or null.
+ * (If `null` is returned, the attribute is removed.)
+ *
  * Any `this` context in the function will almost always point to this `xjs.Element` object (but can be overridden).
+ *
  * @returns the value used as the attribute value to set, or `null` to remove
  */
 export type ValueFunction = (this: any) => ValueType
@@ -200,7 +204,7 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    * @param   value the value to assign to the attribute, or `null` to remove it
    * @returns `this`
    * @throws  {RangeError} if `''` is passed as the attribute name
-   * @throws  {Error} if `NaN` is passed as the attribute value
+   * @throws  {NaNError} if `NaN` is passed as the attribute value
    */
   attr(attr: string, value: ValueType): this;
   /**
@@ -250,27 +254,27 @@ export default class xjs_Element extends xjs_Node implements xjs_ParentNode {
    */
   attr(attr: ValueObject|null): this;
   attr(attr?: any, value?: any, this_arg: any = this): any {
-		return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(attr), {
-			'object': (atr: ValueObject) => {
+		return new Map<string, (atr: any) => this|string|null>([
+			['object', (atr: ValueObject) => {
 				for (let i in atr) this.attr(i, atr[i])
 				return this
-			},
-			'string': (atr: string) => {
+			}],
+			['string', (atr: string) => {
 				if (atr.trim() === '') throw new RangeError('Attribute name cannot be empty string.')
-				return xjs.Object.switch<this|string|null>(xjs.Object.typeOf(value), {
-					'function' : (val: ValueFunction) =>  this     .attr           (atr, val.call(this_arg)),
-					'string'   : (val: string       ) => (this.node.setAttribute   (atr, val               ), this),
-					'number'   : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'infinite' : (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'boolean'  : (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this),
-					'null'     : (                  ) => (this.node.removeAttribute(atr                    ), this),
-					'undefined': (                  ) =>  this.node.getAttribute   (atr                    ),
-					'NaN'      : (val: number       ) => { throw xjs.Number.assertType(val) },
-				})(value)
-			},
-			'null'     : () => this,
-			'undefined': () => this,
-		})(attr)
+				return new Map<string, (val: any) => this|string|null>([
+					['function' , (val: ValueFunction) =>  this     .attr           (atr, val.call(this_arg))],
+					['string'   , (val: string       ) => (this.node.setAttribute   (atr, val               ), this)],
+					['number'   , (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['infinite' , (val: number       ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['boolean'  , (val: boolean      ) => (this.node.setAttribute   (atr, val.toString()    ), this)],
+					['null'     , (                  ) => (this.node.removeAttribute(atr                    ), this)],
+					['undefined', (                  ) =>  this.node.getAttribute   (atr                    )],
+					['NaN'      , (                  ) => { throw new NaNError() }],
+				]).get(xjs.Object.typeOf(value)) !(value)
+			}],
+			['null'     , () => this],
+			['undefined', () => this],
+		]).get(xjs.Object.typeOf(attr) !) !(attr)
   }
 
   /**
