@@ -48,8 +48,8 @@ const createMyLink = (url, text) =>
 - Method chaining
 - `xjs.Node#empty()` removes all children
 - `xjs.Node#trimInner()` removes all empty and whitespace-only Text node descendants
-- `xjs.Node#exe()` executes a custom function for any unsupported features you might need
-- `xjs.Node#ifElse()` executes a custom function based on a condition
+- `xjs.Node#run()` executes a custom function for any unsupported features you might need
+- `xjs.Node#select()` executes a custom function based on a condition
 - `xjs.Element#attr()` sets/removes multiple attributes in one step; taking object and function arguments
 - `xjs.Element#{addClass,removeClass,replaceClassString}()` for better `[class]` attribute manipulation
 - `xjs.{Document,DocumentFragment}#innerHTML()` gets what you would expect
