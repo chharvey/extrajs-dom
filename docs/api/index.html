@@ -62,13 +62,19 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="extrajs-dom"><a href="https://chharvey.github.io/extrajs-dom/docs/api/">extrajs-dom</a></h1>
+				<a href="#extrajs-dom" id="extrajs-dom" style="color: inherit; text-decoration: none;">
+					<h1><a href="https://chharvey.github.io/extrajs-dom/docs/api/">extrajs-dom</a></h1>
+				</a>
 				<p>Javascript extensions to DOM.</p>
 				<p>DOM code is kinda spaghetti-like.
 				Use this package to streamline your code and keep the control flow sensible.</p>
-				<h2 id="install">Install</h2>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
 				<pre><code class="language-bash">$ npm install extrajs-dom</code></pre>
-				<h2 id="example">Example</h2>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h2>Example</h2>
+				</a>
 				<p>traditional DOM methods:</p>
 				<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createMyLink</span>(<span class="hljs-params">url, text</span>) </span>{
   <span class="hljs-keyword">let</span> link = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>)
@@ -95,13 +101,15 @@
     .href(url)
     .textContent(text)
     .node <span class="hljs-comment">// returns the modified Node (originally passed to constructor)</span></code></pre>
-				<h2 id="features">Features</h2>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
 				<ul>
 					<li>Method chaining</li>
 					<li><code>xjs.Node#empty()</code> removes all children</li>
 					<li><code>xjs.Node#trimInner()</code> removes all empty and whitespace-only Text node descendants</li>
-					<li><code>xjs.Node#exe()</code> executes a custom function for any unsupported features you might need</li>
-					<li><code>xjs.Node#ifElse()</code> executes a custom function based on a condition</li>
+					<li><code>xjs.Node#run()</code> executes a custom function for any unsupported features you might need</li>
+					<li><code>xjs.Node#select()</code> executes a custom function based on a condition</li>
 					<li><code>xjs.Element#attr()</code> sets/removes multiple attributes in one step; taking object and function arguments</li>
 					<li><code>xjs.Element#{addClass,removeClass,replaceClassString}()</code> for better <code>[class]</code> attribute manipulation</li>
 					<li><code>xjs.{Document,DocumentFragment}#innerHTML()</code> gets what you would expect</li>
@@ -214,6 +222,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -262,7 +271,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

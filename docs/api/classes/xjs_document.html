@@ -124,6 +124,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#prepend" class="tsd-kind-icon">prepend</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#queryselector" class="tsd-kind-icon">query<wbr>Selector</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="xjs_document.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#run" class="tsd-kind-icon">run</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#select" class="tsd-kind-icon">select</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#textcontent" class="tsd-kind-icon">text<wbr>Content</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="xjs_document.html#triminner" class="tsd-kind-icon">trim<wbr>Inner</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="xjs_document.html#fromfile" class="tsd-kind-icon">from<wbr>File</a></li>
@@ -147,7 +149,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L52">class/Document.class.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L50">class/Document.class.ts:50</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -184,7 +186,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#node">node</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L65">class/Document.class.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L63">class/Document.class.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -210,7 +212,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#append">append</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L78">class/Document.class.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L76">class/Document.class.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -241,7 +243,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#empty">empty</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L132">class/Node.class.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L158">class/Node.class.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -265,16 +267,19 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#exe">exe</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L75">class/Node.class.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L73">class/Node.class.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Execute a function acting on this node, and then return this node.</p>
-								</div>
-								<p>Simplifies chaining when performing void tasks,
-									especially tasks that have not been defined in this implementation.
-								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd><p>DEPRECATED: Use <code>.run()</code> instead.
+										Execute a function acting on this node, and then return this node.</p>
+										<p>Simplifies chaining when performing void tasks,
+											especially tasks that have not been defined in this implementation.
+										Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -319,15 +324,18 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#ifelse">ifElse</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L90">class/Node.class.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L103">class/Node.class.ts:103</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Execute a function based on a condition.</p>
-								</div>
-								<p>Given a condition, execute one function upon passing, or execute another upon failure.
-								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd><p>DEPRECATED: Use <code>.select()</code> instead.
+										Execute a function based on a condition.</p>
+										<p>Given a condition, execute one function upon passing, or execute another upon failure.
+										Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -401,7 +409,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L165">class/Document.class.ts:165</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L163">class/Document.class.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -472,7 +480,7 @@ this.importLinks(__dirname)</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L186">class/Document.class.ts:186</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L184">class/Document.class.ts:184</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -503,7 +511,7 @@ this.importLinks(__dirname)</code></pre>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L108">class/Document.class.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L106">class/Document.class.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -536,7 +544,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#prepend">prepend</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L69">class/Document.class.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L67">class/Document.class.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -567,7 +575,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselector">querySelector</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L87">class/Document.class.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L85">class/Document.class.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -601,7 +609,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/xjs_parentnode.html">xjs_ParentNode</a>.<a href="../interfaces/xjs_parentnode.html#queryselectorall">querySelectorAll</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L93">class/Document.class.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L91">class/Document.class.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -622,6 +630,143 @@ this.importLinks(__dirname)</code></pre>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="run" class="tsd-anchor"></a>
+					<h3>run</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#run">run</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L87">class/Node.class.ts:87</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Execute a callback acting on this node, and then return this node.</p>
+								</div>
+								<p>Simplifies chaining when performing void tasks,
+									especially tasks that have not been defined in this implementation.
+								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>callback: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the function to call, taking <code>this</code> as its only argument, and returning <code>void</code></p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>arg: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="select" class="tsd-anchor"></a>
+					<h3>select</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">select<span class="tsd-signature-symbol">(</span>condition<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, onTrue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, onFalse<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#select">select</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Execute a function based on a condition.</p>
+								</div>
+								<p>Given a condition, execute one function upon passing, or execute another upon failure.
+								Note that this function is not asynchronous, and does not accept asynchronous arguments.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>condition: <span class="tsd-signature-type">unknown</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the condition to evaluate; will be converted to boolean</p>
+									</div>
+								</li>
+								<li>
+									<h5>onTrue: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the callback to call (with <code>this</code> as its parameter) if the condition is truthy</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>arg: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> onFalse: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;() &#x3D;&gt; {}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the callback to call (with <code>this</code> as its parameter) if the condition is falsy</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>arg: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p><code>this</code></p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="textcontent" class="tsd-anchor"></a>
 					<h3>text<wbr>Content</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -633,7 +778,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L51">class/Node.class.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L48">class/Node.class.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -656,7 +801,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#textcontent">textContent</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L59">class/Node.class.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L56">class/Node.class.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -690,7 +835,7 @@ this.importLinks(__dirname)</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="xjs_node.html">xjs_Node</a>.<a href="xjs_node.html#triminner">trimInner</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Node.class.ts#L117">class/Node.class.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Node.class.ts#L144">class/Node.class.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -728,7 +873,7 @@ div.innerHTML = <span class="hljs-string">`
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L42">class/Document.class.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L40">class/Document.class.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -762,7 +907,7 @@ div.innerHTML = <span class="hljs-string">`
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L50">class/Document.class.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L48">class/Document.class.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -794,7 +939,7 @@ div.innerHTML = <span class="hljs-string">`
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/23936b4/src/class/Document.class.ts#L30">class/Document.class.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/chharvey/extrajs-dom/blob/cccbd33/src/class/Document.class.ts#L28">class/Document.class.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -873,6 +1018,12 @@ div.innerHTML = <span class="hljs-string">`
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="xjs_document.html#queryselectorall" class="tsd-kind-icon">query<wbr>Selector<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="xjs_document.html#run" class="tsd-kind-icon">run</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="xjs_document.html#select" class="tsd-kind-icon">select</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="xjs_document.html#textcontent" class="tsd-kind-icon">text<wbr>Content</a>
@@ -982,6 +1133,7 @@ div.innerHTML = <span class="hljs-string">`
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -1030,7 +1182,7 @@ div.innerHTML = <span class="hljs-string">`
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

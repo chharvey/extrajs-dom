@@ -16,12 +16,12 @@ export default class xjs_HTMLOListElement extends xjs_HTMLElement {
    *
    * ```js
    * const my_tpl = (await xjs.HTMLOListElement.template())
-   *   .exe(function () {
-   *     new xjs.HTMLUListElement(this.content().querySelector('ol')).addClass('o-List')
-   *     new xjs.HTMLLIElement(this.content().querySelector('template').content.querySelector('li')).addClass('o-List__Item')
-   *   })
-   * const my_processor = new Processor(my_tpl.node, function (frag, data, opts) {
-   *     new xjs.HTMLOListElement(frag.querySelector('ol')).populate(function (f, d, o) {
+	 * 	.run((olisttpl) => {
+	 * 		new xjs.HTMLUListElement(olisttpl.content().querySelector('ol')).addClass('o-List')
+	 * 		new xjs.HTMLLIElement(olisttpl.content().querySelector('template').content.querySelector('li')).addClass('o-List__Item')
+	 * 	})
+   * const my_processor = new Processor(my_tpl.node, (frag, data, opts) => {
+   * 	new xjs.HTMLOListElement(frag.querySelector('ol')).populate((f, d, o) => {
    *       f.querySelector('li').append(d)
    *     }, data, opts)
    *   })
