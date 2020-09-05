@@ -29,11 +29,10 @@ export default class xjs_HTMLDListElement extends xjs_HTMLElement {
 	 * @param   instructions the processing function to use
 	 * @param   dataset      the data to populate this list
 	 * @param   options      additional processing options for all items
-	 * @param   this_arg     the `this` context, if any, in which the instructions is called
 	 * @returns `this`
 	 */
-	populate<T, U extends object>(instructions: ProcessingFunction<DocumentFragment, T, U>, dataset: T[], options?: U, this_arg: unknown = this): this {
-		Processor.populateList(this.node, instructions, dataset, options, this_arg)
+	populate<T, U extends object>(instructions: ProcessingFunction<DocumentFragment, T, U>, dataset: T[], options?: U): this {
+		Processor.populateList(this.node, instructions, dataset, options)
 		return this
 	}
 }
