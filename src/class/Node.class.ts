@@ -60,21 +60,6 @@ export default class xjs_Node {
 		return this
   }
 
-  /**
-	* @deprecated DEPRECATED: Use `.run()` instead.
-   * Execute a function acting on this node, and then return this node.
-   *
-   * Simplifies chaining when performing void tasks,
-   * especially tasks that have not been defined in this implementation.
-   * Note that this function is not asynchronous, and does not accept asynchronous arguments.
-   * @param   executable the function to call in the context of `this`
-   * @returns `this`
-   */
-  exe(executable: (this: this) => void): this {
-    executable.call(this)
-    return this
-  }
-
 	/**
 	 * Execute a callback acting on this node, and then return this node.
 	 *
@@ -87,21 +72,6 @@ export default class xjs_Node {
 	run(callback: (arg: this) => void): this {
 		callback(this)
 		return this
-	}
-
-	/**
-	* @deprecated DEPRECATED: Use `.select()` instead.
-	 * Execute a function based on a condition.
-	 *
-	 * Given a condition, execute one function upon passing, or execute another upon failure.
-	 * Note that this function is not asynchronous, and does not accept asynchronous arguments.
-	 * @param   condition the condition to evaluate; will be converted to boolean
-	 * @param   onResolve the executable to call (in the context of `this`) if the condition is truthy
-	 * @param   onReject  the executable to call (in the context of `this`) if the condition is falsy
-	 * @returns `this`
-	 */
-	ifElse(condition: any, onResolve: (this: this) => void, onReject: (this: this) => void = () => {}): this {
-		return this.exe((!!condition) ? onResolve : onReject)
 	}
 
 	/**
